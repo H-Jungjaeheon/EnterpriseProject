@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f00fdaa2cd86de347a891d467c560dba, type: 3}
-  m_Name: LongEnemy1
+  m_Name: AirEnemy1
   m_EditorClassIdentifier: 
   Hp: 0
-  MonsterType: 1
-  MonsterImg: []
+  AttackPower: 0
+  AttackDistance: 0
+  MoveSpeed: 0
+  MonsterType: 2
+  MonsterImg: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
