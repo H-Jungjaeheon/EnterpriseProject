@@ -1972,7 +1972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef86b40730777d418968296c71898c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyPrefabs:
+  PoolingEnemyPrefabs:
   - {fileID: 3899307102218605548, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
   MaxY: 0
   MinY: 0
