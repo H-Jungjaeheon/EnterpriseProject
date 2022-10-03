@@ -11,7 +11,7 @@ public class ShortDisEnemy : Enemy
 
     protected override void Attack()
     {
-        
+
     }
 
     protected override void Move()

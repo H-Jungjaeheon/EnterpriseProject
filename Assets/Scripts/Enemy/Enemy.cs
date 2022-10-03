@@ -10,7 +10,26 @@ public class Enemy : MonoBehaviour
 
     [Header("데이터 받아올 변수")]
     [SerializeField]
-    private int Hp;
+    private int hp;
+
+    public int Hp 
+    {
+        get
+        {
+            return hp;
+        }
+
+        set
+        {
+            hp = value;
+
+            if(hp <= 0)
+            {
+                EnemySpawner.ReturnEnemy(this);
+            }
+        }
+    }
+
     [SerializeField]
     private float AttackPower;
     [SerializeField]
