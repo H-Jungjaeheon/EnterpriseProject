@@ -9,6 +9,11 @@ public class ShortDisEnemy : Enemy
         base.Start();
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     protected override void Attack()
     {
 
@@ -16,6 +21,6 @@ public class ShortDisEnemy : Enemy
 
     protected override void Move()
     {
-        
+        base.Move();
     }
 }

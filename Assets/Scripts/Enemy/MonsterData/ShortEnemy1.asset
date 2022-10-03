@@ -15,6 +15,6 @@ MonoBehaviour:
   Hp: 100
   AttackPower: 10
   AttackDistance: 10
-  MoveSpeed: 10
+  MoveSpeed: 0.5
   MonsterType: 0
   MonsterImg: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}

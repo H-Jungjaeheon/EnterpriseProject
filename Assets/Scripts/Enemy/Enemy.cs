@@ -50,6 +50,11 @@ public class Enemy : MonoBehaviour
         BasicSetting(); 
     }
 
+    protected virtual void Update()
+    {
+        Move();
+    }
+
     protected virtual void Attack()
     {
 
@@ -57,7 +62,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Move()
     {
-
+        this.gameObject.transform.position -= new Vector3(MoveSpeed * Time.deltaTime, 0, 0);
     }
 
     //데이터 값 세팅

@@ -12,6 +12,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private Queue<Enemy> PoolingEnemyQueue = new Queue<Enemy>();
     [SerializeField]
+    private float MaxTime, MinTime;
+    [SerializeField]
     private float MaxY, MinY;
 
     [SerializeField]
@@ -90,9 +92,11 @@ public class EnemySpawner : MonoBehaviour
 
         while(SpawnCnt > 0)
         {
-            Instance.GetEnemy();
+            Enemy enemy = Instance.GetEnemy();
+            enemy.transform.position = new Vector2(this.transform.position.x, Random.Range(MinY, MaxY));
 
             SpawnCnt--;
+            yield return new WaitForSeconds(Random.Range(MinTime, MaxTime));
         }
     }
 }
