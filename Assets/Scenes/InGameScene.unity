@@ -1976,8 +1976,8 @@ MonoBehaviour:
   - {fileID: 3899307102218605548, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
   MaxTime: 0.7
   MinTime: 0.3
-  MaxY: 1
-  MinY: 0.5
+  MaxY: 1.5
+  MinY: 0.6
 --- !u!1 &810465658
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,4 +17,4 @@ MonoBehaviour:
   AttackDistance: 10
   MoveSpeed: 0.5
   MonsterType: 0
-  MonsterImg: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  MonsterImg: {fileID: 21300000, guid: 0718ae42c78b20442bf379dbad6f59d5, type: 3}
