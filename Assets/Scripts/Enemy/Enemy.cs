@@ -10,8 +10,11 @@ public class Enemy : MonoBehaviour
 
     [Header("데이터 받아올 변수")]
     [SerializeField]
+    private EnemyType EnemyType;
+    [SerializeField]
+    private string EnemyName;
+    [SerializeField]
     private int hp;
-
     public int Hp 
     {
         get
@@ -36,8 +39,6 @@ public class Enemy : MonoBehaviour
     private float AttackDistance;
     [SerializeField]
     private float MoveSpeed;
-    [SerializeField]
-    private MonsterType MonsterType;
 
     private void Awake()
     {
@@ -70,11 +71,13 @@ public class Enemy : MonoBehaviour
     {
         int Select = 0;
 
+        this.EnemyType = Data[Select].EnemyType;
+        this.EnemySprite.sprite = Data[Select].EnemyImg;
+        this.EnemyName = Data[Select].EnemyName;
+
         this.Hp = Data[Select].Hp;
         this.AttackPower = Data[Select].AttackPower;
         this.AttackDistance = Data[Select].AttackDistance;
         this.MoveSpeed = Data[Select].MoveSpeed;
-        this.MonsterType = Data[Select].MonsterType;
-        this.EnemySprite.sprite = Data[Select].MonsterImg;
     }
 }
