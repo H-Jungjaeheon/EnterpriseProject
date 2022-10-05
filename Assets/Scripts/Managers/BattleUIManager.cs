@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Contents
 {
@@ -9,7 +10,7 @@ public enum Contents
     ContentsLength
 }
 
-public class BattleUIManager : MonoBehaviour
+public class BattleUIManager : Singleton<BattleUIManager>
 {
     [Header("콘텐츠 창 관련 변수들")]
     [SerializeField]
@@ -19,12 +20,7 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField]
     [Tooltip("콘텐츠 창 오브젝트 모음")]
     private GameObject[] contentsPanelObjs;
-
-    [Header("재화 테스트")]
-    [SerializeField]
-    private int[] moneyUnit;
-
-    int index;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -69,32 +65,41 @@ public class BattleUIManager : MonoBehaviour
         nowContentsPanelObj.SetActive(true);
     }
 
-    void CalculationOfGoods(int[] aCalculatedValues, int[] aPriceToAdd) //뺄 때에는 가장 높은 단위 비교
+    public void CalculationOfGoods(int[] aCalculatedValues, int[] aPriceToAdd, Text commodityConversionText) //뺄 때에는 가장 높은 단위 비교
     {
-        for (int nowUnitOfGoodsIndex = 0; nowUnitOfGoodsIndex < moneyUnit.Length; nowUnitOfGoodsIndex++)
+        int maxUnitIndex = 0;
+        for (int nowUnitOfGoodsIndex = 0; nowUnitOfGoodsIndex < aCalculatedValues.Length; nowUnitOfGoodsIndex++)
         {
             aCalculatedValues[nowUnitOfGoodsIndex] += aPriceToAdd[nowUnitOfGoodsIndex];
-            if (aCalculatedValues[nowUnitOfGoodsIndex] > 0)
-            {
-                index = nowUnitOfGoodsIndex;
-            }
-        }
 
-        for (int i = 0; i <= index; i++)
-        {
-            if (moneyUnit[i] >= 1000)
+            if (aCalculatedValues[nowUnitOfGoodsIndex] >= 1000)
             {
-                moneyUnit[i] -= 1000;
-                moneyUnit[i + 1] += 1;
+                aCalculatedValues[nowUnitOfGoodsIndex + 1] += aCalculatedValues[nowUnitOfGoodsIndex] / 1000;
+                aCalculatedValues[nowUnitOfGoodsIndex] %= 1000;
             }
-            if (moneyUnit[i] < 0)
+            else if(aCalculatedValues[nowUnitOfGoodsIndex] < 0)
             {
-                if (index > i)
+                aCalculatedValues[nowUnitOfGoodsIndex + 1] -= aCalculatedValues[nowUnitOfGoodsIndex] / 1000;
+                aCalculatedValues[nowUnitOfGoodsIndex] %= 1000;
+
+                if (aCalculatedValues[nowUnitOfGoodsIndex] < 0)
                 {
-                    moneyUnit[i + 1] -= 1;
-                    moneyUnit[i] += 1000;
+                    aCalculatedValues[nowUnitOfGoodsIndex + 1]--;
+                    aCalculatedValues[nowUnitOfGoodsIndex] = 1000 + aCalculatedValues[nowUnitOfGoodsIndex];
                 }
             }
+
+            if (aCalculatedValues[nowUnitOfGoodsIndex] > 0)
+            {
+                maxUnitIndex = nowUnitOfGoodsIndex;
+            }
         }
+        ConvertGoodsString(commodityConversionText, maxUnitIndex, aCalculatedValues);
+    }
+
+    private void ConvertGoodsString(Text commodityConversionText, int maxUnitIndex, int[] aCalculatedValues)
+    {
+        print(aCalculatedValues[maxUnitIndex]);
+        //commodityConversionText.text = "성공!";
     }
 }
