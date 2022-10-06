@@ -13,6 +13,9 @@ public class BattleSceneManager : Singleton<BattleSceneManager>
     [SerializeField]
     private int[] pmMoneyUnit;
 
+    [SerializeField]
+    private int[] pmMoneyUnitT;
+
     [Tooltip("텍스트로 재화 나타내기 테스트용")]
     [SerializeField]
     private Text test;
@@ -26,9 +29,13 @@ public class BattleSceneManager : Singleton<BattleSceneManager>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q))
         {
             BattleUIManager.Instance.CalculationOfGoods(moneyUnit, pmMoneyUnit, test);
+        }
+        else if (Input.GetKey(KeyCode.W))
+        {
+            BattleUIManager.Instance.CalculationOfGoods(moneyUnit, pmMoneyUnitT, test);
         }
     }
 }
