@@ -99,7 +99,32 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     private void ConvertGoodsString(Text commodityConversionText, int maxUnitIndex, int[] aCalculatedValues)
     {
-        print(aCalculatedValues[maxUnitIndex]);
-        //commodityConversionText.text = "¼º°ø!";
+        char aUnitOfGoods = '\0';
+        if (maxUnitIndex != 0)
+        {
+            aUnitOfGoods = (char)(maxUnitIndex + 96);
+        }
+
+        if (maxUnitIndex != 0)
+        {
+            if (aCalculatedValues[maxUnitIndex] / 10 >= 10)
+            {
+                commodityConversionText.text = $"{aCalculatedValues[maxUnitIndex]}{aUnitOfGoods}";
+            }
+            else if (aCalculatedValues[maxUnitIndex] / 10 > 0)
+            {
+                commodityConversionText.text = $"{aCalculatedValues[maxUnitIndex]}.{0 + aCalculatedValues[maxUnitIndex - 1] / 100}{aUnitOfGoods}";
+            }
+            else if (aCalculatedValues[maxUnitIndex] / 10 <= 0)
+            {
+                int hundredUnits = aCalculatedValues[maxUnitIndex - 1] / 100;
+                int tenUnits = (aCalculatedValues[maxUnitIndex - 1] % 100) / 10;
+                commodityConversionText.text = $"{aCalculatedValues[maxUnitIndex]}.{hundredUnits}{tenUnits}{aUnitOfGoods}";
+            }
+        }
+        else
+        {
+            commodityConversionText.text = $"{aCalculatedValues[maxUnitIndex]}{aUnitOfGoods}";
+        }
     }
 }
