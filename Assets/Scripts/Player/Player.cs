@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
@@ -40,4 +41,10 @@ public class Player : MonoBehaviour
     //플레이어 숙련도 스크립터블 들어갈 예정
     [SerializeField]
     private BulletData[] BulletData;
+
+
+    void Attack()
+    {
+
+    }
 }

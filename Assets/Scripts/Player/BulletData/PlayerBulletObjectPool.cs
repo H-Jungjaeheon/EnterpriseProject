@@ -16,7 +16,6 @@ public class PlayerBulletObjectPool : MonoBehaviour
         Instance = this;
     }
 
-    //초기화
     private void Initialize(int initCount)
     {
         for (int i = 0; i < initCount; i++)
@@ -25,7 +24,6 @@ public class PlayerBulletObjectPool : MonoBehaviour
         }
     }
 
-    //초기화된 적 미리 소환
     private PlayerBullet CreateNewEnemy()
     {
         var newBullet = Instantiate(PoolingBulletPrefabs).GetComponent<PlayerBullet>();
@@ -34,7 +32,6 @@ public class PlayerBulletObjectPool : MonoBehaviour
         return newBullet;
     }
 
-    //적 활성화
     private PlayerBullet GetEnemy()
     {
         if (Instance.PoolingBulletQueue.Count > 0)
@@ -54,7 +51,6 @@ public class PlayerBulletObjectPool : MonoBehaviour
         }
     }
 
-    //적 오브젝트 풀로 리턴
     public static void ReturnEnemy(PlayerBullet bullet)
     {
         bullet.gameObject.SetActive(false);
