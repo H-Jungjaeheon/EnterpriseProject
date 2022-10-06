@@ -29,7 +29,7 @@ public class BattleSceneManager : Singleton<BattleSceneManager>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             BattleUIManager.Instance.CalculationOfGoods(moneyUnit, pmMoneyUnit, test);
         }

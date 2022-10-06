@@ -117,8 +117,9 @@ public class BattleUIManager : Singleton<BattleUIManager>
             }
             else if (aCalculatedValues[maxUnitIndex] / 10 <= 0)
             {
-                print("1자리일 때");
-                commodityConversionText.text = $"{aCalculatedValues[maxUnitIndex]}.{0 + aCalculatedValues[maxUnitIndex - 1] / 10}{aUnitOfGoods}";
+                int hundredUnits = aCalculatedValues[maxUnitIndex - 1] / 100;
+                int tenUnits = (aCalculatedValues[maxUnitIndex - 1] % 100) / 10;
+                commodityConversionText.text = $"{aCalculatedValues[maxUnitIndex]}.{hundredUnits}{tenUnits}{aUnitOfGoods}";
             }
         }
         else
