@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6607633051986260854}
   - component: {fileID: 6607633051986260855}
   - component: {fileID: 6607633051986260852}
+  - component: {fileID: 4087284108575833758}
   m_Layer: 0
   m_Name: PlayerBullet
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6607633051986260853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 0, g: 0.9803941, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!58 &6607633051986260855
@@ -121,3 +122,48 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4087284108575833758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6607633051986260853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb1e90795530ec9408bb7760c50f420c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletData:
+  - {fileID: 11400000, guid: a3ce4a42f746ce844b388b3cd857652a, type: 2}
+  spriteRenderer: {fileID: 6607633051986260854}
+  BulletType: 0
+  BulletImg: {fileID: 0}
+  BulletName: 
+  BulletPower: 0
+  BulletSpeed: 0
+  TargetPos: {fileID: 0}
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: -0.00044250488
+      inSlope: 0.10194599
+      outSlope: 0.10194599
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.50165325
+    - serializedVersion: 3
+      time: 1
+      value: -0.00044250488
+      inSlope: -0.09773014
+      outSlope: -0.09773014
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.49834675
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

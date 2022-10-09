@@ -14,44 +14,52 @@ public class PlayerBulletObjectPool : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        Initialize(10);
     }
 
     private void Initialize(int initCount)
     {
         for (int i = 0; i < initCount; i++)
         {
-            PoolingBulletQueue.Enqueue(CreateNewEnemy());
+            PoolingBulletQueue.Enqueue(CreateNewBullet());
         }
     }
 
-    private PlayerBullet CreateNewEnemy()
+    private PlayerBullet CreateNewBullet()
     {
         var newBullet = Instantiate(PoolingBulletPrefabs).GetComponent<PlayerBullet>();
+        newBullet.transform.position = transform.position;
+
         newBullet.gameObject.SetActive(false);
         newBullet.transform.SetParent(transform);
         return newBullet;
     }
 
-    private PlayerBullet GetEnemy()
+    public PlayerBullet GetBullet(GameObject Target)
     {
+        PlayerBullet bullet = null;
+
         if (Instance.PoolingBulletQueue.Count > 0)
         {
-            var bullet = Instance.PoolingBulletQueue.Dequeue();
+            bullet = Instance.PoolingBulletQueue.Dequeue();
             bullet.transform.SetParent(null);
             bullet.gameObject.SetActive(true);
-            return bullet;
+            
         }
 
         else
         {
-            var newBullet = Instance.CreateNewEnemy();
-            newBullet.gameObject.SetActive(true);
-            newBullet.transform.SetParent(null);
-            return newBullet;
+            bullet = Instance.CreateNewBullet();
+            bullet.gameObject.SetActive(true);
+            bullet.transform.SetParent(null);
         }
+
+        bullet.transform.position = transform.position;
+        bullet.TargetSetting(Target);
+        return bullet;
     }
 
-    public static void ReturnEnemy(PlayerBullet bullet)
+    public static void ReturnBullet(PlayerBullet bullet)
     {
         bullet.gameObject.SetActive(false);
         bullet.transform.SetParent(Instance.transform);

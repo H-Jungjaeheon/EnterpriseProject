@@ -30,11 +30,18 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float AttackPower;
     [SerializeField]
-    private float AttackSpeed;
+    private float AttackDelay;
     [SerializeField]
     private float CriticalPercent;
     [SerializeField]
     private float CriticalDamage;
+
+    [Header("전투 변수")]
+    [SerializeField]
+    private PlayerRange Range;
+    [SerializeField]
+    private bool OnAttack = false;
+    private Coroutine AttackCorutine;
 
     [Header("숙련도 변수")]
     //[SerializeField]
@@ -42,9 +49,34 @@ public class Player : MonoBehaviour
     [SerializeField]
     private BulletData[] BulletData;
 
-
-    void Attack()
+    private void Update()
     {
+        if(OnAttack == false && Range.TargetEnemy.Count > 0)
+        {
+            StartAttack();
+        }
+    }
 
+    void StartAttack()
+    {
+        OnAttack = true;
+        AttackCorutine = StartCoroutine(Attack());
+    }
+
+    void StopAttack()
+    {
+        OnAttack = false;
+        StopCoroutine(AttackCorutine);
+    }
+
+    IEnumerator Attack()
+    {
+        yield return null;
+
+        while (Range.TargetEnemy.Count > 0)
+        {
+            yield return new WaitForSeconds(AttackDelay);
+            PlayerBulletObjectPool.Instance.GetBullet(Range.TargetEnemy[0]);
+        }
     }
 }
