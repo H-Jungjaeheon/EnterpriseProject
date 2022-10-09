@@ -42,6 +42,9 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [SerializeField]
     private int[] damageGoodsRequiredForUpgrade = new int[25];
 
+    [SerializeField]
+    private GameObject Player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,8 +63,9 @@ public class BattleUIManager : Singleton<BattleUIManager>
         var gmInstance = GameManager.Instance;
         int largestIndex = 0;
         int[] nextGoodsRequiredForUpgrade = new int[25];
+        int[] statsForUpgrade = new int[25];
+        var playerComponent = Player.GetComponent<Player>();
 
-        //현재 재화가 업그레이드 비용 재화보다 많은지 판별 : 통과
         for (int nowIndex = 0; nowIndex < gmInstance.MoneyUnit.Length; nowIndex++)
         {
             if (gmInstance.MoneyUnit[nowIndex] > 0)
@@ -73,27 +77,22 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
         for (int nowIndex = unitMaximumArrayIndex; nowIndex >= 0; nowIndex--)
         {
-            print(nowIndex);
             if (nowIndex > largestIndex && gmInstance.MoneyUnit[nowIndex] > damageGoodsRequiredForUpgrade[nowIndex])
             {
-                print("통과!");
                 break;
             }
             else if(nowIndex <= largestIndex)
             {
                 if (gmInstance.MoneyUnit[nowIndex] < damageGoodsRequiredForUpgrade[nowIndex])
                 {
-                    print("실패!");
                     return;
                 }
                 else if (gmInstance.MoneyUnit[nowIndex] > damageGoodsRequiredForUpgrade[nowIndex])
                 {
-                    print("통과!");
                     break;
                 }
                 else if (nowIndex == 0 && gmInstance.MoneyUnit[nowIndex] == damageGoodsRequiredForUpgrade[nowIndex])
                 {
-                    print("통과!");
                     break;
                 }
             }
@@ -114,6 +113,17 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
         CalculationOfGoods(damageGoodsRequiredForUpgrade, nextGoodsRequiredForUpgrade, goodsTextRequiredForUpgrade[statsToUpgradeCurrently], true); //업그레이드 비용 수정
         goodsTextRequiredForUpgrade[statsToUpgradeCurrently].text = $"강화\n{goodsTextRequiredForUpgrade[statsToUpgradeCurrently].text}원";
+
+        for (int nowIndex = unitMaximumArrayIndex; nowIndex >= 0; nowIndex--) //비용 수정(연산)
+        {
+            if (playerComponent.AttackPower[nowIndex] > 0)
+            {
+                statsForUpgrade[nowIndex]++;
+                break;
+            }
+        }
+
+        CalculationOfGoods(playerComponent.AttackPower, statsForUpgrade, basicStatFigureText[statsToUpgradeCurrently], true);
     }
 
     public void AnotherContentsPopUp(GameObject PopUpObj)
