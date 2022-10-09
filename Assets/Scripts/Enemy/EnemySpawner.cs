@@ -51,21 +51,27 @@ public class EnemySpawner : MonoBehaviour
     //적 활성화
     private Enemy GetEnemy()
     {
+        Enemy enemy = null;
+
+        //pool에 적이 있을 시 소환
         if(Instance.PoolingEnemyQueue.Count > 0)
         {
-            var enemy = Instance.PoolingEnemyQueue.Dequeue();
+            enemy = Instance.PoolingEnemyQueue.Dequeue();
             enemy.transform.SetParent(null);
             enemy.gameObject.SetActive(true);
-            return enemy;
         }
 
+        //없을 시 새로 생성
         else
         {
-            var newEnemy = Instance.CreateNewEnemy();
-            newEnemy.gameObject.SetActive(true);
-            newEnemy.transform.SetParent(null);
-            return newEnemy;
+            enemy = Instance.CreateNewEnemy();
+            enemy.gameObject.SetActive(true);
+            enemy.transform.SetParent(null);
         }
+
+
+
+        return enemy;
     }
 
     //적 오브젝트 풀로 리턴
