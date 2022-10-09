@@ -10,6 +10,12 @@ public enum Contents
     ContentsLength
 }
 
+public enum UpgradeableBasicStats
+{
+    Damage,
+    MaxHp
+}
+
 public class BattleUIManager : Singleton<BattleUIManager>
 {
     [Header("콘텐츠 창 관련 변수들")]
@@ -20,18 +26,93 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [SerializeField]
     [Tooltip("콘텐츠 창 오브젝트 모음")]
     private GameObject[] contentsPanelObjs;
-    
+
+    #region 스탯 업그레이드창 텍스트 모음
+    [SerializeField]
+    [Tooltip("스탯 레벨 표기 텍스트")]
+    private Text[] basicStatLevelText;
+    [SerializeField]
+    [Tooltip("현재 스탯 수치 표기 텍스트")]
+    private Text[] basicStatFigureText;
+    [SerializeField]
+    [Tooltip("스탯 업그레이드 비용 표기 텍스트")]
+    private Text[] goodsTextRequiredForUpgrade;
+    #endregion
+
+    [SerializeField]
+    private int[] damageGoodsRequiredForUpgrade = new int[25];
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        basicStatLevelText[(int)UpgradeableBasicStats.Damage].text = $"Lv {GameManager.Instance.statsLevel[(int)UpgradeableBasicStats.Damage]}";
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void BasicStatUpgrade(int statsToUpgradeCurrently)
+    {
+        int unitMaximumArrayIndex = 24;
+        var gmInstance = GameManager.Instance;
+        int largestIndex = 0;
+        int[] nextGoodsRequiredForUpgrade = new int[25];
+
+        //현재 재화가 업그레이드 비용 재화보다 많은지 판별 : 통과
+        for (int nowIndex = 0; nowIndex < gmInstance.MoneyUnit.Length; nowIndex++)
+        {
+            if (gmInstance.MoneyUnit[nowIndex] > 0)
+            {
+                largestIndex = nowIndex;
+            }
+        }
+
+
+        for (int nowIndex = unitMaximumArrayIndex; nowIndex >= 0; nowIndex--)
+        {
+            print(nowIndex);
+            if (nowIndex > largestIndex && gmInstance.MoneyUnit[nowIndex] > damageGoodsRequiredForUpgrade[nowIndex])
+            {
+                print("통과!");
+                break;
+            }
+            else if(nowIndex <= largestIndex)
+            {
+                if (gmInstance.MoneyUnit[nowIndex] < damageGoodsRequiredForUpgrade[nowIndex])
+                {
+                    print("실패!");
+                    return;
+                }
+                else if (gmInstance.MoneyUnit[nowIndex] > damageGoodsRequiredForUpgrade[nowIndex])
+                {
+                    print("통과!");
+                    break;
+                }
+                else if (nowIndex == 0 && gmInstance.MoneyUnit[nowIndex] == damageGoodsRequiredForUpgrade[nowIndex])
+                {
+                    print("통과!");
+                    break;
+                }
+            }
+        }
+
+        CalculationOfGoods(gmInstance.MoneyUnit, damageGoodsRequiredForUpgrade, basicStatFigureText[statsToUpgradeCurrently], false); //재화 삭감
+        gmInstance.statsLevel[statsToUpgradeCurrently]++; //레벨 증가
+        basicStatLevelText[statsToUpgradeCurrently].text = $"Lv {gmInstance.statsLevel[statsToUpgradeCurrently]}"; //레벨 텍스트 수정
+
+        for (int nowIndex = unitMaximumArrayIndex; nowIndex >= 0; nowIndex--) //비용 수정(연산)
+        {
+            if (damageGoodsRequiredForUpgrade[nowIndex] > 0)
+            {
+                nextGoodsRequiredForUpgrade[nowIndex]++;
+                break;
+            }
+        }
+
+        CalculationOfGoods(damageGoodsRequiredForUpgrade, nextGoodsRequiredForUpgrade, basicStatFigureText[statsToUpgradeCurrently], true); //업그레이드 비용 수정
     }
 
     public void AnotherContentsPopUp(GameObject PopUpObj)
@@ -65,12 +146,19 @@ public class BattleUIManager : Singleton<BattleUIManager>
         nowContentsPanelObj.SetActive(true);
     }
 
-    public void CalculationOfGoods(int[] aCalculatedValues, int[] aPriceToAdd, Text commodityConversionText) //뺄 때에는 가장 높은 단위 비교
+    public void CalculationOfGoods(int[] aCalculatedValues, int[] aPriceToAdd, Text commodityConversionText, bool isAddition) //뺄 때에는 가장 높은 단위 비교
     {
         int maxUnitIndex = 0;
         for (int nowUnitOfGoodsIndex = 0; nowUnitOfGoodsIndex < aCalculatedValues.Length; nowUnitOfGoodsIndex++)
         {
-            aCalculatedValues[nowUnitOfGoodsIndex] += aPriceToAdd[nowUnitOfGoodsIndex];
+            if (isAddition)
+            {
+                aCalculatedValues[nowUnitOfGoodsIndex] += aPriceToAdd[nowUnitOfGoodsIndex];
+            }
+            else
+            {
+                aCalculatedValues[nowUnitOfGoodsIndex] -= aPriceToAdd[nowUnitOfGoodsIndex];
+            }
 
             if (aCalculatedValues[nowUnitOfGoodsIndex] >= 1000)
             {

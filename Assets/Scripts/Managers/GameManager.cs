@@ -9,6 +9,17 @@ public class GameManager : Singleton<GameManager>
         
     }
 
+    [SerializeField]
+    [Tooltip("현재 보유 재화")]
+    private int[] moneyUnit;
+
+    public int[] MoneyUnit
+    {
+        get { return moneyUnit; }
+        set { moneyUnit = value; }
+    }
+
+    public int[] statsLevel;
     
 
     // Start is called before the first frame update

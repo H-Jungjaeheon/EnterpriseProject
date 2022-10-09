@@ -272,7 +272,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC2A4\uD0EF1"
+  m_Text: "\uACF5\uACA9\uB825"
 --- !u!222 &34785734
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1959,7 +1959,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 699858288}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1103746049}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+        m_MethodName: BasicStatUpgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &699858288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3042,6 +3054,25 @@ MonoBehaviour:
   contentsPanelObjs:
   - {fileID: 1490917323}
   - {fileID: 933780099}
+  basicStatLevelText:
+  - {fileID: 1582084038}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  basicStatFigureText:
+  - {fileID: 1522493651}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  goodsTextRequiredForUpgrade:
+  - {fileID: 1503910694}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  damageGoodsRequiredForUpgrade: 0a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!4 &1103746050
 Transform:
   m_ObjectHideFlags: 0
@@ -4360,7 +4391,7 @@ GameObject:
   - component: {fileID: 1503910695}
   - component: {fileID: 1503910694}
   m_Layer: 5
-  m_Name: Text
+  m_Name: DamageGoodsRequiredForUpgradeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5007,10 +5038,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroyObj: 0
-  moneyUnit: 50000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  pmMoneyUnit: 0a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  pmMoneyUnitT: c8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  test: {fileID: 395004578}
 --- !u!4 &1728561029
 Transform:
   m_ObjectHideFlags: 0
@@ -5061,6 +5088,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -250.00012}
   m_SizeDelta: {x: 0, y: 499.99976}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1976572748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1976572750}
+  - component: {fileID: 1976572749}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1976572749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976572748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a11efbb5087b9b74db31c1780467ee09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDontDestroyObj: 0
+  moneyUnit: 0a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  statsLevel: 01000000
+--- !u!4 &1976572750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976572748}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2045686910
 GameObject:
   m_ObjectHideFlags: 0
