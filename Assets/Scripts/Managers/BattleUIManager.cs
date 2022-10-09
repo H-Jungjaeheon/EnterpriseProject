@@ -112,7 +112,8 @@ public class BattleUIManager : Singleton<BattleUIManager>
             }
         }
 
-        CalculationOfGoods(damageGoodsRequiredForUpgrade, nextGoodsRequiredForUpgrade, basicStatFigureText[statsToUpgradeCurrently], true); //업그레이드 비용 수정
+        CalculationOfGoods(damageGoodsRequiredForUpgrade, nextGoodsRequiredForUpgrade, goodsTextRequiredForUpgrade[statsToUpgradeCurrently], true); //업그레이드 비용 수정
+        goodsTextRequiredForUpgrade[statsToUpgradeCurrently].text = $"강화\n{goodsTextRequiredForUpgrade[statsToUpgradeCurrently].text}원";
     }
 
     public void AnotherContentsPopUp(GameObject PopUpObj)
