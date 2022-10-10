@@ -19,30 +19,40 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private Coroutine EnemySpawnCorutine;
 
+    [Header("StageInfo변수")]
+    [SerializeField]
+    private StageInfo StageData;
+
+
     private void Awake()
     {
         Instance = this;
-        Initialize(10);
+        Initialize(8);
     }
 
     private void Start()
     {
         Instance.StartEnemySpawn(5);
+        StageData = this.GetComponent<ReciveStageInfo>().GetStageInfo(0);
     }
 
+    #region Pool함수
     //초기화
     private void Initialize(int initCount)
     {
-        for (int i = 0; i < initCount; i++)
+        for (int i = 0; i < PoolingEnemyPrefabs.Length; i++)
         {
-            PoolingEnemyQueue.Enqueue(CreateNewEnemy());
+            for (int j = 0; j < initCount; j++)
+            {
+                PoolingEnemyQueue.Enqueue(CreateNewEnemy(i));
+            }
         }
     }
 
     //초기화된 적 미리 소환
-    private Enemy CreateNewEnemy()
+    private Enemy CreateNewEnemy(int Type)
     {
-        var newEnemy = Instantiate(PoolingEnemyPrefabs[0]).GetComponent<Enemy>();
+        var newEnemy = Instantiate(PoolingEnemyPrefabs[Type]).GetComponent<Enemy>();
         newEnemy.gameObject.SetActive(false);
         newEnemy.transform.SetParent(transform);
         return newEnemy;
@@ -64,7 +74,7 @@ public class EnemySpawner : MonoBehaviour
         //없을 시 새로 생성
         else
         {
-            enemy = Instance.CreateNewEnemy();
+            enemy = Instance.CreateNewEnemy(0);
             enemy.gameObject.SetActive(true);
             enemy.transform.SetParent(null);
         }
@@ -81,7 +91,9 @@ public class EnemySpawner : MonoBehaviour
         enemy.transform.SetParent(Instance.transform);
         Instance.PoolingEnemyQueue.Enqueue(enemy);
     }
+    #endregion
 
+    #region Spawn함수
     public void StartEnemySpawn(int SpawnCnt)
     {
         EnemySpawnCorutine = StartCoroutine(EnemySpawn(SpawnCnt));
@@ -105,4 +117,5 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(MinTime, MaxTime));
         }
     }
+    #endregion
 }
