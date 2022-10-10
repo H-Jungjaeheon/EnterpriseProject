@@ -40,13 +40,17 @@ public class PlayerBullet : MonoBehaviour
     void Start()
     {
         BasicSetting();
-        StartCoroutine(IEFlight());
+        StartCoroutine(BulletMove());
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        BulletMove(); 
+        if(other.CompareTag("Enemy"))
+        {
+            Attack(other.GetComponent<Enemy>());
+
+            PlayerBulletObjectPool.ReturnBullet(this);
+        }
     }
 
     //세팅 함수
@@ -70,12 +74,12 @@ public class PlayerBullet : MonoBehaviour
     }
 
     //공격 함수
-    private void BulletMove()
+    private void Attack(Enemy enemy)
     {
-
+        enemy.Hp -= BulletPower;
     }
 
-    private IEnumerator IEFlight()
+    private IEnumerator BulletMove()
     {
         float duration = BulletSpeed;
         float time = 0.0f;
@@ -96,5 +100,7 @@ public class PlayerBullet : MonoBehaviour
 
             yield return null;
         }
+
+        yield break;
     }
 }

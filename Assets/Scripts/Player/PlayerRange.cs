@@ -12,7 +12,6 @@ public class PlayerRange : MonoBehaviour
         if(other.gameObject.CompareTag("Enemy"))
         {
             TargetEnemy.Add(other.gameObject);
-            Debug.Log(other.gameObject.name);
         }
     }
 

@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance = null;
+
     [Header("플레이어 기본 스탯 변수")]
     [SerializeField]
     private int hp;
@@ -39,7 +41,7 @@ public class Player : MonoBehaviour
 
     [Header("전투 변수")]
     [SerializeField]
-    private PlayerRange Range;
+    public PlayerRange Range;
     [SerializeField]
     private bool OnAttack = false;
     private Coroutine AttackCorutine;
@@ -50,11 +52,21 @@ public class Player : MonoBehaviour
     [SerializeField]
     private BulletData[] BulletData;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Update()
     {
         if(OnAttack == false && Range.TargetEnemy.Count > 0)
         {
             StartAttack();
+        }
+
+        else if(OnAttack == true && Range.TargetEnemy.Count <= 0)
+        {
+            StopAttack();
         }
     }
 

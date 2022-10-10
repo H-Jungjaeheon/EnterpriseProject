@@ -100,7 +100,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
 --- !u!50 &6607633051986260852
 Rigidbody2D:
   serializedVersion: 4
@@ -149,20 +149,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: -0.00044250488
-      inSlope: 0.10194599
-      outSlope: 0.10194599
+      inSlope: 0.2791024
+      outSlope: 0.2791024
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.50165325
+      outWeight: 0.042338714
+    - serializedVersion: 3
+      time: 0.49999997
+      value: 0.05039873
+      inSlope: -0.00085266406
+      outSlope: -0.00085266406
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: -0.00044250488
-      inSlope: -0.09773014
-      outSlope: -0.09773014
+      inSlope: -0.28550312
+      outSlope: -0.28550312
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.49834675
+      inWeight: 0.04233873
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
