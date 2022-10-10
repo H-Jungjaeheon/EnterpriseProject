@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ReciveStageInfo : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Serializable]
+    public class StageInfos
     {
-        
+        public StageInfo[] StageData;
     }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    StageInfos DataList;
+
+    void Awake()
     {
-        
+        string JsonData = Resources.Load<TextAsset>("JsonData/StageData").ToString();
+
+        DataList = JsonUtility.FromJson<StageInfos>(JsonData);
+    }
+
+    public StageInfo GetStageInfo(int ID)
+    {
+        return DataList.StageData[ID];
     }
 }
