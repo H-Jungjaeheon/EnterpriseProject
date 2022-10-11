@@ -3290,6 +3290,34 @@ MonoBehaviour:
     Shrot_3: 0
     Long_3: 0
     Air_3: 0
+  EnemyData:
+  - Type: 0
+    EnemyValue: 0
+    EnemyForm: 0
+  - Type: 0
+    EnemyValue: 0
+    EnemyForm: 1
+  - Type: 0
+    EnemyValue: 0
+    EnemyForm: 2
+  - Type: 1
+    EnemyValue: 0
+    EnemyForm: 0
+  - Type: 1
+    EnemyValue: 0
+    EnemyForm: 1
+  - Type: 1
+    EnemyValue: 0
+    EnemyForm: 2
+  - Type: 2
+    EnemyValue: 0
+    EnemyForm: 0
+  - Type: 2
+    EnemyValue: 0
+    EnemyForm: 1
+  - Type: 2
+    EnemyValue: 0
+    EnemyForm: 2
 --- !u!114 &788044564
 MonoBehaviour:
   m_ObjectHideFlags: 0

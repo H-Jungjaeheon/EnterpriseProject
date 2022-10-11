@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class DataForm
+{
+    public EnemyType Type;
+    public int EnemyValue;
+    public int EnemyForm;
+}
+
 public class EnemySpawner : MonoBehaviour
 {
     public static EnemySpawner Instance;
@@ -10,7 +18,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private GameObject[] PoolingEnemyPrefabs;
     [SerializeField]
-    private Queue<Enemy> PoolingEnemyQueue = new Queue<Enemy>();
+    private Queue<Enemy> PoolingShortQueue = new Queue<Enemy>();
+    private Queue<Enemy> PoolingLongQueue = new Queue<Enemy>();
+    private Queue<Enemy> PoolingAirQueue = new Queue<Enemy>();
     [SerializeField]
     private float MaxTime, MinTime;
     [SerializeField]
@@ -25,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
 
     // 몬스터 수량 배열화(순서 : short1, short2, short3, long1...)
     [SerializeField]
-    private int[] MonsterData = new int[9];
+    private DataForm[] EnemyData;
 
 
     private void Awake()
@@ -36,19 +46,26 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        Instance.StartEnemySpawn(5);
-        ReciveData(4);
+        Instance.StartEnemySpawn();
+        ReciveData(9);
     }
 
     #region Pool함수
-    //초기화
+    //초기화 타입별로 소환
     private void Initialize(int initCount)
     {
         for (int i = 0; i < PoolingEnemyPrefabs.Length; i++)
         {
             for (int j = 0; j < initCount; j++)
             {
-                PoolingEnemyQueue.Enqueue(CreateNewEnemy(i));
+               if(i == 0)
+                    PoolingShortQueue.Enqueue(CreateNewEnemy(i));
+
+               else if(i == 1)
+                    PoolingLongQueue.Enqueue(CreateNewEnemy(i));
+
+               else
+                    PoolingAirQueue.Enqueue(CreateNewEnemy(i));
             }
         }
     }
@@ -59,46 +76,83 @@ public class EnemySpawner : MonoBehaviour
         var newEnemy = Instantiate(PoolingEnemyPrefabs[Type]).GetComponent<Enemy>();
         newEnemy.gameObject.SetActive(false);
         newEnemy.transform.SetParent(transform);
+
         return newEnemy;
     }
 
     //적 활성화
-    private Enemy GetEnemy()
+    private Enemy GetEnemy(EnemyType type, int form)
     {
         Enemy enemy = null;
 
-        //pool에 적이 있을 시 소환
-        if(Instance.PoolingEnemyQueue.Count > 0)
+        if (type == EnemyType.ShortDis)
         {
-            enemy = Instance.PoolingEnemyQueue.Dequeue();
-            enemy.transform.SetParent(null);
-            enemy.gameObject.SetActive(true);
+            //pool에 적이 있을 시 소환
+            if (Instance.PoolingShortQueue.Count > 0)
+            {
+                enemy = Instance.PoolingShortQueue.Dequeue();
+                enemy.transform.SetParent(null);
+                enemy.gameObject.SetActive(true);
+            }
+        }
+
+        else if (type == EnemyType.LongDis)
+        {
+            //pool에 적이 있을 시 소환
+            if (Instance.PoolingLongQueue.Count > 0)
+            {
+                enemy = Instance.PoolingLongQueue.Dequeue();
+                enemy.transform.SetParent(null);
+                enemy.gameObject.SetActive(true);
+            }
+        }
+
+        else if(type == EnemyType.Air)
+        {
+            //pool에 적이 있을 시 소환
+            if (Instance.PoolingAirQueue.Count > 0)
+            {
+                enemy = Instance.PoolingAirQueue.Dequeue();
+                enemy.transform.SetParent(null);
+                enemy.gameObject.SetActive(true);
+            }
         }
 
         //없을 시 새로 생성
         else
         {
-            enemy = Instance.CreateNewEnemy(0);
+            enemy = Instance.CreateNewEnemy((int)type);
             enemy.gameObject.SetActive(true);
             enemy.transform.SetParent(null);
         }
+
+        enemy.GetComponent<Enemy>().BasicSetting(form);
 
         return enemy;
     }
 
     //적 오브젝트 풀로 리턴
-    public static void ReturnEnemy(Enemy enemy)
+    public static void ReturnEnemy(EnemyType type ,Enemy enemy)
     {
         enemy.gameObject.SetActive(false);
         enemy.transform.SetParent(Instance.transform);
-        Instance.PoolingEnemyQueue.Enqueue(enemy);
+
+        //타입별 리턴(리펙토링 필요)
+        if(type == EnemyType.ShortDis)
+            Instance.PoolingShortQueue.Enqueue(enemy);
+
+        else if (type == EnemyType.LongDis)
+            Instance.PoolingLongQueue.Enqueue(enemy);
+
+        if (type == EnemyType.Air)
+            Instance.PoolingAirQueue.Enqueue(enemy);
     }
     #endregion
 
     #region Spawn함수
-    public void StartEnemySpawn(int SpawnCnt)
+    public void StartEnemySpawn()
     {
-        EnemySpawnCorutine = StartCoroutine(EnemySpawn(SpawnCnt));
+        EnemySpawnCorutine = StartCoroutine(EnemySpawn());
     }
 
     public void StopEnemySpawn()
@@ -106,17 +160,22 @@ public class EnemySpawner : MonoBehaviour
         StopCoroutine(EnemySpawnCorutine);
     }
 
-    private IEnumerator EnemySpawn(int SpawnCnt)
+    private IEnumerator EnemySpawn()
     {
         yield return null;
 
-        while(SpawnCnt > 0)
+        for (int i = 0; i < EnemyData.Length; i++)
         {
-            Enemy enemy = Instance.GetEnemy();
-            enemy.transform.position = new Vector2(this.transform.position.x, Random.Range(MinY, MaxY));
+            if(EnemyData[i].EnemyValue > 0)
+            {
+                for (int j = 0; j < EnemyData[i].EnemyValue; j++)
+                {
+                    Enemy enemy = Instance.GetEnemy(EnemyData[i].Type, EnemyData[i].EnemyForm);
+                    enemy.transform.position = new Vector2(this.transform.position.x, Random.Range(MinY, MaxY));
 
-            SpawnCnt--;
-            yield return new WaitForSeconds(Random.Range(MinTime, MaxTime));
+                    yield return new WaitForSeconds(Random.Range(MinTime, MaxTime));
+                }
+            }
         }
     }
     #endregion
@@ -126,17 +185,17 @@ public class EnemySpawner : MonoBehaviour
     {
         StageData = this.GetComponent<ReciveStageInfo>().GetStageInfo(StageID);
 
-        MonsterData[0] = StageData.Shrot_1;
-        MonsterData[1] = StageData.Shrot_2;
-        MonsterData[2] = StageData.Shrot_3;
+        EnemyData[0].EnemyValue = StageData.Shrot_1;
+        EnemyData[1].EnemyValue = StageData.Shrot_2;
+        EnemyData[2].EnemyValue = StageData.Shrot_3;
         //---------------------------------------short
-        MonsterData[3] = StageData.Long_1;
-        MonsterData[4] = StageData.Long_2;
-        MonsterData[5] = StageData.Long_3;
+        EnemyData[3].EnemyValue = StageData.Long_1;
+        EnemyData[4].EnemyValue = StageData.Long_2;
+        EnemyData[5].EnemyValue = StageData.Long_3;
         //---------------------------------------long
-        MonsterData[6] = StageData.Air_1;
-        MonsterData[7] = StageData.Air_2;
-        MonsterData[8] = StageData.Air_3;
+        EnemyData[6].EnemyValue = StageData.Air_1;
+        EnemyData[7].EnemyValue = StageData.Air_2;
+        EnemyData[8].EnemyValue = StageData.Air_3;
         //---------------------------------------air
     }
     #endregion
