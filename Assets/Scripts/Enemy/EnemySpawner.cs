@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         Instance.StartEnemySpawn();
-        ReciveData(9);
+        ReciveData(0);
     }
 
     #region PoolÇÔ¼ö
