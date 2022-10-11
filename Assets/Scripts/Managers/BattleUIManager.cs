@@ -6,8 +6,15 @@ using UnityEngine.UI;
 public enum Contents
 {
     StatUpgradeContents,
-    TestContents,
+    SaleOfFoodContents,
     ContentsLength
+}
+
+public enum SaleOfFoodContents
+{
+    BasicScreen,
+    ChooseFoodScreen,
+    FoodMakingScreen
 }
 
 public enum UpgradeableBasicStats
@@ -18,6 +25,13 @@ public enum UpgradeableBasicStats
 
 public class BattleUIManager : Singleton<BattleUIManager>
 {
+    #region 현재 상태 표기 관련 변수
+    private Contents nowContents;
+
+    private SaleOfFoodContents nowSaleOfFoodContents;
+    #endregion
+
+    #region 콘텐츠 창 관련 변수들
     [Header("콘텐츠 창 관련 변수들")]
     [SerializeField]
     [Tooltip("현재 보여지는 콘텐츠 창 오브젝트")]
@@ -27,7 +41,13 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [Tooltip("콘텐츠 창 오브젝트 모음")]
     private GameObject[] contentsPanelObjs;
 
+    [SerializeField]
+    [Tooltip("요리 판매 시스템 - 요리 선택 및 제작 창 오브젝트")]
+    private GameObject foodChooseAndMakePanelObj;
+    #endregion
+
     #region 스탯 업그레이드창 텍스트 모음
+    [Header("스탯 업그레이드창의 텍스트 모음")]
     [SerializeField]
     [Tooltip("스탯 레벨 표기 텍스트")]
     private Text[] basicStatLevelText;
@@ -39,22 +59,122 @@ public class BattleUIManager : Singleton<BattleUIManager>
     private Text[] goodsTextRequiredForUpgrade;
     #endregion
 
+    #region 요리 판매 시스템 화면 텍스트, 변수, 오브젝트 모음
+    [Header("재료 개수 표기 텍스트(기본 화면)")]
+    [SerializeField]
+    [Tooltip("기본 화면의 모든 등급 개수 표기 텍스트들 모음")]
+    private Text[] materialsText_BasicScreen;
+
+    [Header("재료 개수 표기 텍스트(요리 선택 화면)")]
+    [SerializeField]
+    [Tooltip("요리 선택 화면의 모든 등급 개수 표기 텍스트들 모음")]
+    private Text[] materialsText_ChooseCookScreen;
+
+    [SerializeField]
+    [Tooltip("현재 제작할 요리 수량 표기 텍스트")]
+    private Text nowCookingCountText;
+
+    private int cookingCount;
+
+    private int nowChangeContents;
+
+    [Header("현재 요리에 필요한 재료 개수들")]
+    [SerializeField]
+    [Tooltip("현재 요리에 필요한 재료 개수")]
+    private int[] quantityOfMaterials;
+
+    [HideInInspector]
+    public bool isCustomerArrival;
+
+    [SerializeField]
+    [Tooltip("손님 오브젝트")]
+    private GameObject customerObj;
+
+    private Vector3 customerSpeed = new Vector3(1, 0, 0);
+    #endregion
+
+    [Header("그 외")]
     [SerializeField]
     private int[] damageGoodsRequiredForUpgrade = new int[25];
 
     [SerializeField]
     private GameObject Player;
 
-    // Start is called before the first frame update
     void Start()
     {
         basicStatLevelText[(int)UpgradeableBasicStats.Damage].text = $"Lv {GameManager.Instance.statsLevel[(int)UpgradeableBasicStats.Damage]}";
+        StartCoroutine(customerOnTheWay());
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        SaleOfFoodViewMaterialsText_BasicScreen();
+        SaleOfFoodViewMaterialsText_ChooseFoodScreen();
+    }
+
+    private IEnumerator customerOnTheWay()
+    {
+        //-3.5, -3.2 (초기화 자리)
+        while (customerObj.transform.position.x < -1)
+        {
+            customerObj.transform.position += customerSpeed * Time.deltaTime;
+            if (isCustomerArrival)
+            {
+                break;
+            }
+            yield return null;
+        }
+        isCustomerArrival = true;
+        customerObj.transform.position = new Vector2(-1, -3.15f);
+    }
+
+    private void SaleOfFoodViewMaterialsText_BasicScreen()
+    {
+        if (nowContents == Contents.SaleOfFoodContents)
+        {
+            var battleSceneManagerIn = BattleSceneManager.Instance;
+            for (int nowIndex = 0; nowIndex < 3; nowIndex++)
+            {
+                if (nowSaleOfFoodContents == SaleOfFoodContents.BasicScreen)
+                {
+                    materialsText_BasicScreen[nowIndex].text = $"{battleSceneManagerIn.quantityOfMaterials[nowIndex]} 개";
+                }
+                else if(nowSaleOfFoodContents == SaleOfFoodContents.ChooseFoodScreen)
+                {
+                    materialsText_BasicScreen[nowIndex].text = $"{battleSceneManagerIn.quantityOfMaterials[nowIndex]} / {quantityOfMaterials[nowIndex]}";
+                    //개수 불충분 시 빨간색으로 텍스트 색 변경
+                }
+            }
+        }
+    }
+
+    private void SaleOfFoodViewMaterialsText_ChooseFoodScreen()
+    {
+        if (nowContents == Contents.SaleOfFoodContents && nowSaleOfFoodContents == SaleOfFoodContents.ChooseFoodScreen)
+        {
+            nowCookingCountText.text = $"{cookingCount} 개";
+        }
+    }
+
+    public void FoodChooseAndMakePanelOnOrOff(bool isPanelOn)
+    {
+        if (isPanelOn && isCustomerArrival == false)
+        {
+            return;
+        }
+        foodChooseAndMakePanelObj.SetActive(isPanelOn);
+    }
+
+    public void AdjustTheNumberOfFoods(bool isPlus)
+    {
+        if (isPlus == false && cookingCount > 0)
+        {
+            cookingCount--;
+        }
+        else if(isPlus && cookingCount < 99)
+        {
+            cookingCount++;
+        }
     }
 
     public void BasicStatUpgrade(int statsToUpgradeCurrently)
@@ -133,13 +253,24 @@ public class BattleUIManager : Singleton<BattleUIManager>
         if (PopUpObj.activeSelf)
         {
             nowContentsPanelObj = contentsPanelObjs[(int)Contents.StatUpgradeContents];
+            nowContents = Contents.StatUpgradeContents;
         }
         else
         {
+            nowContents = (Contents)nowChangeContents;
             nowContentsPanelObj = PopUpObj;
         }
         lastViewContents.SetActive(false);
         nowContentsPanelObj.SetActive(true);
+        if (isCustomerArrival == false)
+        {
+            isCustomerArrival = true;
+        }
+    }
+
+    public void NowContentsChange(int ChangeIndex)
+    {
+        nowChangeContents = ChangeIndex;
     }
 
     public void AnotherContentsChangeScrollView(GameObject PopUpObj)
@@ -148,13 +279,19 @@ public class BattleUIManager : Singleton<BattleUIManager>
         if (PopUpObj.activeSelf)
         {
             nowContentsPanelObj = contentsPanelObjs[(int)Contents.StatUpgradeContents];
+            nowContents = Contents.StatUpgradeContents;
         }
         else
         {
             nowContentsPanelObj = PopUpObj;
+            nowContents = (Contents)nowChangeContents;
         }
         lastViewContents.SetActive(false);
         nowContentsPanelObj.SetActive(true);
+        if (isCustomerArrival == false)
+        {
+            isCustomerArrival = true;
+        }
     }
 
     public void CalculationOfGoods(int[] aCalculatedValues, int[] aPriceToAdd, Text commodityConversionText, bool isAddition) //뺄 때에는 가장 높은 단위 비교

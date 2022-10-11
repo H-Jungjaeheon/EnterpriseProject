@@ -3275,6 +3275,19 @@ MonoBehaviour:
   MinTime: 0.3
   MaxY: 1.5
   MinY: 0.6
+  StageData:
+    ID: 0
+    StageNumber: 0
+    IsBossStage: 
+    Shrot_1: 0
+    Long_1: 0
+    Air_1: 0
+    Shrot_2: 0
+    Long_2: 0
+    Air_2: 0
+    Shrot_3: 0
+    Long_3: 0
+    Air_3: 0
 --- !u!114 &788044564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5036,6 +5049,7 @@ MonoBehaviour:
   contentsPanelObjs:
   - {fileID: 1490917323}
   - {fileID: 933780099}
+  foodChooseAndMakePanelObj: {fileID: 1799846713}
   basicStatLevelText:
   - {fileID: 1582084038}
   - {fileID: 0}
@@ -5054,6 +5068,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  materialsText_BasicScreen:
+  - {fileID: 2006706812}
+  - {fileID: 1254427040}
+  - {fileID: 1607128860}
+  materialsText_ChooseCookScreen:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  nowCookingCountText: {fileID: 0}
+  quantityOfMaterials: 
+  isCustomerArrival: 0
+  customerObj: {fileID: 1915098345}
   damageGoodsRequiredForUpgrade: 0a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   Player: {fileID: 1293959311}
 --- !u!4 &1103746050
@@ -6130,6 +6156,18 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1103746049}
         m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+        m_MethodName: NowContentsChange
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1103746049}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
         m_MethodName: AnotherContentsChangeScrollView
         m_Mode: 2
         m_Arguments:
@@ -7081,7 +7119,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1521004597}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1103746049}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+        m_MethodName: FoodChooseAndMakePanelOnOrOff
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1521004597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7753,7 +7803,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1647596745}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1103746049}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+        m_MethodName: FoodChooseAndMakePanelOnOrOff
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1647596745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8330,6 +8392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroyObj: 0
+  quantityOfMaterials: 000000000000000000000000
 --- !u!4 &1728561029
 Transform:
   m_ObjectHideFlags: 0
@@ -8802,7 +8865,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915098345}
-  m_LocalRotation: {x: 0, y: 0.105656646, z: 0, w: 0.9944027}
+  m_LocalRotation: {x: -0, y: 0.105656646, z: -0, w: 0.9944027}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 500, y: 500, z: 1}
   m_Children: []
