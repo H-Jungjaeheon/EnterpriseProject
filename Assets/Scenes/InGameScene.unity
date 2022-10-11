@@ -3271,10 +3271,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolingEnemyPrefabs:
   - {fileID: 3899307102218605548, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
+  - {fileID: 3899307102218605548, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
+  - {fileID: 3899307102218605548, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
   MaxTime: 0.7
   MinTime: 0.3
   MaxY: 1.5
   MinY: 0.6
+  StageData:
+    ID: 0
+    StageNumber: 0
+    IsBossStage: 
+    Shrot_1: 0
+    Long_1: 0
+    Air_1: 0
+    Shrot_2: 0
+    Long_2: 0
+    Air_2: 0
+    Shrot_3: 0
+    Long_3: 0
+    Air_3: 0
 --- !u!114 &788044564
 MonoBehaviour:
   m_ObjectHideFlags: 0

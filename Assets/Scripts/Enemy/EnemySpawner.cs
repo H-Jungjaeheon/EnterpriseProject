@@ -23,6 +23,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private StageInfo StageData;
 
+    // 몬스터 수량 배열화(순서 : short1, short2, short3, long1...)
+    [SerializeField]
+    private int[] MonsterData = new int[9];
+
 
     private void Awake()
     {
@@ -33,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         Instance.StartEnemySpawn(5);
-        StageData = this.GetComponent<ReciveStageInfo>().GetStageInfo(0);
+        ReciveData(4);
     }
 
     #region Pool함수
@@ -79,8 +83,6 @@ public class EnemySpawner : MonoBehaviour
             enemy.transform.SetParent(null);
         }
 
-
-
         return enemy;
     }
 
@@ -116,6 +118,26 @@ public class EnemySpawner : MonoBehaviour
             SpawnCnt--;
             yield return new WaitForSeconds(Random.Range(MinTime, MaxTime));
         }
+    }
+    #endregion
+
+    #region 데이터 전달 함수
+    void ReciveData(int StageID)
+    {
+        StageData = this.GetComponent<ReciveStageInfo>().GetStageInfo(StageID);
+
+        MonsterData[0] = StageData.Shrot_1;
+        MonsterData[1] = StageData.Shrot_2;
+        MonsterData[2] = StageData.Shrot_3;
+        //---------------------------------------short
+        MonsterData[3] = StageData.Long_1;
+        MonsterData[4] = StageData.Long_2;
+        MonsterData[5] = StageData.Long_3;
+        //---------------------------------------long
+        MonsterData[6] = StageData.Air_1;
+        MonsterData[7] = StageData.Air_2;
+        MonsterData[8] = StageData.Air_3;
+        //---------------------------------------air
     }
     #endregion
 }

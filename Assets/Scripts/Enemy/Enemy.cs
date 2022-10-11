@@ -46,12 +46,6 @@ public class Enemy : MonoBehaviour
         EnemySprite = this.GetComponent<SpriteRenderer>();
     }
 
-    // Start is called before the first frame update
-    protected virtual void Start()
-    {
-        BasicSetting(); 
-    }
-
     protected virtual void Update()
     {
         Move();
@@ -68,10 +62,8 @@ public class Enemy : MonoBehaviour
     }
 
     //데이터 값 세팅
-    private void BasicSetting()
+    public void BasicSetting(int Select)
     {
-        int Select = 0;
-
         this.EnemyType = Data[Select].EnemyType;
         this.EnemySprite.sprite = Data[Select].EnemyImg;
         this.EnemyName = Data[Select].EnemyName;
