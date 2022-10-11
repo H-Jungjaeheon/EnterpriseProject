@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EnemyType
 {
-    ShortDis, LongDis, Air
+    ShortDis = 0, LongDis = 1, Air = 2
 }
 
 [CreateAssetMenu(fileName = "EnemyData", menuName ="Scriptable/EnemyData")]

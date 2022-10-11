@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerBullet_1
   m_EditorClassIdentifier: 
   BulletType: 1
-  BulletImg: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  BulletImg: {fileID: 21300000, guid: c10cffa56abf565488c277c960e57b57, type: 3}
   BulletName: NomalBullet
   BulletPower: 100
   BulletSpeed: 0.7
