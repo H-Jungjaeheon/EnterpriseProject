@@ -167,7 +167,6 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     private void SaleOfFoodViewMaterialsText_ChooseFoodScreen()
     {
-        print("½ÇÇà");
         if (nowContents == Contents.SaleOfFoodContents && nowSaleOfFoodContents == SaleOfFoodContents.ChooseFoodScreen)
         {
             nowCookingCountText.text = $"{cookingCount} °³";

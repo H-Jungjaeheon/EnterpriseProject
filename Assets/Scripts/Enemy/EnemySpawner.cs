@@ -44,10 +44,17 @@ public class EnemySpawner : MonoBehaviour
         Initialize(8);
     }
 
-    private void Start()
+    void Start()
     {
-        Instance.StartEnemySpawn();
         ReciveData(0);
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            StartEnemySpawn();
+        }
     }
 
     #region PoolÇÔ¼ö

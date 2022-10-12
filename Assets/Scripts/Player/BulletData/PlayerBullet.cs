@@ -49,7 +49,8 @@ public class PlayerBullet : MonoBehaviour
         {
             Attack(other.GetComponent<Enemy>());
 
-            PlayerBulletObjectPool.ReturnBullet(this);
+            TargetPos = null;
+            PlayerBulletObjectPool.Instance.ReturnBullet(this);
         }
     }
 
@@ -57,6 +58,7 @@ public class PlayerBullet : MonoBehaviour
     public void TargetSetting(GameObject Target)
     {
         TargetPos = Target.transform;
+        StartCoroutine(BulletMove());
     }
 
     private void BasicSetting()

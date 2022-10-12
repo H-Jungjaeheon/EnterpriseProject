@@ -17,6 +17,11 @@ public class PlayerBulletObjectPool : MonoBehaviour
         Initialize(10);
     }
 
+    void Update()
+    {
+        Debug.Log(PoolingBulletQueue.Count);
+    }
+
     private void Initialize(int initCount)
     {
         for (int i = 0; i < initCount; i++)
@@ -59,10 +64,12 @@ public class PlayerBulletObjectPool : MonoBehaviour
         return bullet;
     }
 
-    public static void ReturnBullet(PlayerBullet bullet)
+    public void ReturnBullet(PlayerBullet bullet)
     {
         bullet.gameObject.SetActive(false);
         bullet.transform.SetParent(Instance.transform);
+        bullet.transform.position = this.transform.position;
+
         Instance.PoolingBulletQueue.Enqueue(bullet);
     }
 }
