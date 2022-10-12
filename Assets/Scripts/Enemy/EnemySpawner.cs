@@ -17,10 +17,14 @@ public class EnemySpawner : MonoBehaviour
     [Header("EnemySpawner변수")]
     [SerializeField]
     private GameObject[] PoolingEnemyPrefabs;
-    [SerializeField]
+
     private Queue<Enemy> PoolingShortQueue = new Queue<Enemy>();
     private Queue<Enemy> PoolingLongQueue = new Queue<Enemy>();
     private Queue<Enemy> PoolingAirQueue = new Queue<Enemy>();
+
+    [SerializeField]
+    private List<Enemy> SpawnEnemyList = new List<Enemy>();
+
     [SerializeField]
     private float MaxTime, MinTime;
     [SerializeField]
@@ -30,6 +34,8 @@ public class EnemySpawner : MonoBehaviour
     private Coroutine EnemySpawnCorutine;
 
     [Header("StageInfo변수")]
+    [SerializeField]
+    private int StageID = -1;
     [SerializeField]
     private StageInfo StageData;
 
@@ -42,19 +48,6 @@ public class EnemySpawner : MonoBehaviour
     {
         Instance = this;
         Initialize(8);
-    }
-
-    void Start()
-    {
-        ReciveData(0);
-    }
-
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.S))
-        {
-            StartEnemySpawn();
-        }
     }
 
     #region Pool함수
@@ -134,6 +127,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         enemy.GetComponent<Enemy>().BasicSetting(form);
+        SpawnEnemyList.Add(enemy);
 
         return enemy;
     }
@@ -143,6 +137,8 @@ public class EnemySpawner : MonoBehaviour
     {
         enemy.gameObject.SetActive(false);
         enemy.transform.SetParent(Instance.transform);
+
+        Instance.SpawnEnemyList.Remove(enemy);
 
         //타입별 리턴(리펙토링 필요)
         if(type == EnemyType.ShortDis)
@@ -159,6 +155,8 @@ public class EnemySpawner : MonoBehaviour
     #region Spawn함수
     public void StartEnemySpawn()
     {
+        StageID++;
+        ReciveData(StageID);
         EnemySpawnCorutine = StartCoroutine(EnemySpawn());
     }
 

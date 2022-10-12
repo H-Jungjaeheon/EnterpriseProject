@@ -48,6 +48,8 @@ public class Player : MonoBehaviour
 
     [Header("이동 변수")]
     [SerializeField]
+    private float MoveTime;
+    [SerializeField]
     private float MoveSpeed;
     [SerializeField]
     public float StendPosX;
@@ -115,5 +117,16 @@ public class Player : MonoBehaviour
     {
         Vector2 GoalPos = new Vector2(Range.TargetEnemy.Count <= 0 ? MovePosX : StendPosX, this.transform.position.y);
         this.transform.position = Vector2.Lerp(this.transform.position, GoalPos, MoveSpeed * Time.deltaTime);
+
+        if(GoalPos.x == MovePosX)
+        {
+            MoveTime += Time.deltaTime;
+
+            if(MoveTime > 2)
+            {
+                EnemySpawner.Instance.StartEnemySpawn();
+                MoveTime = 0;
+            }
+        }
     }
 }
