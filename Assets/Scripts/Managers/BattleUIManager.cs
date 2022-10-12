@@ -83,6 +83,8 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [Tooltip("현재 요리에 필요한 재료 개수")]
     private int[] quantityOfMaterials;
 
+    private bool[] isMeetingTheNumberOfMaterials = new bool[3];
+
     [HideInInspector]
     public bool isCustomerArrival;
 
@@ -91,6 +93,10 @@ public class BattleUIManager : Singleton<BattleUIManager>
     private GameObject customerObj;
 
     private Vector3 customerSpeed = new Vector3(1, 0, 0);
+
+    Color redTextColor = new Color(1, 0, 0);
+
+    Color greenTextColor = new Color(0, 1, 0.03f);
     #endregion
 
     [Header("그 외")]
@@ -102,6 +108,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     void Start()
     {
+        StartSetting();
         basicStatLevelText[(int)UpgradeableBasicStats.Damage].text = $"Lv {GameManager.Instance.statsLevel[(int)UpgradeableBasicStats.Damage]}";
         StartCoroutine(customerOnTheWay());
     }
@@ -110,6 +117,11 @@ public class BattleUIManager : Singleton<BattleUIManager>
     {
         SaleOfFoodViewMaterialsText_BasicScreen();
         SaleOfFoodViewMaterialsText_ChooseFoodScreen();
+    }
+
+    private void StartSetting()
+    {
+        cookingCount = 1;
     }
 
     private IEnumerator customerOnTheWay()
@@ -141,8 +153,13 @@ public class BattleUIManager : Singleton<BattleUIManager>
                 }
                 else if(nowSaleOfFoodContents == SaleOfFoodContents.ChooseFoodScreen)
                 {
-                    materialsText_BasicScreen[nowIndex].text = $"{battleSceneManagerIn.quantityOfMaterials[nowIndex]} / {quantityOfMaterials[nowIndex]}";
-                    //개수 불충분 시 빨간색으로 텍스트 색 변경
+                    materialsText_ChooseCookScreen[nowIndex].text = $"{battleSceneManagerIn.quantityOfMaterials[nowIndex]} / {quantityOfMaterials[nowIndex] * cookingCount}";
+                    
+                    materialsText_ChooseCookScreen[nowIndex].color = (battleSceneManagerIn.quantityOfMaterials[nowIndex] < quantityOfMaterials[nowIndex] * cookingCount)
+                        ? materialsText_ChooseCookScreen[nowIndex].color = redTextColor : materialsText_ChooseCookScreen[nowIndex].color = greenTextColor;
+
+                    isMeetingTheNumberOfMaterials[nowIndex] = (battleSceneManagerIn.quantityOfMaterials[nowIndex] < quantityOfMaterials[nowIndex] * cookingCount)
+                        ? isMeetingTheNumberOfMaterials[nowIndex] = true : isMeetingTheNumberOfMaterials[nowIndex] = false;
                 }
             }
         }
@@ -150,6 +167,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     private void SaleOfFoodViewMaterialsText_ChooseFoodScreen()
     {
+        print("실행");
         if (nowContents == Contents.SaleOfFoodContents && nowSaleOfFoodContents == SaleOfFoodContents.ChooseFoodScreen)
         {
             nowCookingCountText.text = $"{cookingCount} 개";
@@ -162,12 +180,14 @@ public class BattleUIManager : Singleton<BattleUIManager>
         {
             return;
         }
+        nowSaleOfFoodContents = isPanelOn ? SaleOfFoodContents.ChooseFoodScreen : SaleOfFoodContents.BasicScreen;
+        print(nowSaleOfFoodContents);
         foodChooseAndMakePanelObj.SetActive(isPanelOn);
     }
 
     public void AdjustTheNumberOfFoods(bool isPlus)
     {
-        if (isPlus == false && cookingCount > 0)
+        if (isPlus == false && cookingCount > 1)
         {
             cookingCount--;
         }
