@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public class DataForm
@@ -43,6 +45,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private DataForm[] EnemyData;
 
+    [Header("나중에 옮길 UI")]
+    [SerializeField]
+    private Image FrontProcessBar;
+    [SerializeField]
+    private TextMeshProUGUI DifficultyTxt;
+    [SerializeField]
+    private TextMeshProUGUI StageTxt;
 
     private void Awake()
     {
@@ -158,6 +167,29 @@ public class EnemySpawner : MonoBehaviour
         StageID++;
         ReciveData(StageID);
         EnemySpawnCorutine = StartCoroutine(EnemySpawn());
+        UISetting();
+    }
+
+    public void UISetting()
+    {
+        string StageNumStr = StageData.StageNumber.ToString();
+
+        StageTxt.text = $"{StageNumStr[0]}-{StageNumStr[1]}";
+
+        switch(int.Parse(StageNumStr[2].ToString()))
+        {
+            case 1:
+                break;
+
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+        }
     }
 
     public void StopEnemySpawn()

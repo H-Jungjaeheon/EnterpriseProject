@@ -3520,10 +3520,12 @@ MonoBehaviour:
   - {fileID: 3899307102218605548, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
   - {fileID: 3899307102218605548, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
   - {fileID: 3899307102218605548, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
+  SpawnEnemyList: []
   MaxTime: 0.7
   MinTime: 0.3
   MaxY: 1.5
   MinY: 0.6
+  StageID: -1
   StageData:
     ID: 0
     StageNumber: 0
@@ -3565,6 +3567,9 @@ MonoBehaviour:
   - Type: 2
     EnemyValue: 0
     EnemyForm: 0
+  FrontProcessBar: {fileID: 1714399403}
+  DifficultyTxt: {fileID: 1173568156}
+  StageTxt: {fileID: 1591068079}
 --- !u!114 &788044564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6653,6 +6658,7 @@ MonoBehaviour:
   CriticalDamage: 0
   Range: {fileID: 678497181}
   IsAttack: 0
+  MoveTime: 0
   MoveSpeed: 2
   StendPosX: -1.5
   MovePosX: -1
@@ -10677,6 +10683,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1998532904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1998532906}
+  - component: {fileID: 1998532905}
+  m_Layer: 0
+  m_Name: Fps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1998532905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998532904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1bf8a6cb56e1f44bbb048e0a03e13cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontSize: 90
+  color: {r: 0, g: 0, b: 0, a: 1}
+  width: 370
+  height: 400
+--- !u!4 &1998532906
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998532904}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7131019, y: -0.57787436, z: -0.868423}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2006706810
 GameObject:
