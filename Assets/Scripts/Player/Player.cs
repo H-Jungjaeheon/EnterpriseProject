@@ -53,8 +53,6 @@ public class Player : MonoBehaviour
     public float StendPosX;
     [SerializeField]
     private float MovePosX;
-    [SerializeField]
-    private bool IsMove = false;
     private Coroutine MoveCorutine;
 
     [Header("¼÷·Ãµµ º¯¼ö")]
@@ -113,58 +111,9 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    #region Move
     void OnMove()
     {
-        if(Range.TargetEnemy.Count <= 0 && IsMove == false)
-        {
-            TowardMove();
-        }
-
-        else if(Range.TargetEnemy.Count > 0 && IsMove == false)
-        {
-            BackMove();
-        }
+        Vector2 GoalPos = new Vector2(Range.TargetEnemy.Count <= 0 ? MovePosX : StendPosX, this.transform.position.y);
+        this.transform.position = Vector2.Lerp(this.transform.position, GoalPos, MoveSpeed * Time.deltaTime);
     }
-
-    void TowardMove()
-    {
-        IsMove = true;
-        MoveCorutine = StartCoroutine(Move("Toward"));
-    }
-
-    void BackMove()
-    {
-        IsMove = true;
-        MoveCorutine = StartCoroutine(Move("Back"));
-    }
-
-    IEnumerator Move(string MoveDir)
-    {
-        Vector2 GoalPos = new Vector2(MoveDir == "Toward" ? MovePosX : StendPosX, this.transform.position.y);
-
-        while (true)
-        {
-            yield return null;
-
-            this.transform.position = Vector2.Lerp(this.transform.position, GoalPos, MoveSpeed * Time.deltaTime);
-
-            if(MoveDir == "Toward" && this.transform.position.x >= GoalPos.x - 0.005f)
-            {
-                break;
-            }
-
-            else if(MoveDir != "Toward" && this.transform.position.x <= GoalPos.x + 0.005f)
-            {
-                break;
-            }
-        }
-
-        this.transform.position = GoalPos;
-
-        StopCoroutine(MoveCorutine);
-
-        yield break;
-    }
-    #endregion
 }

@@ -28,8 +28,8 @@ public class Enemy : MonoBehaviour
 
             if(hp <= 0)
             {
-                EnemySpawner.ReturnEnemy(EnemyType, this);
                 Player.Instance.Range.TargetEnemy.Remove(this.gameObject);
+                EnemySpawner.ReturnEnemy(EnemyType, this);
             }
         }
     }
