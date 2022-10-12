@@ -212,9 +212,12 @@ GameObject:
   m_Component:
   - component: {fileID: 13958299}
   - component: {fileID: 13958300}
+  - component: {fileID: 13958303}
+  - component: {fileID: 13958302}
+  - component: {fileID: 13958301}
   m_Layer: 5
   m_Name: SuccessZone
-  m_TagString: Untagged
+  m_TagString: SuccessZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -289,6 +292,79 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &13958301
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13958298}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &13958302
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13958298}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.34458613, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.31092775, y: 1}
+  m_EdgeRadius: 0
+--- !u!61 &13958303
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13958298}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.34274763, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.3145047, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &34785731
 GameObject:
   m_ObjectHideFlags: 0
@@ -3502,7 +3578,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 855675248}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1103746049}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+        m_MethodName: StopArrow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &855675248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3623,7 +3711,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 857277907}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1103746049}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+        m_MethodName: CookingPanelOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &857277907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3985,6 +4085,7 @@ GameObject:
   m_Component:
   - component: {fileID: 932574768}
   - component: {fileID: 932574769}
+  - component: {fileID: 932574770}
   m_Layer: 5
   m_Name: CookImage1
   m_TagString: Untagged
@@ -4062,6 +4163,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &932574770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932574767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e9353dad769b346a0eb60d80ccd0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodObjIndex: 0
+  nextPos: {x: 0, y: 0, z: 0}
+  lastPos: {x: 0, y: 0, z: 0}
+  arrangingArrivalPositions:
+  - {x: 0, y: 1.8, z: 90}
+  - {x: 1.3, y: 2.3, z: 90}
+  - {x: -1.3, y: 2.3, z: 90}
+  lastIndex: 0
 --- !u!1 &933780099
 GameObject:
   m_ObjectHideFlags: 0
@@ -4080,7 +4201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &933780100
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5177,6 +5298,8 @@ MonoBehaviour:
   - {fileID: 1490917323}
   - {fileID: 933780099}
   foodChooseAndMakePanelObj: {fileID: 1799846713}
+  chooseADishObj: {fileID: 109940300}
+  theProductionObj: {fileID: 1039488477}
   basicStatLevelText:
   - {fileID: 1582084038}
   - {fileID: 0}
@@ -5204,9 +5327,22 @@ MonoBehaviour:
   - {fileID: 2052586838}
   - {fileID: 365542312}
   nowCookingCountText: {fileID: 1348250819}
+  nowCookingFoodNameText: {fileID: 53005360}
   quantityOfMaterials: 000000000000000000000000
   isCustomerArrival: 0
   customerObj: {fileID: 1915098345}
+  foodObjectsToCooking:
+  - {fileID: 932574767}
+  - {fileID: 1820653129}
+  - {fileID: 1633828723}
+  arrowObj: {fileID: 1935100626}
+  foodDatas:
+  - quantityOfMaterials: 010000000100000001000000
+    FoodName: "3\uB4F1\uAE09 \uC694\uB9AC"
+  - quantityOfMaterials: 020000000200000002000000
+    FoodName: "2\uB4F1\uAE09 \uC694\uB9AC"
+  - quantityOfMaterials: 030000000300000003000000
+    FoodName: "1\uB4F1\uAE09 \uC694\uB9AC"
   damageGoodsRequiredForUpgrade: 0a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   Player: {fileID: 1293959311}
 --- !u!4 &1103746050
@@ -6004,11 +6140,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 110
+    m_FontSize: 125
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 110
+    m_MaxSize: 191
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -6398,9 +6534,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1424353521}
   - component: {fileID: 1424353522}
+  - component: {fileID: 1424353525}
+  - component: {fileID: 1424353524}
+  - component: {fileID: 1424353523}
   m_Layer: 5
   m_Name: FailZone
-  m_TagString: Untagged
+  m_TagString: FailZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6478,6 +6617,79 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1424353523
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424353520}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.35062844, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.29874313, y: 1}
+  m_EdgeRadius: 0
+--- !u!61 &1424353524
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424353520}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.35064316, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.2987137, y: 1}
+  m_EdgeRadius: 0
+--- !u!50 &1424353525
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424353520}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1425672838
 GameObject:
   m_ObjectHideFlags: 0
@@ -6922,7 +7134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1490917324
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7783,6 +7995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1633828724}
   - component: {fileID: 1633828725}
+  - component: {fileID: 1633828726}
   m_Layer: 5
   m_Name: CookImage3
   m_TagString: Untagged
@@ -7860,6 +8073,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1633828726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633828723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e9353dad769b346a0eb60d80ccd0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodObjIndex: 2
+  nextPos: {x: 0, y: 0, z: 0}
+  lastPos: {x: 0, y: 0, z: 0}
+  arrangingArrivalPositions:
+  - {x: 0, y: 1.8, z: 90}
+  - {x: 1.3, y: 2.3, z: 90}
+  - {x: -1.3, y: 2.3, z: 90}
+  lastIndex: 0
 --- !u!1 &1647596742
 GameObject:
   m_ObjectHideFlags: 0
@@ -8153,7 +8386,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1664737158}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1103746049}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+        m_MethodName: ChangeTheFoodType
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1664737158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8531,7 +8776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroyObj: 0
-  quantityOfMaterials: 000000000000000000000000
+  quantityOfMaterials: 010000000100000001000000
 --- !u!4 &1728561029
 Transform:
   m_ObjectHideFlags: 0
@@ -8706,7 +8951,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1786605253}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1103746049}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+        m_MethodName: ChangeTheFoodType
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1786605253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8760,7 +9017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1799846714
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8791,6 +9048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1820653130}
   - component: {fileID: 1820653131}
+  - component: {fileID: 1820653132}
   m_Layer: 5
   m_Name: CookImage2
   m_TagString: Untagged
@@ -8868,6 +9126,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1820653132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820653129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e9353dad769b346a0eb60d80ccd0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodObjIndex: 1
+  nextPos: {x: 0, y: 0, z: 0}
+  lastPos: {x: 0, y: 0, z: 0}
+  arrangingArrivalPositions:
+  - {x: 0, y: 1.8, z: 90}
+  - {x: 1.3, y: 2.3, z: 90}
+  - {x: -1.3, y: 2.3, z: 90}
+  lastIndex: 0
 --- !u!1 &1838405552
 GameObject:
   m_ObjectHideFlags: 0
@@ -9317,7 +9595,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 16
+  m_SortingOrder: 15
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9581,9 +9859,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2055693447}
   - component: {fileID: 2055693448}
+  - component: {fileID: 2055693450}
+  - component: {fileID: 2055693449}
   m_Layer: 5
   m_Name: PerfectZone
-  m_TagString: Untagged
+  m_TagString: PerfectZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9646,7 +9926,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 13
+  m_SortingOrder: 14
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0, g: 0.6348052, b: 1, a: 1}
   m_FlipX: 0
@@ -9658,6 +9938,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &2055693449
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055693446}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!50 &2055693450
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055693446}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &2098893909
 GameObject:
   m_ObjectHideFlags: 0
