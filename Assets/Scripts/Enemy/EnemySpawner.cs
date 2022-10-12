@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public class DataForm
@@ -17,10 +19,14 @@ public class EnemySpawner : MonoBehaviour
     [Header("EnemySpawner변수")]
     [SerializeField]
     private GameObject[] PoolingEnemyPrefabs;
-    [SerializeField]
+
     private Queue<Enemy> PoolingShortQueue = new Queue<Enemy>();
     private Queue<Enemy> PoolingLongQueue = new Queue<Enemy>();
     private Queue<Enemy> PoolingAirQueue = new Queue<Enemy>();
+
+    [SerializeField]
+    private List<Enemy> SpawnEnemyList = new List<Enemy>();
+
     [SerializeField]
     private float MaxTime, MinTime;
     [SerializeField]
@@ -31,23 +37,26 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("StageInfo변수")]
     [SerializeField]
+    private int StageID = -1;
+    [SerializeField]
     private StageInfo StageData;
 
     // 몬스터 수량 배열화(순서 : short1, short2, short3, long1...)
     [SerializeField]
     private DataForm[] EnemyData;
 
+    [Header("나중에 옮길 UI")]
+    [SerializeField]
+    private Image FrontProcessBar;
+    [SerializeField]
+    private TextMeshProUGUI DifficultyTxt;
+    [SerializeField]
+    private TextMeshProUGUI StageTxt;
 
     private void Awake()
     {
         Instance = this;
         Initialize(8);
-    }
-
-    private void Start()
-    {
-        Instance.StartEnemySpawn();
-        ReciveData(0);
     }
 
     #region Pool함수
@@ -58,13 +67,13 @@ public class EnemySpawner : MonoBehaviour
         {
             for (int j = 0; j < initCount; j++)
             {
-               if(i == 0)
+                if (i == 0)
                     PoolingShortQueue.Enqueue(CreateNewEnemy(i));
 
-               else if(i == 1)
+                else if (i == 1)
                     PoolingLongQueue.Enqueue(CreateNewEnemy(i));
 
-               else
+                else
                     PoolingAirQueue.Enqueue(CreateNewEnemy(i));
             }
         }
@@ -107,7 +116,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        else if(type == EnemyType.Air)
+        else if (type == EnemyType.Air)
         {
             //pool에 적이 있을 시 소환
             if (Instance.PoolingAirQueue.Count > 0)
@@ -127,18 +136,21 @@ public class EnemySpawner : MonoBehaviour
         }
 
         enemy.GetComponent<Enemy>().BasicSetting(form);
+        SpawnEnemyList.Add(enemy);
 
         return enemy;
     }
 
     //적 오브젝트 풀로 리턴
-    public static void ReturnEnemy(EnemyType type ,Enemy enemy)
+    public static void ReturnEnemy(EnemyType type, Enemy enemy)
     {
         enemy.gameObject.SetActive(false);
         enemy.transform.SetParent(Instance.transform);
 
+        Instance.SpawnEnemyList.Remove(enemy);
+
         //타입별 리턴(리펙토링 필요)
-        if(type == EnemyType.ShortDis)
+        if (type == EnemyType.ShortDis)
             Instance.PoolingShortQueue.Enqueue(enemy);
 
         else if (type == EnemyType.LongDis)
@@ -152,7 +164,65 @@ public class EnemySpawner : MonoBehaviour
     #region Spawn함수
     public void StartEnemySpawn()
     {
+        StageID++;
+        ReciveData(StageID);
         EnemySpawnCorutine = StartCoroutine(EnemySpawn());
+        UISetting();
+    }
+
+    public void UISetting()
+    {
+        string StageNumStr = StageData.StageNumber.ToString();
+
+        StageTxt.text = $"{StageNumStr[0]}-{StageNumStr[1]}";
+
+        switch (int.Parse(StageNumStr[2].ToString()))
+        {
+            case 1:
+                StartCoroutine(SetProcessBar(0.0f));
+                break;
+            case 2:
+                StartCoroutine(SetProcessBar(0.35f));
+                break;
+            case 3:
+                StartCoroutine(SetProcessBar(0.6f));
+                break;
+            case 4:
+                StartCoroutine(SetProcessBar(0.82f));
+                break;
+            case 5:
+                StartCoroutine(SetProcessBar(1.0f));
+                break;
+        }
+    }
+
+    public IEnumerator SetProcessBar(float value)
+    {
+        yield return null;
+
+        if (value > 0)
+        {
+            Debug.Log("Up");
+
+            while(FrontProcessBar.fillAmount < value)
+            {
+                yield return null;
+                FrontProcessBar.fillAmount += Time.deltaTime;
+            }
+        }
+
+        else
+        {
+            Debug.Log("Down");
+
+            while (FrontProcessBar.fillAmount > value)
+            {
+                yield return null;
+                FrontProcessBar.fillAmount -= Time.deltaTime * 2;
+            }
+        }
+
+        yield break;
     }
 
     public void StopEnemySpawn()
@@ -166,7 +236,7 @@ public class EnemySpawner : MonoBehaviour
 
         for (int i = 0; i < EnemyData.Length; i++)
         {
-            if(EnemyData[i].EnemyValue > 0)
+            if (EnemyData[i].EnemyValue > 0)
             {
                 for (int j = 0; j < EnemyData[i].EnemyValue; j++)
                 {

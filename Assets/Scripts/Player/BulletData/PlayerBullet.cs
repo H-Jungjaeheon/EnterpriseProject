@@ -28,6 +28,8 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField]
     private Transform TargetPos;
     [SerializeField]
+    private float RotationSpeed;
+    [SerializeField]
     private AnimationCurve curve;
 
 
@@ -43,13 +45,23 @@ public class PlayerBullet : MonoBehaviour
         StartCoroutine(BulletMove());
     }
 
+    void Update()
+    {
+        Vector3 dir = TargetPos.position - transform.position;
+
+        // 타겟 방향으로 회전함
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle * RotationSpeed, Vector3.forward);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Enemy"))
         {
             Attack(other.GetComponent<Enemy>());
 
-            PlayerBulletObjectPool.ReturnBullet(this);
+            TargetPos = null;
+            PlayerBulletObjectPool.Instance.ReturnBullet(this);
         }
     }
 
@@ -57,6 +69,7 @@ public class PlayerBullet : MonoBehaviour
     public void TargetSetting(GameObject Target)
     {
         TargetPos = Target.transform;
+        StartCoroutine(BulletMove());
     }
 
     private void BasicSetting()

@@ -43,8 +43,19 @@ public class Player : MonoBehaviour
     [SerializeField]
     public PlayerRange Range;
     [SerializeField]
-    private bool OnAttack = false;
+    private bool IsAttack = false;
     private Coroutine AttackCorutine;
+
+    [Header("이동 변수")]
+    [SerializeField]
+    private float MoveTime;
+    [SerializeField]
+    private float MoveSpeed;
+    [SerializeField]
+    public float StendPosX;
+    [SerializeField]
+    private float MovePosX;
+    private Coroutine MoveCorutine;
 
     [Header("숙련도 변수")]
     //[SerializeField]
@@ -59,12 +70,19 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if(OnAttack == false && Range.TargetEnemy.Count > 0)
+        OnAttack();
+        OnMove();
+    }
+
+    #region Attack
+    void OnAttack()
+    {
+        if (IsAttack == false && Range.TargetEnemy.Count > 0)
         {
             StartAttack();
         }
 
-        else if(OnAttack == true && Range.TargetEnemy.Count <= 0)
+        else if (IsAttack == true && Range.TargetEnemy.Count <= 0)
         {
             StopAttack();
         }
@@ -72,13 +90,13 @@ public class Player : MonoBehaviour
 
     void StartAttack()
     {
-        OnAttack = true;
+        IsAttack = true;
         AttackCorutine = StartCoroutine(Attack());
     }
 
     void StopAttack()
     {
-        OnAttack = false;
+        IsAttack = false;
         StopCoroutine(AttackCorutine);
     }
 
@@ -88,8 +106,27 @@ public class Player : MonoBehaviour
 
         while (Range.TargetEnemy.Count > 0)
         {
+            Debug.Log("Attack");
             yield return new WaitForSeconds(AttackDelay);
             PlayerBulletObjectPool.Instance.GetBullet(Range.TargetEnemy[0]);
+        }
+    }
+    #endregion
+
+    void OnMove()
+    {
+        Vector2 GoalPos = new Vector2(Range.TargetEnemy.Count <= 0 ? MovePosX : StendPosX, this.transform.position.y);
+        this.transform.position = Vector2.Lerp(this.transform.position, GoalPos, MoveSpeed * Time.deltaTime);
+
+        if(GoalPos.x == MovePosX)
+        {
+            MoveTime += Time.deltaTime;
+
+            if(MoveTime > 2)
+            {
+                EnemySpawner.Instance.StartEnemySpawn();
+                MoveTime = 0;
+            }
         }
     }
 }

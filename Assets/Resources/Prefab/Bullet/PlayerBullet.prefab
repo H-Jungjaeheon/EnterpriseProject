@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 19
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,7 +100,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.2
 --- !u!50 &6607633051986260852
 Rigidbody2D:
   serializedVersion: 4
@@ -143,6 +143,7 @@ MonoBehaviour:
   BulletPower: 0
   BulletSpeed: 0
   TargetPos: {fileID: 0}
+  RotationSpeed: 3
   curve:
     serializedVersion: 2
     m_Curve:

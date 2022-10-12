@@ -5,8 +5,8 @@
          "StageNumber":111,
          "IsBossStage":"FALSE",
          "Shrot_1":1,
-         "Long_1":1,
-         "Air_1":1,
+         "Long_1":0,
+         "Air_1":0,
          "Shrot_2":0,
          "Long_2":0,
          "Air_2":0,
@@ -72,7 +72,7 @@
       },
       {
          "ID":6,
-         "StageNumber":211,
+         "StageNumber":121,
          "IsBossStage":"FALSE",
          "Shrot_1":6,
          "Long_1":0,
@@ -86,7 +86,7 @@
       },
       {
          "ID":7,
-         "StageNumber":212,
+         "StageNumber":122,
          "IsBossStage":"FALSE",
          "Shrot_1":7,
          "Long_1":0,
@@ -100,7 +100,7 @@
       },
       {
          "ID":8,
-         "StageNumber":213,
+         "StageNumber":123,
          "IsBossStage":"FALSE",
          "Shrot_1":8,
          "Long_1":0,
@@ -114,7 +114,7 @@
       },
       {
          "ID":9,
-         "StageNumber":214,
+         "StageNumber":124,
          "IsBossStage":"FALSE",
          "Shrot_1":9,
          "Long_1":0,
@@ -128,7 +128,7 @@
       },
       {
          "ID":10,
-         "StageNumber":215,
+         "StageNumber":125,
          "IsBossStage":"TRUE",
          "Shrot_1":10,
          "Long_1":0,
@@ -142,7 +142,7 @@
       },
       {
          "ID":11,
-         "StageNumber":311,
+         "StageNumber":131,
          "IsBossStage":"FALSE",
          "Shrot_1":1,
          "Long_1":0,
@@ -156,7 +156,7 @@
       },
       {
          "ID":12,
-         "StageNumber":312,
+         "StageNumber":132,
          "IsBossStage":"FALSE",
          "Shrot_1":2,
          "Long_1":0,
@@ -170,7 +170,7 @@
       },
       {
          "ID":13,
-         "StageNumber":313,
+         "StageNumber":133,
          "IsBossStage":"FALSE",
          "Shrot_1":3,
          "Long_1":0,
@@ -184,7 +184,7 @@
       },
       {
          "ID":14,
-         "StageNumber":314,
+         "StageNumber":134,
          "IsBossStage":"FALSE",
          "Shrot_1":4,
          "Long_1":0,
@@ -198,7 +198,7 @@
       },
       {
          "ID":15,
-         "StageNumber":315,
+         "StageNumber":135,
          "IsBossStage":"TRUE",
          "Shrot_1":5,
          "Long_1":0,
@@ -212,7 +212,7 @@
       },
       {
          "ID":16,
-         "StageNumber":411,
+         "StageNumber":141,
          "IsBossStage":"FALSE",
          "Shrot_1":6,
          "Long_1":0,
@@ -226,7 +226,7 @@
       },
       {
          "ID":17,
-         "StageNumber":412,
+         "StageNumber":142,
          "IsBossStage":"FALSE",
          "Shrot_1":7,
          "Long_1":0,
@@ -240,7 +240,7 @@
       },
       {
          "ID":18,
-         "StageNumber":413,
+         "StageNumber":143,
          "IsBossStage":"FALSE",
          "Shrot_1":8,
          "Long_1":0,
@@ -254,7 +254,7 @@
       },
       {
          "ID":19,
-         "StageNumber":414,
+         "StageNumber":144,
          "IsBossStage":"FALSE",
          "Shrot_1":9,
          "Long_1":0,
@@ -268,7 +268,7 @@
       },
       {
          "ID":20,
-         "StageNumber":415,
+         "StageNumber":145,
          "IsBossStage":"TRUE",
          "Shrot_1":10,
          "Long_1":0,
@@ -282,7 +282,7 @@
       },
       {
          "ID":21,
-         "StageNumber":511,
+         "StageNumber":151,
          "IsBossStage":"FALSE",
          "Shrot_1":1,
          "Long_1":0,
@@ -296,7 +296,7 @@
       },
       {
          "ID":22,
-         "StageNumber":512,
+         "StageNumber":152,
          "IsBossStage":"FALSE",
          "Shrot_1":2,
          "Long_1":0,
@@ -310,7 +310,7 @@
       },
       {
          "ID":23,
-         "StageNumber":513,
+         "StageNumber":153,
          "IsBossStage":"FALSE",
          "Shrot_1":3,
          "Long_1":0,
@@ -324,7 +324,7 @@
       },
       {
          "ID":24,
-         "StageNumber":514,
+         "StageNumber":154,
          "IsBossStage":"FALSE",
          "Shrot_1":4,
          "Long_1":0,
@@ -338,7 +338,7 @@
       },
       {
          "ID":25,
-         "StageNumber":515,
+         "StageNumber":155,
          "IsBossStage":"TRUE",
          "Shrot_1":5,
          "Long_1":0,
