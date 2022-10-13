@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
 
         while (Range.TargetEnemy.Count > 0)
         {
-            Debug.Log("Attack");
+            //Debug.Log("Attack");
             yield return new WaitForSeconds(AttackDelay);
             PlayerBulletObjectPool.Instance.GetBullet(Range.TargetEnemy[0]);
         }

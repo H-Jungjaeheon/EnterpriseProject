@@ -19,7 +19,7 @@ public class PlayerBulletObjectPool : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(PoolingBulletQueue.Count);
+        //Debug.Log(PoolingBulletQueue.Count);
     }
 
     private void Initialize(int initCount)

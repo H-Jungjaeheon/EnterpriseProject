@@ -202,7 +202,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (value > 0)
         {
-            Debug.Log("Up");
+            //Debug.Log("Up");
 
             while(FrontProcessBar.fillAmount < value)
             {
@@ -213,7 +213,7 @@ public class EnemySpawner : MonoBehaviour
 
         else
         {
-            Debug.Log("Down");
+            //Debug.Log("Down");
 
             while (FrontProcessBar.fillAmount > value)
             {

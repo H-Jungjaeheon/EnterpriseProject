@@ -210,17 +210,17 @@ public class BattleUIManager : Singleton<BattleUIManager>
     public void ChangeTheFoodType(bool isChangeNextFoodType)
     {
         int maxFoodIndex = 2;
-        if (NowFoodIndex == maxFoodIndex && isChangeNextFoodType)
+        if (NowFoodIndex == maxFoodIndex && isChangeNextFoodType == false)
         {
             NowFoodIndex = 0;
         }
-        else if (NowFoodIndex == 0 && isChangeNextFoodType == false)
+        else if (NowFoodIndex == 0 && isChangeNextFoodType)
         {
             NowFoodIndex = maxFoodIndex;
         }
         else
         {
-            NowFoodIndex = isChangeNextFoodType ? NowFoodIndex + 1 : NowFoodIndex - 1;
+            NowFoodIndex = isChangeNextFoodType ? NowFoodIndex - 1 : NowFoodIndex + 1;
         }
         ChangeFoodAnim(isChangeNextFoodType);
         nowCookingFoodNameText.text = foodDatas[NowFoodIndex].FoodName;

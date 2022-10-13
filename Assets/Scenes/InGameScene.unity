@@ -5570,6 +5570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44e9353dad769b346a0eb60d80ccd0dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteThisObj: {fileID: 932574769}
   foodObjIndex: 0
   nextPos: {x: 0, y: 0, z: 0}
   lastPos: {x: 0, y: 0, z: 0}
@@ -5577,6 +5578,7 @@ MonoBehaviour:
   - {x: 0, y: 1.8, z: 90}
   - {x: 1.3, y: 2.3, z: 90}
   - {x: -1.3, y: 2.3, z: 90}
+  nowIndex: 0
   lastIndex: 0
 --- !u!1 &933780099
 GameObject:
@@ -9787,6 +9789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44e9353dad769b346a0eb60d80ccd0dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteThisObj: {fileID: 1633828725}
   foodObjIndex: 2
   nextPos: {x: 0, y: 0, z: 0}
   lastPos: {x: 0, y: 0, z: 0}
@@ -9794,6 +9797,7 @@ MonoBehaviour:
   - {x: 0, y: 1.8, z: 90}
   - {x: 1.3, y: 2.3, z: 90}
   - {x: -1.3, y: 2.3, z: 90}
+  nowIndex: 0
   lastIndex: 0
 --- !u!1 &1647596742
 GameObject:
@@ -10926,7 +10930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1799846714
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11125,6 +11129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44e9353dad769b346a0eb60d80ccd0dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteThisObj: {fileID: 1820653131}
   foodObjIndex: 1
   nextPos: {x: 0, y: 0, z: 0}
   lastPos: {x: 0, y: 0, z: 0}
@@ -11132,6 +11137,7 @@ MonoBehaviour:
   - {x: 0, y: 1.8, z: 90}
   - {x: 1.3, y: 2.3, z: 90}
   - {x: -1.3, y: 2.3, z: 90}
+  nowIndex: 0
   lastIndex: 0
 --- !u!1 &1838405552
 GameObject:
