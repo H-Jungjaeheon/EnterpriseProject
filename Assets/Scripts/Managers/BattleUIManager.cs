@@ -21,7 +21,8 @@ public enum SaleOfFoodContents
 public enum UpgradeableBasicStats
 {
     Damage,
-    MaxHp
+    MaxHp,
+    UpgradeableBasicStatsNumber
 }
 
 public class BattleUIManager : Singleton<BattleUIManager>
@@ -133,12 +134,22 @@ public class BattleUIManager : Singleton<BattleUIManager>
     private FoodData[] foodDatas;
     #endregion
 
-    [Header("그 외")]
     [SerializeField]
-    private int[] damageGoodsRequiredForUpgrade = new int[25];
+    [Tooltip("코인 재화 텍스트")]
+    private Text coinText;
 
     [SerializeField]
-    private GameObject Player;
+    [Tooltip("보석 재화 텍스트")]
+    private Text jemText;
+
+    [Header("그 외")]
+    [SerializeField]
+    private int[] goodsRequiredForUpgrade = new int[(int)UpgradeableBasicStats.UpgradeableBasicStatsNumber];
+
+    [SerializeField]
+    private GameObject player;
+
+    private GameManager gmInstance;
 
     void Start()
     {
@@ -150,10 +161,19 @@ public class BattleUIManager : Singleton<BattleUIManager>
     void Update()
     {
         SaleOfFoodViewMaterialsText_BasicScreen();
+        TextSettings();
+    }
+
+    private void TextSettings()
+    {
+        coinText.text = $"{ConvertGoodsToString(gmInstance.MoneyUnit)}";
+        jemText.text = $"{gmInstance.JewelryUnit}";
     }
 
     private void StartSetting()
     {
+        gmInstance = GameManager.Instance;
+
         cookingCount = 1;
         NowFoodIndex = 0;
 
@@ -319,71 +339,29 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     public void BasicStatUpgrade(int statsToUpgradeCurrently)
     {
-        int unitMaximumArrayIndex = 24;
-        var gmInstance = GameManager.Instance;
-        int largestIndex = 0;
-        int[] nextGoodsRequiredForUpgrade = new int[25];
-        int[] statsForUpgrade = new int[25];
-        var playerComponent = Player.GetComponent<Player>();
+        var playerComponent = player.GetComponent<Player>();
+        string goodsRequiredForUpgradeString;
 
-        for (int nowIndex = 0; nowIndex < gmInstance.MoneyUnit.Length; nowIndex++)
+        if (gmInstance.MoneyUnit < goodsRequiredForUpgrade[statsToUpgradeCurrently])
         {
-            if (gmInstance.MoneyUnit[nowIndex] > 0)
-            {
-                largestIndex = nowIndex;
-            }
+            return;
+        }
+        else
+        {
+            gmInstance.MoneyUnit -= goodsRequiredForUpgrade[statsToUpgradeCurrently];
         }
 
-
-        for (int nowIndex = unitMaximumArrayIndex; nowIndex >= 0; nowIndex--)
-        {
-            if (nowIndex > largestIndex && gmInstance.MoneyUnit[nowIndex] > damageGoodsRequiredForUpgrade[nowIndex])
-            {
-                break;
-            }
-            else if(nowIndex <= largestIndex)
-            {
-                if (gmInstance.MoneyUnit[nowIndex] < damageGoodsRequiredForUpgrade[nowIndex])
-                {
-                    return;
-                }
-                else if (gmInstance.MoneyUnit[nowIndex] > damageGoodsRequiredForUpgrade[nowIndex])
-                {
-                    break;
-                }
-                else if (nowIndex == 0 && gmInstance.MoneyUnit[nowIndex] == damageGoodsRequiredForUpgrade[nowIndex])
-                {
-                    break;
-                }
-            }
-        }
-
-        CalculationOfGoods(gmInstance.MoneyUnit, damageGoodsRequiredForUpgrade, basicStatFigureText[statsToUpgradeCurrently], false); //재화 삭감
         gmInstance.statsLevel[statsToUpgradeCurrently]++; //레벨 증가
+
         basicStatLevelText[statsToUpgradeCurrently].text = $"Lv {gmInstance.statsLevel[statsToUpgradeCurrently]}"; //레벨 텍스트 수정
 
-        for (int nowIndex = unitMaximumArrayIndex; nowIndex >= 0; nowIndex--) //비용 수정(연산)
-        {
-            if (damageGoodsRequiredForUpgrade[nowIndex] > 0)
-            {
-                nextGoodsRequiredForUpgrade[nowIndex]++;
-                break;
-            }
-        }
+        goodsRequiredForUpgrade[statsToUpgradeCurrently] += goodsRequiredForUpgrade[statsToUpgradeCurrently] / 2; //강화 비용 수정(임시 연산)
 
-        CalculationOfGoods(damageGoodsRequiredForUpgrade, nextGoodsRequiredForUpgrade, goodsTextRequiredForUpgrade[statsToUpgradeCurrently], true); //업그레이드 비용 수정
-        goodsTextRequiredForUpgrade[statsToUpgradeCurrently].text = $"강화\n{goodsTextRequiredForUpgrade[statsToUpgradeCurrently].text}원";
+        goodsRequiredForUpgradeString = ConvertGoodsToString(goodsRequiredForUpgrade[statsToUpgradeCurrently]);
 
-        for (int nowIndex = unitMaximumArrayIndex; nowIndex >= 0; nowIndex--) //비용 수정(연산)
-        {
-            if (playerComponent.AttackPower[nowIndex] > 0)
-            {
-                statsForUpgrade[nowIndex]++;
-                break;
-            }
-        }
+        goodsTextRequiredForUpgrade[statsToUpgradeCurrently].text = $"강화\n{goodsRequiredForUpgradeString}원";
 
-        CalculationOfGoods(playerComponent.AttackPower, statsForUpgrade, basicStatFigureText[statsToUpgradeCurrently], true);
+        playerComponent.AttackPower++; //공격력 증가(임시 연산)
     }
 
     public void AnotherContentsPopUp(GameObject PopUpObj)
@@ -434,73 +412,19 @@ public class BattleUIManager : Singleton<BattleUIManager>
         }
     }
 
-    public void CalculationOfGoods(int[] aCalculatedValues, int[] aPriceToAdd, Text commodityConversionText, bool isAddition) //뺄 때에는 가장 높은 단위 비교
+    public string ConvertGoodsToString(int theValueOfAGood) //리메이크한 재화 단위 표시
     {
-        int maxUnitIndex = 0;
-        for (int nowUnitOfGoodsIndex = 0; nowUnitOfGoodsIndex < aCalculatedValues.Length; nowUnitOfGoodsIndex++)
+        int nowAUnitOfGoodsIndex = 0;
+        string translatedString;
+
+        while (theValueOfAGood > 1000)
         {
-            if (isAddition)
-            {
-                aCalculatedValues[nowUnitOfGoodsIndex] += aPriceToAdd[nowUnitOfGoodsIndex];
-            }
-            else
-            {
-                aCalculatedValues[nowUnitOfGoodsIndex] -= aPriceToAdd[nowUnitOfGoodsIndex];
-            }
-
-            if (aCalculatedValues[nowUnitOfGoodsIndex] >= 1000)
-            {
-                aCalculatedValues[nowUnitOfGoodsIndex + 1] += aCalculatedValues[nowUnitOfGoodsIndex] / 1000;
-                aCalculatedValues[nowUnitOfGoodsIndex] %= 1000;
-            }
-            else if(aCalculatedValues[nowUnitOfGoodsIndex] < 0)
-            {
-                aCalculatedValues[nowUnitOfGoodsIndex + 1] -= aCalculatedValues[nowUnitOfGoodsIndex] / 1000;
-                aCalculatedValues[nowUnitOfGoodsIndex] %= 1000;
-
-                if (aCalculatedValues[nowUnitOfGoodsIndex] < 0)
-                {
-                    aCalculatedValues[nowUnitOfGoodsIndex + 1]--;
-                    aCalculatedValues[nowUnitOfGoodsIndex] = 1000 + aCalculatedValues[nowUnitOfGoodsIndex];
-                }
-            }
-
-            if (aCalculatedValues[nowUnitOfGoodsIndex] > 0)
-            {
-                maxUnitIndex = nowUnitOfGoodsIndex;
-            }
-        }
-        ConvertGoodsString(commodityConversionText, maxUnitIndex, aCalculatedValues);
-    }
-
-    private void ConvertGoodsString(Text commodityConversionText, int maxUnitIndex, int[] aCalculatedValues)
-    {
-        char aUnitOfGoods = '\0';
-        if (maxUnitIndex != 0)
-        {
-            aUnitOfGoods = (char)(maxUnitIndex + 96);
+            theValueOfAGood /= 1000;
+            nowAUnitOfGoodsIndex++;
         }
 
-        if (maxUnitIndex != 0)
-        {
-            if (aCalculatedValues[maxUnitIndex] / 10 >= 10)
-            {
-                commodityConversionText.text = $"{aCalculatedValues[maxUnitIndex]}{aUnitOfGoods}";
-            }
-            else if (aCalculatedValues[maxUnitIndex] / 10 > 0)
-            {
-                commodityConversionText.text = $"{aCalculatedValues[maxUnitIndex]}.{0 + aCalculatedValues[maxUnitIndex - 1] / 100}{aUnitOfGoods}";
-            }
-            else if (aCalculatedValues[maxUnitIndex] / 10 <= 0)
-            {
-                int hundredUnits = aCalculatedValues[maxUnitIndex - 1] / 100;
-                int tenUnits = (aCalculatedValues[maxUnitIndex - 1] % 100) / 10;
-                commodityConversionText.text = $"{aCalculatedValues[maxUnitIndex]}.{hundredUnits}{tenUnits}{aUnitOfGoods}";
-            }
-        }
-        else
-        {
-            commodityConversionText.text = $"{aCalculatedValues[maxUnitIndex]}{aUnitOfGoods}";
-        }
+        translatedString = (nowAUnitOfGoodsIndex == 0) ? $"{theValueOfAGood}" : $"{theValueOfAGood}{(char)(96 + nowAUnitOfGoodsIndex)}";
+
+        return translatedString;
     }
 }

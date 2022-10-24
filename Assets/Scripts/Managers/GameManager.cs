@@ -10,15 +10,26 @@ public class GameManager : Singleton<GameManager>
     }
 
     [SerializeField]
-    [Tooltip("현재 보유 재화")]
-    private int[] moneyUnit;
+    [Tooltip("현재 보유 재화(골드)")]
+    private int moneyUnit;
 
-    public int[] MoneyUnit
+    public int MoneyUnit
     {
         get { return moneyUnit; }
         set { moneyUnit = value; }
     }
 
+    [SerializeField]
+    [Tooltip("현재 보유 재화(보석)")]
+    private int jewelryUnit;
+
+    public int JewelryUnit
+    {
+        get { return jewelryUnit; }
+        set { jewelryUnit = value; }
+    }
+
+    [Tooltip("플레이어 기본 능력치 레벨들")]
     public int[] statsLevel;
     
 

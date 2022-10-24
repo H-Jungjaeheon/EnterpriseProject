@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int HealingValue; 
     
-    public int[] AttackPower;
+    public int AttackPower;
 
     [SerializeField]
     private float AttackDelay;
