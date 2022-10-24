@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         this.Hp = SelectPlayerData.Hp;
         this.HealingValue = SelectPlayerData.HealingValue;
 
-        this.AttackPower = SelectPlayerData.AttackPower;
+        //this.AttackPower = SelectPlayerData.AttackPower;
         this.AttackDelay = SelectPlayerData.AttackDelay;
 
         this.CriticalDamage = SelectPlayerData.CriticalDamage;
