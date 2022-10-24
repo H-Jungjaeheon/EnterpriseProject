@@ -7,6 +7,14 @@ public class Player : MonoBehaviour
 {
     public static Player Instance = null;
 
+    [Header("플레이어 숙련도 데이터")]
+    [SerializeField]
+    private PlayerData[] PlayerDatas;
+    [SerializeField]
+    private int SelectNumber;
+    [SerializeField]
+    private PlayerData SelectPlayerData;
+
     [Header("플레이어 기본 스탯 변수")]
     [SerializeField]
     private int hp;
@@ -66,12 +74,28 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        BasicSetting();
     }
 
     private void Update()
     {
         OnAttack();
         OnMove();
+    }
+
+    void BasicSetting()
+    {
+        SelectPlayerData = PlayerDatas[SelectNumber];
+
+        this.Hp = SelectPlayerData.Hp;
+        this.HealingValue = SelectPlayerData.HealingValue;
+
+        this.AttackPower = SelectPlayerData.AttackPower;
+        this.AttackDelay = SelectPlayerData.AttackDelay;
+
+        this.CriticalDamage = SelectPlayerData.CriticalDamage;
+        this.CriticalPercent = SelectPlayerData.CriticalPercent;
     }
 
     #region Attack
