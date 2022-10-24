@@ -15,7 +15,8 @@ public class EnemyData : ScriptableObject
     public Sprite EnemyImg;
     public string EnemyName;
     public int Hp;
-    public float AttackPower;
+    public int AttackPower;
     public float AttackDistance;
+    public float AttackDelay;
     public float MoveSpeed;
 }

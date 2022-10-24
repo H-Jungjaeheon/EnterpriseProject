@@ -15,5 +15,5 @@ MonoBehaviour:
   BulletType: 1
   BulletImg: {fileID: 21300000, guid: c10cffa56abf565488c277c960e57b57, type: 3}
   BulletName: NomalBullet
-  BulletPower: 45
+  BulletPower: 1
   BulletSpeed: 0.7

@@ -4623,6 +4623,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PoolingEnemyPrefabs:
   - {fileID: 3899307102218605548, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
+  - {fileID: 3899307102218605548, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
+  - {fileID: 3899307102218605548, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
   SpawnEnemyList: []
   MaxTime: 0.7
   MinTime: 0.3
@@ -7591,7 +7593,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b6e54a82329fe5b4ab2a0e122292b441, type: 2}
   - {fileID: 11400000, guid: f23813bbdd631f645b36de13a69cba5a, type: 2}
   - {fileID: 11400000, guid: 903890fb976ac3c4aa8698add4c699a3, type: 2}
-  hp: 0
+  SelectNumber: 0
+  SelectPlayerData: {fileID: 0}
+  hp: 1000
   HealingValue: 0
   AttackPower: 01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   AttackDelay: 1

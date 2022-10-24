@@ -17,5 +17,6 @@ MonoBehaviour:
   EnemyName: Carrot
   Hp: 100
   AttackPower: 10
-  AttackDistance: 10
+  AttackDistance: 2
+  AttackDelay: 1
   MoveSpeed: 0.5

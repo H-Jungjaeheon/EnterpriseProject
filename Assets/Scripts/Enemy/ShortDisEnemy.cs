@@ -9,13 +9,13 @@ public class ShortDisEnemy : Enemy
         base.Update();
     }
 
-    protected override void Attack()
-    {
-
-    }
-
     protected override void Move()
     {
         base.Move();
+    }
+
+    protected override IEnumerator Attack()
+    {
+        return base.Attack();
     }
 }
