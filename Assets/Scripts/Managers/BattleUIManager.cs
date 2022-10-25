@@ -11,6 +11,7 @@ public enum Contents
 {
     StatUpgradeContents,
     SaleOfFoodContents,
+    ColleagueContents,
     ContentsLength
 }
 
@@ -38,6 +39,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     #region 콘텐츠 창 관련 변수들
     [Header("콘텐츠 창 관련 변수들")]
+
     [SerializeField]
     [Tooltip("현재 보여지는 콘텐츠 창 오브젝트")]
     private GameObject nowContentsPanelObj;
@@ -57,6 +59,10 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [SerializeField]
     [Tooltip("요리 판매 시스템 - 요리 제작 창 오브젝트")]
     private GameObject theProductionObj;
+
+    [SerializeField]
+    [Tooltip("동료 시스템 - 동료 시스템 창 오브젝트")]
+    private GameObject colleagueSystemPanelObj;
     #endregion
 
     #region 스탯 업그레이드창 텍스트 모음
@@ -269,6 +275,13 @@ public class BattleUIManager : Singleton<BattleUIManager>
         }
         nowSaleOfFoodContents = isPanelOn ? SaleOfFoodContents.ChooseFoodScreen : SaleOfFoodContents.BasicScreen;
         foodChooseAndMakePanelObj.SetActive(isPanelOn);
+    }
+
+    public void ColleagueContentsPanelOnOrOff(bool isPanelOn)
+    {
+        print("tlfgod");
+        nowSaleOfFoodContents = isPanelOn ? SaleOfFoodContents.ChooseFoodScreen : SaleOfFoodContents.BasicScreen;
+        contentsPanelObjs[2].SetActive(isPanelOn);
     }
 
     public void CookingPanelOn()
