@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Numerics;
+using Vector3 = UnityEngine.Vector3;
+using Vector2 = UnityEngine.Vector2;
 using DG.Tweening;
 
 public enum Contents
@@ -144,7 +147,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     [Header("그 외")]
     [SerializeField]
-    private int[] goodsRequiredForUpgrade = new int[(int)UpgradeableBasicStats.UpgradeableBasicStatsNumber];
+    private BigInteger[] goodsRequiredForUpgrade = new BigInteger[(int)UpgradeableBasicStats.UpgradeableBasicStatsNumber];
 
     [SerializeField]
     private GameObject player;
@@ -412,7 +415,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
         }
     }
 
-    public string ConvertGoodsToString(int theValueOfAGood) //리메이크한 재화 단위 표시
+    public string ConvertGoodsToString(BigInteger theValueOfAGood) //리메이크한 재화 단위 표시
     {
         int nowAUnitOfGoodsIndex = 0;
         string translatedString;

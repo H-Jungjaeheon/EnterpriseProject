@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager> 
@@ -9,21 +10,23 @@ public class GameManager : Singleton<GameManager>
         
     }
 
-    [SerializeField]
+    
     [Tooltip("현재 보유 재화(골드)")]
-    private int moneyUnit;
+    [SerializeField]
+    private BigInteger moneyUnit;
 
-    public int MoneyUnit
+    public BigInteger MoneyUnit
     {
         get { return moneyUnit; }
         set { moneyUnit = value; }
     }
 
-    [SerializeField]
+    
     [Tooltip("현재 보유 재화(보석)")]
-    private int jewelryUnit;
+    [SerializeField]
+    private BigInteger jewelryUnit;
 
-    public int JewelryUnit
+    public BigInteger JewelryUnit
     {
         get { return jewelryUnit; }
         set { jewelryUnit = value; }
