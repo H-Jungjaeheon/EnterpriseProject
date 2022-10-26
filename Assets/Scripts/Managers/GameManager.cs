@@ -24,12 +24,12 @@ public class GameManager : Singleton<GameManager>
     
     [Tooltip("현재 보유 재화(보석)")]
     [SerializeField]
-    private BigInteger jewelryUnit;
+    private BigInteger gemUnit;
 
-    public BigInteger JewelryUnit
+    public BigInteger GemUnit
     {
-        get { return jewelryUnit; }
-        set { jewelryUnit = value; }
+        get { return gemUnit; }
+        set { gemUnit = value; }
     }
 
     [Tooltip("플레이어 기본 능력치 레벨들")]

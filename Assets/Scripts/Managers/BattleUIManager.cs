@@ -176,7 +176,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     private void TextSettings()
     {
         coinText.text = $"{ConvertGoodsToString(gmInstance.MoneyUnit)}";
-        jemText.text = $"{gmInstance.JewelryUnit}";
+        jemText.text = $"{gmInstance.GemUnit}";
     }
 
     private void StartSetting()
@@ -275,13 +275,6 @@ public class BattleUIManager : Singleton<BattleUIManager>
         }
         nowSaleOfFoodContents = isPanelOn ? SaleOfFoodContents.ChooseFoodScreen : SaleOfFoodContents.BasicScreen;
         foodChooseAndMakePanelObj.SetActive(isPanelOn);
-    }
-
-    public void ColleagueContentsPanelOnOrOff(bool isPanelOn)
-    {
-        print("tlfgod");
-        nowSaleOfFoodContents = isPanelOn ? SaleOfFoodContents.ChooseFoodScreen : SaleOfFoodContents.BasicScreen;
-        contentsPanelObjs[2].SetActive(isPanelOn);
     }
 
     public void CookingPanelOn()
