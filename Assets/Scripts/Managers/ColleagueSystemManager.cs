@@ -17,43 +17,41 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
     [Tooltip("각 동료 잠금 해제 시 필요한 보석")]
     private int[] gemRequiredForColleaguenlock = new int[(int)ColleagueKind.ColleagueCount];
 
-    private bool[] colleagueUnlocking = new bool[(int)ColleagueKind.ColleagueCount];
+    private bool[] colleagueUnlocking = new bool[(int)ColleagueKind.ColleagueCount]; //동료 잠금 해제 판별
 
     private BigInteger[] moneyRequiredForUpgrade = new BigInteger[(int)ColleagueKind.ColleagueCount];
 
     private int[] colleagueLevel = new int[(int)ColleagueKind.ColleagueCount];
 
     [SerializeField]
-    [Tooltip("각 동료 가격 표시 텍스트")]
-    private Text[] priceIndicationText = new Text[(int)ColleagueKind.ColleagueCount];
+    [Tooltip("잠금 해제 시 나타나는 장착 버튼 오브젝트")]
+    private GameObject[] colleagueEquip;
 
     [SerializeField]
-    [Tooltip("현재 장착중인 동료 아이콘")]
-    private SpriteRenderer nowColleagueIcon;
+    [Tooltip("각 동료 가격 표시 텍스트")]
+    private Text[] priceIndicationText = new Text[(int)ColleagueKind.ColleagueCount];
 
     [SerializeField]
     [Tooltip("동료 아이콘 모음")]
     private Sprite[] colleagueIcons;
 
+    [SerializeField]
+    [Tooltip("현재 장착중인 동료 아이콘")]
+    private SpriteRenderer nowColleagueIcon;
+
     Color redTextColor = new Color(1, 0, 0);
 
     Color greenTextColor = new Color(0, 1, 0.03f);
 
-    // Start is called before the first frame update
     void Start()
     {
         StartSettings();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnEnable()
     {
         TextColorChange();
+        EquipButtonSetActive();
     }
 
     private void StartSettings()
@@ -64,6 +62,15 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
         }
     }
 
+    public void EquipColleague(int nowEquipColleagueIndex)
+    {
+        if (nowColleagueIcon.sprite != colleagueIcons[nowEquipColleagueIndex])
+        {
+            print("동료 장착 실행");
+            nowColleagueIcon.sprite = colleagueIcons[nowEquipColleagueIndex];
+        }
+    }
+
     public void ColleagueUpgradeOrUnlock(int nowColleagueIndex)
     {
         if (colleagueUnlocking[nowColleagueIndex] == false && GameManager.Instance.GemUnit >= gemRequiredForColleaguenlock[nowColleagueIndex]) //해당 인덱스 동료 비 잠금해제의 경우
@@ -71,6 +78,8 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
             GameManager.Instance.GemUnit -= gemRequiredForColleaguenlock[nowColleagueIndex]; //해당 인덱스 동료 잠금 해제 비용 차감
 
             colleagueUnlocking[nowColleagueIndex] = true; //해당 인덱스 동료 잠금 해제
+                
+            EquipButtonSetActive();
         }
         else if (colleagueUnlocking[nowColleagueIndex] && GameManager.Instance.MoneyUnit >= moneyRequiredForUpgrade[nowColleagueIndex]) //해당 인덱스 동료 잠금해제의 경우
         {
@@ -101,6 +110,17 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
             {
                 priceIndicationText[nowIndex].color = (gemRequiredForColleaguenlock[nowIndex] <= GameManager.Instance.GemUnit) ? greenTextColor : redTextColor;
                 priceIndicationText[nowIndex].text = $"구매\n{gemRequiredForColleaguenlock[nowIndex]} 젬"; //해당 인덱스 동료 버튼 텍스트 수정
+            }
+        }
+    }
+
+    private void EquipButtonSetActive()
+    {
+        for (int nowIndex = 0; nowIndex < (int)ColleagueKind.ColleagueCount; nowIndex++)
+        {
+            if (colleagueUnlocking[nowIndex] && colleagueEquip[nowIndex].activeSelf == false)
+            {
+                colleagueEquip[nowIndex].SetActive(true);
             }
         }
     }
