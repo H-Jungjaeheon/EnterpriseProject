@@ -5048,7 +5048,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 840797444}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1959401196}
+        m_TargetAssemblyTypeName: ColleagueSystemManager, Assembly-CSharp
+        m_MethodName: ColleagueUpgradeOrUnlock
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &840797444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5170,9 +5182,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1103746049}
-        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
-        m_MethodName: BasicStatUpgrade
+      - m_Target: {fileID: 1959401196}
+        m_TargetAssemblyTypeName: ColleagueSystemManager, Assembly-CSharp
+        m_MethodName: ColleagueUpgradeOrUnlock
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5616,7 +5628,7 @@ GameObject:
   - component: {fileID: 867303356}
   - component: {fileID: 867303355}
   m_Layer: 5
-  m_Name: DamageGoodsRequiredForUpgradeText
+  m_Name: GoodsRequiredForUpgradeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5638,8 +5650,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 75, y: 0}
-  m_SizeDelta: {x: -150, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &867303355
 MonoBehaviour:
@@ -5668,7 +5680,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 159
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -10115,7 +10127,7 @@ GameObject:
   - component: {fileID: 1508569130}
   - component: {fileID: 1508569129}
   m_Layer: 5
-  m_Name: Text
+  m_Name: GoodsRequiredForUpgradeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10137,8 +10149,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 75, y: 0}
-  m_SizeDelta: {x: -150, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1508569129
 MonoBehaviour:
@@ -10167,7 +10179,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 159
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -12866,7 +12878,7 @@ GameObject:
   - component: {fileID: 1959401195}
   - component: {fileID: 1959401196}
   m_Layer: 5
-  m_Name: ColleagueSystemPanel
+  m_Name: DragAbleColleagueSystemPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12904,6 +12916,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e33eb3e7f75c224ba9c92e4885f794e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDontDestroyObj: 0
+  gemRequiredForColleaguenlock: 0a0000000a000000
+  priceIndicationText:
+  - {fileID: 867303355}
+  - {fileID: 1508569129}
+  nowColleagueIcon: {fileID: 350075752}
+  colleagueIcons:
+  - {fileID: 21300000, guid: ddbfe50ee2371f74f8d020a2191a2794, type: 3}
+  - {fileID: 21300000, guid: addf00e4ec86b0b498fcfcaa54141e5a, type: 3}
 --- !u!1 &1976572748
 GameObject:
   m_ObjectHideFlags: 0

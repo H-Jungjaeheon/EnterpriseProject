@@ -11,25 +11,33 @@ public class GameManager : Singleton<GameManager>
     }
 
     
-    [Tooltip("현재 보유 재화(골드)")]
     [SerializeField]
+    [Tooltip("현재 보유 재화(골드)")]
     private BigInteger moneyUnit;
 
     public BigInteger MoneyUnit
     {
         get { return moneyUnit; }
-        set { moneyUnit = value; }
+        set 
+        {
+            moneyUnit = value;
+            ColleagueSystemManager.Instance.TextColorChange();
+        }
     }
 
     
-    [Tooltip("현재 보유 재화(보석)")]
     [SerializeField]
+    [Tooltip("현재 보유 재화(보석)")]
     private BigInteger gemUnit;
 
     public BigInteger GemUnit
     {
         get { return gemUnit; }
-        set { gemUnit = value; }
+        set 
+        {
+            gemUnit = value;
+            ColleagueSystemManager.Instance.TextColorChange();
+        }
     }
 
     [Tooltip("플레이어 기본 능력치 레벨들")]
@@ -45,6 +53,10 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            MoneyUnit += 10;
+            GemUnit += 10;
+        }
     }
 }
