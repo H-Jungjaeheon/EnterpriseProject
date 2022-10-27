@@ -21,22 +21,28 @@ public class GameManager : Singleton<GameManager>
         set 
         {
             moneyUnit = value;
-            ColleagueSystemManager.Instance.TextColorChange();
+            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.ColleagueContents].activeSelf)
+            {
+                ColleagueSystemManager.Instance.TextColorChange();
+            }
         }
     }
 
     
     [SerializeField]
     [Tooltip("현재 보유 재화(보석)")]
-    private BigInteger gemUnit;
+    private int gemUnit;
 
-    public BigInteger GemUnit
+    public int GemUnit
     {
         get { return gemUnit; }
         set 
         {
             gemUnit = value;
-            ColleagueSystemManager.Instance.TextColorChange();
+            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.ColleagueContents].activeSelf)
+            {
+                ColleagueSystemManager.Instance.TextColorChange();
+            }
         }
     }
 

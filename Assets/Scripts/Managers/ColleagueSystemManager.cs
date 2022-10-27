@@ -50,7 +50,10 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
 
     private void OnEnable()
     {
-        TextColorChange();
+        if (gameObject.activeSelf)
+        {
+            TextColorChange();
+        }
         EquipButtonSetActive();
     }
 

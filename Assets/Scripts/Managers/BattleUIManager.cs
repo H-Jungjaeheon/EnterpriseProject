@@ -44,9 +44,9 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [Tooltip("현재 보여지는 콘텐츠 창 오브젝트")]
     private GameObject nowContentsPanelObj;
 
-    [SerializeField]
+  
     [Tooltip("콘텐츠 창 오브젝트 모음")]
-    private GameObject[] contentsPanelObjs;
+    public GameObject[] contentsPanelObjs;
 
     [SerializeField]
     [Tooltip("요리 판매 시스템 - 요리 선택 및 제작 창 오브젝트")]

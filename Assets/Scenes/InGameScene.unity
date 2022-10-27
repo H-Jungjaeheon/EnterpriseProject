@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 1678485}
   - component: {fileID: 1678484}
   m_Layer: 5
-  m_Name: Text
+  m_Name: DamageGoodsRequiredForUpgradeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -767,12 +767,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1103746049}
         m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
-        m_MethodName: ContentsPanelOnOrOff
-        m_Mode: 6
+        m_MethodName: BasicStatUpgrade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
@@ -1219,7 +1219,7 @@ GameObject:
   - component: {fileID: 154344286}
   - component: {fileID: 154344285}
   m_Layer: 5
-  m_Name: StatUpGradeImagePanel3
+  m_Name: HealingStatUpGradeImagePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1648,7 +1648,7 @@ GameObject:
   - component: {fileID: 253022836}
   - component: {fileID: 253022835}
   m_Layer: 5
-  m_Name: StatUpGradeImagePanel6
+  m_Name: FatalAttackProbabilityStatUpGradeImagePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2190,7 +2190,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 368968290}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1103746049}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+        m_MethodName: BasicStatUpgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &368968290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2387,7 +2399,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 382340687}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1103746049}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+        m_MethodName: BasicStatUpgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &382340687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2438,7 +2462,7 @@ GameObject:
   - component: {fileID: 385857129}
   - component: {fileID: 385857128}
   m_Layer: 5
-  m_Name: Text
+  m_Name: DamageGoodsRequiredForUpgradeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2875,7 +2899,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 472281226}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1103746049}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+        m_MethodName: BasicStatUpgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &472281226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2926,7 +2962,7 @@ GameObject:
   - component: {fileID: 491141380}
   - component: {fileID: 491141379}
   m_Layer: 5
-  m_Name: StatUpGradeImagePanel4
+  m_Name: AttackSpeedStatUpGradeImagePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4440,7 +4476,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 768644926}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1103746049}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+        m_MethodName: BasicStatUpgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &768644926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5708,7 +5756,7 @@ GameObject:
   - component: {fileID: 868072413}
   - component: {fileID: 868072412}
   m_Layer: 5
-  m_Name: Text
+  m_Name: DamageGoodsRequiredForUpgradeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5863,7 +5911,7 @@ GameObject:
   - component: {fileID: 884590925}
   - component: {fileID: 884590924}
   m_Layer: 5
-  m_Name: StatUpGradeImagePanel
+  m_Name: DamageStatUpGradeImagePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6216,7 +6264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &933780100
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6473,7 +6521,7 @@ GameObject:
   - component: {fileID: 955706658}
   - component: {fileID: 955706657}
   m_Layer: 5
-  m_Name: StatUpGradeImagePanel5
+  m_Name: FatalAttackStatUpGradeImagePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6724,7 +6772,7 @@ GameObject:
   - component: {fileID: 983388621}
   - component: {fileID: 983388620}
   m_Layer: 5
-  m_Name: Text
+  m_Name: DamageGoodsRequiredForUpgradeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7744,22 +7792,25 @@ MonoBehaviour:
   colleagueSystemPanelObj: {fileID: 1959401194}
   basicStatLevelText:
   - {fileID: 1582084038}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1338358372}
+  - {fileID: 2120827144}
+  - {fileID: 1118825676}
+  - {fileID: 730471802}
+  - {fileID: 1708184438}
   basicStatFigureText:
   - {fileID: 1522493651}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1417463145}
+  - {fileID: 1697926318}
+  - {fileID: 693547518}
+  - {fileID: 1085643588}
+  - {fileID: 919021761}
   goodsTextRequiredForUpgrade:
   - {fileID: 1503910694}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1678484}
+  - {fileID: 868072412}
+  - {fileID: 983388620}
+  - {fileID: 385857128}
+  - {fileID: 1838405554}
   materialsText_BasicScreen:
   - {fileID: 2006706812}
   - {fileID: 1254427040}
@@ -10139,7 +10190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1490917324
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10863,7 +10914,7 @@ GameObject:
   - component: {fileID: 1527847421}
   - component: {fileID: 1527847420}
   m_Layer: 5
-  m_Name: StatUpGradeImagePanel2
+  m_Name: HpStatUpGradeImagePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12782,7 +12833,7 @@ GameObject:
   - component: {fileID: 1838405555}
   - component: {fileID: 1838405554}
   m_Layer: 5
-  m_Name: Text
+  m_Name: DamageGoodsRequiredForUpgradeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13406,7 +13457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1959401195
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13481,6 +13532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroyObj: 0
+  gemUnit: 0
   statsLevel: 010000000100000001000000010000000100000001000000
 --- !u!4 &1976572750
 Transform:
