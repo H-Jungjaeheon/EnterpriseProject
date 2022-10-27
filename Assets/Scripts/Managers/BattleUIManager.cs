@@ -26,6 +26,10 @@ public enum UpgradeableBasicStats
 {
     Damage,
     MaxHp,
+    Healing,
+    AttackSpeed,
+    FatalAttackDamage,
+    FatalAttackProbability,
     UpgradeableBasicStatsNumber
 }
 
@@ -152,7 +156,6 @@ public class BattleUIManager : Singleton<BattleUIManager>
     private Text jemText;
 
     [Header("그 외")]
-    [SerializeField]
     private BigInteger[] goodsRequiredForUpgrade = new BigInteger[(int)UpgradeableBasicStats.UpgradeableBasicStatsNumber];
 
     [SerializeField]
@@ -192,6 +195,19 @@ public class BattleUIManager : Singleton<BattleUIManager>
         for (int nowDataIndex = 0; nowDataIndex < quantityOfMaterials.Length; nowDataIndex++)
         {
             quantityOfMaterials[nowDataIndex] = foodDatas[NowFoodIndex].quantityOfMaterials[nowDataIndex];
+        }
+
+        for (int nowIndex = 0; nowIndex < goodsRequiredForUpgrade.Length; nowIndex++)
+        {
+            string goodsRequiredForUpgradeString;
+
+            goodsRequiredForUpgrade[nowIndex] = 2;
+
+            basicStatLevelText[nowIndex].text = $"Lv {gmInstance.statsLevel[nowIndex]}"; //레벨 텍스트 수정
+
+            goodsRequiredForUpgradeString = ConvertGoodsToString(goodsRequiredForUpgrade[nowIndex]);
+
+            goodsTextRequiredForUpgrade[nowIndex].text = $"강화\n{goodsRequiredForUpgradeString}원";
         }
     }
 
@@ -346,7 +362,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
         nowCookingCountText.text = $"{cookingCount} 개";
     }
 
-    public void BasicStatUpgrade(int statsToUpgradeCurrently)
+    public void BasicStatUpgrade(int statsToUpgradeCurrently) //스탯 업그레이드 함수
     {
         var playerComponent = player.GetComponent<Player>();
         string goodsRequiredForUpgradeString;
@@ -370,7 +386,28 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
         goodsTextRequiredForUpgrade[statsToUpgradeCurrently].text = $"강화\n{goodsRequiredForUpgradeString}원";
 
-        playerComponent.AttackPower++; //공격력 증가(임시 연산)
+        switch (statsToUpgradeCurrently)
+        {
+            case (int)UpgradeableBasicStats.Damage:
+                playerComponent.AttackPower++; //공격력 증가(임시 연산)
+                basicStatFigureText[statsToUpgradeCurrently].text = $"{playerComponent.AttackPower}";
+                break;
+            case (int)UpgradeableBasicStats.MaxHp:
+
+                break;
+            case (int)UpgradeableBasicStats.Healing:
+
+                break;
+            case (int)UpgradeableBasicStats.AttackSpeed:
+
+                break;
+            case (int)UpgradeableBasicStats.FatalAttackDamage:
+
+                break;
+            case (int)UpgradeableBasicStats.FatalAttackProbability:
+
+                break;
+        }
     }
 
     public void AnotherContentsPopUp(GameObject PopUpObj)
