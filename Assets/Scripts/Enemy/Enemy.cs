@@ -37,6 +37,8 @@ public class Enemy : MonoBehaviour
             {
                 Player.Instance.Range.TargetEnemy.Remove(this.gameObject);
                 EnemySpawner.ReturnEnemy(EnemyType, this);
+                GameManager.Instance.MoneyUnit += 100;
+                GameManager.Instance.GemUnit += 10;
             }
         }
     }
