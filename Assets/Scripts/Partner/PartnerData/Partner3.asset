@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f069bb9cd4c114b921ae1bda2bd667, type: 3}
   m_Name: Partner3
   m_EditorClassIdentifier: 
-  PartnerImg: {fileID: 0}
+  PartnerImg: {fileID: 21300000, guid: be13886b60813594b97388f087c9b61e, type: 3}
   PartnerName: "\uD3EC\uD0A4"
   AttackPower: 10000
   AttackDelay: 10
