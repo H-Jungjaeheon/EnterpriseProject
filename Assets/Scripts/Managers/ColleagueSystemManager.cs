@@ -32,6 +32,12 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
     private Text[] priceIndicationText = new Text[(int)ColleagueKind.ColleagueCount];
 
     [SerializeField]
+    private Partner Partner;
+
+    [SerializeField]
+    private PartnerData[] PartnerData;
+
+    [SerializeField]
     [Tooltip("동료 아이콘 모음")]
     private Sprite[] colleagueIcons;
 
@@ -70,6 +76,12 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
         if (nowColleagueIcon.sprite != colleagueIcons[nowEquipColleagueIndex])
         {
             print("동료 장착 실행");
+
+            //실제 동료 장착 스크립트
+            Partner.PartnerData = this.PartnerData[nowEquipColleagueIndex];
+            Partner.Setting();
+            Partner.gameObject.SetActive(true);
+
             nowColleagueIcon.sprite = colleagueIcons[nowEquipColleagueIndex];
         }
     }

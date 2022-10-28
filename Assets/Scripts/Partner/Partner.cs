@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Partner : MonoBehaviour
 {
-    [Header("외부 데이터")]
     public static PartnerData PartnerData;
 
     [Header("외관 변수")]
