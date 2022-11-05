@@ -54,6 +54,9 @@ public class Player : MonoBehaviour
     private bool IsAttack = false;
     private Coroutine AttackCorutine;
 
+    [Header("스킬 변수")]
+    public SkillManager SkillManager;
+
     [Header("이동 변수")]
     [SerializeField]
     private float MoveTime;
