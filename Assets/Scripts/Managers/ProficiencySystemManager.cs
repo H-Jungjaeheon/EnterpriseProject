@@ -49,6 +49,8 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
 
     public bool[] isNowChooseCharacterUnlock = new bool[(int)CharacterKind.CharacterCount];
 
+    public bool[] isNowChooseCharacterEquiping = new bool[(int)CharacterKind.CharacterCount];
+
     public int nowChooseCharacterIndex;
 
     private Vector3 dragStartMousePos;
@@ -80,7 +82,6 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
         TextReSettings();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && isDraging == false)
@@ -174,14 +175,30 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
         slideableBgRectTransform[moveImageIndex].DOAnchorPos(targetPos, 0);
     }
 
-    public void ProficiencyUnlock()
+    public void ProficiencyUnlockOrEquip()
     {
-        if (isNowChooseCharacterUnlock[nowChooseCharacterIndex] == false && nowChooseCharacterUnlockCost[nowChooseCharacterIndex] <= GameManager.Instance.CurrentProficiency) 
+        if (isNowChooseCharacterUnlock[nowChooseCharacterIndex] == false && nowChooseCharacterUnlockCost[nowChooseCharacterIndex] <= GameManager.Instance.CurrentProficiency)
         {
             isNowChooseCharacterUnlock[nowChooseCharacterIndex] = true;
 
             lockObj[nowChooseCharacterIndex].SetActive(false);
 
+            TextReSettings();
+        }
+        else if(isNowChooseCharacterEquiping[nowChooseCharacterIndex] == false)
+        {
+            for (int nowIndex = minCharacterIndex; nowIndex <= maxCharacterIndex; nowIndex++)
+            {
+                if (nowIndex == nowChooseCharacterIndex)
+                {
+                    isNowChooseCharacterEquiping[nowIndex] = true;
+                }
+                else
+                {
+                    isNowChooseCharacterEquiping[nowIndex] = false;
+                }
+            }
+            // 여기가 캐릭터 장착하는 부분
             TextReSettings();
         }
     }
@@ -200,7 +217,14 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
         else
         {
             nowChooseCharacterUnlockButtonText.color = blackTextColor;
-            nowChooseCharacterUnlockButtonText.text = $"캐릭터 잠금해제 완료";
+            if (isNowChooseCharacterEquiping[nowChooseCharacterIndex] == false)
+            {
+                nowChooseCharacterUnlockButtonText.text = $"장착 가능";
+            }
+            else
+            {
+                nowChooseCharacterUnlockButtonText.text = $"장착중";
+            }
         }
     }
 }

@@ -16,7 +16,14 @@ public class GameManager : Singleton<GameManager>
     public int CurrentProficiency
     {
         get { return currentProficiency; }
-        set { currentProficiency = value; }
+        set
+        {
+            currentProficiency = value;
+            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.ProficiencyContents].activeSelf)
+            {
+                ProficiencySystemManager.Instance.TextReSettings();
+            }
+        }
     }
 
     [SerializeField]
