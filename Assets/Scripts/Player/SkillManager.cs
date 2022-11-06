@@ -16,18 +16,21 @@ public class SkillManager : MonoBehaviour
     [Header("스킬 변수")]
     [SerializeField]
     private List<Skill> EquieSkills;
+    [SerializeReference]
+    protected List<Skill> NoneEquieSkills;
     [SerializeField]
     private List<SkillUI> SkillUis;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            EquieSkills[0].OnSkillEffect();
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            EquieSkills[1].OnSkillEffect();
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            EquieSkills[2].OnSkillEffect();
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            EquieSkills[3].OnSkillEffect();
     }
 }

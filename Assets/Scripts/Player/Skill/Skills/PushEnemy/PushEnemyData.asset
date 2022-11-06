@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d05fd4bcc10e75409db890e2bdd6927, type: 3}
+  m_Name: PushEnemyData
+  m_EditorClassIdentifier: 
+  SkillName: "\uC801 \uBC00\uCE58\uAE30"
+  SkillImage: {fileID: 21300000, guid: 008a192409bb98143b0e56fdebd13ebb, type: 3}
+  SkillCol: 8
+  SkillDuration: 3

@@ -12,10 +12,13 @@ public class Skill : MonoBehaviour
     public string SkillName;
     public Sprite SkillImage;
     public float SkillCol;
+    public float SkillDuration;
 
     [Header("스킬 사용 변수")]
     [SerializeField]
     protected int SkillEquieIdx;
+    [SerializeField]
+    protected List<GameObject> SkillParticles;
     protected Coroutine SkillCorutine;
 
     protected void Awake()
@@ -29,16 +32,31 @@ public class Skill : MonoBehaviour
         SkillName = SkillData.SkillName;
         SkillImage = SkillData.SkillImage;
         SkillCol = SkillData.SkillCol;
+        SkillDuration = SkillData.SkillDuration;
     }
 
     public void OnSkillEffect()
     {
-        SkillCorutine = StartCoroutine(SkillEffect());
+        if(SkillCorutine == null)
+            SkillCorutine = StartCoroutine(SkillEffect());
     }
 
     public void OffSkillEffect()
     {
         StopCoroutine(SkillCorutine);
+        SkillCorutine = null;
+    }
+
+    protected void OnSkillParticle(int Idx)
+    {
+        if (SkillParticles.Count > Idx)
+            SkillParticles[Idx].SetActive(true);
+    }
+
+    protected void OffSkillParticle(int Idx)
+    {
+        if (SkillParticles.Count > Idx)
+            SkillParticles[Idx].SetActive(false);
     }
 
     protected virtual IEnumerator SkillEffect()
