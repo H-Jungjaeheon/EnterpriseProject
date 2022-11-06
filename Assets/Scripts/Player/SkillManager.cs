@@ -16,7 +16,11 @@ public class SkillManager : MonoBehaviour
     [Header("스킬 변수")]
     [SerializeField]
     private List<Skill> EquieSkills;
-    [SerializeReference]
+    [SerializeField]
+    private int MaximamIdx = 4;
+    [SerializeField]
+    private int CurIdx = 0;
+    [SerializeField]
     protected List<Skill> NoneEquieSkills;
     [SerializeField]
     private List<SkillUI> SkillUis;
@@ -25,17 +29,24 @@ public class SkillManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            EquieSkills[0].OnSkillEffect();
+            SkillEquie(0);
         if (Input.GetKeyDown(KeyCode.Alpha2))
-            EquieSkills[1].OnSkillEffect();
+            SkillEquie(1);
         if (Input.GetKeyDown(KeyCode.Alpha3))
-            EquieSkills[2].OnSkillEffect();
+            SkillEquie(2);
         if (Input.GetKeyDown(KeyCode.Alpha4))
-            EquieSkills[3].OnSkillEffect();
+            SkillEquie(3);
     }
 
     public void SkillEquie(int idx)
     {
+        if(CurIdx < MaximamIdx)
+        {
+            EquieSkills.Add(NoneEquieSkills[idx]);
+            SkillUis.FrontSKillImage.sprite = EquieSkills[CurIdx].SkillImage;
+            SkillUis.BackSKillImage.sprite = EquieSkills[CurIdx].SkillImage;
 
+            CurIdx++;
+        }
     }
 }
