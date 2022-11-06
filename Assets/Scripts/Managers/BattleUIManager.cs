@@ -49,7 +49,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [Tooltip("현재 보여지는 콘텐츠 창 오브젝트")]
     private GameObject nowContentsPanelObj;
 
-  
+
     [Tooltip("콘텐츠 창 오브젝트 모음")]
     public GameObject[] contentsPanelObjs;
 
@@ -167,6 +167,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     void Start()
     {
         StartSetting();
+        BasicStatSetting();
         basicStatLevelText[(int)UpgradeableBasicStats.Damage].text = $"Lv {GameManager.Instance.statsLevel[(int)UpgradeableBasicStats.Damage]}";
         StartCoroutine(customerOnTheWay());
     }
@@ -239,10 +240,10 @@ public class BattleUIManager : Singleton<BattleUIManager>
                 {
                     materialsText_BasicScreen[nowIndex].text = $"{battleSceneManagerIn.quantityOfMaterials[nowIndex]} 개";
                 }
-                else if(nowSaleOfFoodContents == SaleOfFoodContents.ChooseFoodScreen)
+                else if (nowSaleOfFoodContents == SaleOfFoodContents.ChooseFoodScreen)
                 {
                     materialsText_ChooseCookScreen[nowIndex].text = $"{battleSceneManagerIn.quantityOfMaterials[nowIndex]} / {quantityOfMaterials[nowIndex] * cookingCount}";
-                    
+
                     materialsText_ChooseCookScreen[nowIndex].color = (battleSceneManagerIn.quantityOfMaterials[nowIndex] < quantityOfMaterials[nowIndex] * cookingCount)
                         ? materialsText_ChooseCookScreen[nowIndex].color = redTextColor : materialsText_ChooseCookScreen[nowIndex].color = greenTextColor;
 
@@ -361,11 +362,21 @@ public class BattleUIManager : Singleton<BattleUIManager>
         {
             cookingCount--;
         }
-        else if(isPlus && cookingCount < 99)
+        else if (isPlus && cookingCount < 99)
         {
             cookingCount++;
         }
         nowCookingCountText.text = $"{cookingCount} 개";
+    }
+
+    public void BasicStatSetting()
+    {
+        basicStatFigureText[0].text = $"{Player.Instance.AttackPower}";
+        basicStatFigureText[1].text = $"{Player.Instance.Hp}";
+        basicStatFigureText[2].text = $"{Player.Instance.HealingValue}";
+        basicStatFigureText[3].text = $"{Player.Instance.AttackDelay}";
+        basicStatFigureText[4].text = $"{Player.Instance.CriticalDamage}%";
+        basicStatFigureText[5].text = $"{Player.Instance.CriticalPercent}%";
     }
 
     public void BasicStatUpgrade(int statsToUpgradeCurrently) //스탯 업그레이드 함수
@@ -404,23 +415,33 @@ public class BattleUIManager : Singleton<BattleUIManager>
         switch (statsToUpgradeCurrently)
         {
             case (int)UpgradeableBasicStats.Damage:
-                playerComponent.AttackPower++; //공격력 증가(임시 연산)
+                playerComponent.AttackPower += 10; //공격력 증가(임시 연산)
                 basicStatFigureText[statsToUpgradeCurrently].text = $"{playerComponent.AttackPower}";
                 break;
+
             case (int)UpgradeableBasicStats.MaxHp:
-                basicStatFigureText[statsToUpgradeCurrently].text = $"{gmInstance.statsLevel[statsToUpgradeCurrently]}";
+                playerComponent.Hp += 10;
+                basicStatFigureText[statsToUpgradeCurrently].text = $"{playerComponent.Hp}";
                 break;
+
             case (int)UpgradeableBasicStats.Healing:
-                basicStatFigureText[statsToUpgradeCurrently].text = $"{gmInstance.statsLevel[statsToUpgradeCurrently]}";
+                playerComponent.HealingValue += 10;
+                basicStatFigureText[statsToUpgradeCurrently].text = $"{playerComponent.HealingValue}";
                 break;
+
             case (int)UpgradeableBasicStats.AttackSpeed:
-                basicStatFigureText[statsToUpgradeCurrently].text = $"{gmInstance.statsLevel[statsToUpgradeCurrently]}";
+                playerComponent.AttackDelay -= 0.01f;
+                basicStatFigureText[statsToUpgradeCurrently].text = $"{playerComponent.AttackDelay}";
                 break;
+
             case (int)UpgradeableBasicStats.FatalAttackDamage:
-                basicStatFigureText[statsToUpgradeCurrently].text = $"{gmInstance.statsLevel[statsToUpgradeCurrently]}%";
+                playerComponent.CriticalDamage += 5;
+                basicStatFigureText[statsToUpgradeCurrently].text = $"{playerComponent.CriticalDamage}%";
                 break;
+
             case (int)UpgradeableBasicStats.FatalAttackProbability:
-                basicStatFigureText[statsToUpgradeCurrently].text = $"{gmInstance.statsLevel[statsToUpgradeCurrently]}%";
+                playerComponent.CriticalPercent += 0.5f;
+                basicStatFigureText[statsToUpgradeCurrently].text = $"{playerComponent.CriticalPercent}%";
                 break;
         }
     }

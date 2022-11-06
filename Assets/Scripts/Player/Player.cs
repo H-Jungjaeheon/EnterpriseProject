@@ -35,9 +35,8 @@ public class Player : MonoBehaviour
             }
         }
     }
-    [SerializeField]
-    private int HealingValue; 
-    
+
+    public int HealingValue; 
     public int AttackPower;
     public float AttackDelay;
     public float CriticalPercent;

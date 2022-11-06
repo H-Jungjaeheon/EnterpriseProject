@@ -73,8 +73,9 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            MoneyUnit += 10;
-            GemUnit += 10;
+            MoneyUnit += 100000000000;
+            GemUnit += 1000;
+            CurrentProficiency += 10;
         }
     }
 }
