@@ -341,6 +341,11 @@ public class BattleUIManager : Singleton<BattleUIManager>
             yield return null;
         }
         yield return new WaitForSeconds(5);
+
+        //원래는 실패하면 안줘야함
+
+        GameManager.Instance.CurrentProficiency += 10; //그냥 대충 올린 테스트 버전
+
         theProductionObj.SetActive(false);
         isCustomerArrival = false;
         foodChooseAndMakePanelObj.SetActive(false);
