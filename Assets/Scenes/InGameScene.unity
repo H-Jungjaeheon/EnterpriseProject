@@ -1020,7 +1020,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1787463852}
         m_TargetAssemblyTypeName: ProficiencySystemManager, Assembly-CSharp
-        m_MethodName: ProficiencyUnlock
+        m_MethodName: ProficiencyUnlockOrEquip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15123,6 +15123,7 @@ MonoBehaviour:
   - {fileID: 1976065761}
   - {fileID: 1976065761}
   isNowChooseCharacterUnlock: 0100
+  isNowChooseCharacterEquiping: 0100
   nowChooseCharacterIndex: 0
   isDraging: 0
 --- !u!1 &1790767132
