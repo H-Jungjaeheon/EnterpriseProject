@@ -14352,10 +14352,10 @@ MonoBehaviour:
   nowChooseCharacterBuffText: {fileID: 1931384625}
   nowChooseCharacterUnlockButtonText: {fileID: 1915159752}
   lockObj:
-  - {fileID: 857277904}
+  - {fileID: 1976065761}
   - {fileID: 1976065761}
   isNowChooseCharacterUnlock: 0100
-  nowChooseCharacterIndex: 1
+  nowChooseCharacterIndex: 0
   isDraging: 0
 --- !u!1 &1790767132
 GameObject:
@@ -15795,6 +15795,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  NoneEquieSkills: []
   SkillUis:
   - SkillName: "\uC2A4\uD0AC1"
     FrontSKillImage: {fileID: 1876380558}
