@@ -16,8 +16,9 @@ public class Skill : MonoBehaviour
     [Header("스킬 사용 변수")]
     [SerializeField]
     protected int SkillEquieIdx;
+    protected Coroutine SkillCorutine;
 
-    protected virtual void Awake()
+    protected void Awake()
     {
         ApplySkillData();
     }
@@ -30,8 +31,18 @@ public class Skill : MonoBehaviour
         SkillCol = SkillData.SkillCol;
     }
 
-    protected virtual void OnSkillEffect()
+    public void OnSkillEffect()
     {
+        SkillCorutine = StartCoroutine(SkillEffect());
+    }
 
+    public void OffSkillEffect()
+    {
+        StopCoroutine(SkillCorutine);
+    }
+
+    protected virtual IEnumerator SkillEffect()
+    {
+        yield return null;
     }
 }
