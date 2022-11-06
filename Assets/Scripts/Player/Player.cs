@@ -39,13 +39,9 @@ public class Player : MonoBehaviour
     private int HealingValue; 
     
     public int AttackPower;
-
-    [SerializeField]
-    private float AttackDelay;
-    [SerializeField]
-    private float CriticalPercent;
-    [SerializeField]
-    private float CriticalDamage;
+    public float AttackDelay;
+    public float CriticalPercent;
+    public float CriticalDamage;
 
     [Header("전투 변수")]
     [SerializeField]
