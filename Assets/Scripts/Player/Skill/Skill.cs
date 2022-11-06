@@ -21,7 +21,7 @@ public class Skill : MonoBehaviour
     protected List<GameObject> SkillParticles;
     protected Coroutine SkillCorutine;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         ApplySkillData();
     }

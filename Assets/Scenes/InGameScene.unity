@@ -16640,12 +16640,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803ccf3f5df0bd944a0a8881acae49c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EquieSkills:
+  EquieSkills: []
+  MaximamIdx: 4
+  CurIdx: 0
+  NoneEquieSkills:
   - {fileID: 844885931}
   - {fileID: 617408293}
   - {fileID: 589727376}
   - {fileID: 1245943025}
-  NoneEquieSkills: []
   SkillUis:
   - SkillName: "\uC2A4\uD0AC1"
     FrontSKillImage: {fileID: 1876380558}

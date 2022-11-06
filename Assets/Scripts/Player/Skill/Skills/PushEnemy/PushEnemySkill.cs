@@ -25,8 +25,10 @@ public class PushEnemySkill : Skill
     [SerializeField]
     private Vector2 FrontMovePos;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         HandSpriteRenderer = Hand.GetComponent<SpriteRenderer>();
 
         OriginalPos = this.transform.position;
