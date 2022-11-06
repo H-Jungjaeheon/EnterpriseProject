@@ -156,6 +156,10 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [Tooltip("보석 재화 텍스트")]
     private Text jemText;
 
+    [SerializeField]
+    [Tooltip("숙련도 수치 텍스트")]
+    private Text proficiencyText;
+
     [Header("그 외")]
     private BigInteger[] goodsRequiredForUpgrade = new BigInteger[(int)UpgradeableBasicStats.UpgradeableBasicStatsNumber];
 
@@ -182,6 +186,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     {
         coinText.text = $"{ConvertGoodsToString(gmInstance.MoneyUnit)}";
         jemText.text = $"{gmInstance.GemUnit}";
+        proficiencyText.text = $"{gmInstance.CurrentProficiency}";
     }
 
     private void StartSetting()

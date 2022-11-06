@@ -9520,6 +9520,7 @@ MonoBehaviour:
     FoodName: "1\uB4F1\uAE09 \uC694\uB9AC"
   coinText: {fileID: 655448475}
   jemText: {fileID: 446454305}
+  proficiencyText: {fileID: 1381109704}
   player: {fileID: 1293959311}
 --- !u!4 &1103746050
 Transform:
