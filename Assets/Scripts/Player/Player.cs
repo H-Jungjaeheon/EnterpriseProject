@@ -10,8 +10,7 @@ public class Player : MonoBehaviour
     [Header("플레이어 숙련도 데이터")]
     [SerializeField]
     private PlayerData[] PlayerDatas;
-    [SerializeField]
-    private int SelectNumber;
+    public int SelectNumber;
     [SerializeField]
     private PlayerData SelectPlayerData;
 
@@ -88,7 +87,7 @@ public class Player : MonoBehaviour
         OnMove();
     }
 
-    void BasicSetting()
+    public void BasicSetting()
     {
         SelectPlayerData = PlayerDatas[SelectNumber];
 
@@ -101,6 +100,8 @@ public class Player : MonoBehaviour
 
         this.CriticalDamage = SelectPlayerData.CriticalDamage;
         this.CriticalPercent = SelectPlayerData.CriticalPercent;
+
+        this.GetComponent<SpriteRenderer>().sprite = SelectPlayerData.PlayerSkinImg;
     }
 
     #region Attack

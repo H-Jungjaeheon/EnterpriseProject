@@ -198,7 +198,12 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
                     isNowChooseCharacterEquiping[nowIndex] = false;
                 }
             }
+
             // 여기가 캐릭터 장착하는 부분
+
+            Player.Instance.SelectNumber = nowChooseCharacterIndex;
+            Player.Instance.BasicSetting();
+
             TextReSettings();
         }
     }

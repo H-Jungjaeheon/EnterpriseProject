@@ -72,7 +72,9 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        MoneyUnit += 100000000000;
+        GemUnit += 1000;
+        CurrentProficiency += 10;
     }
 
     // Update is called once per frame

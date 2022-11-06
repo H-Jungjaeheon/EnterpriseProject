@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PushEnemyData
   m_EditorClassIdentifier: 
   SkillName: "\uC801 \uBC00\uCE58\uAE30"
-  SkillImage: {fileID: 21300000, guid: 008a192409bb98143b0e56fdebd13ebb, type: 3}
+  SkillImage: {fileID: 21300000, guid: 84ee1868e4811264ab5ca324edd3e115, type: 3}
   SkillCol: 8
   SkillDuration: 3

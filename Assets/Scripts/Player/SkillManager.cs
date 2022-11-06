@@ -25,22 +25,17 @@ public class SkillManager : MonoBehaviour
     [SerializeField]
     private List<SkillUI> SkillUis;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            SkillEquie(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            SkillEquie(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            SkillEquie(2);
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            SkillEquie(3);
+        SkillEquie(0);
+        SkillEquie(1);
+        SkillEquie(2);
+        SkillEquie(3);
     }
 
     public void SkillEquie(int idx)
     {
-        if(CurIdx < MaximamIdx)
+        if (CurIdx < MaximamIdx)
         {
             EquieSkills.Add(NoneEquieSkills[idx]);
             SkillUis[CurIdx].FrontSKillImage.sprite = EquieSkills[CurIdx].SkillImage;
@@ -48,5 +43,10 @@ public class SkillManager : MonoBehaviour
 
             CurIdx++;
         }
+    }
+
+    public void UseSkill(int idx)
+    {
+        EquieSkills[idx].OnSkillEffect();
     }
 }
