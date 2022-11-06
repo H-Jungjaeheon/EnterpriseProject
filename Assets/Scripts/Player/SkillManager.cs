@@ -33,4 +33,9 @@ public class SkillManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha4))
             EquieSkills[3].OnSkillEffect();
     }
+
+    public void SkillEquie(int idx)
+    {
+
+    }
 }
