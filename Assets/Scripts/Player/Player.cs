@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private PlayerData SelectPlayerData;
 
     [Header("플레이어 기본 스탯 변수")]
+    public int MaxHp;
     [SerializeField]
     private int hp;
     public int Hp
@@ -76,6 +77,11 @@ public class Player : MonoBehaviour
         BasicSetting();
     }
 
+    private void Start()
+    {
+        StartCoroutine(HealingHp());
+    }
+
     private void Update()
     {
         OnAttack();
@@ -86,10 +92,11 @@ public class Player : MonoBehaviour
     {
         SelectPlayerData = PlayerDatas[SelectNumber];
 
+        this.MaxHp = SelectPlayerData.Hp;
         this.Hp = SelectPlayerData.Hp;
         this.HealingValue = SelectPlayerData.HealingValue;
 
-        //this.AttackPower = SelectPlayerData.AttackPower;
+        this.AttackPower = SelectPlayerData.AttackPower;
         this.AttackDelay = SelectPlayerData.AttackDelay;
 
         this.CriticalDamage = SelectPlayerData.CriticalDamage;
@@ -134,6 +141,22 @@ public class Player : MonoBehaviour
         }
     }
     #endregion
+
+    IEnumerator HealingHp()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        if (hp + HealingValue <= MaxHp)
+        {
+            hp += HealingValue;
+        }
+
+        else
+            hp = MaxHp;
+
+        StartCoroutine(HealingHp());
+        yield break;
+    }
 
     void OnMove()
     {

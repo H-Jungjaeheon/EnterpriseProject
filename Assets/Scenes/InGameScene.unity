@@ -10568,10 +10568,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 903890fb976ac3c4aa8698add4c699a3, type: 2}
   SelectNumber: 0
   SelectPlayerData: {fileID: 0}
-  hp: 1000
+  MaxHp: 0
+  hp: 0
   HealingValue: 0
-  AttackPower: 10
-  AttackDelay: 1
+  AttackPower: 0
+  AttackDelay: 0
   CriticalPercent: 0
   CriticalDamage: 0
   Range: {fileID: 678497181}

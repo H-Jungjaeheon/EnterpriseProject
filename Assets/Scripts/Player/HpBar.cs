@@ -10,6 +10,6 @@ public class HpBar : MonoBehaviour
 
     private void Update()
     {
-        HpFrontImage.fillAmount = (float)Player.Instance.Hp / 100.0f;
+        HpFrontImage.fillAmount = (float)Player.Instance.Hp / (float)Player.Instance.MaxHp;
     }
 }

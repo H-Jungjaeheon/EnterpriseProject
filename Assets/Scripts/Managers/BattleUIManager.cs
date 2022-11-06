@@ -372,7 +372,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     public void BasicStatSetting()
     {
         basicStatFigureText[0].text = $"{Player.Instance.AttackPower}";
-        basicStatFigureText[1].text = $"{Player.Instance.Hp}";
+        basicStatFigureText[1].text = $"{Player.Instance.MaxHp}";
         basicStatFigureText[2].text = $"{Player.Instance.HealingValue}";
         basicStatFigureText[3].text = $"{Player.Instance.AttackDelay}";
         basicStatFigureText[4].text = $"{Player.Instance.CriticalDamage}%";
@@ -420,8 +420,8 @@ public class BattleUIManager : Singleton<BattleUIManager>
                 break;
 
             case (int)UpgradeableBasicStats.MaxHp:
-                playerComponent.Hp += 10;
-                basicStatFigureText[statsToUpgradeCurrently].text = $"{playerComponent.Hp}";
+                playerComponent.MaxHp += 10;
+                basicStatFigureText[statsToUpgradeCurrently].text = $"{playerComponent.MaxHp}";
                 break;
 
             case (int)UpgradeableBasicStats.Healing:
