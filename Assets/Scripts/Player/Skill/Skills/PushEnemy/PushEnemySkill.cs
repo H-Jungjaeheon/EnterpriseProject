@@ -31,7 +31,7 @@ public class PushEnemySkill : Skill
 
         OffSkillParticle(0);
 
-        Player.Instance.AttackPower -= UpgreadAttackValue;
+        //Player.Instance.AttackPower -= UpgreadAttackValue;
         #endregion
 
         OffSkillEffect();
