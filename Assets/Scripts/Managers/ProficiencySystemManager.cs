@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+public enum CharacterKind
+{
+    Basic,
+    SecondaryCharacter,
+    CharacterCount
+}
+
 public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
 {
     [SerializeField]
@@ -28,51 +35,44 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
 
     [SerializeField]
     [Tooltip("현재 캐릭터 업그레이드/잠금해제 버튼 텍스트")]
-    private Text nowChooseCharacterUpgradeOrUnlockButtonText;
+    private Text nowChooseCharacterUnlockButtonText;
+
+    [SerializeField]
+    [Tooltip("현재 잠금해제 캐릭터 자물쇠 오브젝트")]
+    private GameObject[] lockObj;
 
     private int minCharacterIndex;
 
     private int maxCharacterIndex;
 
-    private int[] nowChooseCharacterUnlockCost;
+    private int[] nowChooseCharacterUnlockCost = new int[(int)CharacterKind.CharacterCount];
 
-    private int[] nowChooseCharacterUpgradeCost;
-
-    public bool[] isNowChooseCharacterUnlock;
-
-    private int[] nowChooseCharacterLevel;
+    public bool[] isNowChooseCharacterUnlock = new bool[(int)CharacterKind.CharacterCount];
 
     public int nowChooseCharacterIndex;
 
     private Vector3 dragStartMousePos;
 
-    private bool isDraging;
+    public bool isDraging;
+
+    Color blackTextColor = new Color(0, 0, 0);
 
     Color redTextColor = new Color(1, 0, 0);
 
     Color greenTextColor = new Color(0, 1, 0.03f);
 
-    protected override void Awake()
+    private void Start()
     {
-        base.Awake();
+        isDraging = false;
+
         minCharacterIndex = 0;
-        maxCharacterIndex = nowChooseCharacterName.Length - 1;
-
-        nowChooseCharacterUnlockCost = new int[nowChooseCharacterName.Length];
-        nowChooseCharacterUpgradeCost = new int[nowChooseCharacterName.Length];
-        isNowChooseCharacterUnlock = new bool[nowChooseCharacterName.Length];
-        nowChooseCharacterLevel = new int[nowChooseCharacterName.Length];
-
+        maxCharacterIndex = (int)CharacterKind.CharacterCount - 1;
+        
         for (int nowIndex = minCharacterIndex; nowIndex <= maxCharacterIndex; nowIndex++)
         {
-            nowChooseCharacterLevel[nowIndex] = 1;
-            nowChooseCharacterUpgradeCost[nowIndex] = 4;
             nowChooseCharacterUnlockCost[nowIndex] = 4;
         }
-
         isNowChooseCharacterUnlock[minCharacterIndex] = true;
-        
-        TextReSettings();
     }
 
     private void OnEnable()
@@ -85,7 +85,6 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
     {
         if (Input.GetMouseButtonDown(0) && isDraging == false)
         {
-            isDraging = true;
             StartCoroutine(DragStart());
         }
     }
@@ -125,6 +124,7 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
 
         imageTargetPosX = isRightDrag ? 1300 : -1300;
 
+        isDraging = true;
         slideableBgRectTransform[nowChooseCharacterIndex].DOAnchorPos(new Vector2(imageTargetPosX, 0), 0.3f);
 
         if (isRightDrag && nowChooseCharacterIndex == minCharacterIndex || isRightDrag == false && nowChooseCharacterIndex == maxCharacterIndex)
@@ -174,23 +174,13 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
         slideableBgRectTransform[moveImageIndex].DOAnchorPos(targetPos, 0);
     }
 
-    public void ProficiencyUpgradeOrUnlock()
+    public void ProficiencyUnlock()
     {
-        if (isNowChooseCharacterUnlock[nowChooseCharacterIndex] == false) //&& nowChooseCharacterUnlockCost[nowChooseCharacterIndex] <= 현재 숙련도
+        if (isNowChooseCharacterUnlock[nowChooseCharacterIndex] == false && nowChooseCharacterUnlockCost[nowChooseCharacterIndex] <= GameManager.Instance.CurrentProficiency) 
         {
-            //GameManager.Instance.GemUnit -= gemRequiredForColleaguenlock[nowColleagueIndex]; //숙련도 차감 
-
             isNowChooseCharacterUnlock[nowChooseCharacterIndex] = true;
 
-            TextReSettings();
-        }
-        else if (isNowChooseCharacterUnlock[nowChooseCharacterIndex] && GameManager.Instance.MoneyUnit >= nowChooseCharacterUpgradeCost[nowChooseCharacterIndex])
-        {
-            GameManager.Instance.MoneyUnit -= nowChooseCharacterUpgradeCost[nowChooseCharacterIndex];
-
-            nowChooseCharacterLevel[nowChooseCharacterIndex]++; //해당 인덱스 동료 레벨 증가
-
-            nowChooseCharacterUpgradeCost[nowChooseCharacterIndex] += nowChooseCharacterUpgradeCost[nowChooseCharacterIndex] / 2;
+            lockObj[nowChooseCharacterIndex].SetActive(false);
 
             TextReSettings();
         }
@@ -204,14 +194,13 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
 
         if (isNowChooseCharacterUnlock[nowChooseCharacterIndex] == false)
         {
-            //숙련도 변수와 비교
-            //nowChooseCharacterUpgradeOrUnlockButtonText.color = (nowChooseCharacterUnlockCost[nowChooseCharacterIndex] <= GameManager.Instance.MoneyUnit) ? greenTextColor : redTextColor;
-            nowChooseCharacterUpgradeOrUnlockButtonText.text = $"캐릭터 잠금해제\n{nowChooseCharacterUnlockCost[nowChooseCharacterIndex]} 숙련도 필요";
+            nowChooseCharacterUnlockButtonText.color = (nowChooseCharacterUnlockCost[nowChooseCharacterIndex] <= GameManager.Instance.CurrentProficiency) ? greenTextColor : redTextColor;
+            nowChooseCharacterUnlockButtonText.text = $"캐릭터 잠금해제\n{nowChooseCharacterUnlockCost[nowChooseCharacterIndex]} 숙련도 필요";
         }
         else
         {
-            nowChooseCharacterUpgradeOrUnlockButtonText.color = (nowChooseCharacterUpgradeCost[nowChooseCharacterIndex] <= GameManager.Instance.MoneyUnit) ? greenTextColor : redTextColor;
-            nowChooseCharacterUpgradeOrUnlockButtonText.text = $"캐릭터 업그레이드\n{nowChooseCharacterUpgradeCost[nowChooseCharacterIndex]} 골드";
+            nowChooseCharacterUnlockButtonText.color = blackTextColor;
+            nowChooseCharacterUnlockButtonText.text = $"캐릭터 잠금해제 완료";
         }
     }
 }

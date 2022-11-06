@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager> 
+public class GameManager : Singleton<GameManager>
 {
     public class SaveDatas
     {
-        
+
     }
 
-    
+
+    private int currentProficiency;
+
+    public int CurrentProficiency
+    {
+        get { return currentProficiency; }
+        set { currentProficiency = value; }
+    }
+
     [SerializeField]
     [Tooltip("현재 보유 재화(골드)")]
     private BigInteger moneyUnit;
