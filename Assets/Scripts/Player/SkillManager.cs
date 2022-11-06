@@ -43,8 +43,8 @@ public class SkillManager : MonoBehaviour
         if(CurIdx < MaximamIdx)
         {
             EquieSkills.Add(NoneEquieSkills[idx]);
-            SkillUis.FrontSKillImage.sprite = EquieSkills[CurIdx].SkillImage;
-            SkillUis.BackSKillImage.sprite = EquieSkills[CurIdx].SkillImage;
+            SkillUis[CurIdx].FrontSKillImage.sprite = EquieSkills[CurIdx].SkillImage;
+            SkillUis[CurIdx].BackSKillImage.sprite = EquieSkills[CurIdx].SkillImage;
 
             CurIdx++;
         }
