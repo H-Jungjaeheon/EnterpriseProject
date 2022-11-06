@@ -25,7 +25,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    protected void Awake()
+    protected virtual void Awake()
     {
         if (isDontDestroyObj)
         {

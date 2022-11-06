@@ -12,6 +12,7 @@ public enum Contents
     StatUpgradeContents,
     SaleOfFoodContents,
     ColleagueContents,
+    ProficiencyContents,
     ContentsLength
 }
 

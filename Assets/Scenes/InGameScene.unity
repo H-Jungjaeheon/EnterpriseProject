@@ -1018,7 +1018,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 75246455}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1787463852}
+        m_TargetAssemblyTypeName: ProficiencySystemManager, Assembly-CSharp
+        m_MethodName: ProficiencyUpgradeOrUnlock
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &75246455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8980,6 +8992,7 @@ MonoBehaviour:
   - {fileID: 1490917323}
   - {fileID: 933780099}
   - {fileID: 1959401194}
+  - {fileID: 1787463850}
   foodChooseAndMakePanelObj: {fileID: 1799846713}
   chooseADishObj: {fileID: 109940300}
   theProductionObj: {fileID: 1039488477}
@@ -10022,6 +10035,7 @@ MonoBehaviour:
   CriticalDamage: 0
   Range: {fileID: 678497181}
   IsAttack: 0
+  SkillManager: {fileID: 0}
   MoveTime: 0
   MoveSpeed: 2
   StendPosX: -1.5
@@ -14440,7 +14454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1787463851
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14473,6 +14487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8279cdc19591ff4fb922060f10228a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDontDestroyObj: 0
   nowChooseCharacterName:
   - "\uAE30\uBCF8 \uCE90\uB9AD\uD130"
   - "\uB2E4\uB978 \uCE90\uB9AD\uD1301"
@@ -14485,6 +14500,7 @@ MonoBehaviour:
   nowChooseCharacterNameText: {fileID: 1177314516}
   nowChooseCharacterBuffText: {fileID: 1931384625}
   nowChooseCharacterUpgradeOrUnlockButtonText: {fileID: 1915159752}
+  isNowChooseCharacterUnlock: 
   nowChooseCharacterIndex: 0
 --- !u!1 &1790767132
 GameObject:

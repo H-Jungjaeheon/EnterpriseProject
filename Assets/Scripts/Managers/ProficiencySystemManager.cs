@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class ProficiencySystemManager : MonoBehaviour
+public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
 {
     [SerializeField]
     [Tooltip("현재 선택한 캐릭터 이름")]
@@ -25,8 +25,8 @@ public class ProficiencySystemManager : MonoBehaviour
     [SerializeField]
     [Tooltip("현재 캐릭터 버프 내용 텍스트")]
     private Text nowChooseCharacterBuffText;
-    [SerializeField]
 
+    [SerializeField]
     [Tooltip("현재 캐릭터 업그레이드/잠금해제 버튼 텍스트")]
     private Text nowChooseCharacterUpgradeOrUnlockButtonText;
 
@@ -38,7 +38,7 @@ public class ProficiencySystemManager : MonoBehaviour
 
     private int[] nowChooseCharacterUpgradeCost;
 
-    private bool[] isNowChooseCharacterUnlock;
+    public bool[] isNowChooseCharacterUnlock;
 
     private int[] nowChooseCharacterLevel;
 
@@ -48,8 +48,13 @@ public class ProficiencySystemManager : MonoBehaviour
 
     private bool isDraging;
 
-    private void Start()
+    Color redTextColor = new Color(1, 0, 0);
+
+    Color greenTextColor = new Color(0, 1, 0.03f);
+
+    protected override void Awake()
     {
+        base.Awake();
         minCharacterIndex = 0;
         maxCharacterIndex = nowChooseCharacterName.Length - 1;
 
@@ -57,11 +62,22 @@ public class ProficiencySystemManager : MonoBehaviour
         nowChooseCharacterUpgradeCost = new int[nowChooseCharacterName.Length];
         isNowChooseCharacterUnlock = new bool[nowChooseCharacterName.Length];
         nowChooseCharacterLevel = new int[nowChooseCharacterName.Length];
+
+        for (int nowIndex = minCharacterIndex; nowIndex <= maxCharacterIndex; nowIndex++)
+        {
+            nowChooseCharacterLevel[nowIndex] = 1;
+            nowChooseCharacterUpgradeCost[nowIndex] = 4;
+            nowChooseCharacterUnlockCost[nowIndex] = 4;
+        }
+
+        isNowChooseCharacterUnlock[minCharacterIndex] = true;
+        
+        TextReSettings();
     }
 
     private void OnEnable()
     {
-
+        TextReSettings();
     }
 
     // Update is called once per frame
@@ -109,45 +125,30 @@ public class ProficiencySystemManager : MonoBehaviour
 
         imageTargetPosX = isRightDrag ? 1300 : -1300;
 
-        slideableBgRectTransform[nowChooseCharacterIndex].DOAnchorPos(new Vector2(imageTargetPosX, 0), 0.35f);
+        slideableBgRectTransform[nowChooseCharacterIndex].DOAnchorPos(new Vector2(imageTargetPosX, 0), 0.3f);
 
-        if (isRightDrag)
+        if (isRightDrag && nowChooseCharacterIndex == minCharacterIndex || isRightDrag == false && nowChooseCharacterIndex == maxCharacterIndex)
         {
-            if (nowChooseCharacterIndex - 1 < minCharacterIndex)
-            {
-                StartCoroutine(ImagePosInitialization(-imageTargetPosX, isRightDrag));
-            }
-            else
-            {
-                nowChooseCharacterIndex--;
-            }
+            StartCoroutine(ImagePosInitialization(-imageTargetPosX, isRightDrag));
+            yield break;
         }
         else
         {
-            if (nowChooseCharacterIndex + 1 > maxCharacterIndex)
-            {
-                StartCoroutine(ImagePosInitialization(-imageTargetPosX, isRightDrag));
-            }
-            else
-            {
-                nowChooseCharacterIndex++;
-            }
+            nowChooseCharacterIndex = isRightDrag ? nowChooseCharacterIndex - 1 : nowChooseCharacterIndex + 1;
         }
-        slideableBgRectTransform[nowChooseCharacterIndex].DOAnchorPos(new Vector2(0, 0), 0.35f);
-        yield return new WaitForSeconds(0.4f);
+
+        slideableBgRectTransform[nowChooseCharacterIndex].DOAnchorPos(new Vector2(0, 0), 0.3f);
+        TextReSettings();
+        yield return new WaitForSeconds(0.035f);
         isDraging = false;
     }
 
     IEnumerator ImagePosInitialization(int targetPos, bool isRightDrag)
     {
-        WaitForSeconds imagerelocationDelay = new WaitForSeconds(0.4f);
-        bool isTheEndIndex = false;
-
-        for (int nowIndex = 0; nowIndex <= maxCharacterIndex; nowIndex++)
+        for (int nowIndex = 0; nowIndex <= maxCharacterIndex; nowIndex++) //전체 이미지 위치 초기화(현재 이동중인 이미지는 딜레이 후 위치 변경)
         {
-            if (nowIndex == maxCharacterIndex)
+            if (isRightDrag == false && nowIndex == maxCharacterIndex || isRightDrag && nowIndex == minCharacterIndex)
             {
-                isTheEndIndex = true;
                 StartCoroutine(ImagerelocationDelay(new Vector2(targetPos, 0), nowIndex, true));
             }
             else
@@ -156,24 +157,12 @@ public class ProficiencySystemManager : MonoBehaviour
             }
         }
 
-        if (isRightDrag)
-        {
-            nowChooseCharacterIndex = maxCharacterIndex;
-        }
-        else
-        {
-            nowChooseCharacterIndex = minCharacterIndex;
-        }
+        nowChooseCharacterIndex = isRightDrag ? maxCharacterIndex : minCharacterIndex;
 
-        slideableBgRectTransform[nowChooseCharacterIndex].DOAnchorPos(new Vector2(0, 0), 0.35f);
-        if (isTheEndIndex == false)
-        {
-            yield return imagerelocationDelay;
-            isDraging = false;
-        }
-
+        slideableBgRectTransform[nowChooseCharacterIndex].DOAnchorPos(new Vector2(0, 0), 0.3f);
+        TextReSettings();
         yield return null;
-    }  
+    }
 
     IEnumerator ImagerelocationDelay(Vector2 targetPos, int moveImageIndex, bool isGiveDelay)
     {
@@ -183,5 +172,46 @@ public class ProficiencySystemManager : MonoBehaviour
             isDraging = false;
         }
         slideableBgRectTransform[moveImageIndex].DOAnchorPos(targetPos, 0);
+    }
+
+    public void ProficiencyUpgradeOrUnlock()
+    {
+        if (isNowChooseCharacterUnlock[nowChooseCharacterIndex] == false) //&& nowChooseCharacterUnlockCost[nowChooseCharacterIndex] <= 현재 숙련도
+        {
+            //GameManager.Instance.GemUnit -= gemRequiredForColleaguenlock[nowColleagueIndex]; //숙련도 차감 
+
+            isNowChooseCharacterUnlock[nowChooseCharacterIndex] = true;
+
+            TextReSettings();
+        }
+        else if (isNowChooseCharacterUnlock[nowChooseCharacterIndex] && GameManager.Instance.MoneyUnit >= nowChooseCharacterUpgradeCost[nowChooseCharacterIndex])
+        {
+            GameManager.Instance.MoneyUnit -= nowChooseCharacterUpgradeCost[nowChooseCharacterIndex];
+
+            nowChooseCharacterLevel[nowChooseCharacterIndex]++; //해당 인덱스 동료 레벨 증가
+
+            nowChooseCharacterUpgradeCost[nowChooseCharacterIndex] += nowChooseCharacterUpgradeCost[nowChooseCharacterIndex] / 2;
+
+            TextReSettings();
+        }
+    }
+
+    public void TextReSettings()
+    {
+        nowChooseCharacterNameText.text = $"{nowChooseCharacterName[nowChooseCharacterIndex]}";
+
+        nowChooseCharacterBuffText.text = $"{nowChooseCharacterBuff[nowChooseCharacterIndex]}";
+
+        if (isNowChooseCharacterUnlock[nowChooseCharacterIndex] == false)
+        {
+            //숙련도 변수와 비교
+            //nowChooseCharacterUpgradeOrUnlockButtonText.color = (nowChooseCharacterUnlockCost[nowChooseCharacterIndex] <= GameManager.Instance.MoneyUnit) ? greenTextColor : redTextColor;
+            nowChooseCharacterUpgradeOrUnlockButtonText.text = $"캐릭터 잠금해제\n{nowChooseCharacterUnlockCost[nowChooseCharacterIndex]} 숙련도 필요";
+        }
+        else
+        {
+            nowChooseCharacterUpgradeOrUnlockButtonText.color = (nowChooseCharacterUpgradeCost[nowChooseCharacterIndex] <= GameManager.Instance.MoneyUnit) ? greenTextColor : redTextColor;
+            nowChooseCharacterUpgradeOrUnlockButtonText.text = $"캐릭터 업그레이드\n{nowChooseCharacterUpgradeCost[nowChooseCharacterIndex]} 골드";
+        }
     }
 }

@@ -25,6 +25,10 @@ public class GameManager : Singleton<GameManager>
             {
                 ColleagueSystemManager.Instance.TextColorChange();
             }
+            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.ProficiencyContents].activeSelf)
+            {
+                ProficiencySystemManager.Instance.TextReSettings();
+            }
         }
     }
 
