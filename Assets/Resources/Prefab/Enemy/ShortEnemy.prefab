@@ -100,11 +100,15 @@ MonoBehaviour:
   Data:
   - {fileID: 11400000, guid: c3dcd22c0392bce459db66ad48a69ef2, type: 2}
   EnemySprite: {fileID: 0}
+  TargetPos: {fileID: 0}
+  CurBehaviorType: 0
   EnemyType: 0
   EnemyName: 
   hp: 0
   AttackPower: 0
   AttackDistance: 0
+  AttackDelay: 0
+  IsAttack: 0
   MoveSpeed: 0
 --- !u!61 &743787892426380635
 BoxCollider2D:

@@ -24,8 +24,7 @@ public class EnemySpawner : MonoBehaviour
     private Queue<Enemy> PoolingLongQueue = new Queue<Enemy>();
     private Queue<Enemy> PoolingAirQueue = new Queue<Enemy>();
 
-    [SerializeField]
-    private List<Enemy> SpawnEnemyList = new List<Enemy>();
+    public List<Enemy> SpawnEnemyList = new List<Enemy>();
 
     [SerializeField]
     private float MaxTime, MinTime;

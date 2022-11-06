@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemyAttackDownSkill : Skill
 {
     [SerializeField]
+    private List<GameObject> UseParticle;
+
+    [SerializeField]
     private int UpgreadAttackValue = 0;
 
     protected override IEnumerator SkillEffect()
@@ -12,17 +15,29 @@ public class EnemyAttackDownSkill : Skill
         yield return null;
 
         #region SkillEffect
-        UpgreadAttackValue = (int)((float)Player.Instance.AttackPower * (70.0f / 100.0f));
-        Player.Instance.AttackPower += UpgreadAttackValue;
+        for (int i = 0; i < EnemySpawner.Instance.SpawnEnemyList.Count; i++)
+        {
+            Enemy enemy = EnemySpawner.Instance.SpawnEnemyList[i];
+            GameObject Particle = SkillParticles[i];
+            UseParticle.Add(Particle);
 
-        OnSkillParticle(0);
+            Particle.transform.SetParent(enemy.transform);
+            Particle.transform.localPosition = Vector3.zero;
+
+            Particle.SetActive(true);
+        }
+        #endregion
 
         yield return new WaitForSeconds(SkillDuration);
 
-        OffSkillParticle(0);
+        foreach(var Particle in UseParticle)
+        {
+            Particle.SetActive(false);
+            Particle.transform.SetParent(this.transform);
+            Particle.transform.localPosition = Vector3.zero;
 
-        Player.Instance.AttackPower -= UpgreadAttackValue;
-        #endregion
+            UseParticle.Remove(Particle);
+        }
 
         OffSkillEffect();
     }
