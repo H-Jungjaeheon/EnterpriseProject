@@ -59,6 +59,7 @@ public class PlayerBullet : MonoBehaviour
         if(other.CompareTag("Enemy"))
         {
             Attack(other.GetComponent<Enemy>());
+            CameraManager.Instance.OnCameraShake(0.3f, 0.05f);
 
             TargetPos = null;
             PlayerBulletObjectPool.Instance.ReturnBullet(this);
