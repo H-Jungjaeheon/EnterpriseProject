@@ -13,6 +13,7 @@ public enum Contents
     SaleOfFoodContents,
     ColleagueContents,
     ProficiencyContents,
+    SkillEquipContents,
     ContentsLength
 }
 
@@ -480,19 +481,15 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     public void AnotherContentsChangeScrollView(GameObject PopUpObj)
     {
-        GameObject lastViewContents = PopUpObj;
-        if (PopUpObj.activeSelf)
-        {
-            nowContentsPanelObj = contentsPanelObjs[(int)Contents.StatUpgradeContents];
-            nowContents = Contents.StatUpgradeContents;
-        }
-        else
-        {
-            nowContentsPanelObj = PopUpObj;
-            nowContents = (Contents)nowChangeContents;
-        }
-        lastViewContents.SetActive(false);
+        bool isSameContents = PopUpObj.activeSelf;
+
+        nowContentsPanelObj.SetActive(isSameContents);
+
+        nowContentsPanelObj = isSameContents ? contentsPanelObjs[(int)Contents.StatUpgradeContents] : PopUpObj;
+        nowContents = isSameContents ? Contents.StatUpgradeContents : (Contents)nowChangeContents;
+
         nowContentsPanelObj.SetActive(true);
+
         if (isCustomerArrival == false)
         {
             isCustomerArrival = true;
