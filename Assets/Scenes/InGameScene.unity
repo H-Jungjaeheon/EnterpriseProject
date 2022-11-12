@@ -16703,6 +16703,12 @@ MonoBehaviour:
   - {fileID: 617408293}
   - {fileID: 589727376}
   - {fileID: 1245943025}
+  - {fileID: 1245943025}
+  - {fileID: 1245943025}
+  - {fileID: 1245943025}
+  - {fileID: 1245943025}
+  - {fileID: 1245943025}
+  - {fileID: 1245943025}
   SkillUis:
   - SkillName: "\uC2A4\uD0AC1"
     FrontSKillImage: {fileID: 1876380558}
