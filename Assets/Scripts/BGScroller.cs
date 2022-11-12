@@ -6,7 +6,8 @@ using UnityEngine;
 public class BGScrollData
 {
     public Transform[] BackGrounds;
-    public float Speed;
+    public float FixMoveSpeed;
+    public float MoveSpeed;
 
     public Vector3 NextPos;
 }
@@ -34,7 +35,14 @@ public class BGScroller : MonoBehaviour
         {
             for (int j = 0; j < ScrollDatas[i].BackGrounds.Length; j++)
             {
-                ScrollDatas[i].BackGrounds[j].localPosition += new Vector3(-ScrollDatas[i].Speed, 0, 0) * Time.deltaTime;
+                //ScrollDatas[i].BackGrounds[j].localPosition += new Vector3(-ScrollDatas[i].Speed, 0, 0) * Time.deltaTime;
+
+                ScrollDatas[i].MoveSpeed = ((Player.Instance.transform.position.x - Player.Instance.StendPosX) * -ScrollDatas[i].FixMoveSpeed) * Time.deltaTime;
+
+                if (ScrollDatas[i].MoveSpeed > 0)
+                    ScrollDatas[i].MoveSpeed = 0.0f;
+
+                ScrollDatas[i].BackGrounds[j].localPosition += new Vector3(ScrollDatas[i].MoveSpeed, 0, 0);
 
                 if (ScrollDatas[i].BackGrounds[j].localPosition.x <= ResetPosX)
                 {
