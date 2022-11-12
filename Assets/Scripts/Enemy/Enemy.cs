@@ -92,6 +92,11 @@ public class Enemy : MonoBehaviour
     }
     #endregion
 
+    protected virtual void TakeDamage(int Damage, bool IsCritical)
+    {
+
+    }
+
     protected virtual void Move()
     {
         if (Vector2.Distance(TargetPos.position, this.transform.position) > AttackDistance)
