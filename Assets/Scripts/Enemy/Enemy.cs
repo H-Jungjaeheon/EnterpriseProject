@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public enum BehaviorType
 {
@@ -14,6 +16,7 @@ public class Enemy : MonoBehaviour
     public SpriteRenderer EnemySprite;
     public Transform TargetPos;
     public BehaviorType CurBehaviorType;
+    public TextMeshProUGUI Text;
 
     [Header("데이터 받아올 변수")]
     [SerializeField]
@@ -92,9 +95,9 @@ public class Enemy : MonoBehaviour
     }
     #endregion
 
-    protected virtual void TakeDamage(int Damage, bool IsCritical)
+    protected IEnumerator TakeDamage(int Damage, bool IsCritical)
     {
-
+        yield return null;
     }
 
     protected virtual void Move()
