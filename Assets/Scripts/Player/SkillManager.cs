@@ -25,6 +25,12 @@ public class SkillManager : MonoBehaviour
     [SerializeField]
     private List<SkillUI> SkillUis;
 
+    [HideInInspector]
+    public bool isSkillEquiping;
+
+    [SerializeField]
+    private SkillEquipManager semInstance;
+
     private void Start()
     {
         SkillEquie(0);
@@ -47,6 +53,16 @@ public class SkillManager : MonoBehaviour
 
     public void UseSkill(int idx)
     {
-        EquieSkills[idx].OnSkillEffect();
+        if (isSkillEquiping)
+        {
+            isSkillEquiping = false;
+            semInstance.changeObj.SetActive(false);
+            //semInstance.nowSkillIndex
+            //현재 선택한 스킬 인덱스로 스킬 바꾸기 
+        }
+        else
+        {
+            EquieSkills[idx].OnSkillEffect();
+        }
     }
 }

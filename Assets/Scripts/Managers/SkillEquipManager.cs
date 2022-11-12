@@ -16,13 +16,12 @@ public class SkillEquipManager : MonoBehaviour
 {
     public int nowSkillIndex;
 
+    [Tooltip("변경할 스킬 장착 창")]
+    public GameObject changeObj;
+
     [SerializeField]
     [Tooltip("스킬 장착 창")]
     private GameObject equipObj;
-
-    [SerializeField]
-    [Tooltip("변경할 스킬 장착 창")]
-    private GameObject changeObj;
 
     [SerializeField]
     [Tooltip("화살표 오브젝트")]
@@ -56,6 +55,10 @@ public class SkillEquipManager : MonoBehaviour
     [Tooltip("현재 선택 스킬 아이콘")]
     private Image nowSkillIcon;
 
+    [SerializeField]
+    [Tooltip("스킬 매니저 스크립트")]
+    private SkillManager smComponent;
+
     public void SkillIconClick(int skillIndex)
     {
         nowSkillIndex = skillIndex;
@@ -77,6 +80,8 @@ public class SkillEquipManager : MonoBehaviour
     {
         equipObj.SetActive(false);
         changeObj.SetActive(true);
+
+        smComponent.isSkillEquiping = true;
 
         StartCoroutine(ArrowAnim());
     }

@@ -12124,7 +12124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1305378071
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12167,8 +12167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nowSkillIndex: 0
-  equipObj: {fileID: 1919284001}
   changeObj: {fileID: 972462733}
+  equipObj: {fileID: 1919284001}
   arrowObj: {fileID: 26206694}
   names:
   - "\uC2A4\uD0AC \uC774\uB9841"
@@ -12231,6 +12231,7 @@ MonoBehaviour:
   - {fileID: 2073669559}
   - {fileID: 1267778806}
   nowSkillIcon: {fileID: 533142339}
+  smComponent: {fileID: 1991222333}
 --- !u!114 &1305378073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14211,7 +14212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1490917324
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19103,6 +19104,8 @@ MonoBehaviour:
   - SkillName: "\uC2A4\uD0AC4"
     FrontSKillImage: {fileID: 153350891}
     BackSKillImage: {fileID: 17267279}
+  isSkillEquiping: 0
+  semInstance: {fileID: 1305378072}
 --- !u!1 &2006706810
 GameObject:
   m_ObjectHideFlags: 0

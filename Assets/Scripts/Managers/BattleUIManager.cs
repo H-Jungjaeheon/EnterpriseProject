@@ -50,7 +50,6 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [Tooltip("현재 보여지는 콘텐츠 창 오브젝트")]
     private GameObject nowContentsPanelObj;
 
-
     [Tooltip("콘텐츠 창 오브젝트 모음")]
     public GameObject[] contentsPanelObjs;
 
