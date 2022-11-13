@@ -82,6 +82,8 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
             Partner.Setting();
             Partner.gameObject.SetActive(true);
 
+            Partner.NowIdx = nowEquipColleagueIndex;
+
             nowColleagueIcon.sprite = colleagueIcons[nowEquipColleagueIndex];
         }
     }

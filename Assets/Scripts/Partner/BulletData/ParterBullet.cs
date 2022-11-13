@@ -126,6 +126,9 @@ public class ParterBullet : MonoBehaviour
         TargetPos = Target.transform;
         this.Target = Target;
 
+        Debug.Log(Partner.Instance.NowIdx);
+        this.GetComponent<SpriteRenderer>().sprite = this.BulletData[Partner.Instance.NowIdx].BulletImg;
+
         ResetBulletDamage();
 
         StartCoroutine(BulletMove());

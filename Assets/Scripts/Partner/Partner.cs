@@ -8,6 +8,7 @@ public class Partner : MonoBehaviour
     public static PartnerData PartnerData;
 
     [Header("외관 변수")]
+    public int NowIdx = 0;
     public Sprite PartnerImg;
     public string PartnerName;
 
