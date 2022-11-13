@@ -8,7 +8,7 @@ public class PartnerData : ScriptableObject
     [Header("기본 데이터")]
     public Sprite PartnerImg;
     public string PartnerName;
-    public float AttackPower;
+    public int AttackPower;
     public float AttackDelay;
     [Header("기본 스탯 버프량")]
     public float AttackBuff;

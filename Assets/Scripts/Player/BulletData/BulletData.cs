@@ -14,6 +14,5 @@ public class BulletData : ScriptableObject
     public BulletType BulletType;
     public Sprite BulletImg;
     public string BulletName;
-    public int BulletPower;
     public float BulletSpeed;
 }

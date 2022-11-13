@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     private string EnemyName;
     [SerializeField]
     private int hp;
-    public int Hp 
+    public int Hp
     {
         get
         {
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
         {
             hp = value;
 
-            if(hp <= 0)
+            if (hp <= 0)
             {
                 Die();
             }
@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
             //Debug.Log("Attack");
             yield return new WaitForSeconds(AttackDelay);
             Player.Instance.Hp -= AttackPower;
-            
+
         }
     }
     #endregion
@@ -115,6 +115,11 @@ public class Enemy : MonoBehaviour
         Text = Obj.GetComponentInChildren<TextMeshProUGUI>();
         Text.text = Damage.ToString();
 
+        if (IsCritical == true)
+        {
+            Text.color = Color.red;
+        }
+
         TextObjs.Add(Obj);
 
         Hp -= Damage;
@@ -125,6 +130,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(DurationUpPos);
         TextObjs.Remove(Obj);
 
+        Text.color = Color.white;
         StopCoroutine(TakeDamageCorutine);
     }
     #endregion TakeDamage

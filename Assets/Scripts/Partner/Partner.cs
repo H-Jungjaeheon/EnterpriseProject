@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Partner : MonoBehaviour
 {
+    public static Partner Instance;
     public static PartnerData PartnerData;
 
     [Header("외관 변수")]
@@ -11,7 +12,7 @@ public class Partner : MonoBehaviour
     public string PartnerName;
 
     [Header("스탯 변수")]
-    public float AttackPower;
+    public int AttackPower;
     public float AttackDelay;
 
     [Header("기본 스탯 버프량 변수")]
@@ -24,6 +25,11 @@ public class Partner : MonoBehaviour
     [SerializeField]
     private bool IsAttack = false;
     private Coroutine AttackCorutine;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Update is called once per frame
     void Update()

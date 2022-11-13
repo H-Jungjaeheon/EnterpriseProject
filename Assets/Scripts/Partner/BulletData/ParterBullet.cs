@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class ParterBullet : MonoBehaviour
 {
@@ -32,6 +33,20 @@ public class ParterBullet : MonoBehaviour
     [SerializeField]
     private AnimationCurve curve;
 
+    [Header("타겟 관련 변수")]
+    [SerializeField]
+    GameObject Target;
+    [SerializeField]
+    bool IsTarget = false;
+    [SerializeField]
+    bool TargetActive = false;
+
+    [Header("데미지 관련 변수")]
+    [SerializeField]
+    bool IsCritical;
+    [SerializeField]
+    int CriticalDamage;
+
 
     private void Awake()
     {
@@ -45,20 +60,60 @@ public class ParterBullet : MonoBehaviour
         StartCoroutine(BulletMove());
     }
 
+    private void OnEnable()
+    {
+        IsTarget = true;
+        TargetActive = true;
+
+        this.gameObject.GetComponent<SpriteRenderer>().DOFade(1, 0);
+    }
+
     void Update()
     {
-        Vector3 dir = TargetPos.position - transform.position;
+        Vector3 dir = Vector3.one;
+
+        if (TargetActive == true)
+        {
+            dir = TargetPos.position - transform.position;
+        }
 
         // 타겟 방향으로 회전함
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle * RotationSpeed, Vector3.forward);
+
+        TargetActive = Target.activeSelf;
+
+        if (TargetActive == false && IsTarget == true)
+        {
+            Debug.Log("Des");
+            IsTarget = false;
+
+            StartCoroutine(NoneTarget());
+        }
+    }
+
+    IEnumerator NoneTarget()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        TargetPos = null;
+
+        this.gameObject.GetComponent<SpriteRenderer>().DOFade(0, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+
+        ParterBulletObjectPool.Instance.ReturnBullet(this);
+
+        yield break;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Enemy"))
         {
-            Attack(other.GetComponent<Enemy>());
+            Debug.Log("Attack");
+            other.GetComponent<Enemy>().StartTakeDamage(BulletPower, IsCritical);
+
+            IsTarget = false;
 
             TargetPos = null;
             ParterBulletObjectPool.Instance.ReturnBullet(this);
@@ -69,7 +124,28 @@ public class ParterBullet : MonoBehaviour
     public void TargetSetting(GameObject Target)
     {
         TargetPos = Target.transform;
+        this.Target = Target;
+
+        ResetBulletDamage();
+
         StartCoroutine(BulletMove());
+    }
+
+    void ResetBulletDamage()
+    {
+        IsCritical = false;
+        CriticalDamage = 0;
+
+        //치명타
+        float RanCriticalPercent = Random.Range(0.0f, 100.1f);
+
+        if (RanCriticalPercent <= Player.Instance.CriticalPercent)
+        {
+            IsCritical = true;
+            CriticalDamage = (int)((float)Partner.Instance.AttackPower * ((Player.Instance.CriticalDamage / 100.0f) - 1.0f));
+        }
+
+        this.BulletPower = Partner.Instance.AttackPower + CriticalDamage;
     }
 
     private void BasicSetting()
@@ -80,16 +156,9 @@ public class ParterBullet : MonoBehaviour
         this.BulletImg = BulletData[Select].BulletImg;
         this.BulletName = BulletData[Select].BulletName;
 
-        this.BulletPower = BulletData[Select].BulletPower;
         this.BulletSpeed = BulletData[Select].BulletSpeed;
 
         spriteRenderer.sprite = BulletImg;
-    }
-
-    //공격 함수
-    private void Attack(Enemy enemy)
-    {
-        enemy.Hp -= BulletPower;
     }
 
     private IEnumerator BulletMove()

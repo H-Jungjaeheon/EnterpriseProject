@@ -33,12 +33,19 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField]
     private AnimationCurve curve;
 
+    [Header("타겟 관련 변수")]
     [SerializeField]
     GameObject Target;
     [SerializeField]
     bool IsTarget = false;
     [SerializeField]
     bool TargetActive = false;
+
+    [Header("데미지 관련 변수")]
+    [SerializeField]
+    bool IsCritical;
+    [SerializeField]
+    int CriticalDamage;
 
     private void Awake()
     {
@@ -103,7 +110,7 @@ public class PlayerBullet : MonoBehaviour
         if(other.CompareTag("Enemy"))
         {
             Debug.Log("Attack");
-            other.GetComponent<Enemy>().StartTakeDamage(BulletPower, false);
+            other.GetComponent<Enemy>().StartTakeDamage(BulletPower, IsCritical);
 
             IsTarget = false;
 
@@ -118,7 +125,26 @@ public class PlayerBullet : MonoBehaviour
         TargetPos = Target.transform;
         this.Target = Target;
 
+        ResetBulletDamage();
+
         StartCoroutine(BulletMove());
+    }
+
+    void ResetBulletDamage()
+    {
+        IsCritical = false;
+        CriticalDamage = 0;
+
+        //치명타
+        float RanCriticalPercent = Random.Range(0.0f, 100.1f);
+
+        if (RanCriticalPercent <= Player.Instance.CriticalPercent)
+        {
+            IsCritical = true;
+            CriticalDamage = (int)((float)Player.Instance.AttackPower * ((Player.Instance.CriticalDamage / 100.0f) - 1.0f));
+        }
+
+        this.BulletPower = Player.Instance.AttackPower + CriticalDamage;
     }
 
     private void BasicSetting()
@@ -129,7 +155,6 @@ public class PlayerBullet : MonoBehaviour
         this.BulletImg = BulletData[Select].BulletImg;
         this.BulletName = BulletData[Select].BulletName;
 
-        this.BulletPower = BulletData[Select].BulletPower;
         this.BulletSpeed = BulletData[Select].BulletSpeed;
 
         spriteRenderer.sprite = BulletImg;
