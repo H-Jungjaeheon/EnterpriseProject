@@ -1593,13 +1593,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 011270822c8c9604e8c17903d34a1978, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &153350892
@@ -5005,6 +5005,8 @@ MonoBehaviour:
   SkillName: 
   SkillImage: {fileID: 0}
   SkillCol: 0
+  SkillCurCol: 0
+  WaitCol: 0
   SkillDuration: 0
   SkillEquieIdx: 0
   SkillParticles: []
@@ -5197,6 +5199,8 @@ MonoBehaviour:
   SkillName: 
   SkillImage: {fileID: 0}
   SkillCol: 0
+  SkillCurCol: 0
+  WaitCol: 0
   SkillDuration: 0
   SkillEquieIdx: 0
   SkillParticles:
@@ -7687,6 +7691,8 @@ MonoBehaviour:
   SkillName: 
   SkillImage: {fileID: 0}
   SkillCol: 0
+  SkillCurCol: 0
+  WaitCol: 0
   SkillDuration: 0
   SkillEquieIdx: 0
   SkillParticles:
@@ -7885,13 +7891,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 011270822c8c9604e8c17903d34a1978, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &854016153
@@ -11684,6 +11690,8 @@ MonoBehaviour:
   SkillName: 
   SkillImage: {fileID: 0}
   SkillCol: 0
+  SkillCurCol: 0
+  WaitCol: 0
   SkillDuration: 0
   SkillEquieIdx: 0
   SkillParticles:
@@ -14646,13 +14654,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 011270822c8c9604e8c17903d34a1978, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1507511514
@@ -17970,7 +17978,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1876380559
@@ -19262,7 +19270,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 7
   m_TargetDisplay: 0
 --- !u!114 &2011930094
 MonoBehaviour:

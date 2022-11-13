@@ -25,6 +25,9 @@ public class SkillManager : MonoBehaviour
     [SerializeField]
     private List<SkillUI> SkillUis;
 
+    [SerializeField]
+    bool IsAutoSkill = false;
+
     [HideInInspector]
     public bool isSkillEquiping;
 
@@ -39,11 +42,26 @@ public class SkillManager : MonoBehaviour
         SkillEquie(3);
     }
 
+    private void Update()
+    {
+        for (int i = 0; i < EquieSkills.Count; i++)
+        {
+            SkillUis[EquieSkills[i].SkillEquieIdx].FrontSKillImage.fillAmount = EquieSkills[i].SkillCurCol / EquieSkills[i].SkillCol;
+
+            if (IsAutoSkill == true && EquieSkills[i].WaitCol == false && Player.Instance.Range.TargetEnemy.Count > 0)
+                EquieSkills[i].OnSkillEffect();
+        }
+    }
+
     public void SkillEquie(int idx)
     {
         if (CurIdx < MaximamIdx)
         {
             EquieSkills.Add(NoneEquieSkills[idx]);
+
+            //임의
+            EquieSkills[CurIdx].SkillEquieIdx = CurIdx;
+
             SkillUis[CurIdx].FrontSKillImage.sprite = EquieSkills[CurIdx].SkillImage;
             SkillUis[CurIdx].BackSKillImage.sprite = EquieSkills[CurIdx].SkillImage;
 
@@ -57,12 +75,23 @@ public class SkillManager : MonoBehaviour
         {
             isSkillEquiping = false;
             semInstance.changeObj.SetActive(false);
+
             //semInstance.nowSkillIndex
             //현재 선택한 스킬 인덱스로 스킬 바꾸기 
         }
         else
         {
             EquieSkills[idx].OnSkillEffect();
+            SkillUis[idx].FrontSKillImage.fillAmount = 0.0f;
         }
+    }
+
+    public void AutoSkillOnOff()
+    {
+        if (IsAutoSkill == true)
+            IsAutoSkill = false;
+
+        else
+            IsAutoSkill = true;
     }
 }

@@ -11,12 +11,15 @@ public class Skill : MonoBehaviour
     [Header("스킬 데이터/내부")]
     public string SkillName;
     public Sprite SkillImage;
+
     public float SkillCol;
+    public float SkillCurCol;
+    public bool WaitCol = false;
+
     public float SkillDuration;
 
     [Header("스킬 사용 변수")]
-    [SerializeField]
-    protected int SkillEquieIdx;
+    public int SkillEquieIdx;
     [SerializeField]
     protected List<GameObject> SkillParticles;
     protected Coroutine SkillCorutine;
@@ -26,19 +29,39 @@ public class Skill : MonoBehaviour
         ApplySkillData();
     }
 
+    private void Update()
+    {
+        if (SkillCurCol < SkillCol)
+        {
+            SkillCurCol += Time.deltaTime;
+        }
+
+        else
+        {
+            SkillCurCol = SkillCol;
+            WaitCol = false;
+        }
+    }
+
     //데이터 삽입
     protected void ApplySkillData()
     {
         SkillName = SkillData.SkillName;
         SkillImage = SkillData.SkillImage;
         SkillCol = SkillData.SkillCol;
+        SkillCurCol = SkillData.SkillCol;
         SkillDuration = SkillData.SkillDuration;
     }
 
     public void OnSkillEffect()
     {
-        if(SkillCorutine == null)
+        if (SkillCorutine == null && WaitCol == false)
+        {
+            SkillCurCol = 0.0f;
+            WaitCol = true;
+
             SkillCorutine = StartCoroutine(SkillEffect());
+        }
     }
 
     public void OffSkillEffect()
