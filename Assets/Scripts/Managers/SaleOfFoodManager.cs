@@ -79,6 +79,10 @@ public class SaleOfFoodManager : MonoBehaviour
     [Tooltip("미니게임 화살표 오브젝트")]
     private GameObject arrowObj;
 
+    [SerializeField]
+    [Tooltip("화살표 컴포넌트")]
+    private Arrow arrowComponent;
+
     private Vector3 customerSpeed = new Vector3(1, 0, 0);
 
     Color redTextColor = new Color(1, 0, 0);
@@ -288,7 +292,7 @@ public class SaleOfFoodManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        GameManager.Instance.CurrentProficiency += basicScore;
+        GameManager.Instance.CurrentProficiency += (basicScore * arrowComponent.multiplication);
 
         theProductionObj.SetActive(false);
         isCustomerArrival = false;
