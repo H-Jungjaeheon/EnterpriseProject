@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerBullet : MonoBehaviour
 {
@@ -32,6 +33,12 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField]
     private AnimationCurve curve;
 
+    [SerializeField]
+    GameObject Target;
+    [SerializeField]
+    bool IsTarget = false;
+    [SerializeField]
+    bool TargetActive = false;
 
     private void Awake()
     {
@@ -45,21 +52,60 @@ public class PlayerBullet : MonoBehaviour
         StartCoroutine(BulletMove());
     }
 
+    private void OnEnable()
+    {
+        IsTarget = true;
+        TargetActive = true;
+
+        this.gameObject.GetComponent<SpriteRenderer>().DOFade(1, 0);
+    }
+
     void Update()
     {
-        Vector3 dir = TargetPos.position - transform.position;
+        Vector3 dir = Vector3.one;
+
+        if (TargetActive == true)
+        {
+            dir = TargetPos.position - transform.position;
+        }
 
         // 타겟 방향으로 회전함
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(angle * RotationSpeed, Vector3.forward);
+
+        TargetActive = Target.activeSelf;
+
+        if (TargetActive == false && IsTarget == true)
+        {
+            Debug.Log("Des");
+            IsTarget = false;
+
+            StartCoroutine(NoneTarget());
+        }
+    }
+
+    IEnumerator NoneTarget()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        TargetPos = null;
+
+        this.gameObject.GetComponent<SpriteRenderer>().DOFade(0, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+
+        PlayerBulletObjectPool.Instance.ReturnBullet(this);
+
+        yield break;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Enemy"))
         {
-            Attack(other.GetComponent<Enemy>());
-            CameraManager.Instance.OnCameraShake(0.3f, 0.05f);
+            Debug.Log("Attack");
+            other.GetComponent<Enemy>().StartTakeDamage(BulletPower, false);
+
+            IsTarget = false;
 
             TargetPos = null;
             PlayerBulletObjectPool.Instance.ReturnBullet(this);
@@ -70,6 +116,8 @@ public class PlayerBullet : MonoBehaviour
     public void TargetSetting(GameObject Target)
     {
         TargetPos = Target.transform;
+        this.Target = Target;
+
         StartCoroutine(BulletMove());
     }
 
@@ -85,12 +133,6 @@ public class PlayerBullet : MonoBehaviour
         this.BulletSpeed = BulletData[Select].BulletSpeed;
 
         spriteRenderer.sprite = BulletImg;
-    }
-
-    //공격 함수
-    private void Attack(Enemy enemy)
-    {
-        enemy.Hp -= BulletPower;
     }
 
     private IEnumerator BulletMove()

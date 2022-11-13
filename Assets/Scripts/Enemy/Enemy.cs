@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using TMPro;
 
 public enum BehaviorType
@@ -16,7 +17,13 @@ public class Enemy : MonoBehaviour
     public SpriteRenderer EnemySprite;
     public Transform TargetPos;
     public BehaviorType CurBehaviorType;
+
+    public List<GameObject> TextObjs;
+    public GameObject TextObj;
     public TextMeshProUGUI Text;
+    private Coroutine TakeDamageCorutine;
+    private float UpYPos = 0.4f;
+    private float DurationUpPos = 0.5f;
 
     [Header("데이터 받아올 변수")]
     [SerializeField]
@@ -38,10 +45,7 @@ public class Enemy : MonoBehaviour
 
             if(hp <= 0)
             {
-                Player.Instance.Range.TargetEnemy.Remove(this.gameObject);
-                EnemySpawner.ReturnEnemy(EnemyType, this);
-                GameManager.Instance.MoneyUnit += 100;
-                GameManager.Instance.GemUnit += 10;
+                Die();
             }
         }
     }
@@ -95,10 +99,35 @@ public class Enemy : MonoBehaviour
     }
     #endregion
 
+    #region TakeDamage
+    public void StartTakeDamage(int Damage, bool IsCritical)
+    {
+        TakeDamageCorutine = StartCoroutine(TakeDamage(Damage, IsCritical));
+    }
+
     protected IEnumerator TakeDamage(int Damage, bool IsCritical)
     {
         yield return null;
+
+        GameObject Obj = Instantiate(TextObj, this.transform.position, Quaternion.identity);
+        Destroy(Obj, DurationUpPos);
+
+        Text = Obj.GetComponentInChildren<TextMeshProUGUI>();
+        Text.text = Damage.ToString();
+
+        TextObjs.Add(Obj);
+
+        Hp -= Damage;
+
+        Obj.transform.DOMoveY(Obj.transform.position.y + UpYPos, DurationUpPos);
+        Text.DOFade(0.3f, DurationUpPos);
+
+        yield return new WaitForSeconds(DurationUpPos);
+        TextObjs.Remove(Obj);
+
+        StopCoroutine(TakeDamageCorutine);
     }
+    #endregion TakeDamage
 
     protected virtual void Move()
     {
@@ -149,4 +178,19 @@ public class Enemy : MonoBehaviour
         this.AttackDelay = Data[Select].AttackDelay;
         this.MoveSpeed = Data[Select].MoveSpeed;
     }
+
+    void Die()
+    {
+        Player.Instance.Range.TargetEnemy.Remove(this.gameObject);
+        EnemySpawner.ReturnEnemy(EnemyType, this);
+        GameManager.Instance.MoneyUnit += 100;
+        GameManager.Instance.GemUnit += 10;
+
+        int cnt = TextObjs.Count;
+        for (int i = 0; i < cnt; i++)
+        {
+            TextObjs.RemoveAt(0);
+        }
+    }
 }
+

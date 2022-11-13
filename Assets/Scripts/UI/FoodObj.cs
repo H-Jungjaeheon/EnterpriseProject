@@ -65,15 +65,15 @@ public class FoodObj : MonoBehaviour
         {
             if (nextPos == arrangingArrivalPositions[0])
             {
-                spriteThisObj.sortingOrder = 13;
+                spriteThisObj.sortingOrder = 130;
             }
             else if (nextPos == arrangingArrivalPositions[1])
             {
-                spriteThisObj.sortingOrder = 11;
+                spriteThisObj.sortingOrder = 110;
             }
             else
             {
-                spriteThisObj.sortingOrder = 12;
+                spriteThisObj.sortingOrder = 120;
             }
             transform.DOMove(nextPos, 0.5f);
         }
@@ -81,15 +81,15 @@ public class FoodObj : MonoBehaviour
         {
             if (lastPos == arrangingArrivalPositions[0])
             {
-                spriteThisObj.sortingOrder = 13;
+                spriteThisObj.sortingOrder = 130;
             }
             else if (lastPos == arrangingArrivalPositions[1])
             {
-                spriteThisObj.sortingOrder = 11;
+                spriteThisObj.sortingOrder = 110;
             }
             else
             {
-                spriteThisObj.sortingOrder = 12;
+                spriteThisObj.sortingOrder = 120;
             }
             transform.DOMove(lastPos, 0.5f);
         }

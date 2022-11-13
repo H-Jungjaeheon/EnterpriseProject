@@ -280,7 +280,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 13
+  m_SortingOrder: 416
   m_Sprite: {fileID: 21300000, guid: 58e4d6caa7a821042bef13403efc2842, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1074,10 +1074,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyAttackDownParticle
       objectReference: {fileID: 0}
-    - target: {fileID: 1152466998765402029, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1152466998765402030, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1442,7 +1438,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -450, y: 0}
-  m_SizeDelta: {x: 196, y: 196}
+  m_SizeDelta: {x: 218, y: 218}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &141757657
 MonoBehaviour:
@@ -2180,7 +2176,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: 21d3307b640e27d49be62f3cf2f5d983, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
@@ -2994,10 +2990,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1565423641, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 683654880}
     - target: {fileID: 3899307102218605548, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
       propertyPath: m_Name
       value: LongEnemy
@@ -3138,10 +3130,6 @@ PrefabInstance:
     - target: {fileID: 1152466998765402029, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
       propertyPath: m_Name
       value: EnemyAttackDownParticle
-      objectReference: {fileID: 0}
-    - target: {fileID: 1152466998765402029, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1152466998765402030, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
       propertyPath: m_RootOrder
@@ -3455,10 +3443,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1805357598, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 683654880}
     - target: {fileID: 3899307102218605548, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
       propertyPath: m_Name
       value: ShortEnemy
@@ -3951,7 +3935,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 450, y: -100}
-  m_SizeDelta: {x: 196, y: 196}
+  m_SizeDelta: {x: 218, y: 218}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &459150112
 MonoBehaviour:
@@ -4599,7 +4583,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -450, y: 100}
-  m_SizeDelta: {x: 196, y: 196}
+  m_SizeDelta: {x: 218, y: 218}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &532640853
 MonoBehaviour:
@@ -5305,10 +5289,6 @@ PrefabInstance:
     - target: {fileID: 1152466998765402029, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
       propertyPath: m_Name
       value: EnemyAttackDownParticle
-      objectReference: {fileID: 0}
-    - target: {fileID: 1152466998765402029, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1152466998765402030, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
       propertyPath: m_RootOrder
@@ -6395,7 +6375,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -150, y: 0}
-  m_SizeDelta: {x: 196, y: 196}
+  m_SizeDelta: {x: 218, y: 218}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &743167098
 MonoBehaviour:
@@ -6602,7 +6582,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: -150, y: 100}
-  m_SizeDelta: {x: 196, y: 196}
+  m_SizeDelta: {x: 218, y: 218}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &750889238
 MonoBehaviour:
@@ -8789,7 +8769,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 130
   m_Sprite: {fileID: 21300000, guid: e11c36b775028bc4cad23bec99871ae7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9536,10 +9516,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyAttackDownParticle
       objectReference: {fileID: 0}
-    - target: {fileID: 1152466998765402029, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1152466998765402030, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -10029,10 +10005,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1054242289, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 683654880}
     - target: {fileID: 3899307102218605548, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
       propertyPath: m_Name
       value: AirEnemy
@@ -10693,7 +10665,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 99
   m_TargetDisplay: 0
 --- !u!224 &1102354364
 RectTransform:
@@ -12833,7 +12805,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 31
   m_TargetDisplay: 0
 --- !u!224 &1355201049
 RectTransform:
@@ -13563,7 +13535,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 12
+  m_SortingOrder: 234
   m_Sprite: {fileID: 21300000, guid: 4ef071edb49727e4895f9648813eb907, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -13972,7 +13944,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &1442654348
 RectTransform:
@@ -14200,7 +14172,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 150, y: 0}
-  m_SizeDelta: {x: 196, y: 196}
+  m_SizeDelta: {x: 218, y: 218}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1490582902
 MonoBehaviour:
@@ -15719,10 +15691,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyAttackDownParticle
       objectReference: {fileID: 0}
-    - target: {fileID: 1152466998765402029, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1152466998765402030, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -15855,7 +15823,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 130
   m_Sprite: {fileID: 21300000, guid: 77e0a22f1e67855499f006f65aa390e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -16595,7 +16563,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 16
+  m_SortingOrder: 128
   m_Sprite: {fileID: 21300000, guid: e24188cda8f4c0042b21abfefb2465a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -17616,7 +17584,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 130
   m_Sprite: {fileID: 21300000, guid: 3f26fd8b167c7624a91c90ff5366195c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -18183,7 +18151,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 99
   m_Sprite: {fileID: 21300000, guid: f4ea44e86f6c4444cba22fa6a28f4c6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -18540,7 +18508,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 211
   m_Sprite: {fileID: 21300000, guid: b96b4d6004eabc040a2eba270e807d50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -18729,7 +18697,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -450, y: -100}
-  m_SizeDelta: {x: 196, y: 196}
+  m_SizeDelta: {x: 218, y: 218}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1961330315
 MonoBehaviour:
@@ -18943,7 +18911,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -150, y: -100}
-  m_SizeDelta: {x: 196, y: 196}
+  m_SizeDelta: {x: 218, y: 218}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1976652306
 MonoBehaviour:
@@ -19345,7 +19313,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 150, y: -100}
-  m_SizeDelta: {x: 196, y: 196}
+  m_SizeDelta: {x: 218, y: 218}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2037275115
 MonoBehaviour:
@@ -19726,7 +19694,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 14
+  m_SortingOrder: 571
   m_Sprite: {fileID: 21300000, guid: 34f4f279352c0fd4eac838733089aeeb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -19821,7 +19789,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 450, y: 0}
-  m_SizeDelta: {x: 196, y: 196}
+  m_SizeDelta: {x: 218, y: 218}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2062315823
 MonoBehaviour:
@@ -21095,10 +21063,6 @@ PrefabInstance:
     - target: {fileID: 1152466998765402029, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
       propertyPath: m_Name
       value: EnemyAttackDownParticle
-      objectReference: {fileID: 0}
-    - target: {fileID: 1152466998765402029, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1152466998765402030, guid: 4f85954d82b7412478126e00bede3eff, type: 3}
       propertyPath: m_RootOrder
