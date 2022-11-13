@@ -15,6 +15,7 @@ public enum SkillElements
 public class SkillEquipManager : MonoBehaviour
 {
     public int nowSkillIndex;
+    public SkillData CurSkillData;
 
     [Tooltip("변경할 스킬 장착 창")]
     public GameObject changeObj;
@@ -26,6 +27,10 @@ public class SkillEquipManager : MonoBehaviour
     [SerializeField]
     [Tooltip("화살표 오브젝트")]
     private GameObject arrowObj;
+
+    [SerializeField]
+    [Tooltip("스킬 데이터")]
+    private SkillData[] SkillDatas;
 
     [SerializeField]
     [Tooltip("스킬 이름")]
@@ -73,6 +78,8 @@ public class SkillEquipManager : MonoBehaviour
 
         elementTexts[(int)SkillElements.CoolTime].text = $"{coolTimes[skillIndex]} 초";
 
+        CurSkillData = SkillDatas[skillIndex];
+
         equipObj.SetActive(true);
     }
 
@@ -104,6 +111,7 @@ public class SkillEquipManager : MonoBehaviour
 
     public void CloseSkillEquipPanel()
     {
+        CurSkillData = null;
         equipObj.SetActive(false);
     }
 }

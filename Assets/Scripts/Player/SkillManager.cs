@@ -32,6 +32,11 @@ public class SkillManager : MonoBehaviour
     [SerializeField]
     bool IsAutoSkill = false;
 
+    Dictionary<int, Skill> EquieSkillsDic = new Dictionary<int, Skill>();
+    Dictionary<string, Skill> CanEquoeSkills = new Dictionary<string, Skill>();
+
+    public Sprite NonePlace;
+
     [HideInInspector]
     public bool isSkillEquiping;
 
@@ -40,10 +45,10 @@ public class SkillManager : MonoBehaviour
 
     private void Start()
     {
-        SkillEquie(0);
-        SkillEquie(1);
-        SkillEquie(2);
-        SkillEquie(3);
+        foreach (var Obj in NoneEquieSkills)
+        {
+            CanEquoeSkills.Add(Obj.SkillName, Obj);
+        }
     }
 
     private void Update()
@@ -57,20 +62,58 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    public void SkillEquie(int idx)
+    public void SkillEquie(int idx, string SkillName)
     {
-        if (CurIdx < MaximamIdx)
+        if (EquieSkillsDic.ContainsKey(idx) == false)
         {
-            EquieSkills.Add(NoneEquieSkills[idx]);
+            if(EquieSkillsDic.ContainsValue(CanEquoeSkills[SkillName]) == true)
+            {
+                Debug.Log("Yes");
 
-            //임의
-            EquieSkills[CurIdx].SkillEquieIdx = CurIdx;
+                SkillUis[CanEquoeSkills[SkillName].SkillEquieIdx].FrontSKillImage.sprite = NonePlace;
+                SkillUis[CanEquoeSkills[SkillName].SkillEquieIdx].BackSKillImage.sprite = NonePlace;
 
-            SkillUis[CurIdx].FrontSKillImage.sprite = EquieSkills[CurIdx].SkillImage;
-            SkillUis[CurIdx].BackSKillImage.sprite = EquieSkills[CurIdx].SkillImage;
+                EquieSkills.Remove(CanEquoeSkills[SkillName]);
+                EquieSkillsDic.Remove(CanEquoeSkills[SkillName].SkillEquieIdx);
+            }
 
-            CurIdx++;
+            EquieSkills.Add(CanEquoeSkills[SkillName]);
+            EquieSkillsDic.Add(idx, CanEquoeSkills[SkillName]);
+
+            EquieSkillsDic[idx].SkillEquieIdx = idx;
+
+            SkillUis[idx].FrontSKillImage.sprite = EquieSkillsDic[idx].SkillImage;
+            SkillUis[idx].BackSKillImage.sprite = EquieSkillsDic[idx].SkillImage;
         }
+
+        else
+        {
+            if (EquieSkillsDic.ContainsValue(CanEquoeSkills[SkillName]) == true)
+            {
+                Debug.Log("Yes");
+
+                SkillUis[CanEquoeSkills[SkillName].SkillEquieIdx].FrontSKillImage.sprite = NonePlace;
+                SkillUis[CanEquoeSkills[SkillName].SkillEquieIdx].BackSKillImage.sprite = NonePlace;
+
+                EquieSkills.Remove(CanEquoeSkills[SkillName]);
+                EquieSkillsDic.Remove(CanEquoeSkills[SkillName].SkillEquieIdx);
+            }
+
+            EquieSkills.Remove(EquieSkillsDic[idx]);
+            EquieSkillsDic.Remove(idx);
+
+            EquieSkills.Add(CanEquoeSkills[SkillName]);
+            EquieSkillsDic.Add(idx, CanEquoeSkills[SkillName]);
+
+            EquieSkillsDic[idx].SkillEquieIdx = idx;
+
+            SkillUis[idx].FrontSKillImage.sprite = EquieSkillsDic[idx].SkillImage;
+            SkillUis[idx].BackSKillImage.sprite = EquieSkillsDic[idx].SkillImage;
+        }
+    }
+
+    public void SkillUnEquie(int idx, string SkillName)
+    {
     }
 
     public void UseSkill(int idx)
@@ -82,11 +125,16 @@ public class SkillManager : MonoBehaviour
 
             //semInstance.nowSkillIndex
             //현재 선택한 스킬 인덱스로 스킬 바꾸기 
+
+            SkillEquie(idx, semInstance.CurSkillData.SkillName);
         }
         else
         {
-            EquieSkills[idx].OnSkillEffect();
-            SkillUis[idx].FrontSKillImage.fillAmount = 0.0f;
+            if (EquieSkillsDic.ContainsKey(idx))
+            {
+                EquieSkillsDic[idx].OnSkillEffect();
+                SkillUis[idx].FrontSKillImage.fillAmount = 0.0f;
+            }
         }
     }
 

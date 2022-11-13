@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d05fd4bcc10e75409db890e2bdd6927, type: 3}
   m_Name: WeaponSpawnData
   m_EditorClassIdentifier: 
-  SkillName: "\uACF5\uACA9\uB825 \uAC15\uD654"
-  SkillImage: {fileID: 21300000, guid: 22d624fd5ee1aca499f0636c0110d342, type: 3}
+  SkillName: "\uBB34\uAE30 \uC18C\uD658"
+  SkillImage: {fileID: 21300000, guid: 44e4accdac284fa4382c7043bdae9ce7, type: 3}
   SkillCol: 10
   SkillDuration: 3
