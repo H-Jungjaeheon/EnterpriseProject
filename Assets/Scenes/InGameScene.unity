@@ -234,7 +234,7 @@ RectTransform:
   m_LocalScale: {x: 50, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 1039488478}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -326,7 +326,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.34458613, y: 0}
+  m_Offset: {x: -3.3257108, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -337,7 +337,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.31092775, y: 1}
+  m_Size: {x: 2.8278923, y: 1}
   m_EdgeRadius: 0
 --- !u!61 &13958303
 BoxCollider2D:
@@ -352,7 +352,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.34274763, y: 0}
+  m_Offset: {x: 3.3450723, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -363,7 +363,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3145047, y: 1}
+  m_Size: {x: 2.8282967, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &17267276
 GameObject:
@@ -7995,7 +7995,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1039488478}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8046,8 +8046,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1103746049}
-        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+      - m_Target: {fileID: 933780101}
+        m_TargetAssemblyTypeName: SaleOfFoodManager, Assembly-CSharp
         m_MethodName: StopArrow
         m_Mode: 1
         m_Arguments:
@@ -8178,8 +8178,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1103746049}
-        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+      - m_Target: {fileID: 933780101}
+        m_TargetAssemblyTypeName: SaleOfFoodManager, Assembly-CSharp
         m_MethodName: CookingPanelOn
         m_Mode: 1
         m_Arguments:
@@ -8861,6 +8861,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a86ae77d99d5445b8a5f73f4a4eecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foodChooseAndMakePanelObj: {fileID: 1799846713}
+  chooseADishObj: {fileID: 109940300}
+  theProductionObj: {fileID: 1039488477}
+  materialsText_BasicScreen:
+  - {fileID: 2006706812}
+  - {fileID: 1254427040}
+  - {fileID: 1607128860}
+  materialsText_ChooseCookScreen:
+  - {fileID: 1102182252}
+  - {fileID: 2052586838}
+  - {fileID: 365542312}
+  nowCookingCountText: {fileID: 1348250819}
+  nowCookingFoodNameText: {fileID: 53005360}
+  quantityOfMaterials: 000000000000000000000000
+  isCustomerArrival: 0
+  customerObj: {fileID: 1915098345}
+  foodObjectsToCooking:
+  - {fileID: 932574767}
+  - {fileID: 1820653129}
+  - {fileID: 1633828723}
+  arrowObj: {fileID: 1935100626}
+  foodDatas:
+  - quantityOfMaterials: 010000000100000001000000
+    FoodName: "3\uB4F1\uAE09 \uC694\uB9AC"
+  - quantityOfMaterials: 020000000200000002000000
+    FoodName: "2\uB4F1\uAE09 \uC694\uB9AC"
+  - quantityOfMaterials: 030000000300000003000000
+    FoodName: "1\uB4F1\uAE09 \uC694\uB9AC"
+  ingredientSprite:
+  - {fileID: 21300000, guid: e29310de0eb41984db61a5f2706bd06d, type: 3}
+  - {fileID: 21300000, guid: 28106f5853102aa4583588cc4e10f572, type: 3}
+  - {fileID: 21300000, guid: f7ec8f9aab3ffa045b4075f883452317, type: 3}
+  - {fileID: 21300000, guid: a275890a519ee6e4891d7fe92d046a80, type: 3}
+  ingredientImage: {fileID: 1978659860}
+  potObj: {fileID: 1476681897}
 --- !u!114 &933780102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9003,13 +9038,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946909474}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1679193252}
-  m_Father: {fileID: 1039488478}
-  m_RootOrder: 2
+  m_Father: {fileID: 1476681898}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9814,8 +9849,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1103746049}
-        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+      - m_Target: {fileID: 933780101}
+        m_TargetAssemblyTypeName: SaleOfFoodManager, Assembly-CSharp
         m_MethodName: AdjustTheNumberOfFoods
         m_Mode: 6
         m_Arguments:
@@ -9972,7 +10007,8 @@ RectTransform:
   m_Children:
   - {fileID: 1790767133}
   - {fileID: 1817119262}
-  - {fileID: 946909475}
+  - {fileID: 1978659859}
+  - {fileID: 1476681898}
   - {fileID: 1424353521}
   - {fileID: 13958299}
   - {fileID: 2055693447}
@@ -10713,9 +10749,6 @@ MonoBehaviour:
   - {fileID: 1959401194}
   - {fileID: 1787463850}
   - {fileID: 1305378070}
-  foodChooseAndMakePanelObj: {fileID: 1799846713}
-  chooseADishObj: {fileID: 109940300}
-  theProductionObj: {fileID: 1039488477}
   colleagueSystemPanelObj: {fileID: 1959401194}
   basicStatLevelText:
   - {fileID: 1582084038}
@@ -10738,34 +10771,10 @@ MonoBehaviour:
   - {fileID: 983388620}
   - {fileID: 385857128}
   - {fileID: 1838405554}
-  materialsText_BasicScreen:
-  - {fileID: 2006706812}
-  - {fileID: 1254427040}
-  - {fileID: 1607128860}
-  materialsText_ChooseCookScreen:
-  - {fileID: 1102182252}
-  - {fileID: 2052586838}
-  - {fileID: 365542312}
-  nowCookingCountText: {fileID: 1348250819}
-  nowCookingFoodNameText: {fileID: 53005360}
-  quantityOfMaterials: 000000000000000000000000
-  isCustomerArrival: 0
-  customerObj: {fileID: 1915098345}
-  foodObjectsToCooking:
-  - {fileID: 932574767}
-  - {fileID: 1820653129}
-  - {fileID: 1633828723}
-  arrowObj: {fileID: 1935100626}
-  foodDatas:
-  - quantityOfMaterials: 010000000100000001000000
-    FoodName: "3\uB4F1\uAE09 \uC694\uB9AC"
-  - quantityOfMaterials: 020000000200000002000000
-    FoodName: "2\uB4F1\uAE09 \uC694\uB9AC"
-  - quantityOfMaterials: 030000000300000003000000
-    FoodName: "1\uB4F1\uAE09 \uC694\uB9AC"
   coinText: {fileID: 655448475}
   jemText: {fileID: 446454305}
   proficiencyText: {fileID: 1381109704}
+  sofmComponent: {fileID: 933780101}
   player: {fileID: 1293959311}
 --- !u!4 &1103746050
 Transform:
@@ -13480,7 +13489,7 @@ RectTransform:
   m_LocalScale: {x: 100, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 1039488478}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13551,7 +13560,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.35062844, y: 0}
+  m_Offset: {x: 3.6063461, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -13562,7 +13571,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.29874313, y: 1}
+  m_Size: {x: 2.431636, y: 1}
   m_EdgeRadius: 0
 --- !u!61 &1424353524
 BoxCollider2D:
@@ -13577,7 +13586,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.35064316, y: 0}
+  m_Offset: {x: -3.592561, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -13588,7 +13597,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2987137, y: 1}
+  m_Size: {x: 2.397347, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &1424353525
 Rigidbody2D:
@@ -14127,6 +14136,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450232829}
   m_CullTransparentMesh: 1
+--- !u!1 &1476681897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1476681898}
+  m_Layer: 5
+  m_Name: PotObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1476681898
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476681897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 946909475}
+  m_Father: {fileID: 1039488478}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1490582900
 GameObject:
   m_ObjectHideFlags: 0
@@ -14872,8 +14917,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1103746049}
-        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+      - m_Target: {fileID: 933780101}
+        m_TargetAssemblyTypeName: SaleOfFoodManager, Assembly-CSharp
         m_MethodName: FoodChooseAndMakePanelOnOrOff
         m_Mode: 6
         m_Arguments:
@@ -16144,8 +16189,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1103746049}
-        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+      - m_Target: {fileID: 933780101}
+        m_TargetAssemblyTypeName: SaleOfFoodManager, Assembly-CSharp
         m_MethodName: FoodChooseAndMakePanelOnOrOff
         m_Mode: 6
         m_Arguments:
@@ -16355,8 +16400,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1103746049}
-        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+      - m_Target: {fileID: 933780101}
+        m_TargetAssemblyTypeName: SaleOfFoodManager, Assembly-CSharp
         m_MethodName: ChangeTheFoodType
         m_Mode: 6
         m_Arguments:
@@ -17194,8 +17239,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1103746049}
-        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+      - m_Target: {fileID: 933780101}
+        m_TargetAssemblyTypeName: SaleOfFoodManager, Assembly-CSharp
         m_MethodName: ChangeTheFoodType
         m_Mode: 6
         m_Arguments:
@@ -17846,8 +17891,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1103746049}
-        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+      - m_Target: {fileID: 933780101}
+        m_TargetAssemblyTypeName: SaleOfFoodManager, Assembly-CSharp
         m_MethodName: AdjustTheNumberOfFoods
         m_Mode: 6
         m_Arguments:
@@ -18434,6 +18479,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1935100627}
   - component: {fileID: 1935100628}
+  - component: {fileID: 1935100630}
+  - component: {fileID: 1935100629}
   m_Layer: 5
   m_Name: ArrowObj
   m_TagString: Untagged
@@ -18453,7 +18500,7 @@ RectTransform:
   m_LocalScale: {x: 124.6, y: 149.99998, z: 1}
   m_Children: []
   m_Father: {fileID: 1039488478}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18511,6 +18558,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1935100629
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935100626}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.19398263}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.43, y: 0.34}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.37662244, y: 0.7279653}
+  m_EdgeRadius: 0
+--- !u!50 &1935100630
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935100626}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1946817956
 GameObject:
   m_ObjectHideFlags: 0
@@ -18997,6 +19091,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976652304}
+  m_CullTransparentMesh: 1
+--- !u!1 &1978659858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1978659859}
+  - component: {fileID: 1978659861}
+  - component: {fileID: 1978659860}
+  m_Layer: 5
+  m_Name: IngredientImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1978659859
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978659858}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1039488478}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 900}
+  m_SizeDelta: {x: 250, y: 250}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1978659860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978659858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 28106f5853102aa4583588cc4e10f572, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1978659861
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978659858}
   m_CullTransparentMesh: 1
 --- !u!1 &1991222331
 GameObject:
@@ -19640,7 +19809,7 @@ RectTransform:
   m_LocalScale: {x: 20, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 1039488478}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19711,7 +19880,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.00000071525574, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -19722,7 +19891,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 9.613037, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &2055693450
 Rigidbody2D:
