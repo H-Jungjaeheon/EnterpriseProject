@@ -1,6 +1,6 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
 using Spine.Unity.Examples;
 
@@ -69,8 +69,7 @@ public class Player : MonoBehaviour
     [Header("숙련도 변수")]
     //[SerializeField]
     //플레이어 숙련도 스크립터블 들어갈 예정
-    [SerializeField]
-    private BulletData[] BulletData;
+    public BulletData[] BulletData;
 
     [Header("애니메이션 변수")]
     [SerializeField]
