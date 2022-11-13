@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using System.Numerics;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
-using DG.Tweening;
 
 public enum Contents
 {
@@ -38,7 +37,7 @@ public enum UpgradeableBasicStats
 public class BattleUIManager : Singleton<BattleUIManager>
 {
     #region 현재 상태 표기 관련 변수
-    private Contents nowContents;
+    public Contents nowContents;
 
     private SaleOfFoodContents nowSaleOfFoodContents;
     #endregion
@@ -48,7 +47,9 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     [SerializeField]
     [Tooltip("현재 보여지는 콘텐츠 창 오브젝트")]
-    private GameObject nowContentsPanelObj;
+    private GameObject nowContentsObj;
+
+    private GameObject lastContents; //전에 띄우던 콘텐츠 창 오브젝트
 
     [Tooltip("콘텐츠 창 오브젝트 모음")]
     public GameObject[] contentsPanelObjs;
@@ -451,43 +452,72 @@ public class BattleUIManager : Singleton<BattleUIManager>
         }
     }
 
-    public void AnotherContentsPopUp(GameObject PopUpObj)
+    /// <summary>
+    /// 콘텐츠 창 변경 (팝업되는 콘텐츠들)
+    /// </summary>
+    /// <param name="popUpObj"></param>
+    public void AnotherContentsPopUp(GameObject popUpObj)
     {
-        //팝업 다트윈 애니메이션 넣기
-        GameObject lastViewContents = PopUpObj;
-        if (PopUpObj.activeSelf)
-        {
-            nowContentsPanelObj = contentsPanelObjs[(int)Contents.StatUpgradeContents];
-            nowContents = Contents.StatUpgradeContents;
-        }
-        else
-        {
-            nowContents = (Contents)nowChangeContents;
-            nowContentsPanelObj = PopUpObj;
-        }
-        lastViewContents.SetActive(false);
-        nowContentsPanelObj.SetActive(true);
+        lastContents = nowContentsObj;
+        nowContentsObj = popUpObj;
+
+        nowContentsObj.SetActive(true);
+
+        nowContents = (Contents)nowChangeContents;
+
         if (isCustomerArrival == false)
         {
             isCustomerArrival = true;
         }
     }
 
+    /// <summary>
+    /// 콘텐츠 창 닫기 (팝업되는 콘텐츠들)
+    /// </summary>
+    /// <param name="PopUpObj"></param>
+    public void PopUpClose(GameObject PopUpObj)
+    {
+        PopUpObj.SetActive(false);
+
+        if (lastContents == contentsPanelObjs[(int)Contents.StatUpgradeContents])
+        {
+            nowChangeContents = (int)Contents.StatUpgradeContents;
+        }
+        else if (lastContents == contentsPanelObjs[(int)Contents.SaleOfFoodContents])
+        {
+            nowChangeContents = (int)Contents.SaleOfFoodContents;
+        }
+        else
+        {
+            nowChangeContents = (int)Contents.SkillEquipContents;
+        }
+
+        nowContentsObj = lastContents;
+        nowContents = (Contents)nowChangeContents;
+    }
+
+    /// <summary>
+    /// 변경하려는 콘텐츠 인덱스 (콘텐츠 변경 버튼에서 사용)
+    /// </summary>
+    /// <param name="ChangeIndex"></param>
     public void NowContentsChange(int ChangeIndex)
     {
         nowChangeContents = ChangeIndex;
     }
 
+    /// <summary>
+    /// 스크롤 뷰에서 보이는 콘텐츠 창 변경
+    /// </summary>
+    /// <param name="PopUpObj"></param>
     public void AnotherContentsChangeScrollView(GameObject PopUpObj)
     {
         bool isSameContents = PopUpObj.activeSelf;
 
-        nowContentsPanelObj.SetActive(isSameContents);
+        nowContentsObj.SetActive(false);
+        nowContentsObj = isSameContents ? contentsPanelObjs[(int)Contents.StatUpgradeContents] : PopUpObj;
 
-        nowContentsPanelObj = isSameContents ? contentsPanelObjs[(int)Contents.StatUpgradeContents] : PopUpObj;
         nowContents = isSameContents ? Contents.StatUpgradeContents : (Contents)nowChangeContents;
-
-        nowContentsPanelObj.SetActive(true);
+        nowContentsObj.SetActive(true);
 
         if (isCustomerArrival == false)
         {
@@ -495,7 +525,12 @@ public class BattleUIManager : Singleton<BattleUIManager>
         }
     }
 
-    public string ConvertGoodsToString(BigInteger theValueOfAGood) //리메이크한 재화 단위 표시
+    /// <summary>
+    /// 재화 단위 표시 함수 (값 넣으면 string으로 리턴)
+    /// </summary>
+    /// <param name="theValueOfAGood"></param>
+    /// <returns></returns>
+    public string ConvertGoodsToString(BigInteger theValueOfAGood)
     {
         int nowAUnitOfGoodsIndex = 0;
         string translatedString;
