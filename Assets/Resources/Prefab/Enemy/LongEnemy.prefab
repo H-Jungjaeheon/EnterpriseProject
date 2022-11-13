@@ -102,6 +102,7 @@ MonoBehaviour:
   EnemySprite: {fileID: 0}
   TargetPos: {fileID: 0}
   CurBehaviorType: 0
+  TextObjs: []
   TextObj: {fileID: 1614285316519802009, guid: 72907f1e2fb990d45ac366c95bb2c900, type: 3}
   Text: {fileID: 0}
   EnemyType: 1
@@ -112,6 +113,8 @@ MonoBehaviour:
   AttackDelay: 0
   IsAttack: 0
   MoveSpeed: 0
+  ParticleMaterial: {fileID: 2100000, guid: 6839acaafed65704daef63f89faf0534, type: 2}
+  ParticlePrefab: {fileID: 6141688812485550459, guid: afbfe552eac65fe4a863268eac03d5f3, type: 3}
 --- !u!61 &743787892426380635
 BoxCollider2D:
   m_ObjectHideFlags: 0

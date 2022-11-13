@@ -12123,6 +12123,7 @@ MonoBehaviour:
   IsMove: 0
   BulletData:
   - {fileID: 11400000, guid: a3ce4a42f746ce844b388b3cd857652a, type: 2}
+  - {fileID: 11400000, guid: bc1b722ee6ffb6a488d26f42902c1d38, type: 2}
   PlayerAnimation: {fileID: 32120042}
 --- !u!61 &1293959315
 BoxCollider2D:

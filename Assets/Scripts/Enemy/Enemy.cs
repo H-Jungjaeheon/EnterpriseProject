@@ -62,6 +62,12 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float MoveSpeed;
 
+    [Header("파티클 소환")]
+    [SerializeField]
+    Material ParticleMaterial;
+    [SerializeField]
+    GameObject ParticlePrefab;
+
     private void Awake()
     {
         EnemySprite = this.GetComponent<SpriteRenderer>();
@@ -197,6 +203,9 @@ public class Enemy : MonoBehaviour
         {
             TextObjs.RemoveAt(0);
         }
+
+        ParticleSystemRenderer Particle = Instantiate(ParticlePrefab, this.transform.position, Quaternion.identity).GetComponent<ParticleSystemRenderer>();
+        Particle.material = ParticleMaterial;
     }
 }
 

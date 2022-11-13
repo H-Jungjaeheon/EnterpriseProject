@@ -125,6 +125,7 @@ public class PlayerBullet : MonoBehaviour
         TargetPos = Target.transform;
         this.Target = Target;
 
+        BasicSetting();
         ResetBulletDamage();
 
         StartCoroutine(BulletMove());
@@ -149,13 +150,11 @@ public class PlayerBullet : MonoBehaviour
 
     private void BasicSetting()
     {
-        int Select = 0;
+        this.BulletType = Player.Instance.BulletData[Player.Instance.SelectNumber].BulletType;
+        this.BulletImg = Player.Instance.BulletData[Player.Instance.SelectNumber].BulletImg;
+        this.BulletName = Player.Instance.BulletData[Player.Instance.SelectNumber].BulletName;
 
-        this.BulletType = BulletData[Select].BulletType;
-        this.BulletImg = BulletData[Select].BulletImg;
-        this.BulletName = BulletData[Select].BulletName;
-
-        this.BulletSpeed = BulletData[Select].BulletSpeed;
+        this.BulletSpeed = Player.Instance.BulletData[Player.Instance.SelectNumber].BulletSpeed;
 
         spriteRenderer.sprite = BulletImg;
     }
