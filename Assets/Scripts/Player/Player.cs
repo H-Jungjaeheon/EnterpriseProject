@@ -104,6 +104,11 @@ public class Player : MonoBehaviour
         this.GetComponent<SpriteRenderer>().sprite = SelectPlayerData.PlayerSkinImg;
     }
 
+    public void CharacterChange(int idx)
+    {
+
+    }
+
     #region Attack
     void OnAttack()
     {

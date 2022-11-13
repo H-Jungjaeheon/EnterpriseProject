@@ -26,6 +26,10 @@ public class SkillManager : MonoBehaviour
     private List<SkillUI> SkillUis;
 
     [SerializeField]
+    Image AutoSkillBtn = null;
+    [SerializeField]
+    List<Sprite> SkillOnOffImg;
+    [SerializeField]
     bool IsAutoSkill = false;
 
     [HideInInspector]
@@ -89,9 +93,16 @@ public class SkillManager : MonoBehaviour
     public void AutoSkillOnOff()
     {
         if (IsAutoSkill == true)
+        {
             IsAutoSkill = false;
+            AutoSkillBtn.sprite = SkillOnOffImg[1];
+        }
 
         else
+        {
             IsAutoSkill = true;
+            AutoSkillBtn.sprite = SkillOnOffImg[0];
+
+        }
     }
 }
