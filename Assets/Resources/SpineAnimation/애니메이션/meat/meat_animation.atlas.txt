@@ -1,0 +1,15 @@
+meat_animation.png
+size:467,191
+filter:Linear,Linear
+pma:true
+Group 2
+bounds:383,60,129,82
+rotate:90
+body
+bounds:2,2,238,187
+eyes
+bounds:282,18,39,24
+mouse
+bounds:242,13,38,29
+wing
+bounds:242,44,139,145

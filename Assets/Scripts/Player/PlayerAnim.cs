@@ -25,30 +25,31 @@ namespace Spine.Unity.Examples
         public Spine.AnimationState spineAnimationState;
         public Spine.Skeleton skeleton;
 
-        private void Update()
+        public void AnimationSetting()
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            PlayerCharacters[Player.Instance.SelectNumber].SetActive(true);
+
+            for (int i = 0; i < PlayerCharacters.Count; i++)
             {
-                PlayerCharacters[Player.Instance.SelectNumber].SetActive(true);
+                if (Player.Instance.SelectNumber == i)
+                    continue;
 
-                for (int i = 0; i < PlayerCharacters.Count; i++)
-                {
-                    if (Player.Instance.SelectNumber == i)
-                        continue;
-
-                    PlayerCharacters[i].SetActive(false);
-                }
-
-                skeletonAnimation = PlayerCharacters[Player.Instance.SelectNumber].GetComponent<SkeletonAnimation>();
-                spineAnimationState = skeletonAnimation.AnimationState;
-                skeleton = skeletonAnimation.Skeleton;
+                PlayerCharacters[i].SetActive(false);
             }
 
-            if(Input.GetKeyDown(KeyCode.LeftArrow))
-                spineAnimationState.SetAnimation(0, walkAnimationName, true);
+            skeletonAnimation = PlayerCharacters[Player.Instance.SelectNumber].GetComponent<SkeletonAnimation>();
+            spineAnimationState = skeletonAnimation.AnimationState;
+            skeleton = skeletonAnimation.Skeleton;
+        }
 
-            if(Input.GetKeyDown(KeyCode.RightArrow))
-                spineAnimationState.SetAnimation(0, idleAnimationName, true);
+        public void OnWalkAnimation()
+        {
+            spineAnimationState.SetAnimation(0, walkAnimationName, true);
+        }
+
+        public void OnIdleAnimation()
+        {
+            spineAnimationState.SetAnimation(0, idleAnimationName, true);
         }
     }
 }

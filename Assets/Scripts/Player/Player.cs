@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Spine.Unity.Examples;
 
 public class Player : MonoBehaviour
 {
@@ -61,6 +62,8 @@ public class Player : MonoBehaviour
     public float StendPosX;
     [SerializeField]
     private float MovePosX;
+    [SerializeField]
+    bool IsMove = false;
     private Coroutine MoveCorutine;
 
     [Header("숙련도 변수")]
@@ -68,6 +71,10 @@ public class Player : MonoBehaviour
     //플레이어 숙련도 스크립터블 들어갈 예정
     [SerializeField]
     private BulletData[] BulletData;
+
+    [Header("애니메이션 변수")]
+    [SerializeField]
+    PlayerAnim PlayerAnimation;
 
     private void Awake()
     {
@@ -101,12 +108,23 @@ public class Player : MonoBehaviour
         this.CriticalDamage = SelectPlayerData.CriticalDamage;
         this.CriticalPercent = SelectPlayerData.CriticalPercent;
 
-        this.GetComponent<SpriteRenderer>().sprite = SelectPlayerData.PlayerSkinImg;
+        //this.GetComponent<SpriteRenderer>().sprite = SelectPlayerData.PlayerSkinImg;
+
+        PlayerAnimation.AnimationSetting();
     }
 
     public void CharacterChange(int idx)
     {
+        SelectNumber = idx;
+        BasicSetting();
 
+        PlayerAnimation.AnimationSetting();
+
+        if (IsAttack == true && IsMove == false)
+            PlayerAnimation.OnIdleAnimation();
+
+        else
+            PlayerAnimation.OnWalkAnimation();
     }
 
     #region Attack
@@ -125,7 +143,11 @@ public class Player : MonoBehaviour
 
     void StartAttack()
     {
+        PlayerAnimation.OnIdleAnimation();
+
         IsAttack = true;
+        IsMove = false;
+
         AttackCorutine = StartCoroutine(Attack());
     }
 
@@ -169,13 +191,20 @@ public class Player : MonoBehaviour
         Vector2 GoalPos = new Vector2(Range.TargetEnemy.Count <= 0 ? MovePosX : StendPosX, this.transform.position.y);
         this.transform.position = Vector2.Lerp(this.transform.position, GoalPos, MoveSpeed * Time.deltaTime);
 
-        if(GoalPos.x == MovePosX)
+        if(IsMove == false && IsAttack == false && GoalPos.x == MovePosX)
+        {
+            IsMove = true;
+            PlayerAnimation.OnWalkAnimation();
+        }
+
+        if (GoalPos.x == MovePosX)
         {
             MoveTime += Time.deltaTime;
 
             if(MoveTime > 2)
             {
                 EnemySpawner.Instance.StartEnemySpawn();
+
                 MoveTime = 0;
             }
         }
