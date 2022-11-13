@@ -101,13 +101,16 @@ public class SaleOfFoodManager : MonoBehaviour
 
     [SerializeField]
     [Tooltip("재료 이미지")]
-    private Image ingredientImage;
+    private Image[] ingredientImage;
 
     [SerializeField]
     [Tooltip("냄비 오브젝트")]
     private GameObject potObj;
 
     Color ingredientColor = new Color(1, 1, 1, 0);
+
+    WaitForSeconds oneSecondDelay = new WaitForSeconds(1);
+    WaitForSeconds inputDelay = new WaitForSeconds(0.08f);
     #endregion
 
     void Start()
@@ -237,11 +240,29 @@ public class SaleOfFoodManager : MonoBehaviour
 
     public void StopArrow() => isArrowMoving = false;
 
+    /// <summary>
+    /// 재료들 알파값 초기 애니메이션
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator AlphaPlus(int nowIndex)
+    {
+        float nowAlpha = 0;
+
+        while (nowAlpha < 1)
+        {
+            nowAlpha += Time.deltaTime * 6;
+            ingredientColor.a = nowAlpha;
+            ingredientImage[nowIndex].color = ingredientColor;
+            yield return null;
+        }
+    }
+
     IEnumerator ArrowMiniGameStart()
     {
         Vector2 arrowMoveSpeed = new Vector2(4f, 0);
         bool isLeft = false;
         int basicScore = 2;
+        int maxCount = 0;
         isArrowMoving = true;
 
         while (isArrowMoving)
@@ -262,35 +283,55 @@ public class SaleOfFoodManager : MonoBehaviour
             yield return null;
         }
 
-        ingredientImage.sprite = ingredientSprite[Random.Range(0, 4)];
+        yield return null;
 
-        for (int nowIndex = 0; nowIndex < 2; nowIndex++)
+        switch (arrowComponent.multiplication)
         {
-            ingredientImage.transform.DOLocalMoveY(900, 0);
-            float nowAlpha = 0;
-            while (nowAlpha < 1)
-            {
-                nowAlpha += Time.deltaTime;
-                ingredientColor.a = nowAlpha;
-                ingredientImage.color = ingredientColor;
-                yield return null;
-            }
-
-            ingredientImage.transform.DOLocalMoveY(420, 0.5f).SetEase(Ease.InBack);
-
-            while (ingredientImage.transform.localPosition.y > 420)
-            {
-                yield return null;
-            }
-
-            potObj.transform.DOScale(new Vector3(1.08f, 1.08f, 1), 0.2f);
-            yield return new WaitForSeconds(0.2f);
-            potObj.transform.DOScale(new Vector3(1, 1, 1), 0.2f);
-            yield return new WaitForSeconds(0.7f);
-
+            case 1:
+                maxCount = 1;
+                break;
+            case 2:
+                maxCount = 3;
+                break;
+            case 3:
+                maxCount = 5;
+                break;
         }
 
-        yield return new WaitForSeconds(1);
+        for (int nowIndex = 0; nowIndex < maxCount; nowIndex++)
+        {
+            ingredientImage[nowIndex].sprite = ingredientSprite[Random.Range(0, 4)];
+            ingredientImage[nowIndex].transform.DOLocalMoveY(900, 0);
+
+            StartCoroutine(AlphaPlus(nowIndex));
+
+            ingredientImage[nowIndex].transform.DOLocalMoveY(420, 0.5f).SetEase(Ease.InBack);
+            yield return inputDelay;
+        }
+
+        //switch (arrowComponent.multiplication)
+        //{
+        //    case -1:
+        //        yield return new WaitForSeconds(0.4f);
+        //        break;
+        //    case 2:
+        //        yield return new WaitForSeconds(0.5f);
+        //        break;
+        //    case 3:
+        //        yield return new WaitForSeconds(0.6f);
+        //        break;
+        //}
+
+        yield return new WaitForSeconds(0.2f);
+
+        for (int nowIndex = 0; nowIndex < maxCount; nowIndex++)
+        {
+            potObj.transform.DOScale(new Vector3(1.08f, 1.08f, 1), 0.1f);
+            yield return new WaitForSeconds(0.13f);
+            potObj.transform.DOScale(new Vector3(1, 1, 1), 0.1f);
+        }
+
+        yield return oneSecondDelay;
 
         GameManager.Instance.CurrentProficiency += (basicScore * arrowComponent.multiplication);
 

@@ -18,7 +18,7 @@ public class Arrow : MonoBehaviour
         }
         else
         {
-            multiplication = -1;
+            multiplication = 1;
         }
     }
 }
