@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8599648948146996942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletData:
   - {fileID: 11400000, guid: 9e358fa12ec70bc438627261677a42a5, type: 2}
+  - {fileID: 11400000, guid: 1000c95a6bd7eed4c92a1c6aa8a604aa, type: 2}
   spriteRenderer: {fileID: 8599648948146996939}
   BulletType: 0
   BulletImg: {fileID: 0}
@@ -131,6 +132,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  Target: {fileID: 0}
+  IsTarget: 0
+  TargetActive: 0
+  IsCritical: 0
+  CriticalDamage: 0
 --- !u!61 &7811071937534299930
 BoxCollider2D:
   m_ObjectHideFlags: 0
