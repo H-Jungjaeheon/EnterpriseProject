@@ -34,6 +34,8 @@ public class Coin : MonoBehaviour
         this.gameObject.GetComponent<SpriteRenderer>().DOFade(0.0f, 0.5f);
         yield return new WaitForSeconds(0.5f);
 
+        GameManager.Instance.MoneyUnit += CoinValue;
+
         yield break;
     }
 }

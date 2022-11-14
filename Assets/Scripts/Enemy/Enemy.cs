@@ -73,6 +73,12 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     EnemyAnim EnemyAnimation;
 
+    [Header("ÄÚÀÎ")]
+    [SerializeField]
+    private GameObject CoinObj;
+    [SerializeField]
+    private int CoinValue;
+
     private void Awake()
     {
         EnemySprite = this.GetComponent<SpriteRenderer>();
@@ -204,7 +210,14 @@ public class Enemy : MonoBehaviour
     {
         Player.Instance.Range.TargetEnemy.Remove(this.gameObject);
         EnemySpawner.ReturnEnemy(EnemyType, this);
-        GameManager.Instance.MoneyUnit += 100;
+
+        for (int i = 0; i < 3; i++)
+        {
+            Coin coin = Instantiate(CoinObj, this.transform.position, Quaternion.Euler(0,0,Random.Range(0.0f, 360.0f))).GetComponent<Coin>();
+
+            coin.CoinValue = this.CoinValue / 3;
+        }
+
         GameManager.Instance.GemUnit += 10;
 
         int cnt = TextObjs.Count;

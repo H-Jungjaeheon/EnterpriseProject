@@ -67,15 +67,6 @@ public class GameManager : Singleton<GameManager>
 
     [Tooltip("플레이어 기본 능력치 레벨들")]
     public int[] statsLevel;
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        MoneyUnit += 100000000000;
-        GemUnit += 1000;
-        CurrentProficiency += 10;
-    }
 
     // Update is called once per frame
     void Update()

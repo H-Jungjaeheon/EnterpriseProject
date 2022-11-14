@@ -288,6 +288,8 @@ MonoBehaviour:
   ParticleMaterial: {fileID: 2100000, guid: 6839acaafed65704daef63f89faf0534, type: 2}
   ParticlePrefab: {fileID: 6141688812485550459, guid: afbfe552eac65fe4a863268eac03d5f3, type: 3}
   EnemyAnimation: {fileID: 2366359836673471395}
+  CoinObj: {fileID: 6206293678686774288, guid: 85f222829c8e2cc418a506407542acb7, type: 3}
+  CoinValue: 100
 --- !u!61 &743787892426380635
 BoxCollider2D:
   m_ObjectHideFlags: 0
