@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BezierMissile : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class BezierMissile : MonoBehaviour
 
     public GameObject master;
     public GameObject enemy;
+
+    public bool IsEnemy = true;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -42,6 +45,15 @@ public class BezierMissile : MonoBehaviour
         if (hit) return;
         t += Time.deltaTime * spd;
         DrawTrajectory();
+
+        if(enemy.activeSelf == false && IsEnemy == true)
+        {
+            IsEnemy = false;
+
+            this.gameObject.GetComponent<SpriteRenderer>().DOFade(0, 1.5f);
+            Destroy(this.gameObject, 1.5f);
+        }
+
     }
 
     Vector2 PointSetting(Vector2 origin)

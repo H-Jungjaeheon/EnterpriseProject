@@ -22940,5 +22940,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkillEffect_Colleague
       objectReference: {fileID: 0}
+    - target: {fileID: 8996506897977387987, guid: 19576981d55141a44bf294a6492f906d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19576981d55141a44bf294a6492f906d, type: 3}
