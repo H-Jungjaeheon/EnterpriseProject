@@ -113,6 +113,24 @@ public class SaleOfFoodManager : MonoBehaviour
     WaitForSeconds inputDelay = new WaitForSeconds(0.08f);
     #endregion
 
+    #region 결과 요소 모음
+    [SerializeField]
+    [Tooltip("결과 창 오브젝트")]
+    private GameObject resultsObj;
+
+    [SerializeField]
+    [Tooltip("결과 창 이미지")]
+    private Image resultsImage;
+
+    [SerializeField]
+    [Tooltip("결과 창 텍스트")]
+    private Text resultsText;
+
+    [SerializeField]
+    [Tooltip("결과 창 스프라이트 모음")]
+    private Sprite[] resultsSprite;
+    #endregion
+
     void Start()
     {
         cookingCount = 1;
@@ -309,19 +327,6 @@ public class SaleOfFoodManager : MonoBehaviour
             yield return inputDelay;
         }
 
-        //switch (arrowComponent.multiplication)
-        //{
-        //    case -1:
-        //        yield return new WaitForSeconds(0.4f);
-        //        break;
-        //    case 2:
-        //        yield return new WaitForSeconds(0.5f);
-        //        break;
-        //    case 3:
-        //        yield return new WaitForSeconds(0.6f);
-        //        break;
-        //}
-
         yield return new WaitForSeconds(0.2f);
 
         for (int nowIndex = 0; nowIndex < maxCount; nowIndex++)
@@ -333,9 +338,16 @@ public class SaleOfFoodManager : MonoBehaviour
 
         yield return oneSecondDelay;
 
+        resultsText.text = $"명성도 : +{(basicScore * arrowComponent.multiplication)}";
+        resultsObj.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.OutBounce);
+        resultsImage.sprite = resultsSprite[arrowComponent.multiplication - 1];
+
+        yield return new WaitForSeconds(2.5f);
+
         GameManager.Instance.CurrentProficiency += (basicScore * arrowComponent.multiplication);
 
         theProductionObj.SetActive(false);
+        resultsObj.transform.DOScale(new Vector3(0, 0, 0), 0);
         isCustomerArrival = false;
         foodChooseAndMakePanelObj.SetActive(false);
         chooseADishObj.SetActive(true);
