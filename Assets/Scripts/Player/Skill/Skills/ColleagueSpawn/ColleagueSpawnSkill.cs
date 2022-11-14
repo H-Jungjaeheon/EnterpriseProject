@@ -1,29 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class ColleagueSpawnSkill : Skill
 {
     [SerializeField]
-    private int UpgreadAttackValue = 0;
+    private GameObject Colleague;
+
+    [SerializeField] public GameObject missile;
+    [SerializeField] public GameObject target;
+
+    [SerializeField] public float spd;
+    [SerializeField] public int shot = 12;
 
     protected override IEnumerator SkillEffect()
     {
         yield return null;
 
         #region SkillEffect
-        UpgreadAttackValue = (int)((float)Player.Instance.AttackPower * (70.0f / 100.0f));
-        Player.Instance.AttackPower += UpgreadAttackValue;
+        Colleague.SetActive(true);
+        Colleague.GetComponent<SpriteRenderer>().DOFade(1.0f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
 
-        OnSkillParticle(0);
+        yield return StartCoroutine(CreateMissile());
 
-        yield return new WaitForSeconds(SkillDuration);
-
-        OffSkillParticle(0);
-
-        Player.Instance.AttackPower -= UpgreadAttackValue;
+        Colleague.GetComponent<SpriteRenderer>().DOFade(0.0f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+        Colleague.SetActive(false);
         #endregion
 
         OffSkillEffect();
     }
+
+    IEnumerator CreateMissile()
+    {
+        float CurDuration = 0.0f;
+        float Time = 0.2f;
+
+        while (CurDuration < SkillDuration)
+        {
+            if (Player.Instance.Range.TargetEnemy.Count > 0)
+            {
+                GameObject bullet = Instantiate(missile, Colleague.transform);
+                bullet.GetComponent<BezierMissile>().master = Colleague.gameObject;
+                bullet.GetComponent<BezierMissile>().enemy = Player.Instance.Range.TargetEnemy[Random.Range(0, Player.Instance.Range.TargetEnemy.Count - 1)];
+            }
+
+            CurDuration += 0.2f;
+            yield return new WaitForSeconds(0.2f);
+        }
+        yield return null;
+    }
 }
+
