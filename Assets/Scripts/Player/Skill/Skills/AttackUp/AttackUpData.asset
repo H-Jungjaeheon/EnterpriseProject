@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillName: "\uACF5\uACA9\uB825 \uAC15\uD654"
   SkillImage: {fileID: 21300000, guid: 0e6227a74d7ce234d8e0ff6ddbc43d78, type: 3}
-  SkillCol: 10
+  SkillCol: 5
   SkillDuration: 3
