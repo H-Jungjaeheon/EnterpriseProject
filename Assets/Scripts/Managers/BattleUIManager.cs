@@ -128,7 +128,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
         }
     }
 
-    public void BasicStatSetting()
+    public void BasicStatSetting() // Ω∫≈» ºº∆√
     {
         basicStatFigureText[0].text = $"{Player.Instance.AttackPower}";
         basicStatFigureText[1].text = $"{Player.Instance.MaxHp}";
