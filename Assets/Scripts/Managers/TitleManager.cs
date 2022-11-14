@@ -33,7 +33,7 @@ public class TitleManager : MonoBehaviour
 
     private void ImageAnim()
     {
-        logoMoveSpeed.y = 1300 + Mathf.Sin(Time.time) * 50;
+        logoMoveSpeed.y = 1000 + Mathf.Sin(Time.time) * 50;
         logoImage.transform.localPosition = logoMoveSpeed;
     }
 

@@ -3328,6 +3328,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1958324478, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3899307102218605548, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
       propertyPath: m_Name
       value: LongEnemy
@@ -3781,6 +3785,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1933117910, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3899307102218605548, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
       propertyPath: m_Name
       value: ShortEnemy
@@ -10590,6 +10598,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1039199441, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3899307102218605548, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
       propertyPath: m_Name
       value: AirEnemy
@@ -14653,7 +14665,14 @@ MonoBehaviour:
   SkillEquieIdx: 0
   SkillParticles: []
   SpawnBase: {fileID: 1957724269}
-  SpawnBaseSpriteRenderer: {fileID: 0}
+  SpawnBaseSpriteRenderer: {fileID: 1957724271}
+  Bullets:
+  - {fileID: 1216769730160516566, guid: db7eb86eb16411f43b09d619e726e8e8, type: 3}
+  - {fileID: 2799475158118341494, guid: 0acd364ec0c513541ba82f7951b95fac, type: 3}
+  - {fileID: 8877098901890251801, guid: dc12b5d616876a745aa00ab377f39fd8, type: 3}
+  CurShootCnt: 0
+  MaxShootCnt: 10
+  TikShootCnt: 0
 --- !u!1 &1437737393
 GameObject:
   m_ObjectHideFlags: 0
@@ -19836,9 +19855,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 8
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: c470e20a2fe6d5546b66077df69a5bd8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -20593,7 +20612,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 7
+  m_SortingOrder: 12
   m_TargetDisplay: 0
 --- !u!114 &2011930094
 MonoBehaviour:

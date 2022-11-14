@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Spine.Unity.Examples;
 using DG.Tweening;
 using TMPro;
 
@@ -67,6 +68,10 @@ public class Enemy : MonoBehaviour
     Material ParticleMaterial;
     [SerializeField]
     GameObject ParticlePrefab;
+
+    [Header("애니메이션 변수")]
+    [SerializeField]
+    EnemyAnim EnemyAnimation;
 
     private void Awake()
     {
@@ -162,10 +167,12 @@ public class Enemy : MonoBehaviour
             switch (Type)
             {
                 case BehaviorType.Attack:
+                    EnemyAnimation.OnIdleAnimation();
                     StartAttack();
                     break;
 
                 case BehaviorType.Move:
+                    EnemyAnimation.OnWalkAnimation();
                     StopAttack();
                     break;
 
@@ -189,6 +196,8 @@ public class Enemy : MonoBehaviour
         this.AttackDistance = Data[Select].AttackDistance;
         this.AttackDelay = Data[Select].AttackDelay;
         this.MoveSpeed = Data[Select].MoveSpeed;
+
+        EnemyAnimation.AnimationSetting(Select);
     }
 
     void Die()
