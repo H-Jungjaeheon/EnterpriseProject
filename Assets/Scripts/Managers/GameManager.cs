@@ -7,8 +7,6 @@ public class GameManager : Singleton<GameManager>
 {
     public class SaveDatas
     {
-        public int hpLevel;
-        public int damageLevel;
     }
 
 
