@@ -162,15 +162,6 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
         goodsTextRequiredForUpgrade[statsToUpgradeCurrently].text = $"강화\n{goodsRequiredForUpgradeString}원";
 
-        //if (statsToUpgradeCurrently == (int)UpgradeableBasicStats.Damage)
-        //{
-        //    playerComponent.AttackPower++; //공격력 증가(임시 연산)
-        //    basicStatFigureText[statsToUpgradeCurrently].text = $"{playerComponent.AttackPower}";
-        //}
-        //else
-        //{
-        //    basicStatFigureText[statsToUpgradeCurrently].text = $"{gmInstance.statsLevel[statsToUpgradeCurrently]}";
-        //}
         switch (statsToUpgradeCurrently)
         {
             case (int)UpgradeableBasicStats.Damage:
