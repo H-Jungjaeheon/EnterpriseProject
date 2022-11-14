@@ -32,6 +32,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
     #region 현재 상태 표기 관련 변수
     public Contents nowContents;
 
+    private bool isClickDown;
     #endregion
 
     #region 콘텐츠 창 관련 변수들
@@ -91,6 +92,8 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     private GameManager gmInstance;
 
+    private float nowClickTime;
+
     void Start()
     {
         StartSetting();
@@ -124,7 +127,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
             goodsRequiredForUpgradeString = ConvertGoodsToString(goodsRequiredForUpgrade[nowIndex]);
 
-            goodsTextRequiredForUpgrade[nowIndex].text = $"강화\n{goodsRequiredForUpgradeString}원";
+            goodsTextRequiredForUpgrade[nowIndex].text = $"강화\n{goodsRequiredForUpgradeString}";
         }
     }
 
@@ -138,12 +141,35 @@ public class BattleUIManager : Singleton<BattleUIManager>
         basicStatFigureText[5].text = $"{Player.Instance.CriticalPercent}%";
     }
 
-    public void BasicStatUpgrade(int statsToUpgradeCurrently) //스탯 업그레이드 함수
+    public void NowUpgradeButtonClick(int statsToUpgradeCurrently)
     {
-        var playerComponent = player.GetComponent<Player>();
-        string goodsRequiredForUpgradeString;
+        isClickDown = true;
+        StartCoroutine(ButtonClicking(statsToUpgradeCurrently));
+    }
 
-        if (gmInstance.MoneyUnit < goodsRequiredForUpgrade[statsToUpgradeCurrently])
+    public void NowUpgradeButtonClickEnd(int statsToUpgradeCurrently)
+    {
+        StatUpgrade(statsToUpgradeCurrently);
+        nowClickTime = 0;
+        isClickDown = false;
+    }
+
+    IEnumerator ButtonClicking(int statsToUpgradeCurrently)
+    {
+        while (isClickDown)
+        {
+            nowClickTime += Time.deltaTime;
+            if (nowClickTime >= 0.5f)
+            {
+                StatUpgrade(statsToUpgradeCurrently);
+            }
+            yield return null;
+        }
+    }
+
+    private void StatUpgrade(int statsToUpgradeCurrently) //스탯 업그레이드 함수
+    {
+        if (isClickDown == false || gmInstance.MoneyUnit < goodsRequiredForUpgrade[statsToUpgradeCurrently])
         {
             return;
         }
@@ -151,6 +177,9 @@ public class BattleUIManager : Singleton<BattleUIManager>
         {
             gmInstance.MoneyUnit -= goodsRequiredForUpgrade[statsToUpgradeCurrently];
         }
+
+        var playerComponent = player.GetComponent<Player>();
+        string goodsRequiredForUpgradeString;
 
         gmInstance.statsLevel[statsToUpgradeCurrently]++; //레벨 증가
 
@@ -160,7 +189,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
         goodsRequiredForUpgradeString = ConvertGoodsToString(goodsRequiredForUpgrade[statsToUpgradeCurrently]);
 
-        goodsTextRequiredForUpgrade[statsToUpgradeCurrently].text = $"강화\n{goodsRequiredForUpgradeString}원";
+        goodsTextRequiredForUpgrade[statsToUpgradeCurrently].text = $"강화\n{goodsRequiredForUpgradeString}";
 
         switch (statsToUpgradeCurrently)
         {

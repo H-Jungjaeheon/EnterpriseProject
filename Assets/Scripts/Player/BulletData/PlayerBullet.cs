@@ -109,7 +109,7 @@ public class PlayerBullet : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))
         {
-            Debug.Log("Attack");
+            //Debug.Log("Attack");
             other.GetComponent<Enemy>().StartTakeDamage(BulletPower, IsCritical);
 
             IsTarget = false;
