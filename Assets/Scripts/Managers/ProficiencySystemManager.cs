@@ -185,7 +185,7 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
 
             TextReSettings();
         }
-        else if(isNowChooseCharacterEquiping[nowChooseCharacterIndex] == false)
+        else if(isNowChooseCharacterUnlock[nowChooseCharacterIndex] && isNowChooseCharacterEquiping[nowChooseCharacterIndex] == false)
         {
             for (int nowIndex = minCharacterIndex; nowIndex <= maxCharacterIndex; nowIndex++)
             {
