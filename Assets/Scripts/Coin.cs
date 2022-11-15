@@ -35,6 +35,7 @@ public class Coin : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         GameManager.Instance.MoneyUnit += CoinValue;
+        Destroy(this.gameObject);
 
         yield break;
     }

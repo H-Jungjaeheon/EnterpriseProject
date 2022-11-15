@@ -233,18 +233,28 @@ public class EnemySpawner : MonoBehaviour
     {
         yield return null;
 
-        for (int i = 0; i < EnemyData.Length; i++)
+        //일반스테이지 일 때
+        if (StageData.IsBossStage == "FALSE")
         {
-            if (EnemyData[i].EnemyValue > 0)
+            for (int i = 0; i < EnemyData.Length; i++)
             {
-                for (int j = 0; j < EnemyData[i].EnemyValue; j++)
+                if (EnemyData[i].EnemyValue > 0)
                 {
-                    Enemy enemy = Instance.GetEnemy(EnemyData[i].Type, EnemyData[i].EnemyForm);
-                    enemy.transform.position = new Vector2(this.transform.position.x, Random.Range(MinY, MaxY));
+                    for (int j = 0; j < EnemyData[i].EnemyValue; j++)
+                    {
+                        Enemy enemy = Instance.GetEnemy(EnemyData[i].Type, EnemyData[i].EnemyForm);
+                        enemy.transform.position = new Vector2(this.transform.position.x, Random.Range(MinY, MaxY));
 
-                    yield return new WaitForSeconds(Random.Range(MinTime, MaxTime));
+                        yield return new WaitForSeconds(Random.Range(MinTime, MaxTime));
+                    }
                 }
             }
+        }
+
+        //일반스테이지가 아닐 때
+        else
+        {
+
         }
     }
     #endregion

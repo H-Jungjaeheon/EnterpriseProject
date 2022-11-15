@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PartnerImg: {fileID: 21300000, guid: 03f5f6504fc4b2d4aa259bdab470a799, type: 3}
   PartnerName: "\uAC00\uB77D\uC774(\uC813)"
-  AttackPower: 1000
-  AttackDelay: 0.5
+  AttackPower: 100
+  AttackDelay: 2
   AttackBuff: 100
   HpBuff: 1500
   BuyCost: 1000
