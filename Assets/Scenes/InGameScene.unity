@@ -16909,7 +16909,20 @@ MonoBehaviour:
   masterVolumeBGM: 0.3
   BGMClip:
   - {fileID: 8300000, guid: 446b7f400cbff9842be0e4303feed238, type: 3}
-  SFXClip: []
+  SFXClip:
+  - {fileID: 8300000, guid: af124cfbfc036d8428ff5df939894167, type: 3}
+  - {fileID: 8300000, guid: b5811567a3c48904794cac04843bc558, type: 3}
+  - {fileID: 8300000, guid: 31480fb2e4a2079419bc7949c4ae25ab, type: 3}
+  - {fileID: 8300000, guid: e715cd7f495722e4cb31b8ea73b650b9, type: 3}
+  - {fileID: 8300000, guid: be08400ff4e74e24783d25cb06ead396, type: 3}
+  - {fileID: 8300000, guid: 6ab74b008c26f8840bcdee48298e2b8c, type: 3}
+  - {fileID: 8300000, guid: ecce3af4c88a5d24f94c2c7f16be6d5a, type: 3}
+  - {fileID: 8300000, guid: c80663ba3321efe48a293423ba52c24a, type: 3}
+  - {fileID: 8300000, guid: 5b5c3ccb7a48258428e4dbf4b6d71bec, type: 3}
+  - {fileID: 8300000, guid: 604fd34b209333e4bb1a4f103bb56e94, type: 3}
+  - {fileID: 8300000, guid: dad0080434a5f9a4b9fb64f1ce944e37, type: 3}
+  - {fileID: 8300000, guid: 66bdb435c93d82e4da1cffe97716f434, type: 3}
+  - {fileID: 8300000, guid: eddef73c1f422084d94c7bc243a587ea, type: 3}
   OtherPanel: {fileID: 0}
 --- !u!82 &1608969553
 AudioSource:

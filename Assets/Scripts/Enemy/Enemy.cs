@@ -226,6 +226,11 @@ public class Enemy : MonoBehaviour
             TextObjs.RemoveAt(0);
         }
 
+        for (int i = 0; i < 3; i++)
+        {
+            BattleSceneManager.Instance.quantityOfMaterials[i]++;
+        }
+
         ParticleSystemRenderer Particle = Instantiate(ParticlePrefab, this.transform.position, Quaternion.identity).GetComponent<ParticleSystemRenderer>();
         Particle.material = ParticleMaterial;
     }
