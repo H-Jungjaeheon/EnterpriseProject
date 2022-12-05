@@ -71,10 +71,6 @@ public class Player : MonoBehaviour
     //플레이어 숙련도 스크립터블 들어갈 예정
     public BulletData[] BulletData;
 
-    [Header("애니메이션 변수")]
-    [SerializeField]
-    PlayerAnim PlayerAnimation;
-
     private void Awake()
     {
         Instance = this;
@@ -108,22 +104,12 @@ public class Player : MonoBehaviour
         this.CriticalPercent = SelectPlayerData.CriticalPercent;
 
         //this.GetComponent<SpriteRenderer>().sprite = SelectPlayerData.PlayerSkinImg;
-
-        PlayerAnimation.AnimationSetting();
     }
 
     public void CharacterChange(int idx)
     {
         SelectNumber = idx;
         BasicSetting();
-
-        PlayerAnimation.AnimationSetting();
-
-        if (IsAttack == true && IsMove == false)
-            PlayerAnimation.OnIdleAnimation();
-
-        else
-            PlayerAnimation.OnWalkAnimation();
     }
 
     #region Attack
@@ -142,8 +128,6 @@ public class Player : MonoBehaviour
 
     void StartAttack()
     {
-        PlayerAnimation.OnIdleAnimation();
-
         IsAttack = true;
         IsMove = false;
 
@@ -193,7 +177,6 @@ public class Player : MonoBehaviour
         if(IsMove == false && IsAttack == false && GoalPos.x == MovePosX)
         {
             IsMove = true;
-            PlayerAnimation.OnWalkAnimation();
         }
 
         if (GoalPos.x == MovePosX)

@@ -69,10 +69,6 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     GameObject ParticlePrefab;
 
-    [Header("애니메이션 변수")]
-    [SerializeField]
-    EnemyAnim EnemyAnimation;
-
     [Header("코인")]
     [SerializeField]
     private GameObject CoinObj;
@@ -173,12 +169,10 @@ public class Enemy : MonoBehaviour
             switch (Type)
             {
                 case BehaviorType.Attack:
-                    EnemyAnimation.OnIdleAnimation();
                     StartAttack();
                     break;
 
                 case BehaviorType.Move:
-                    EnemyAnimation.OnWalkAnimation();
                     StopAttack();
                     break;
 
@@ -202,8 +196,6 @@ public class Enemy : MonoBehaviour
         this.AttackDistance = Data[Select].AttackDistance;
         this.AttackDelay = Data[Select].AttackDelay;
         this.MoveSpeed = Data[Select].MoveSpeed;
-
-        EnemyAnimation.AnimationSetting(Select);
     }
 
     void Die()
