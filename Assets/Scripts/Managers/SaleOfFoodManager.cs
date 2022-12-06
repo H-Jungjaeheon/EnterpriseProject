@@ -275,6 +275,10 @@ public class SaleOfFoodManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 요리제작 시스템 : 타이밍 맞추는 미니게임 함수
+    /// </summary>
+    /// <returns></returns>
     IEnumerator ArrowMiniGameStart()
     {
         Vector2 arrowMoveSpeed = new Vector2(4f, 0);
@@ -289,7 +293,9 @@ public class SaleOfFoodManager : MonoBehaviour
             {
                 break;
             }
+
             arrowObj.transform.position += isLeft ? (Vector3)arrowMoveSpeed * -Time.deltaTime : (Vector3)arrowMoveSpeed * Time.deltaTime;
+            
             if (isLeft && arrowObj.transform.position.x <= -1.5f)
             {
                 isLeft = false;
@@ -316,7 +322,36 @@ public class SaleOfFoodManager : MonoBehaviour
                 break;
         }
 
-        for (int nowIndex = 0; nowIndex < maxCount; nowIndex++)
+        int[] failIndex = new int[5 - maxCount]; //성공도에 따라서 실패 애니메이션 재생할 음식 인덱스 배열
+        bool isComplete; //중복 제거 완료 판별
+
+        for (int nowIndex = 0; nowIndex < failIndex.Length; nowIndex++) //중복 제거 작업
+        {
+            failIndex[nowIndex] = Random.Range(0, 5); //처음 랜덤으로 뽑기
+
+            isComplete = false;
+
+            if (nowIndex != 0) //첫번째는 그냥 통과
+            {
+                while (isComplete == false)
+                {
+                    isComplete = true;
+
+                    for (int checkIndex = 0; checkIndex < nowIndex; checkIndex++)
+                    {
+                        if (failIndex[nowIndex] == failIndex[checkIndex]) //이전에 뽑힌 값들과 같다면 다시 뽑기(반복)
+                        {
+                            failIndex[nowIndex] = Random.Range(0, 5);
+                            isComplete = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        //for : failIndex전체와 값 비교해서 failIndex전체값 중 하나라도 현재 인덱스와 비슷하면 실패 애니메이션 실행 or 성공 애니메이션 실행
+
+        for (int nowIndex = 0; nowIndex < 5; nowIndex++)
         {
             ingredientImage[nowIndex].sprite = ingredientSprite[Random.Range(0, 4)];
             ingredientImage[nowIndex].transform.DOLocalMoveY(900, 0);
