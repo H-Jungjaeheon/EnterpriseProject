@@ -110,7 +110,7 @@ public class SaleOfFoodManager : MonoBehaviour
     Color ingredientColor = new Color(1, 1, 1, 0);
 
     WaitForSeconds oneSecondDelay = new WaitForSeconds(1);
-    WaitForSeconds inputDelay = new WaitForSeconds(0.08f);
+    WaitForSeconds inputDelay = new WaitForSeconds(0.3f);
     #endregion
 
     #region 결과 요소 모음
@@ -259,8 +259,9 @@ public class SaleOfFoodManager : MonoBehaviour
     public void StopArrow() => isArrowMoving = false;
 
     /// <summary>
-    /// 재료들 알파값 초기 애니메이션
+    /// 재료들 소환 애니메이션
     /// </summary>
+    /// <param name="nowIndex"> 현재 소환될 재료 오브젝트 인덱스 </param>
     /// <returns></returns>
     IEnumerator AlphaPlus(int nowIndex)
     {
@@ -269,6 +270,24 @@ public class SaleOfFoodManager : MonoBehaviour
         while (nowAlpha < 1)
         {
             nowAlpha += Time.deltaTime * 6;
+            ingredientColor.a = nowAlpha;
+            ingredientImage[nowIndex].color = ingredientColor;
+            yield return null;
+        }
+    }
+
+    /// <summary>
+    /// 재료들 소멸 애니메이션
+    /// </summary>
+    /// <param name="nowIndex"> 현재 소멸될 재료 오브젝트 인덱스 </param>
+    /// <returns></returns>
+    IEnumerator AlphaMinus(int nowIndex)
+    {
+        float nowAlpha = 1;
+
+        while (nowAlpha > 0)
+        {
+            nowAlpha -= Time.deltaTime * 6;
             ingredientColor.a = nowAlpha;
             ingredientImage[nowIndex].color = ingredientColor;
             yield return null;
@@ -322,53 +341,57 @@ public class SaleOfFoodManager : MonoBehaviour
                 break;
         }
 
-        int[] failIndex = new int[5 - maxCount]; //성공도에 따라서 실패 애니메이션 재생할 음식 인덱스 배열
+        bool[] failIndex = new bool[5]; //성공도에 따라서 실패 애니메이션 재생할 음식 인덱스 배열
         bool isComplete; //중복 제거 완료 판별
+        int randIndex;
 
-        for (int nowIndex = 0; nowIndex < failIndex.Length; nowIndex++) //중복 제거 작업
+        for (int nowIndex = 0; nowIndex < 5 - maxCount; nowIndex++) //중복 제거 작업
         {
-            failIndex[nowIndex] = Random.Range(0, 5); //처음 랜덤으로 뽑기
-
+            randIndex = Random.Range(0, 5); //처음 랜덤으로 뽑기
             isComplete = false;
 
-            if (nowIndex != 0) //첫번째는 그냥 통과
+            while (isComplete == false)
             {
-                while (isComplete == false)
-                {
-                    isComplete = true;
+                isComplete = true;
 
-                    for (int checkIndex = 0; checkIndex < nowIndex; checkIndex++)
+                for (int checkIndex = 0; checkIndex < 5; checkIndex++) //failIndex 배열 전체를 돌며 현재 뽑힌 값에 대한 중복 제거
+                {
+                    if (failIndex[randIndex] == true) //중복이라면, 다시 뽑기
                     {
-                        if (failIndex[nowIndex] == failIndex[checkIndex]) //이전에 뽑힌 값들과 같다면 다시 뽑기(반복)
-                        {
-                            failIndex[nowIndex] = Random.Range(0, 5);
-                            isComplete = false;
-                        }
+                        randIndex = Random.Range(0, 5);
+                        isComplete = false;
                     }
                 }
             }
+
+            failIndex[randIndex] = true; //중복이 아니라면, 현재 인덱스의 재료 애니메이션은 실패 애니메이션으로 저장
         }
 
-        //for : failIndex전체와 값 비교해서 failIndex전체값 중 하나라도 현재 인덱스와 비슷하면 실패 애니메이션 실행 or 성공 애니메이션 실행
-
-        for (int nowIndex = 0; nowIndex < 5; nowIndex++)
+        for (int nowIndex = 0; nowIndex < 5; nowIndex++) //재료 애니메이션 실행
         {
             ingredientImage[nowIndex].sprite = ingredientSprite[Random.Range(0, 4)];
             ingredientImage[nowIndex].transform.DOLocalMoveY(900, 0);
-
             StartCoroutine(AlphaPlus(nowIndex));
 
-            ingredientImage[nowIndex].transform.DOLocalMoveY(420, 0.5f).SetEase(Ease.InBack);
-            yield return inputDelay;
-        }
+            if (failIndex[nowIndex] == false) //현재 인덱스의 이미지가 성공 애니메이션을 띄워야 하는 경우
+            {
+                ingredientImage[nowIndex].transform.DOLocalMoveY(420, 0.5f).SetEase(Ease.InBack);
 
-        yield return new WaitForSeconds(0.2f);
+                yield return inputDelay;
 
-        for (int nowIndex = 0; nowIndex < maxCount; nowIndex++)
-        {
-            potObj.transform.DOScale(new Vector3(1.08f, 1.08f, 1), 0.1f);
-            yield return new WaitForSeconds(0.13f);
-            potObj.transform.DOScale(new Vector3(1, 1, 1), 0.1f);
+                potObj.transform.DOScale(new Vector3(1.08f, 1.08f, 1), 0.1f);
+                yield return new WaitForSeconds(0.13f);
+                potObj.transform.DOScale(new Vector3(1, 1, 1), 0.1f);
+            }
+            else
+            {
+                Vector3 targetPos = new Vector3(300, -500, 0);
+                ingredientImage[nowIndex].transform.DOLocalJump(targetPos, 200, 1, 4);
+
+                yield return inputDelay;
+
+                StartCoroutine(AlphaMinus(nowIndex));
+            }
         }
 
         yield return oneSecondDelay;
