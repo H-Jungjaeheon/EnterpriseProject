@@ -287,7 +287,7 @@ public class SaleOfFoodManager : MonoBehaviour
 
         while (nowAlpha > 0)
         {
-            nowAlpha -= Time.deltaTime * 6;
+            nowAlpha -= Time.deltaTime;
             ingredientColor.a = nowAlpha;
             ingredientImage[nowIndex].color = ingredientColor;
             yield return null;
@@ -370,12 +370,12 @@ public class SaleOfFoodManager : MonoBehaviour
         for (int nowIndex = 0; nowIndex < 5; nowIndex++) //재료 애니메이션 실행
         {
             ingredientImage[nowIndex].sprite = ingredientSprite[Random.Range(0, 4)];
-            ingredientImage[nowIndex].transform.DOLocalMoveY(900, 0);
+            ingredientImage[nowIndex].transform.DOLocalMove(new Vector2(0, 900), 0);
             StartCoroutine(AlphaPlus(nowIndex));
 
             if (failIndex[nowIndex] == false) //현재 인덱스의 이미지가 성공 애니메이션을 띄워야 하는 경우
             {
-                ingredientImage[nowIndex].transform.DOLocalMoveY(420, 0.5f).SetEase(Ease.InBack);
+                ingredientImage[nowIndex].transform.DOLocalMoveY(420, 0.4f).SetEase(Ease.InBack);
 
                 yield return inputDelay;
 
@@ -385,10 +385,12 @@ public class SaleOfFoodManager : MonoBehaviour
             }
             else
             {
-                Vector3 targetPos = new Vector3(300, -500, 0);
-                ingredientImage[nowIndex].transform.DOLocalJump(targetPos, 200, 1, 4);
+                ingredientImage[nowIndex].transform.DOLocalMoveY(611, 0.2f).SetEase(Ease.InBack);
 
-                yield return inputDelay;
+                yield return new WaitForSeconds(0.5f);
+
+                ingredientImage[nowIndex].transform.DOLocalMoveY(400, 3).SetEase(Ease.InBack);
+                ingredientImage[nowIndex].transform.DOLocalMoveX(-100, 3);
 
                 StartCoroutine(AlphaMinus(nowIndex));
             }
