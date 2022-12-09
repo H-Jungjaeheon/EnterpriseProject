@@ -96,18 +96,8 @@ public class SaleOfFoodManager : MonoBehaviour
 
     #region 재료 투입 연출 요소 모음
     [SerializeField]
-    [Tooltip("재료 리소스들")]
-    private Sprite[] ingredientSprite;
-
-    [SerializeField]
-    [Tooltip("재료 이미지")]
-    private Image[] ingredientImage;
-
-    [SerializeField]
-    [Tooltip("냄비 오브젝트")]
-    private GameObject potObj;
-
-    Color ingredientColor = new Color(1, 1, 1, 0);
+    [Tooltip("재료 투입 애니메이션에 사용될 재료 오브젝트 컴포넌트")]
+    private IngredientObj[] ingredientCom;
 
     WaitForSeconds oneSecondDelay = new WaitForSeconds(1);
     WaitForSeconds inputDelay = new WaitForSeconds(0.3f);
@@ -259,42 +249,6 @@ public class SaleOfFoodManager : MonoBehaviour
     public void StopArrow() => isArrowMoving = false;
 
     /// <summary>
-    /// 재료들 소환 애니메이션
-    /// </summary>
-    /// <param name="nowIndex"> 현재 소환될 재료 오브젝트 인덱스 </param>
-    /// <returns></returns>
-    IEnumerator AlphaPlus(int nowIndex)
-    {
-        float nowAlpha = 0;
-
-        while (nowAlpha < 1)
-        {
-            nowAlpha += Time.deltaTime * 6;
-            ingredientColor.a = nowAlpha;
-            ingredientImage[nowIndex].color = ingredientColor;
-            yield return null;
-        }
-    }
-
-    /// <summary>
-    /// 재료들 소멸 애니메이션
-    /// </summary>
-    /// <param name="nowIndex"> 현재 소멸될 재료 오브젝트 인덱스 </param>
-    /// <returns></returns>
-    IEnumerator AlphaMinus(int nowIndex)
-    {
-        float nowAlpha = 1;
-
-        while (nowAlpha > 0)
-        {
-            nowAlpha -= Time.deltaTime;
-            ingredientColor.a = nowAlpha;
-            ingredientImage[nowIndex].color = ingredientColor;
-            yield return null;
-        }
-    }
-
-    /// <summary>
     /// 요리제작 시스템 : 타이밍 맞추는 미니게임 함수
     /// </summary>
     /// <returns></returns>
@@ -369,34 +323,17 @@ public class SaleOfFoodManager : MonoBehaviour
 
         for (int nowIndex = 0; nowIndex < 5; nowIndex++) //재료 애니메이션 실행
         {
-            ingredientImage[nowIndex].sprite = ingredientSprite[Random.Range(0, 4)];
-            ingredientImage[nowIndex].transform.DOLocalMove(new Vector2(0, 900), 0);
-            StartCoroutine(AlphaPlus(nowIndex));
-
             if (failIndex[nowIndex] == false) //현재 인덱스의 이미지가 성공 애니메이션을 띄워야 하는 경우
             {
-                ingredientImage[nowIndex].transform.DOLocalMoveY(420, 0.4f).SetEase(Ease.InBack);
-
-                yield return inputDelay;
-
-                potObj.transform.DOScale(new Vector3(1.08f, 1.08f, 1), 0.1f);
-                yield return new WaitForSeconds(0.13f);
-                potObj.transform.DOScale(new Vector3(1, 1, 1), 0.1f);
+                ingredientCom[nowIndex].StartIngredientAnim(false);
             }
             else
             {
-                ingredientImage[nowIndex].transform.DOLocalMoveY(611, 0.2f).SetEase(Ease.InBack);
-
-                yield return new WaitForSeconds(0.5f);
-
-                ingredientImage[nowIndex].transform.DOLocalMoveY(400, 3).SetEase(Ease.InBack);
-                ingredientImage[nowIndex].transform.DOLocalMoveX(-100, 3);
-
-                StartCoroutine(AlphaMinus(nowIndex));
+                ingredientCom[nowIndex].StartIngredientAnim(true);
             }
         }
 
-        yield return oneSecondDelay;
+        yield return new WaitForSeconds(5);
 
         resultsText.text = $"명성도 : +{(basicScore * arrowComponent.multiplication)}";
         resultsObj.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.OutBounce);
