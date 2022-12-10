@@ -83,6 +83,13 @@ public class SaleOfFoodManager : MonoBehaviour
     [Tooltip("화살표 컴포넌트")]
     private Arrow arrowComponent;
 
+    [SerializeField]
+    [Tooltip("냄비 오브젝트")]
+    public GameObject potObj;
+
+    [Tooltip("재료 리소스들(애니메이션에 사용)")]
+    public Sprite[] foodResources;
+
     private Vector3 customerSpeed = new Vector3(1, 0, 0);
 
     Color redTextColor = new Color(1, 0, 0);

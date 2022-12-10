@@ -16,16 +16,12 @@ public class IngredientObj : MonoBehaviour
     private SpriteRenderer sR;
 
     [SerializeField]
-    [Tooltip("재료 리소스들")]
-    private Sprite[] ingredientSprite;
-
-    [SerializeField]
-    [Tooltip("냄비 오브젝트")]
-    private GameObject potObj;
-
-    [SerializeField]
     [Tooltip("해당 오브젝트의 리지드바디(2D) 컴포넌트")]
     private Rigidbody2D rigid;
+
+    [SerializeField]
+    [Tooltip("요리 제작 시스템 매니저 컴포넌트")]
+    private SaleOfFoodManager systemManager;
 
     private int directionIndex; //실패 애니메이션의 튕기는 방향을 정할 랜덤값
 
@@ -34,6 +30,8 @@ public class IngredientObj : MonoBehaviour
     private Color ingredientColor = new Color(1, 1, 1, 0); //투명도 초기화용 색
 
     private Vector3 initialPos = new Vector3(0, 900, 0); //오브젝트 위치 초기화
+
+    private Vector3 spinSpeed = new Vector3(0, 0, 0); //애니메이션에 사용될 회전 속도
 
     private WaitForSeconds animDelay = new WaitForSeconds(0.4f); //애니메이션 딜레이
 
@@ -46,7 +44,7 @@ public class IngredientObj : MonoBehaviour
 
     private IEnumerator IngredientAnim(bool isFail)
     {
-        sR.sprite = ingredientSprite[Random.Range(0, 4)];
+        sR.sprite = systemManager.foodResources[Random.Range(0, 4)];
 
         StartCoroutine(AlphaPlus());
 
@@ -56,9 +54,9 @@ public class IngredientObj : MonoBehaviour
 
             yield return animDelay;
 
-            potObj.transform.DOScale(new Vector3(128f, 148f, 1), 0.1f);
+            systemManager.potObj.transform.DOScale(new Vector3(128f, 148f, 1), 0.1f);
             yield return new WaitForSeconds(0.13f);
-            potObj.transform.DOScale(new Vector3(110, 130, 1), 0.1f);
+            systemManager.potObj.transform.DOScale(new Vector3(110, 130, 1), 0.1f);
         }
         else
         {
@@ -94,11 +92,11 @@ public class IngredientObj : MonoBehaviour
 
     IEnumerator SpinRotation()
     {
-        Vector3 spinSpeed = new Vector3(0, 0, 50);
+        spinSpeed.z = Random.Range(100, 301);
 
         while (true)
         {
-            transform.rotation = Quaternion.Euler(spinSpeed * Time.deltaTime);
+            transform.eulerAngles += spinSpeed * Time.deltaTime;
             yield return null;
         }
     }
@@ -136,7 +134,13 @@ public class IngredientObj : MonoBehaviour
             yield return null;
         }
 
-        StopCoroutine(spinCoroutine);
+        if (spinCoroutine != null)
+        {
+            StopCoroutine(spinCoroutine);
+        }
+
+        spinSpeed.z = 0;
+        transform.rotation = Quaternion.Euler(spinSpeed);
         sR.sortingOrder = 101;
         rigid.gravityScale = 0;
         rigid.velocity = Vector2.zero;
