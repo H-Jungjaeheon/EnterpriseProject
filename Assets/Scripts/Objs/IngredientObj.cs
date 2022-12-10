@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+public enum NowDirection
+{
+    Left,
+    Right
+}
+
 public class IngredientObj : MonoBehaviour
 {
     [SerializeField]
@@ -21,7 +27,17 @@ public class IngredientObj : MonoBehaviour
     [Tooltip("해당 오브젝트의 리지드바디(2D) 컴포넌트")]
     private Rigidbody2D rigid;
 
-    Color ingredientColor = new Color(1, 1, 1, 0);
+    private int directionIndex; //실패 애니메이션의 튕기는 방향을 정할 랜덤값
+
+    private float powerIndex; //실패 애니메이션의 날아가는 정도를 정할 랜덤값
+
+    private Color ingredientColor = new Color(1, 1, 1, 0); //투명도 초기화용 색
+
+    private Vector3 initialPos = new Vector3(0, 900, 0); //오브젝트 위치 초기화
+
+    private WaitForSeconds animDelay = new WaitForSeconds(0.4f); //애니메이션 딜레이
+
+    private IEnumerator spinCoroutine;
 
     public void StartIngredientAnim(bool isFail)
     {
@@ -31,39 +47,60 @@ public class IngredientObj : MonoBehaviour
     private IEnumerator IngredientAnim(bool isFail)
     {
         sR.sprite = ingredientSprite[Random.Range(0, 4)];
-        sR.transform.DOLocalMove(new Vector2(0, 900), 0);
 
         StartCoroutine(AlphaPlus());
 
         if (isFail == false)
         {
-            sR.transform.DOLocalMoveY(550, 0.4f).SetEase(Ease.InBack);
+            sR.transform.DOLocalMoveY(450, 0.4f).SetEase(Ease.InBack);
 
-            yield return new WaitForSeconds(0.4f);
+            yield return animDelay;
 
-            ingredientColor.a = 0;
-            sR.color = ingredientColor;
-
-            potObj.transform.DOScale(new Vector3(1.08f, 1.08f, 1), 0.1f);
+            potObj.transform.DOScale(new Vector3(128f, 148f, 1), 0.1f);
             yield return new WaitForSeconds(0.13f);
-            potObj.transform.DOScale(new Vector3(1, 1, 1), 0.1f);
+            potObj.transform.DOScale(new Vector3(110, 130, 1), 0.1f);
         }
         else
         {
+            directionIndex = Random.Range(0, 2);
+            powerIndex = Random.Range(1, 5);
+
+            sR.sortingOrder = 103;
+
             sR.transform.DOLocalMoveY(600, 0.4f).SetEase(Ease.InBack);
 
-            yield return new WaitForSeconds(0.4f);
+            yield return animDelay;
 
-            rigid.AddForce(Vector2.up * 3.5f, ForceMode2D.Impulse);
-            rigid.AddForce(Vector2.left, ForceMode2D.Impulse); //랜덤으로 왼, 오, 힘
+            if ((NowDirection)directionIndex == NowDirection.Left)
+            {
+                rigid.AddForce(Vector2.left, ForceMode2D.Impulse);
+            }
+            else
+            {
+                rigid.AddForce(Vector2.right, ForceMode2D.Impulse);
+            }
+
+            rigid.AddForce(Vector2.up * powerIndex, ForceMode2D.Impulse);
+
+            spinCoroutine = SpinRotation();
+            StartCoroutine(spinCoroutine);
+
             rigid.gravityScale = 1;
 
-            yield return new WaitForSeconds(0.4f);
-
-            StartCoroutine(AlphaMinus());
+            yield return animDelay;
         }
+        StartCoroutine(AlphaMinus());
+    }
 
-        yield return null;
+    IEnumerator SpinRotation()
+    {
+        Vector3 spinSpeed = new Vector3(0, 0, 50);
+
+        while (true)
+        {
+            transform.rotation = Quaternion.Euler(spinSpeed * Time.deltaTime);
+            yield return null;
+        }
     }
 
     /// <summary>
@@ -93,10 +130,16 @@ public class IngredientObj : MonoBehaviour
 
         while (nowAlpha > 0)
         {
-            nowAlpha -= Time.deltaTime;
+            nowAlpha -= Time.deltaTime * 2;
             ingredientColor.a = nowAlpha;
             sR.color = ingredientColor;
             yield return null;
         }
+
+        StopCoroutine(spinCoroutine);
+        sR.sortingOrder = 101;
+        rigid.gravityScale = 0;
+        rigid.velocity = Vector2.zero;
+        sR.transform.DOLocalMove(initialPos, 0);
     }
 }

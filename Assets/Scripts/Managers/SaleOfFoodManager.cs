@@ -99,8 +99,7 @@ public class SaleOfFoodManager : MonoBehaviour
     [Tooltip("재료 투입 애니메이션에 사용될 재료 오브젝트 컴포넌트")]
     private IngredientObj[] ingredientCom;
 
-    WaitForSeconds oneSecondDelay = new WaitForSeconds(1);
-    WaitForSeconds inputDelay = new WaitForSeconds(0.3f);
+    WaitForSeconds inputDelay = new WaitForSeconds(0.15f);
     #endregion
 
     #region 결과 요소 모음
@@ -331,9 +330,10 @@ public class SaleOfFoodManager : MonoBehaviour
             {
                 ingredientCom[nowIndex].StartIngredientAnim(true);
             }
+            yield return inputDelay;
         }
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
 
         resultsText.text = $"명성도 : +{(basicScore * arrowComponent.multiplication)}";
         resultsObj.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.OutBounce);
