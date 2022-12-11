@@ -11,6 +11,13 @@ public enum CharacterKind
     CharacterCount
 }
 
+public enum TextColorKind
+{
+    Black,
+    Red,
+    Green
+}
+
 public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
 {
     [SerializeField]
@@ -27,54 +34,61 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
 
     [SerializeField]
     [Tooltip("현재 캐릭터 이름 텍스트")]
-    private Text nowChooseCharacterNameText;
+    private Text nameText;
 
     [SerializeField]
     [Tooltip("현재 캐릭터 버프 내용 텍스트")]
-    private Text nowChooseCharacterBuffText;
+    private Text buffText;
 
     [SerializeField]
-    [Tooltip("현재 캐릭터 업그레이드/잠금해제 버튼 텍스트")]
-    private Text nowChooseCharacterUnlockButtonText;
+    [Tooltip("현재 캐릭터 장착/잠금해제 버튼 안내 텍스트")]
+    private Text guideText;
+
+    [SerializeField]
+    [Tooltip("현재 캐릭터 장착/잠금해제 버튼 가격 텍스트")]
+    private Text priceText;
 
     [SerializeField]
     [Tooltip("현재 잠금해제 캐릭터 자물쇠 오브젝트")]
     private GameObject[] lockObj;
 
-    private int minCharacterIndex;
+    [SerializeField]
+    [Tooltip("업그레이드/잠금해제 버튼 재화 이미지")]
+    private Image goodsImage;
 
-    private int maxCharacterIndex;
+    [SerializeField]
+    [Tooltip("텍스트 색 모음")]
+    private Color[] textColors;
 
-    private int[] nowChooseCharacterUnlockCost = new int[(int)CharacterKind.CharacterCount];
+    private int minIndex; //최소 페이지 인덱스
 
-    public bool[] isNowChooseCharacterUnlock = new bool[(int)CharacterKind.CharacterCount];
+    private int maxIndex; //최대 페이지 인덱스
 
-    public bool[] isNowChooseCharacterEquiping = new bool[(int)CharacterKind.CharacterCount];
+    public int nowIndex; //현재 페이지 인덱스
 
-    public int nowChooseCharacterIndex;
+    private int[] unlockCost = new int[(int)CharacterKind.CharacterCount]; //현재 페이지의 캐릭터 잠금 해제 가격
 
-    private Vector3 dragStartMousePos;
+    public bool[] isUnlock = new bool[(int)CharacterKind.CharacterCount]; //현재 페이지의 캐릭터 잠금 해제 유무 판별
 
-    public bool isDraging;
+    public bool[] isEquiping = new bool[(int)CharacterKind.CharacterCount]; //현재 페이지의 캐릭터 장착 유무 판별
 
-    Color blackTextColor = new Color(0, 0, 0);
+    private Vector3 dragStartMousePos; //드래그 시 마우스 포인트 시작 지점
 
-    Color redTextColor = new Color(1, 0, 0);
+    public bool isDraging; //드래그 중인지 판별
 
-    Color greenTextColor = new Color(0, 1, 0.03f);
 
     private void Start()
     {
         isDraging = false;
 
-        minCharacterIndex = 0;
-        maxCharacterIndex = (int)CharacterKind.CharacterCount - 1;
+        minIndex = 0;
+        maxIndex = (int)CharacterKind.CharacterCount - 1;
         
-        for (int nowIndex = minCharacterIndex; nowIndex <= maxCharacterIndex; nowIndex++)
+        for (int nowIndex = minIndex; nowIndex <= maxIndex; nowIndex++)
         {
-            nowChooseCharacterUnlockCost[nowIndex] = 4;
+            unlockCost[nowIndex] = 10;
         }
-        isNowChooseCharacterUnlock[minCharacterIndex] = true;
+        isUnlock[minIndex] = true;
     }
 
     private void OnEnable()
@@ -126,19 +140,19 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
         imageTargetPosX = isRightDrag ? 1300 : -1300;
 
         isDraging = true;
-        slideableBgRectTransform[nowChooseCharacterIndex].DOAnchorPos(new Vector2(imageTargetPosX, 0), 0.3f);
+        slideableBgRectTransform[nowIndex].DOAnchorPos(new Vector2(imageTargetPosX, 0), 0.3f);
 
-        if (isRightDrag && nowChooseCharacterIndex == minCharacterIndex || isRightDrag == false && nowChooseCharacterIndex == maxCharacterIndex)
+        if (isRightDrag && nowIndex == minIndex || isRightDrag == false && nowIndex == maxIndex)
         {
             StartCoroutine(ImagePosInitialization(-imageTargetPosX, isRightDrag));
             yield break;
         }
         else
         {
-            nowChooseCharacterIndex = isRightDrag ? nowChooseCharacterIndex - 1 : nowChooseCharacterIndex + 1;
+            nowIndex = isRightDrag ? nowIndex - 1 : nowIndex + 1;
         }
 
-        slideableBgRectTransform[nowChooseCharacterIndex].DOAnchorPos(new Vector2(0, 0), 0.3f);
+        slideableBgRectTransform[nowIndex].DOAnchorPos(new Vector2(0, 0), 0.3f);
         TextReSettings();
         yield return new WaitForSeconds(0.035f);
         isDraging = false;
@@ -146,9 +160,9 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
 
     IEnumerator ImagePosInitialization(int targetPos, bool isRightDrag)
     {
-        for (int nowIndex = 0; nowIndex <= maxCharacterIndex; nowIndex++) //전체 이미지 위치 초기화(현재 이동중인 이미지는 딜레이 후 위치 변경)
+        for (int nowIndex = 0; nowIndex <= maxIndex; nowIndex++) //전체 이미지 위치 초기화(현재 이동중인 이미지는 딜레이 후 위치 변경)
         {
-            if (isRightDrag == false && nowIndex == maxCharacterIndex || isRightDrag && nowIndex == minCharacterIndex)
+            if (isRightDrag == false && nowIndex == maxIndex || isRightDrag && nowIndex == minIndex)
             {
                 StartCoroutine(ImagerelocationDelay(new Vector2(targetPos, 0), nowIndex, true));
             }
@@ -158,9 +172,9 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
             }
         }
 
-        nowChooseCharacterIndex = isRightDrag ? maxCharacterIndex : minCharacterIndex;
+        nowIndex = isRightDrag ? maxIndex : minIndex;
 
-        slideableBgRectTransform[nowChooseCharacterIndex].DOAnchorPos(new Vector2(0, 0), 0.3f);
+        slideableBgRectTransform[nowIndex].DOAnchorPos(new Vector2(0, 0), 0.3f);
         TextReSettings();
         yield return null;
     }
@@ -175,59 +189,65 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
         slideableBgRectTransform[moveImageIndex].DOAnchorPos(targetPos, 0);
     }
 
+    /// <summary>
+    /// 캐릭터 장착 or 잠금해제 버튼 클릭 시
+    /// </summary>
     public void ProficiencyUnlockOrEquip()
     {
-        if (isNowChooseCharacterUnlock[nowChooseCharacterIndex] == false && nowChooseCharacterUnlockCost[nowChooseCharacterIndex] <= GameManager.Instance.CurrentProficiency)
+        if (isUnlock[nowIndex] == false && unlockCost[nowIndex] <= GameManager.Instance.CurrentProficiency)
         {
-            isNowChooseCharacterUnlock[nowChooseCharacterIndex] = true;
+            isUnlock[nowIndex] = true;
 
-            lockObj[nowChooseCharacterIndex].SetActive(false);
+            lockObj[nowIndex].SetActive(false);
 
             TextReSettings();
         }
-        else if(isNowChooseCharacterUnlock[nowChooseCharacterIndex] && isNowChooseCharacterEquiping[nowChooseCharacterIndex] == false)
+        else if(isUnlock[nowIndex] && isEquiping[nowIndex] == false)
         {
-            for (int nowIndex = minCharacterIndex; nowIndex <= maxCharacterIndex; nowIndex++)
+            for (int nowIndex = minIndex; nowIndex <= maxIndex; nowIndex++) //다른 인덱스 캐릭터들은 장착 해제, 현재 인덱스 캐릭터만 장착으로 갱신
             {
-                if (nowIndex == nowChooseCharacterIndex)
-                {
-                    isNowChooseCharacterEquiping[nowIndex] = true;
-                }
-                else
-                {
-                    isNowChooseCharacterEquiping[nowIndex] = false;
-                }
+                isEquiping[nowIndex] = nowIndex == this.nowIndex ? true : false;
             }
 
-            // 여기가 캐릭터 장착하는 부분
-            Player.Instance.CharacterChange(nowChooseCharacterIndex);
+            Player.Instance.CharacterChange(nowIndex);
 
             TextReSettings();
         }
     }
 
+    /// <summary>
+    /// 텍스트들 갱신
+    /// </summary>
     public void TextReSettings()
     {
-        nowChooseCharacterNameText.text = $"{nowChooseCharacterName[nowChooseCharacterIndex]}";
+        nameText.text = $"{nowChooseCharacterName[nowIndex]}";
 
-        nowChooseCharacterBuffText.text = $"{nowChooseCharacterBuff[nowChooseCharacterIndex]}";
+        buffText.text = $"{nowChooseCharacterBuff[nowIndex]}";
 
-        if (isNowChooseCharacterUnlock[nowChooseCharacterIndex] == false)
+        if (isUnlock[nowIndex] == false)
         {
-            nowChooseCharacterUnlockButtonText.color = (nowChooseCharacterUnlockCost[nowChooseCharacterIndex] <= GameManager.Instance.CurrentProficiency) ? greenTextColor : redTextColor;
-            nowChooseCharacterUnlockButtonText.text = $"캐릭터 잠금해제\n{nowChooseCharacterUnlockCost[nowChooseCharacterIndex]} 숙련도 필요";
+            guideText.color = (unlockCost[nowIndex] <= GameManager.Instance.CurrentProficiency) ? textColors[(int)TextColorKind.Green] : textColors[(int)TextColorKind.Red];
+
+            guideText.transform.localPosition = new Vector3(0, 185, 0);
+
+            guideText.text = "캐릭터 잠금해제";
+            priceText.text = $"{unlockCost[nowIndex]}";
+
+            goodsImage.GetComponent<RectTransform>().anchoredPosition = new Vector3(-70 + ((priceText.text.Length - 1) * -20), 15, 0); //필요 재화 단위에 따라서 이미지 위치 변경
+
+            goodsImage.color = new Color(1, 1, 1, 1);
         }
         else
         {
-            nowChooseCharacterUnlockButtonText.color = blackTextColor;
-            if (isNowChooseCharacterEquiping[nowChooseCharacterIndex] == false)
-            {
-                nowChooseCharacterUnlockButtonText.text = $"장착 가능";
-            }
-            else
-            {
-                nowChooseCharacterUnlockButtonText.text = $"장착중";
-            }
+            guideText.color = textColors[(int)TextColorKind.Black];
+
+            goodsImage.color = new Color(1, 1, 1, 0);
+            
+            guideText.transform.localPosition = new Vector3(0, 140, 0);
+            
+            priceText.text = "";
+
+            guideText.text = isEquiping[nowIndex] == false ? guideText.text = "장착 가능" : guideText.text = "장착중";
         }
     }
 }
