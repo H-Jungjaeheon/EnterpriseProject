@@ -20,6 +20,8 @@ public class QuestManager : MonoBehaviour
         public int nowFigure;
         [Tooltip("전체 목표 달성 수치")]
         public int maxFigure;
+        [Tooltip("목표 증가량")]
+        public int incremental;
         [Tooltip("보상 재화 종류")]
         public RewardKind rewardkind;
         [Tooltip("보상 재화 지급 수치")]
