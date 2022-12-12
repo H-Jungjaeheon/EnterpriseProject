@@ -127,6 +127,10 @@ public class SaleOfFoodManager : MonoBehaviour
     private Sprite[] resultsSprite;
     #endregion
 
+    [SerializeField]
+    [Tooltip("퀘스트 시스템 매니저 컴포넌트")]
+    private QuestManager questManager;
+
     void Start()
     {
         cookingCount = 1;
@@ -143,7 +147,6 @@ public class SaleOfFoodManager : MonoBehaviour
         StartCoroutine(customerOnTheWay());
     }
 
-    // Update is called once per frame
     void Update()
     {
         SaleOfFoodViewMaterialsText_BasicScreen();
@@ -343,6 +346,13 @@ public class SaleOfFoodManager : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         resultsText.text = $"명성도 : +{(basicScore * arrowComponent.multiplication)}";
+
+        if (questManager.questKind == QuestKind.GetProficiency) //현재 퀘스트가 명성도를 얻는 퀘스트라면 실행
+        {
+            questManager.datas[(int)questManager.questKind].nowFigure += basicScore * arrowComponent.multiplication; //현재 미니게임을 통한 명성도만큼 퀘스트도 갱신
+            questManager.InformationFix();
+        }
+
         resultsObj.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.OutBounce);
         resultsImage.sprite = resultsSprite[arrowComponent.multiplication - 1];
 

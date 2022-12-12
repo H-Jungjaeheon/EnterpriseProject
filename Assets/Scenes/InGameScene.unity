@@ -7949,7 +7949,12 @@ MonoBehaviour:
     amountPaid: 100
   indexText: {fileID: 1676309244}
   progressText: {fileID: 1434710817}
-  questIndex: 1
+  clearUiObj: {fileID: 528795013}
+  bgImage: {fileID: 1764350534}
+  bgResources:
+  - {fileID: 21300000, guid: d46907aae45748144ac7c43ce6653f81, type: 3}
+  - {fileID: 21300000, guid: f50f6ca1a51e4df4a8bf8d8b4a8cda6c, type: 3}
+  questKind: 0
 --- !u!4 &760357126
 Transform:
   m_ObjectHideFlags: 0
@@ -10316,6 +10321,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7789aae43d3e30543ab4307d01fce314, type: 3}
   - {fileID: 21300000, guid: 70fc03f4e0202434a8dabef8a9ee921b, type: 3}
   - {fileID: 21300000, guid: 2bb6b7fd6f25d304db67847a46645d27, type: 3}
+  questManager: {fileID: 760357125}
 --- !u!114 &933780102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12517,7 +12523,8 @@ MonoBehaviour:
   coinText: {fileID: 655448475}
   jemText: {fileID: 446454305}
   proficiencyText: {fileID: 1381109704}
-  sofmComponent: {fileID: 933780101}
+  sofManager: {fileID: 933780101}
+  questManager: {fileID: 760357125}
   player: {fileID: 1293959311}
 --- !u!4 &1103746050
 Transform:
@@ -21778,6 +21785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroyObj: 0
+  currentProficiency: 0
   gemUnit: 0
   statsLevel: 010000000100000001000000010000000100000001000000
 --- !u!4 &1976572750

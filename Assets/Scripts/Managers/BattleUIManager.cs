@@ -83,8 +83,12 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
     [SerializeField]
     [Tooltip("요리 판매 시스템 매니저 컴포넌트")]
-    private SaleOfFoodManager sofmComponent;
-    
+    private SaleOfFoodManager sofManager;
+
+    [SerializeField]
+    [Tooltip("퀘스트 시스템 매니저 컴포넌트")]
+    private QuestManager questManager;
+
     private BigInteger[] goodsRequiredForUpgrade = new BigInteger[(int)UpgradeableBasicStats.UpgradeableBasicStatsNumber];
 
     [SerializeField]
@@ -176,6 +180,8 @@ public class BattleUIManager : Singleton<BattleUIManager>
         else
         {
             gmInstance.MoneyUnit -= goodsRequiredForUpgrade[statsToUpgradeCurrently];
+            questManager.datas[statsToUpgradeCurrently].nowFigure++;
+            questManager.InformationFix();
         }
 
         var playerComponent = player.GetComponent<Player>();
@@ -238,9 +244,9 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
         nowContents = (Contents)nowChangeContents;
 
-        if (sofmComponent.isCustomerArrival == false)
+        if (sofManager.isCustomerArrival == false)
         {
-            sofmComponent.isCustomerArrival = true;
+            sofManager.isCustomerArrival = true;
         }
     }
 
@@ -292,9 +298,9 @@ public class BattleUIManager : Singleton<BattleUIManager>
         nowContents = isSameContents ? Contents.StatUpgradeContents : (Contents)nowChangeContents;
         nowContentsObj.SetActive(true);
 
-        if (sofmComponent.isCustomerArrival == false)
+        if (sofManager.isCustomerArrival == false)
         {
-            sofmComponent.isCustomerArrival = true;
+            sofManager.isCustomerArrival = true;
         }
     }
 

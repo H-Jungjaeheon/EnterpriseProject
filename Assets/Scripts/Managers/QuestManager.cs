@@ -10,6 +10,12 @@ public enum RewardKind
     Proficiency
 }
 
+public enum BGKind
+{
+    BasicBg,
+    ClearBg
+}
+
 public enum QuestKind
 {
     DamageStatLevel,
@@ -17,7 +23,8 @@ public enum QuestKind
     HealingStatLevel,
     AttackSpeedStatLevel,
     CriticalDamageStatLevel,
-    CriticalProbabilityStatLevel
+    CriticalProbabilityStatLevel,
+    GetProficiency
 }
 
 public class QuestManager : MonoBehaviour
@@ -39,8 +46,7 @@ public class QuestManager : MonoBehaviour
         public int amountPaid;
     }
 
-    [SerializeField]
-    private QuestData[] datas;
+    public QuestData[] datas;
 
     [SerializeField]
     [Tooltip("현재 퀘스트 인덱스 표시 텍스트")]
@@ -50,9 +56,21 @@ public class QuestManager : MonoBehaviour
     [Tooltip("현재 퀘스트 진행도 표시 텍스트")]
     private Text progressText;
 
-    private QuestKind questKind; //현재 퀘스트 종류
+    [SerializeField]
+    [Tooltip("퀘스트 클리어 표시 UI 오브젝트")]
+    private GameObject clearUiObj;
 
     [SerializeField]
+    [Tooltip("퀘스트 배경 UI 이미지")]
+    private Image bgImage;
+
+    [SerializeField]
+    [Tooltip("퀘스트 배경 UI 리소스")]
+    private Sprite[] bgResources;
+
+    [HideInInspector]
+    public QuestKind questKind; //현재 퀘스트 종류
+
     private int questIndex = 1; //현재 퀘스트 인덱스
 
     private void Start()
@@ -71,8 +89,18 @@ public class QuestManager : MonoBehaviour
     public void InformationFix()
     {
         TextReSetting();
+        ClearInspection();
     }
 
+    /// <summary>
+    /// 현재 퀘스트 클리어 판별 함수 (클리어 UI 표시)
+    /// </summary>
+    private void ClearInspection()
+    {
+        clearUiObj.SetActive(datas[(int)questKind].nowFigure >= datas[(int)questKind].maxFigure); //현재 퀘스트 목표치를 달성했다면, 클리어 표시 UI 활성화(달성하지 못했을 시 비활성화)
+
+        bgImage.sprite = datas[(int)questKind].nowFigure >= datas[(int)questKind].maxFigure ? bgResources[(int)BGKind.ClearBg] : bgResources[(int)BGKind.BasicBg]; //현재 퀘스트 목표치를 달성했다면, 클리어 표시 배경으로 변경(달성하지 못했을 시 일반 배경으로 변경)
+    }
     /// <summary>
     /// 텍스트 재세팅 함수
     /// </summary>
@@ -103,7 +131,7 @@ public class QuestManager : MonoBehaviour
                     break;
             }
 
-            questKind = (questKind == QuestKind.CriticalProbabilityStatLevel) ? QuestKind.DamageStatLevel : questKind + 1;
+            questKind = (questKind == QuestKind.GetProficiency) ? QuestKind.DamageStatLevel : questKind + 1;
 
             questIndex++;
 

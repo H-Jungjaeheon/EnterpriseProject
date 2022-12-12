@@ -10,7 +10,8 @@ public class GameManager : Singleton<GameManager>
         public int hpLevel;
     }
 
-
+    [SerializeField]
+    [Tooltip("현재 숙련도")]
     private int currentProficiency;
 
     public int CurrentProficiency
