@@ -10,6 +10,16 @@ public enum RewardKind
     Proficiency
 }
 
+public enum QuestKind
+{
+    DamageStatLevel,
+    HpStatLevel,
+    HealingStatLevel,
+    AttackSpeedStatLevel,
+    CriticalDamageStatLevel,
+    CriticalProbabilityStatLevel
+}
+
 public class QuestManager : MonoBehaviour
 {
     [System.Serializable]
@@ -36,19 +46,68 @@ public class QuestManager : MonoBehaviour
     [Tooltip("현재 퀘스트 인덱스 표시 텍스트")]
     private Text indexText;
 
+    [SerializeField]
+    [Tooltip("현재 퀘스트 진행도 표시 텍스트")]
+    private Text progressText;
 
+    private QuestKind questKind; //현재 퀘스트 종류
 
-    private int questIndex; //현재 퀘스트 인덱스
+    [SerializeField]
+    private int questIndex = 1; //현재 퀘스트 인덱스
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        for (int nowIndex = 0; nowIndex < datas.Length; nowIndex++)//저장 후 불러오기 시 각 퀘스트 목표량 최대치 재세팅
+        {
+            datas[nowIndex].maxFigure += datas[nowIndex].incremental * (questIndex / 8);
+        }
+
+        InformationFix();
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// 정보 변경 시 갱신 함수
+    /// </summary>
+    public void InformationFix()
     {
-        
+        TextReSetting();
+    }
+
+    /// <summary>
+    /// 텍스트 재세팅 함수
+    /// </summary>
+    private void TextReSetting()
+    {
+        indexText.text = $"퀘스트 {questIndex}";
+        progressText.text = $"{datas[(int)questKind].name} ({datas[(int)questKind].nowFigure}/{datas[(int)questKind].maxFigure})";
+    }
+
+    /// <summary>
+    /// 퀘스트 조건 충족 시 클리어 세팅 함수
+    /// </summary>
+    public void QuestClear()
+    {
+        if (datas[(int)questKind].nowFigure >= datas[(int)questKind].maxFigure)
+        {
+            datas[(int)questKind].nowFigure -= datas[(int)questKind].maxFigure;
+            datas[(int)questKind].maxFigure += datas[(int)questKind].incremental;
+
+            switch (datas[(int)questKind].rewardkind)
+            {
+                case RewardKind.Gold:
+                    break;
+                case RewardKind.Gem:
+                    GameManager.Instance.GemUnit += datas[(int)questKind].amountPaid;
+                    break;
+                case RewardKind.Proficiency:
+                    break;
+            }
+
+            questKind = (questKind == QuestKind.CriticalProbabilityStatLevel) ? QuestKind.DamageStatLevel : questKind + 1;
+
+            questIndex++;
+
+            InformationFix();
+        }
     }
 }

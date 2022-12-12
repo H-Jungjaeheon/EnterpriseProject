@@ -1850,7 +1850,7 @@ GameObject:
   - component: {fileID: 154344286}
   - component: {fileID: 154344285}
   m_Layer: 5
-  m_Name: HealingStatUpGradeImagePanel
+  m_Name: HealingStatUpgradeImagePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2610,7 +2610,7 @@ GameObject:
   - component: {fileID: 253022836}
   - component: {fileID: 253022835}
   m_Layer: 5
-  m_Name: FatalAttackProbabilityStatUpGradeImagePanel
+  m_Name: FatalAttackProbabilityStatUpgradeImagePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4950,7 +4950,7 @@ GameObject:
   - component: {fileID: 491141380}
   - component: {fileID: 491141379}
   m_Layer: 5
-  m_Name: AttackSpeedStatUpGradeImagePanel
+  m_Name: AttackSpeedStatUpgradeImagePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7905,37 +7905,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   datas:
-  - name: "\uACF5\uACA9\uB825 \uAC15\uD654 \uB808\uBCA8"
+  - name: "\uACF5\uACA9\uB825 \uB808\uBCA8"
     nowFigure: 0
     maxFigure: 10
     incremental: 100
     rewardkind: 1
     amountPaid: 100
-  - name: "\uCCB4\uB825 \uAC15\uD654 \uB808\uBCA8"
+  - name: "\uCCB4\uB825 \uB808\uBCA8"
     nowFigure: 0
     maxFigure: 10
     incremental: 100
     rewardkind: 1
     amountPaid: 100
-  - name: "\uCCB4\uB825 \uD68C\uBCF5 \uAC15\uD654 \uB808\uBCA8"
+  - name: "\uCCB4\uB825 \uD68C\uBCF5 \uB808\uBCA8"
     nowFigure: 0
     maxFigure: 10
     incremental: 100
     rewardkind: 1
     amountPaid: 100
-  - name: "\uCE58\uBA85\uD0C0 \uD655\uB960 \uAC15\uD654 \uB808\uBCA8"
+  - name: "\uCE58\uBA85\uD0C0 \uD655\uB960 \uB808\uBCA8"
     nowFigure: 0
     maxFigure: 10
     incremental: 50
     rewardkind: 1
     amountPaid: 100
-  - name: "\uCE58\uBA85\uD0C0 \uB370\uBBF8\uC9C0 \uAC15\uD654 \uB808\uBCA8"
+  - name: "\uCE58\uBA85\uD0C0 \uB370\uBBF8\uC9C0 \uB808\uBCA8"
     nowFigure: 0
     maxFigure: 10
     incremental: 100
     rewardkind: 1
     amountPaid: 100
-  - name: "\uACF5\uACA9 \uC18D\uB3C4 \uAC15\uD654 \uB808\uBCA8"
+  - name: "\uACF5\uACA9 \uC18D\uB3C4 \uB808\uBCA8"
     nowFigure: 0
     maxFigure: 10
     incremental: 50
@@ -7947,7 +7947,9 @@ MonoBehaviour:
     incremental: 5
     rewardkind: 1
     amountPaid: 100
-  indexText: {fileID: 0}
+  indexText: {fileID: 1676309244}
+  progressText: {fileID: 1434710817}
+  questIndex: 1
 --- !u!4 &760357126
 Transform:
   m_ObjectHideFlags: 0
@@ -9879,7 +9881,7 @@ GameObject:
   - component: {fileID: 884590925}
   - component: {fileID: 884590924}
   m_Layer: 5
-  m_Name: DamageStatUpGradeImagePanel
+  m_Name: DamageStatUpgradeImagePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10443,7 +10445,7 @@ GameObject:
   - component: {fileID: 955706658}
   - component: {fileID: 955706657}
   m_Layer: 5
-  m_Name: FatalAttackStatUpGradeImagePanel
+  m_Name: FatalAttackStatUpgradeImagePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17390,7 +17392,7 @@ GameObject:
   - component: {fileID: 1527847421}
   - component: {fileID: 1527847420}
   m_Layer: 5
-  m_Name: HpStatUpGradeImagePanel
+  m_Name: HpStatUpgradeImagePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19602,7 +19604,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1764350534}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 760357125}
+        m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
+        m_MethodName: QuestClear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1764350534
 MonoBehaviour:
   m_ObjectHideFlags: 0
