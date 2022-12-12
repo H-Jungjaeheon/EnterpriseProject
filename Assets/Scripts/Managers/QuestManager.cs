@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum RewardKind
 {
@@ -30,6 +31,12 @@ public class QuestManager : MonoBehaviour
 
     [SerializeField]
     private QuestData[] datas;
+
+    [SerializeField]
+    [Tooltip("현재 퀘스트 인덱스 표시 텍스트")]
+    private Text indexText;
+
+
 
     private int questIndex; //현재 퀘스트 인덱스
 

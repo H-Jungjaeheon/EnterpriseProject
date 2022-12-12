@@ -7947,6 +7947,7 @@ MonoBehaviour:
     incremental: 5
     rewardkind: 1
     amountPaid: 100
+  indexText: {fileID: 0}
 --- !u!4 &760357126
 Transform:
   m_ObjectHideFlags: 0
@@ -10566,7 +10567,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8fc0e913253361243826cafa631a7e6c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6451dfb0d3020114184918b1404094ba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
