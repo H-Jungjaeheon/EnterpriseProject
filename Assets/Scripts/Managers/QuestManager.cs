@@ -111,16 +111,15 @@ public class QuestManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 퀘스트 조건 충족 시 클리어 세팅 함수
+    /// 퀘스트 조건 충족 시 클리어 세팅 함수(버튼 연결)
     /// </summary>
     public void QuestClear()
     {
-        if (datas[(int)questKind].nowFigure >= datas[(int)questKind].maxFigure)
+        if (datas[(int)questKind].nowFigure >= datas[(int)questKind].maxFigure) //퀘스트 조건을 달성 시 실행
         {
-            datas[(int)questKind].nowFigure -= datas[(int)questKind].maxFigure;
-            datas[(int)questKind].maxFigure += datas[(int)questKind].incremental;
+            datas[(int)questKind].maxFigure += datas[(int)questKind].incremental; //현재 클리어한 퀘스트의 클리어 조건 확장
 
-            switch (datas[(int)questKind].rewardkind)
+            switch (datas[(int)questKind].rewardkind) //각 퀘스트 마다 설정된 재화 지급
             {
                 case RewardKind.Gold:
                     break;
@@ -131,9 +130,9 @@ public class QuestManager : MonoBehaviour
                     break;
             }
 
-            questKind = (questKind == QuestKind.GetProficiency) ? QuestKind.DamageStatLevel : questKind + 1;
+            questKind = (questKind == QuestKind.GetProficiency) ? QuestKind.DamageStatLevel : questKind + 1; //현재 클리어한 퀘스트가 마지막 퀘스트 종류 인덱스면 퀘스트 종류 인덱스 0번으로 가기 or 다음 퀘스트 종류 인덱스로 가기
 
-            questIndex++;
+            questIndex++; //현재 퀘스트 번호 + 1 (n번째 퀘스트)
 
             InformationFix();
         }
