@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,41 +11,46 @@ public enum ColleagueKind
 
 public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
 {
-    [SerializeField]
-    [Tooltip("각 동료 잠금 해제 시 필요한 보석")]
-    private int[] gemRequiredForColleaguenlock = new int[(int)ColleagueKind.ColleagueCount];
+    [System.Serializable]
+    public class ColleagueData
+    {
+        [Tooltip("잠금 해제 시 필요한 보석")]
+        public int needGem;
 
-    private bool[] colleagueUnlocking = new bool[(int)ColleagueKind.ColleagueCount]; //동료 잠금 해제 판별
+        [Tooltip("잠금 해제 판별")]
+        public bool isUnlock;
 
-    private BigInteger[] moneyRequiredForUpgrade = new BigInteger[(int)ColleagueKind.ColleagueCount];
+        [Tooltip("업그레이드 시 필요한 돈")]
+        public BigInteger needGold;
 
-    private int[] colleagueLevel = new int[(int)ColleagueKind.ColleagueCount];
+        [Tooltip("동료 레벨")]
+        public int level;
 
-    [SerializeField]
-    [Tooltip("잠금 해제 시 나타나는 장착 버튼 오브젝트")]
-    private GameObject[] colleagueEquip;
+        [Tooltip("장착 버튼 오브젝트")]
+        public GameObject buttonObj;
 
-    [SerializeField]
-    [Tooltip("각 동료 가격 표시 텍스트")]
-    private Text[] priceIndicationText = new Text[(int)ColleagueKind.ColleagueCount];
+        [Tooltip("가격 표시 텍스트")]
+        public Text priceText;
+
+        [Tooltip("동료 아이콘")]
+        public Sprite icon;
+
+        [Tooltip("동료 데이터")]
+        public PartnerData partnerData;
+    }
+
+    public ColleagueData[] colleagueDatas;
 
     [SerializeField]
     private Partner Partner;
 
     [SerializeField]
-    private PartnerData[] PartnerData;
-
-    [SerializeField]
-    [Tooltip("동료 아이콘 모음")]
-    private Sprite[] colleagueIcons;
-
-    [SerializeField]
     [Tooltip("현재 장착중인 동료 아이콘")]
     private SpriteRenderer nowColleagueIcon;
 
-    Color redTextColor = new Color(1, 0, 0);
+    Color redTextColor = new Color(1f, 0f, 0f);
 
-    Color greenTextColor = new Color(0, 1, 0.03f);
+    Color greenTextColor = new Color(0f, 1f, 0.03f);
 
     void Start()
     {
@@ -56,6 +59,14 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
 
     private void OnEnable()
     {
+        OnEnableSetting();
+    }
+
+    /// <summary>
+    /// 동료 시스템 창 활성화 시 세팅
+    /// </summary>
+    private void OnEnableSetting()
+    {
         if (gameObject.activeSelf)
         {
             TextColorChange();
@@ -63,81 +74,95 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
         EquipButtonSetActive();
     }
 
+    /// <summary>
+    /// 초기 세팅
+    /// </summary>
     private void StartSettings()
     {
         for (int nowIndex = 0; nowIndex < (int)ColleagueKind.ColleagueCount; nowIndex++)
         {
-            moneyRequiredForUpgrade[nowIndex] = 10;
+            colleagueDatas[nowIndex].needGold = 10;
         }
     }
 
+    /// <summary>
+    /// 동료 장착 실행(버튼)
+    /// </summary>
+    /// <param name="nowEquipColleagueIndex"> 현재 장착할 동료 인덱스 </param>
     public void EquipColleague(int nowEquipColleagueIndex)
     {
-        if (nowColleagueIcon.sprite != colleagueIcons[nowEquipColleagueIndex])
+        if (nowColleagueIcon.sprite != colleagueDatas[nowEquipColleagueIndex].icon)
         {
-            print("동료 장착 실행");
-
-            //실제 동료 장착 스크립트
-            Partner.PartnerData = this.PartnerData[nowEquipColleagueIndex];
+            Partner.PartnerData = this.colleagueDatas[nowEquipColleagueIndex].partnerData;
             Partner.Setting();
             Partner.gameObject.SetActive(true);
 
             Partner.NowIdx = nowEquipColleagueIndex;
 
-            nowColleagueIcon.sprite = colleagueIcons[nowEquipColleagueIndex];
+            nowColleagueIcon.sprite = colleagueDatas[nowEquipColleagueIndex].icon;
         }
     }
 
+    /// <summary>
+    /// 동료 업그레이드 or 잠금 해제 함수(버튼)
+    /// </summary>
+    /// <param name="nowColleagueIndex"> 현재 업그레이드 or 잠금 해제할 동료 인덱스 </param>
     public void ColleagueUpgradeOrUnlock(int nowColleagueIndex)
     {
-        if (colleagueUnlocking[nowColleagueIndex] == false && GameManager.Instance.GemUnit >= gemRequiredForColleaguenlock[nowColleagueIndex]) //해당 인덱스 동료 비 잠금해제의 경우
+        if (colleagueDatas[nowColleagueIndex].isUnlock == false && GameManager.Instance.GemUnit >= colleagueDatas[nowColleagueIndex].needGem) //해당 인덱스 동료 비 잠금해제의 경우
         {
-            GameManager.Instance.GemUnit -= gemRequiredForColleaguenlock[nowColleagueIndex]; //해당 인덱스 동료 잠금 해제 비용 차감
+            GameManager.Instance.GemUnit -= colleagueDatas[nowColleagueIndex].needGem; //해당 인덱스 동료 잠금 해제 비용 차감
 
-            colleagueUnlocking[nowColleagueIndex] = true; //해당 인덱스 동료 잠금 해제
+            colleagueDatas[nowColleagueIndex].isUnlock = true; //해당 인덱스 동료 잠금 해제
                 
             EquipButtonSetActive();
         }
-        else if (colleagueUnlocking[nowColleagueIndex] && GameManager.Instance.MoneyUnit >= moneyRequiredForUpgrade[nowColleagueIndex]) //해당 인덱스 동료 잠금해제의 경우
+        else if (colleagueDatas[nowColleagueIndex].isUnlock && GameManager.Instance.MoneyUnit >= colleagueDatas[nowColleagueIndex].needGold) //해당 인덱스 동료 잠금해제의 경우
         {
-            GameManager.Instance.MoneyUnit -= moneyRequiredForUpgrade[nowColleagueIndex]; //해당 인덱스 동료 업그레이드 비용 차감
+            GameManager.Instance.MoneyUnit -= colleagueDatas[nowColleagueIndex].needGold; //해당 인덱스 동료 업그레이드 비용 차감
 
-            colleagueLevel[nowColleagueIndex]++; //해당 인덱스 동료 레벨 증가
+            colleagueDatas[nowColleagueIndex].level++; //해당 인덱스 동료 레벨 증가
 
-            moneyRequiredForUpgrade[nowColleagueIndex] += moneyRequiredForUpgrade[nowColleagueIndex] / 2; //해당 인덱스 동료 업그레이드 비용 증가
+            colleagueDatas[nowColleagueIndex].needGold += colleagueDatas[nowColleagueIndex].needGold / 2; //해당 인덱스 동료 업그레이드 비용 증가
         }
         else
         {
             return;
         }
 
-        priceIndicationText[nowColleagueIndex].text = $"업그레이드\n{moneyRequiredForUpgrade[nowColleagueIndex]} 골드"; //해당 인덱스 동료 버튼 텍스트 수정
+        colleagueDatas[nowColleagueIndex].priceText.text = $"업그레이드\n{colleagueDatas[nowColleagueIndex].needGold} 골드"; //해당 인덱스 동료 버튼 텍스트 수정
     }
 
+    /// <summary>
+    /// 텍스트 색 변경(텍스트 내용 변경)
+    /// </summary>
     public void TextColorChange()
     {
         for (int nowIndex = 0; nowIndex < (int)ColleagueKind.ColleagueCount; nowIndex++)
         {
-            if (colleagueUnlocking[nowIndex]) //잠금 해제 완료 시
+            if (colleagueDatas[nowIndex].isUnlock) //잠금 해제 완료 시
             {
-                priceIndicationText[nowIndex].color = (moneyRequiredForUpgrade[nowIndex] <= GameManager.Instance.MoneyUnit) ? greenTextColor : redTextColor;
-                priceIndicationText[nowIndex].text = $"업그레이드\n{moneyRequiredForUpgrade[nowIndex]} 골드"; //해당 인덱스 동료 버튼 텍스트 수정
+                colleagueDatas[nowIndex].priceText.color = (colleagueDatas[nowIndex].needGold <= GameManager.Instance.MoneyUnit) ? greenTextColor : redTextColor;
+                colleagueDatas[nowIndex].priceText.text = $"업그레이드\n{colleagueDatas[nowIndex].needGold} 골드"; //해당 인덱스 동료 버튼 텍스트 수정
             }
             else //잠금 해제 비 완료 시
             {
-                priceIndicationText[nowIndex].color = (gemRequiredForColleaguenlock[nowIndex] <= GameManager.Instance.GemUnit) ? greenTextColor : redTextColor;
-                priceIndicationText[nowIndex].text = $"구매\n{gemRequiredForColleaguenlock[nowIndex]} 젬"; //해당 인덱스 동료 버튼 텍스트 수정
+                colleagueDatas[nowIndex].priceText.color = (colleagueDatas[nowIndex].needGem <= GameManager.Instance.GemUnit) ? greenTextColor : redTextColor;
+                colleagueDatas[nowIndex].priceText.text = $"구매\n{colleagueDatas[nowIndex].needGem} 젬"; //해당 인덱스 동료 버튼 텍스트 수정
             }
         }
     }
 
+    /// <summary>
+    /// 장착 버튼 활성화
+    /// </summary>
     private void EquipButtonSetActive()
     {
         for (int nowIndex = 0; nowIndex < (int)ColleagueKind.ColleagueCount; nowIndex++)
         {
-            if (colleagueUnlocking[nowIndex] && colleagueEquip[nowIndex].activeSelf == false)
+            if (colleagueDatas[nowIndex].isUnlock && colleagueDatas[nowIndex].buttonObj.activeSelf == false)
             {
-                colleagueEquip[nowIndex].SetActive(true);
+                colleagueDatas[nowIndex].buttonObj.SetActive(true);
             }
         }
     }

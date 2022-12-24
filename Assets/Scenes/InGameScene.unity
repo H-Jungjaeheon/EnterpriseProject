@@ -22312,20 +22312,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroyObj: 0
-  gemRequiredForColleaguenlock: 0a00000014000000
-  colleagueEquip:
-  - {fileID: 2147434712}
-  - {fileID: 1216438607}
-  priceIndicationText:
-  - {fileID: 867303355}
-  - {fileID: 1508569129}
+  colleagueDatas:
+  - needGem: 10
+    isUnlock: 0
+    level: 1
+    buttonObj: {fileID: 2147434712}
+    priceText: {fileID: 867303355}
+    icon: {fileID: 21300000, guid: 8daad5a7ff6247a4a95a2c18feb82e6a, type: 3}
+    partnerData: {fileID: 11400000, guid: c0b481aae83c6ee4b8b06ea33d62e6f3, type: 2}
+  - needGem: 20
+    isUnlock: 0
+    level: 1
+    buttonObj: {fileID: 1216438607}
+    priceText: {fileID: 1508569129}
+    icon: {fileID: 21300000, guid: 03f5f6504fc4b2d4aa259bdab470a799, type: 3}
+    partnerData: {fileID: 11400000, guid: 6dc59b3a8d48b0744b948709bfff184b, type: 2}
   Partner: {fileID: 1163323637}
-  PartnerData:
-  - {fileID: 11400000, guid: c0b481aae83c6ee4b8b06ea33d62e6f3, type: 2}
-  - {fileID: 11400000, guid: 6dc59b3a8d48b0744b948709bfff184b, type: 2}
-  colleagueIcons:
-  - {fileID: 21300000, guid: 8daad5a7ff6247a4a95a2c18feb82e6a, type: 3}
-  - {fileID: 21300000, guid: 03f5f6504fc4b2d4aa259bdab470a799, type: 3}
   nowColleagueIcon: {fileID: 1095936463}
 --- !u!1 &1961330313
 GameObject:

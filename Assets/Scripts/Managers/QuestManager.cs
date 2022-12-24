@@ -75,7 +75,7 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-        for (int nowIndex = 0; nowIndex < datas.Length; nowIndex++)//저장 후 불러오기 시 각 퀘스트 목표량 최대치 재세팅
+        for (int nowIndex = 0; nowIndex < datas.Length; nowIndex++) //저장 후 불러오기 시 각 퀘스트 목표량 최대치 재세팅
         {
             datas[nowIndex].maxFigure += datas[nowIndex].incremental * (questIndex / 8);
         }

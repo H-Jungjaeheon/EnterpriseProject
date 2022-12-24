@@ -1,15 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public class SaveDatas
-    {
-        public int hpLevel;
-    }
-
     [SerializeField]
     [Tooltip("현재 숙련도")]
     private int currentProficiency;
@@ -68,15 +61,4 @@ public class GameManager : Singleton<GameManager>
 
     [Tooltip("플레이어 기본 능력치 레벨들")]
     public int[] statsLevel;
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            MoneyUnit += 100000000000;
-            GemUnit += 1000;
-            CurrentProficiency += 10;
-        }
-    }
 }
