@@ -154,7 +154,7 @@ public class SaleOfFoodManager : MonoBehaviour
 
     private IEnumerator customerOnTheWay()
     {
-        customerObj.transform.position = new Vector2(-3.5f, -3.2f);
+        customerObj.transform.position = new Vector2(-3.5f, -3.15f);
         while (customerObj.transform.position.x < -1)
         {
             customerObj.transform.position += customerSpeed * Time.deltaTime;

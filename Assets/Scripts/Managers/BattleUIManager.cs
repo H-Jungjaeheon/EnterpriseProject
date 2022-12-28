@@ -43,16 +43,16 @@ public class BattleUIManager : Singleton<BattleUIManager>
     [Tooltip("현재 보여지는 콘텐츠 창 오브젝트")]
     private GameObject nowContentsObj;
 
-    private GameObject lastContents; //전에 띄우던 콘텐츠 창 오브젝트
-
-    private int nowChangeContents; //바꿀 콘텐츠 창 인덱스
-
     [Tooltip("콘텐츠 창 오브젝트 모음")]
     public GameObject[] contentsPanelObjs;
 
     [SerializeField]
     [Tooltip("동료 시스템 - 동료 시스템 창 오브젝트")]
     private GameObject colleagueSystemPanelObj;
+    
+    private GameObject lastContents; //전에 띄우던 콘텐츠 창 오브젝트
+
+    private int nowChangeContents; //바꿀 콘텐츠 창 인덱스
     #endregion
 
     #region 스탯 업그레이드창 텍스트 모음
@@ -277,9 +277,9 @@ public class BattleUIManager : Singleton<BattleUIManager>
     }
 
     /// <summary>
-    /// 변경하려는 콘텐츠 인덱스 (콘텐츠 변경 버튼에서 사용)
+    /// 현재 콘텐츠 인덱스 변경(버튼)
     /// </summary>
-    /// <param name="ChangeIndex"></param>
+    /// <param name="ChangeIndex"> 변경할 콘텐츠 인덱스 </param>
     public void NowContentsChange(int ChangeIndex)
     {
         nowChangeContents = ChangeIndex;
