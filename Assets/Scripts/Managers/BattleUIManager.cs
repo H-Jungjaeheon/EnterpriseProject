@@ -8,11 +8,12 @@ using Vector2 = UnityEngine.Vector2;
 
 public enum Contents
 {
-    StatUpgradeContents,
-    SaleOfFoodContents,
-    ColleagueContents,
-    ProficiencyContents,
-    SkillEquipContents,
+    StatUpgrade,
+    SaleOfFood,
+    Colleague,
+    Proficiency,
+    SkillEquip,
+    EquipRigging,
     ContentsLength
 }
 
@@ -258,17 +259,17 @@ public class BattleUIManager : Singleton<BattleUIManager>
     {
         PopUpObj.SetActive(false);
 
-        if (lastContents == contentsPanelObjs[(int)Contents.StatUpgradeContents])
+        if (lastContents == contentsPanelObjs[(int)Contents.StatUpgrade])
         {
-            nowChangeContents = (int)Contents.StatUpgradeContents;
+            nowChangeContents = (int)Contents.StatUpgrade;
         }
-        else if (lastContents == contentsPanelObjs[(int)Contents.SaleOfFoodContents])
+        else if (lastContents == contentsPanelObjs[(int)Contents.SaleOfFood])
         {
-            nowChangeContents = (int)Contents.SaleOfFoodContents;
+            nowChangeContents = (int)Contents.SaleOfFood;
         }
         else
         {
-            nowChangeContents = (int)Contents.SkillEquipContents;
+            nowChangeContents = (int)Contents.SkillEquip;
         }
 
         nowContentsObj = lastContents;
@@ -293,9 +294,9 @@ public class BattleUIManager : Singleton<BattleUIManager>
         bool isSameContents = PopUpObj.activeSelf;
 
         nowContentsObj.SetActive(false);
-        nowContentsObj = isSameContents ? contentsPanelObjs[(int)Contents.StatUpgradeContents] : PopUpObj;
+        nowContentsObj = isSameContents ? contentsPanelObjs[(int)Contents.StatUpgrade] : PopUpObj;
 
-        nowContents = isSameContents ? Contents.StatUpgradeContents : (Contents)nowChangeContents;
+        nowContents = isSameContents ? Contents.StatUpgrade : (Contents)nowChangeContents;
         nowContentsObj.SetActive(true);
 
         if (sofManager.isCustomerArrival == false)

@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
         set
         {
             currentProficiency = value;
-            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.ProficiencyContents].activeSelf)
+            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.Proficiency].activeSelf)
             {
                 ProficiencySystemManager.Instance.TextReSettings();
             }
@@ -30,11 +30,11 @@ public class GameManager : Singleton<GameManager>
         set 
         {
             moneyUnit = value;
-            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.ColleagueContents].activeSelf)
+            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.Colleague].activeSelf)
             {
                 ColleagueSystemManager.Instance.TextColorChange();
             }
-            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.ProficiencyContents].activeSelf)
+            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.Proficiency].activeSelf)
             {
                 ProficiencySystemManager.Instance.TextReSettings();
             }
@@ -52,7 +52,7 @@ public class GameManager : Singleton<GameManager>
         set 
         {
             gemUnit = value;
-            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.ColleagueContents].activeSelf)
+            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.Colleague].activeSelf)
             {
                 ColleagueSystemManager.Instance.TextColorChange();
             }

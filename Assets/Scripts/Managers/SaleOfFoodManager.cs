@@ -170,7 +170,7 @@ public class SaleOfFoodManager : MonoBehaviour
 
     private void SaleOfFoodViewMaterialsText_BasicScreen()
     {
-        if (BattleUIManager.Instance.nowContents == Contents.SaleOfFoodContents)
+        if (BattleUIManager.Instance.nowContents == Contents.SaleOfFood)
         {
             var battleSceneManagerIn = BattleSceneManager.Instance;
             for (int nowIndex = 0; nowIndex < 3; nowIndex++)
@@ -366,7 +366,7 @@ public class SaleOfFoodManager : MonoBehaviour
         foodChooseAndMakePanelObj.SetActive(false);
         chooseADishObj.SetActive(true);
         nowSaleOfFoodContents = SaleOfFoodContents.BasicScreen;
-        BattleUIManager.Instance.nowContents = Contents.SaleOfFoodContents;
+        BattleUIManager.Instance.nowContents = Contents.SaleOfFood;
         StartCoroutine(customerOnTheWay());
     }
 
