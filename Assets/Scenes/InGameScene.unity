@@ -611,7 +611,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 102
+  m_SortingOrder: 13
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1620,7 +1620,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 102
+  m_SortingOrder: 13
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2078,12 +2078,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 342571182}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 170, y: -160}
-  m_SizeDelta: {x: 230, y: 130}
+  m_AnchoredPosition: {x: 165, y: -160}
+  m_SizeDelta: {x: 220, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &143739232
 MonoBehaviour:
@@ -2128,7 +2128,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 143739233}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2105201810}
+        m_TargetAssemblyTypeName: RiggingManager, Assembly-CSharp
+        m_MethodName: ButtonSetting
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &143739233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3507,6 +3519,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1765037485}
   - {fileID: 143739231}
   - {fileID: 448237545}
   - {fileID: 903827933}
@@ -5140,12 +5153,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 342571182}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 390, y: -160}
-  m_SizeDelta: {x: 230, y: 130}
+  m_AnchoredPosition: {x: 384.99997, y: -160}
+  m_SizeDelta: {x: 220, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &448237546
 MonoBehaviour:
@@ -5190,7 +5203,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 448237547}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2105201810}
+        m_TargetAssemblyTypeName: RiggingManager, Assembly-CSharp
+        m_MethodName: ButtonSetting
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &448237547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6036,7 +6061,7 @@ GameObject:
   - component: {fileID: 530163079}
   - component: {fileID: 530163078}
   m_Layer: 5
-  m_Name: Button (7)
+  m_Name: Button8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6645,7 +6670,7 @@ GameObject:
   - component: {fileID: 573650171}
   - component: {fileID: 573650170}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7684,7 +7709,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 101
+  m_SortingOrder: 12
   m_Sprite: {fileID: 21300000, guid: a552befdda86ab0449370802932efecb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -8408,7 +8433,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 92
+  m_SortingOrder: 11
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -11123,7 +11148,7 @@ GameObject:
   - component: {fileID: 882148439}
   - component: {fileID: 882148438}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: Button4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11384,7 +11409,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 92
+  m_SortingOrder: 11
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -11427,12 +11452,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 342571182}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 610, y: -160}
-  m_SizeDelta: {x: 230, y: 130}
+  m_AnchoredPosition: {x: 607.5, y: -160}
+  m_SizeDelta: {x: 225, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &903827934
 MonoBehaviour:
@@ -11477,7 +11502,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 903827935}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2105201810}
+        m_TargetAssemblyTypeName: RiggingManager, Assembly-CSharp
+        m_MethodName: ButtonSetting
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &903827935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17722,7 +17759,7 @@ GameObject:
   - component: {fileID: 1417414940}
   - component: {fileID: 1417414939}
   m_Layer: 5
-  m_Name: Button (8)
+  m_Name: Button9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18507,10 +18544,10 @@ RectTransform:
   - {fileID: 972462734}
   - {fileID: 962728353}
   - {fileID: 1799846714}
-  - {fileID: 2105201809}
   - {fileID: 1959401195}
   - {fileID: 1787463851}
   - {fileID: 1919284002}
+  - {fileID: 2105201809}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18758,7 +18795,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 102
+  m_SortingOrder: 13
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -19980,7 +20017,7 @@ GameObject:
   - component: {fileID: 1536650115}
   - component: {fileID: 1536650114}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Button2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20100,7 +20137,7 @@ GameObject:
   - component: {fileID: 1550220060}
   - component: {fileID: 1550220059}
   m_Layer: 5
-  m_Name: Button (10)
+  m_Name: Button11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20374,7 +20411,7 @@ GameObject:
   - component: {fileID: 1596384668}
   - component: {fileID: 1596384667}
   m_Layer: 5
-  m_Name: Button (4)
+  m_Name: Button5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20558,7 +20595,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 101
+  m_SortingOrder: 12
   m_Sprite: {fileID: 21300000, guid: a552befdda86ab0449370802932efecb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -22492,7 +22529,7 @@ GameObject:
   - component: {fileID: 1752562579}
   - component: {fileID: 1752562578}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Button3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22771,12 +22808,12 @@ RectTransform:
   - {fileID: 2021043447}
   - {fileID: 659286209}
   - {fileID: 1600536082}
-  m_Father: {fileID: 2105201809}
-  m_RootOrder: 1
+  m_Father: {fileID: 342571182}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -300}
+  m_AnchoredPosition: {x: 0, y: -64.5}
   m_SizeDelta: {x: 1200, y: 1150}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1765037486
@@ -23057,7 +23094,7 @@ RectTransform:
   m_Children:
   - {fileID: 1726663057}
   m_Father: {fileID: 1442654348}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -23315,7 +23352,7 @@ GameObject:
   - component: {fileID: 1819759526}
   - component: {fileID: 1819759525}
   m_Layer: 5
-  m_Name: Button (5)
+  m_Name: Button6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24168,7 +24205,7 @@ GameObject:
   - component: {fileID: 1899998752}
   - component: {fileID: 1899998751}
   m_Layer: 5
-  m_Name: Button (9)
+  m_Name: Button10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24509,7 +24546,7 @@ RectTransform:
   m_Children:
   - {fileID: 1224600404}
   m_Father: {fileID: 1442654348}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24927,7 +24964,7 @@ RectTransform:
   m_Children:
   - {fileID: 249611971}
   m_Father: {fileID: 1442654348}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -25882,7 +25919,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 23
+  m_SortingOrder: 12
   m_Sprite: {fileID: 21300000, guid: a552befdda86ab0449370802932efecb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -25936,7 +25973,7 @@ RectTransform:
   - {fileID: 1550220058}
   - {fileID: 2129374886}
   m_Father: {fileID: 342571182}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -26030,7 +26067,7 @@ GameObject:
   - component: {fileID: 2029640280}
   - component: {fileID: 2029640279}
   m_Layer: 5
-  m_Name: Button (6)
+  m_Name: Button7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27188,6 +27225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2105201809}
+  - component: {fileID: 2105201810}
   m_Layer: 5
   m_Name: EquipRiggingPanel
   m_TagString: Untagged
@@ -27207,15 +27245,203 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 342571182}
-  - {fileID: 1765037485}
   m_Father: {fileID: 1442654348}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2105201810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105201808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c80fdc8d9b78849bc4035023eeaa5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  riggingDatas:
+  - id: 1
+    type: 2
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: 5e1e38a4ae4f149429fb5c5e89f7da37, type: 3}
+    name: "\uAE30\uBCF8 \uC21F\uAC00\uB77D"
+    explanation: "\uAE30\uBCF8 \uC21F\uAC00\uB77D \uC124\uBA85"
+    rank: 1
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 2
+    type: 2
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: 496468e248d36ed49881ff202913d466, type: 3}
+    name: "\uB098\uBB34 \uC21F\uAC00\uB77D"
+    explanation: "\uB098\uBB34 \uC21F\uAC00\uB77D \uC124\uBA85"
+    rank: 2
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 3
+    type: 2
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: 3c605e01c9d354840b88e74697f58c5e, type: 3}
+    name: "\uD50C\uB77C\uC2A4\uD2F1 \uC21F\uAC00\uB77D"
+    explanation: "\uD50C\uB77C\uC2A4\uD2F1 \uC21F\uAC00\uB77D \uC124\uBA85"
+    rank: 3
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 4
+    type: 2
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: c10cffa56abf565488c277c960e57b57, type: 3}
+    name: "\uAE08 \uC21F\uAC00\uB77D"
+    explanation: "\uAE08 \uC21F\uAC00\uB77D \uC124\uBA85"
+    rank: 4
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 5
+    type: 2
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: e14c4d1a1f2db6b4c920621c11d45785, type: 3}
+    name: "\uD3EC\uD06C \uC21F\uAC00\uB77D"
+    explanation: "\uD3EC\uD06C \uC21F\uAC00\uB77D \uC124\uBA85"
+    rank: 5
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 6
+    type: 1
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: cb9d7c726864b324588a897be2df2eba, type: 3}
+    name: "\uAE30\uBCF8 \uADF8\uB987"
+    explanation: "\uAE30\uBCF8 \uADF8\uB987 \uC124\uBA85"
+    rank: 1
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 7
+    type: 1
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: 2c1e6b587ea2b3b4d8195874e51e7bb3, type: 3}
+    name: "\uB3C4\uC2DC\uB77D \uD1B5"
+    explanation: "\uB3C4\uC2DC\uB77D \uD1B5 \uC124\uBA85"
+    rank: 2
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 8
+    type: 1
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: 50be087b462d2de44ab1eb0eada64e78, type: 3}
+    name: "\uD1A0\uAE30"
+    explanation: "\uD1A0\uAE30 \uC124\uBA85"
+    rank: 3
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 9
+    type: 1
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: 1fd6a3b6e50f9c84aaf8c30c63446b2c, type: 3}
+    name: "\uB0C4\uBE44"
+    explanation: "\uB0C4\uBE44 \uC124\uBA85"
+    rank: 4
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 10
+    type: 1
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: 1fa89614a9fa5be49b2b1af0b9af5723, type: 3}
+    name: "\uB69D\uBC30\uAE30"
+    explanation: "\uB69D\uBC30\uAE30 \uC124\uBA85"
+    rank: 5
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 11
+    type: 0
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: 817bc48456ff7a84eba350d42c3e9505, type: 3}
+    name: "\uAE30\uBCF8 \uC6B4\uB3D9\uD654"
+    explanation: "\uAE30\uBCF8 \uC6B4\uB3D9\uD654 \uC124\uBA85"
+    rank: 1
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 12
+    type: 0
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: bdd332673ee52f94b86d0f44bf55cd76, type: 3}
+    name: "\uC2AC\uB9AC\uD37C"
+    explanation: "\uC2AC\uB9AC\uD37C \uC124\uBA85"
+    rank: 2
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 13
+    type: 0
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: ffcd97ec5b3f3fe46bc3064a134a2abb, type: 3}
+    name: "\uACA8\uC6B8 \uBD80\uCE20"
+    explanation: "\uACA8\uC6B8 \uBD80\uCE20 \uC124\uBA85"
+    rank: 3
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 14
+    type: 0
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: 95fe3876db8d58945b49c6eee422dc57, type: 3}
+    name: "\uC624\uB9AC\uBC1C"
+    explanation: "\uC624\uB9AC\uBC1C \uC124\uBA85"
+    rank: 4
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  - id: 15
+    type: 0
+    isUnlock: 0
+    icon: {fileID: 21300000, guid: fe8e7fe7b0489a14898a6c0723f1e4e0, type: 3}
+    name: "\uC720\uB9AC \uAD6C\uB450"
+    explanation: "\uC720\uB9AC \uAD6C\uB450 \uC124\uBA85"
+    rank: 5
+    level: 1
+    maxExp: 0
+    nowExp: 3
+  equipButtons:
+  - {fileID: 573650170}
+  - {fileID: 1536650114}
+  - {fileID: 1752562578}
+  - {fileID: 882148438}
+  - {fileID: 1596384667}
+  - {fileID: 1819759525}
+  - {fileID: 2029640279}
+  - {fileID: 530163078}
+  - {fileID: 1417414939}
+  - {fileID: 1899998751}
+  - {fileID: 1550220059}
+  - {fileID: 2129374887}
+  buttonImage:
+  - {fileID: 573650171}
+  - {fileID: 1536650115}
+  - {fileID: 1752562579}
+  - {fileID: 882148439}
+  - {fileID: 1596384668}
+  - {fileID: 1819759526}
+  - {fileID: 2029640280}
+  - {fileID: 530163079}
+  - {fileID: 1417414940}
+  - {fileID: 1899998752}
+  - {fileID: 1550220060}
+  - {fileID: 2129374888}
 --- !u!1 &2105871850
 GameObject:
   m_ObjectHideFlags: 0
@@ -27658,7 +27884,7 @@ GameObject:
   - component: {fileID: 2129374888}
   - component: {fileID: 2129374887}
   m_Layer: 5
-  m_Name: Button (11)
+  m_Name: Button12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
