@@ -147,6 +147,11 @@ public class SaleOfFoodManager : MonoBehaviour
         StartCoroutine(customerOnTheWay());
     }
 
+    private void OnEnable()
+    {
+        customerObj.transform.position = new Vector2(-1, -3.15f);
+    }
+
     void Update()
     {
         SaleOfFoodViewMaterialsText_BasicScreen();
