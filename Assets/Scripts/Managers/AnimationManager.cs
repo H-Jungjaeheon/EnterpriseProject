@@ -55,5 +55,10 @@ public class AnimationManager : MonoBehaviour
     IEnumerator PlayAnimationCorutine(AnimationType Type, float Speed = 1.0f, bool Loop = false)
     {
         yield return null;
+
+        while (true)
+        {
+
+        }
     }
 }
