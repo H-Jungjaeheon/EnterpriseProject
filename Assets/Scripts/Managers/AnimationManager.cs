@@ -39,6 +39,18 @@ public class AnimationManager : MonoBehaviour
         SpriteRenderer = this.GetComponent<SpriteRenderer>();
 
         OriginalSprite = SpriteRenderer.sprite;
+
+        Debug.Log(ClipList.Count);
+        BasicSetting();
+    }
+
+    private void BasicSetting()
+    {
+        for (int i = 0; i < ClipList.Count; i++)
+        {
+            Debug.Log("123");
+            AnimationList.Add(ClipList[i].AnimationType, ClipList[i].AnimationClip);
+        }
     }
 
     public void PlayAnimation(AnimationType Type, float Speed = 1.0f, bool Loop = false)
@@ -52,13 +64,18 @@ public class AnimationManager : MonoBehaviour
         SpriteRenderer.sprite = OriginalSprite;
     }
 
+    public void ChageState(AnimationType Type)
+    {
+
+    }
+
     IEnumerator PlayAnimationCorutine(AnimationType Type, float Speed = 1.0f, bool Loop = false)
     {
         yield return null;
 
         while (true)
         {
-
+            ClipList[0].AnimationClip.SampleAnimation(this.gameObject, 0.5f);
         }
     }
 }
