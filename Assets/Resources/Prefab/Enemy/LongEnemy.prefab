@@ -13,13 +13,14 @@ GameObject:
   - component: {fileID: 1755755353}
   - component: {fileID: 743787892426380635}
   - component: {fileID: 3636879936211524416}
+  - component: {fileID: 7462088874241944448}
   m_Layer: 0
   m_Name: LongEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7299165123022306645
 Transform:
   m_ObjectHideFlags: 0
@@ -113,6 +114,7 @@ MonoBehaviour:
   AttackDelay: 0
   IsAttack: 0
   MoveSpeed: 0
+  Animator: {fileID: 0}
   ParticleMaterial: {fileID: 2100000, guid: 6839acaafed65704daef63f89faf0534, type: 2}
   ParticlePrefab: {fileID: 6141688812485550459, guid: afbfe552eac65fe4a863268eac03d5f3, type: 3}
   CoinObj: {fileID: 6206293678686774288, guid: 85f222829c8e2cc418a506407542acb7, type: 3}
@@ -164,3 +166,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &7462088874241944448
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3899307102218605548}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 256bb15af80fe4042a96824cc3f40e42, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

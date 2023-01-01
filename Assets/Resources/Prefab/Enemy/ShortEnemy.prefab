@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7299165123022306645
 Transform:
   m_ObjectHideFlags: 0
@@ -114,6 +114,7 @@ MonoBehaviour:
   AttackDelay: 0
   IsAttack: 0
   MoveSpeed: 0
+  Animator: {fileID: 0}
   ParticleMaterial: {fileID: 2100000, guid: 3cf71ddc8bc09924396e7e3cad68d667, type: 2}
   ParticlePrefab: {fileID: 6141688812485550459, guid: afbfe552eac65fe4a863268eac03d5f3, type: 3}
   CoinObj: {fileID: 6206293678686774288, guid: 85f222829c8e2cc418a506407542acb7, type: 3}

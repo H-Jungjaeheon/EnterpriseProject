@@ -167,11 +167,11 @@ public class Enemy : MonoBehaviour
 
     void SwichBehaviorType(BehaviorType Type)
     {
+        Animator.SetTrigger(Type.ToString()); //  애니메이션 변경
+
         if (CurBehaviorType != Type)
         {
             CurBehaviorType = Type;
-
-            Animator.SetTrigger(Type.ToString()); //  애니메이션 변경
 
             switch (Type)
             {
