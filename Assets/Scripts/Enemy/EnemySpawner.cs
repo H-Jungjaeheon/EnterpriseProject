@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
@@ -15,6 +16,7 @@ public class DataForm
 public class EnemySpawner : MonoBehaviour
 {
     public static EnemySpawner Instance;
+    const int SortingNum = 6;
 
     [Header("EnemySpawner변수")]
     [SerializeField]
@@ -226,7 +228,20 @@ public class EnemySpawner : MonoBehaviour
 
     public void StopEnemySpawn()
     {
+        Debug.Log("StopEnemy");
         StopCoroutine(EnemySpawnCorutine);
+        SortingEnemy();
+    }
+
+    // 적 높이에 따른 우선렌더
+    public void SortingEnemy()
+    {
+        SpawnEnemyList = SpawnEnemyList.OrderBy(x => x.gameObject.transform.position.y).ToList();
+
+        for (int i = 0; i < SpawnEnemyList.Count; i++)
+        {
+            SpawnEnemyList[i].GetComponent<SpriteRenderer>().sortingOrder = SortingNum + (SpawnEnemyList.Count - i);
+        }
     }
 
     private IEnumerator EnemySpawn()
@@ -244,6 +259,9 @@ public class EnemySpawner : MonoBehaviour
                     {
                         Enemy enemy = Instance.GetEnemy(EnemyData[i].Type, EnemyData[i].EnemyForm);
                         enemy.transform.position = new Vector2(this.transform.position.x, Random.Range(MinY, MaxY));
+                        
+                        // 적 높이에 따른 우선렌더
+                        SortingEnemy();
 
                         yield return new WaitForSeconds(Random.Range(MinTime, MaxTime));
                     }
@@ -256,6 +274,9 @@ public class EnemySpawner : MonoBehaviour
         {
 
         }
+
+        StopEnemySpawn();
+        yield break;
     }
     #endregion
 

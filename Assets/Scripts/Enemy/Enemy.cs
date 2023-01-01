@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     public SpriteRenderer EnemySprite;
     public Transform TargetPos;
     public BehaviorType CurBehaviorType;
-
+   
     public List<GameObject> TextObjs;
     public GameObject TextObj;
     public TextMeshProUGUI Text;
@@ -63,6 +63,10 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float MoveSpeed;
 
+    [Header("애니메이션")]
+    [SerializeField]
+    private Animator Animator;
+
     [Header("파티클 소환")]
     [SerializeField]
     Material ParticleMaterial;
@@ -78,6 +82,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         EnemySprite = this.GetComponent<SpriteRenderer>();
+        Animator = this.GetComponent<Animator>();
     }
 
     protected virtual void Update()
@@ -166,9 +171,12 @@ public class Enemy : MonoBehaviour
         {
             CurBehaviorType = Type;
 
+            Animator.SetTrigger(Type.ToString()); //  애니메이션 변경
+
             switch (Type)
             {
                 case BehaviorType.Attack:
+                    
                     StartAttack();
                     break;
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Animations;
 
 //직접 만드는 애니메이터
 
@@ -22,15 +23,17 @@ public class AnimationManager : MonoBehaviour
     [SerializeField]
     private SpriteRenderer SpriteRenderer;
 
-    [Header("애니메이션 관린")]
+    [Header("애니메이션 관련")]
+    [SerializeField]
+    private RuntimeAnimatorController RuntimeAnimatorController;
     [SerializeField]
     private Sprite OriginalSprite;
     [SerializeField]
-    private List<ClipList> ClipList;
+    private List<ClipList> ClipList = new List<ClipList>();
     [SerializeField]
     private float AnimationSpeed;
     [SerializeField]
-    private Dictionary<AnimationType, AnimationClip> AnimationList;
+    private Dictionary<AnimationType, AnimationClip> AnimationList = new Dictionary<AnimationType, AnimationClip>();
     [SerializeField]
     private Coroutine PlayAnimCorutine;
 
@@ -41,7 +44,7 @@ public class AnimationManager : MonoBehaviour
         OriginalSprite = SpriteRenderer.sprite;
 
         Debug.Log(ClipList.Count);
-        BasicSetting();
+        AnimatorController a = new AnimatorController();
     }
 
     private void BasicSetting()
@@ -75,7 +78,7 @@ public class AnimationManager : MonoBehaviour
 
         while (true)
         {
-            ClipList[0].AnimationClip.SampleAnimation(this.gameObject, 0.5f);
+            
         }
     }
 }
