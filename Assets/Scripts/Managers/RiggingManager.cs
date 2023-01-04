@@ -70,6 +70,10 @@ public class RiggingManager : MonoBehaviour
     [Tooltip("장비 장착 버튼 빈 스프라이트")]
     private Sprite nullSprite;
 
+    [SerializeField]
+    [Tooltip("현재 선택한 장비 종류 안내 텍스트")]
+    private Text kindText;
+
     #region 장비 장착 화면 요소들 모음
     [Header("장비 장착 화면 요소들")]
 
@@ -122,6 +126,19 @@ public class RiggingManager : MonoBehaviour
     {
         RiggingType riggingType = (RiggingType)typeIndex; //현재 장비 타입
         int buttonIndex = 0; //현재 버튼 인덱스
+
+        switch (riggingType)
+        {
+            case RiggingType.Shoes:
+                kindText.text = shoesType;
+                break;
+            case RiggingType.Bowl:
+                kindText.text = bowlType;
+                break;
+            case RiggingType.Spoon:
+                kindText.text = spoonType;
+                break;
+        }
 
         for (int nowIndex = equipButtons.Length - 1; nowIndex >= 0; nowIndex--) //마지막 데이터부터 0번째 데이터까지 반복 (버튼 이벤트 초기화)
         {
