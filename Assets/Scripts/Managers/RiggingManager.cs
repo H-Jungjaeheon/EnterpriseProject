@@ -56,6 +56,7 @@ public class RiggingManager : MonoBehaviour
     [Tooltip("현재 장착한 장비 아이콘 표시 이미지")]
     private Image[] riggingImages;
 
+    #region 장비 장착 버튼 요소들
     [Header("장비 장착 버튼 요소들")]
 
     [SerializeField]
@@ -69,10 +70,7 @@ public class RiggingManager : MonoBehaviour
     [SerializeField]
     [Tooltip("장비 장착 버튼 빈 스프라이트")]
     private Sprite nullSprite;
-
-    [SerializeField]
-    [Tooltip("현재 선택한 장비 종류 안내 텍스트")]
-    private Text kindText;
+    #endregion
 
     #region 장비 장착 화면 요소들 모음
     [Header("장비 장착 화면 요소들")]
@@ -101,6 +99,14 @@ public class RiggingManager : MonoBehaviour
     [Tooltip("장비 설명 텍스트")]
     private Text explanationText;
 
+    [SerializeField]
+    [Tooltip("현재 장비 인벤토리 안내 이미지")]
+    private Image guideImg;
+
+    [SerializeField]
+    [Tooltip("장비 인벤토리 안내 스프라이트 모음")]
+    private Sprite[] guideSprites;
+
     private const string shoesType = "신발";
 
     private const string bowlType = "그릇";
@@ -127,18 +133,7 @@ public class RiggingManager : MonoBehaviour
         RiggingType riggingType = (RiggingType)typeIndex; //현재 장비 타입
         int buttonIndex = 0; //현재 버튼 인덱스
 
-        switch (riggingType)
-        {
-            case RiggingType.Shoes:
-                kindText.text = shoesType;
-                break;
-            case RiggingType.Bowl:
-                kindText.text = bowlType;
-                break;
-            case RiggingType.Spoon:
-                kindText.text = spoonType;
-                break;
-        }
+        guideImg.sprite = guideSprites[typeIndex]; //현재 장비 타입에 맞는 안내 이미지로 변경
 
         for (int nowIndex = equipButtons.Length - 1; nowIndex >= 0; nowIndex--) //마지막 데이터부터 0번째 데이터까지 반복 (버튼 이벤트 초기화)
         {
