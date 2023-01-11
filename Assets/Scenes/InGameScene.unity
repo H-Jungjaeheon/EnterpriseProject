@@ -27684,6 +27684,7 @@ MonoBehaviour:
     type: 2
     isUnlock: 0
     icon: {fileID: 21300000, guid: b2d2b5f75ca1a3345bb6941f1f7f1d3a, type: 3}
+    equipIcon: {fileID: 21300000, guid: 423964ca2a39b334c9142b868561eac0, type: 3}
     name: "\uAE30\uBCF8 \uC21F\uAC00\uB77D"
     explanation: "\uAE30\uBCF8 \uC21F\uAC00\uB77D \uC124\uBA85"
     rank: 1
@@ -27694,6 +27695,7 @@ MonoBehaviour:
     type: 2
     isUnlock: 0
     icon: {fileID: 21300000, guid: 0a342ce6a9cecc747abfcd0ea04d5a9b, type: 3}
+    equipIcon: {fileID: 21300000, guid: eb6fe591342f14a438df4a5d8bb7516b, type: 3}
     name: "\uB098\uBB34 \uC21F\uAC00\uB77D"
     explanation: "\uB098\uBB34 \uC21F\uAC00\uB77D \uC124\uBA85"
     rank: 2
@@ -27704,6 +27706,7 @@ MonoBehaviour:
     type: 2
     isUnlock: 0
     icon: {fileID: 21300000, guid: 215b5b1259ff8434380816ea2092386f, type: 3}
+    equipIcon: {fileID: 21300000, guid: 4c3374fb908eae54fa7a67b18d79f018, type: 3}
     name: "\uD50C\uB77C\uC2A4\uD2F1 \uC21F\uAC00\uB77D"
     explanation: "\uD50C\uB77C\uC2A4\uD2F1 \uC21F\uAC00\uB77D \uC124\uBA85"
     rank: 3
@@ -27714,6 +27717,7 @@ MonoBehaviour:
     type: 2
     isUnlock: 0
     icon: {fileID: 21300000, guid: 7824520b8ac489b4eb5fcc30b1e0d6f1, type: 3}
+    equipIcon: {fileID: 21300000, guid: 10eb14d7d5a1e384689970490c744986, type: 3}
     name: "\uAE08 \uC21F\uAC00\uB77D"
     explanation: "\uAE08 \uC21F\uAC00\uB77D \uC124\uBA85"
     rank: 4
@@ -27724,6 +27728,7 @@ MonoBehaviour:
     type: 2
     isUnlock: 0
     icon: {fileID: 21300000, guid: ff78c6d2605d5d14d90b616a38c0e7fd, type: 3}
+    equipIcon: {fileID: 21300000, guid: dda811ca30bcee74184e09b5a47a52e9, type: 3}
     name: "\uD3EC\uD06C \uC21F\uAC00\uB77D"
     explanation: "\uD3EC\uD06C \uC21F\uAC00\uB77D \uC124\uBA85"
     rank: 5
@@ -27734,6 +27739,7 @@ MonoBehaviour:
     type: 1
     isUnlock: 0
     icon: {fileID: 21300000, guid: 70996d86b6b65fa49ab224e0e2e7b91a, type: 3}
+    equipIcon: {fileID: 21300000, guid: 67214a414e742414fb8287e1fe11bc4d, type: 3}
     name: "\uAE30\uBCF8 \uADF8\uB987"
     explanation: "\uAE30\uBCF8 \uADF8\uB987 \uC124\uBA85"
     rank: 1
@@ -27744,6 +27750,7 @@ MonoBehaviour:
     type: 1
     isUnlock: 0
     icon: {fileID: 21300000, guid: cb45c41b4b3180747b496f10645790f0, type: 3}
+    equipIcon: {fileID: 21300000, guid: ef336a071a3d7734d8627bdf19f22223, type: 3}
     name: "\uB3C4\uC2DC\uB77D \uD1B5"
     explanation: "\uB3C4\uC2DC\uB77D \uD1B5 \uC124\uBA85"
     rank: 2
@@ -27754,6 +27761,7 @@ MonoBehaviour:
     type: 1
     isUnlock: 0
     icon: {fileID: 21300000, guid: 7d97e747a6f34604c8b6996a96a308b4, type: 3}
+    equipIcon: {fileID: 21300000, guid: 96872078a76582247803803c0526c9a5, type: 3}
     name: "\uD1A0\uAE30"
     explanation: "\uD1A0\uAE30 \uC124\uBA85"
     rank: 3
@@ -27764,6 +27772,7 @@ MonoBehaviour:
     type: 1
     isUnlock: 0
     icon: {fileID: 21300000, guid: 277772efcc351cd4db190d8e1ec6a865, type: 3}
+    equipIcon: {fileID: 21300000, guid: c865c70003bf8bd4580369006ef86696, type: 3}
     name: "\uB0C4\uBE44"
     explanation: "\uB0C4\uBE44 \uC124\uBA85"
     rank: 4
@@ -27774,6 +27783,7 @@ MonoBehaviour:
     type: 1
     isUnlock: 0
     icon: {fileID: 21300000, guid: 3bb016c9f87eeaa4895aaea7eea67368, type: 3}
+    equipIcon: {fileID: 21300000, guid: 5a55795767809344d8d9746bf602bc63, type: 3}
     name: "\uB69D\uBC30\uAE30"
     explanation: "\uB69D\uBC30\uAE30 \uC124\uBA85"
     rank: 5
@@ -27784,6 +27794,7 @@ MonoBehaviour:
     type: 0
     isUnlock: 0
     icon: {fileID: 21300000, guid: 724be2acc91fe3a46ada557b29274b7f, type: 3}
+    equipIcon: {fileID: 21300000, guid: 4f5e12e3495fc014bbd4d7bd305f7bdb, type: 3}
     name: "\uAE30\uBCF8 \uC6B4\uB3D9\uD654"
     explanation: "\uAE30\uBCF8 \uC6B4\uB3D9\uD654 \uC124\uBA85"
     rank: 1
@@ -27794,6 +27805,7 @@ MonoBehaviour:
     type: 0
     isUnlock: 0
     icon: {fileID: 21300000, guid: 43d7cbadfa2473649b1a48db3af418e4, type: 3}
+    equipIcon: {fileID: 21300000, guid: 443e88c40cc7e5b4f82bb923d3d65ef6, type: 3}
     name: "\uC2AC\uB9AC\uD37C"
     explanation: "\uC2AC\uB9AC\uD37C \uC124\uBA85"
     rank: 2
@@ -27804,6 +27816,7 @@ MonoBehaviour:
     type: 0
     isUnlock: 0
     icon: {fileID: 21300000, guid: 0c12d54a3e5722f448e97ba7b601229a, type: 3}
+    equipIcon: {fileID: 21300000, guid: ca0f6a19a08cb374483ba8619fc0f7ed, type: 3}
     name: "\uACA8\uC6B8 \uBD80\uCE20"
     explanation: "\uACA8\uC6B8 \uBD80\uCE20 \uC124\uBA85"
     rank: 3
@@ -27814,6 +27827,7 @@ MonoBehaviour:
     type: 0
     isUnlock: 0
     icon: {fileID: 21300000, guid: d280e629fd732e0419e2c0de02a41503, type: 3}
+    equipIcon: {fileID: 21300000, guid: 4e43fe7f4deefbc4382bc6e548e1e7ac, type: 3}
     name: "\uC624\uB9AC\uBC1C"
     explanation: "\uC624\uB9AC\uBC1C \uC124\uBA85"
     rank: 4
@@ -27824,6 +27838,7 @@ MonoBehaviour:
     type: 0
     isUnlock: 0
     icon: {fileID: 21300000, guid: 9b2b1efbeea878d4996e0fb6d08891f4, type: 3}
+    equipIcon: {fileID: 21300000, guid: f0fd1d27a7b23b845a7cde16413f1a92, type: 3}
     name: "\uC720\uB9AC \uAD6C\uB450"
     explanation: "\uC720\uB9AC \uAD6C\uB450 \uC124\uBA85"
     rank: 5

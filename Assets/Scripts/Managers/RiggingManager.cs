@@ -25,6 +25,9 @@ public class Rigging
     [Tooltip("장비 아이콘")]
     public Sprite icon;
 
+    [Tooltip("장비 장착칸에 들어갈 아이콘")]
+    public Sprite equipIcon;
+
     [Tooltip("장비 이름")]
     public string name;
 
@@ -193,7 +196,7 @@ public class RiggingManager : MonoBehaviour
     {
         nowData = riggingDatas[nowDataIndex];
 
-        riggingImages[(int)nowData.type].sprite = nowData.icon;
+        riggingImages[(int)nowData.type].sprite = nowData.equipIcon;
 
         QuestionPanelClose();
     }
