@@ -69,7 +69,19 @@ public class AnimationManager : MonoBehaviour
 
     public void ChageState(AnimationType Type)
     {
-
+        switch (Type)
+        {
+            case AnimationType.Move:
+                break;
+            case AnimationType.Attack:
+                break;
+            case AnimationType.Hit:
+                break;
+            case AnimationType.Any:
+                break;
+            default:
+                break;
+        }
     }
 
     IEnumerator PlayAnimationCorutine(AnimationType Type, float Speed = 1.0f, bool Loop = false)
