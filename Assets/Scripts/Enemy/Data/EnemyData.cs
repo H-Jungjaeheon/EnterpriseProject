@@ -19,4 +19,6 @@ public class EnemyData : ScriptableObject
     public float AttackDistance;
     public float AttackDelay;
     public float MoveSpeed;
+    [Header("애니메이션")]
+    public RuntimeAnimatorController RuntimeAnimatorController;
 }

@@ -19,4 +19,6 @@ public class PlayerData : ScriptableObject
     public float CriticalDamage;
     [Header("필요 재화")]
     public float BuyCost;
+    [Header("애니메이션")]
+    public RuntimeAnimatorController RuntimeAnimatorController;
 }
