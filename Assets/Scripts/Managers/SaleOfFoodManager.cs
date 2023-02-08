@@ -15,6 +15,9 @@ public class SaleOfFoodManager : MonoBehaviour
 {
     private SaleOfFoodContents nowSaleOfFoodContents;
 
+    #region 창 오브젝트 모음
+    [Header("창 오브젝트 모음")]
+
     [SerializeField]
     [Tooltip("요리 판매 시스템 - 요리 선택 및 제작 창 오브젝트")]
     private GameObject foodChooseAndMakePanelObj;
@@ -26,6 +29,7 @@ public class SaleOfFoodManager : MonoBehaviour
     [SerializeField]
     [Tooltip("요리 판매 시스템 - 요리 제작 창 오브젝트")]
     private GameObject theProductionObj;
+    #endregion
 
     #region 요리 판매 시스템 화면 텍스트, 변수, 오브젝트 모음
     [Header("재료 개수 표기 텍스트(기본 화면)")]
@@ -46,7 +50,12 @@ public class SaleOfFoodManager : MonoBehaviour
     [Tooltip("현재 제작할 요리 이름 표기 텍스트")]
     private Text nowCookingFoodNameText;
 
+    [Tooltip("최대 음식 인덱스")]
+    const int MAX_FOOD_INDEX = 2;
+
+    [Tooltip("현재 음식 종류 인덱스")]
     private int nowFoodIndex;
+    
     public int NowFoodIndex
     {
         get { return nowFoodIndex; }
@@ -91,10 +100,6 @@ public class SaleOfFoodManager : MonoBehaviour
     public Sprite[] foodResources;
 
     private Vector3 customerSpeed = new Vector3(1, 0, 0);
-
-    Color redTextColor = new Color(1, 0, 0);
-
-    Color greenTextColor = new Color(0, 1, 0.03f);
 
     [SerializeField]
     [Tooltip("각 음식들 필요 재료, 음식 이름")]
@@ -160,6 +165,7 @@ public class SaleOfFoodManager : MonoBehaviour
     private IEnumerator customerOnTheWay()
     {
         customerObj.transform.position = new Vector2(-3.5f, -3.15f);
+
         while (customerObj.transform.position.x < -1)
         {
             customerObj.transform.position += customerSpeed * Time.deltaTime;
@@ -189,7 +195,7 @@ public class SaleOfFoodManager : MonoBehaviour
                     materialsText_ChooseCookScreen[nowIndex].text = $"{battleSceneManagerIn.quantityOfMaterials[nowIndex]} / {quantityOfMaterials[nowIndex] * cookingCount}";
 
                     materialsText_ChooseCookScreen[nowIndex].color = (battleSceneManagerIn.quantityOfMaterials[nowIndex] < quantityOfMaterials[nowIndex] * cookingCount)
-                        ? materialsText_ChooseCookScreen[nowIndex].color = redTextColor : materialsText_ChooseCookScreen[nowIndex].color = greenTextColor;
+                        ? materialsText_ChooseCookScreen[nowIndex].color = Color.red : materialsText_ChooseCookScreen[nowIndex].color = Color.green;
 
                     isMeetingTheNumberOfMaterials[nowIndex] = (battleSceneManagerIn.quantityOfMaterials[nowIndex] < quantityOfMaterials[nowIndex] * cookingCount)
                         ? isMeetingTheNumberOfMaterials[nowIndex] = true : isMeetingTheNumberOfMaterials[nowIndex] = false;
@@ -198,23 +204,28 @@ public class SaleOfFoodManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 음식 종류(등급) 변경 함수
+    /// </summary>
+    /// <param name="isChangeNextFoodType"> 다음 인덱스의 음식으로 넘기는지 판별(false면 이전 인덱스의 음식으로 넘김) </param>
     public void ChangeTheFoodType(bool isChangeNextFoodType)
     {
-        int maxFoodIndex = 2;
-        if (NowFoodIndex == maxFoodIndex && isChangeNextFoodType == false)
+        if (NowFoodIndex == MAX_FOOD_INDEX && isChangeNextFoodType == false)
         {
             NowFoodIndex = 0;
         }
         else if (NowFoodIndex == 0 && isChangeNextFoodType)
         {
-            NowFoodIndex = maxFoodIndex;
+            NowFoodIndex = MAX_FOOD_INDEX;
         }
         else
         {
             NowFoodIndex = isChangeNextFoodType ? NowFoodIndex - 1 : NowFoodIndex + 1;
         }
+
         ChangeFoodAnim(isChangeNextFoodType);
         nowCookingFoodNameText.text = foodDatas[NowFoodIndex].FoodName;
+
         for (int nowDataIndex = 0; nowDataIndex < quantityOfMaterials.Length; nowDataIndex++)
         {
             quantityOfMaterials[nowDataIndex] = foodDatas[NowFoodIndex].quantityOfMaterials[nowDataIndex];
@@ -229,12 +240,17 @@ public class SaleOfFoodManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 음식 선택 및 제작 콘텐츠 화면 활성화/비활성화
+    /// </summary>
+    /// <param name="isPanelOn"> 콘텐츠 화면 활성화 여부 </param>
     public void FoodChooseAndMakePanelOnOrOff(bool isPanelOn)
     {
         if (isPanelOn && isCustomerArrival == false)
         {
             return;
         }
+
         nowSaleOfFoodContents = isPanelOn ? SaleOfFoodContents.ChooseFoodScreen : SaleOfFoodContents.BasicScreen;
         foodChooseAndMakePanelObj.SetActive(isPanelOn);
     }
@@ -260,6 +276,9 @@ public class SaleOfFoodManager : MonoBehaviour
         StartCoroutine(ArrowMiniGameStart());
     }
 
+    /// <summary>
+    /// 화살표 움직임 정지
+    /// </summary>
     public void StopArrow() => isArrowMoving = false;
 
     /// <summary>
@@ -270,8 +289,9 @@ public class SaleOfFoodManager : MonoBehaviour
     {
         Vector2 arrowMoveSpeed = new Vector2(4f, 0);
         bool isLeft = false;
-        int basicScore = 2;
         int maxCount = 0;
+        int nowGiveJewel = 0;
+
         isArrowMoving = true;
 
         while (isArrowMoving)
@@ -291,11 +311,16 @@ public class SaleOfFoodManager : MonoBehaviour
             {
                 isLeft = true;
             }
+
             yield return null;
         }
 
         yield return null;
 
+        nowGiveJewel += (NowFoodIndex + 1) * 10 + //현재 음식 등급에 맞는 기본 지급 보석
+            Random.Range(0, (10 * arrowComponent.multiplication) + 1) * //현재 요리 성공 등급에 맞는 지급 보석
+            cookingCount; //현재 요리 개수에 따른 보상 배로 늘리기 
+        
         switch (arrowComponent.multiplication)
         {
             case 1:
@@ -350,28 +375,24 @@ public class SaleOfFoodManager : MonoBehaviour
 
         yield return new WaitForSeconds(3);
 
-        resultsText.text = $"명성도 : +{(basicScore * arrowComponent.multiplication)}";
+        resultsText.text = $"보석 + {nowGiveJewel}";
 
-        if (questManager.questKind == QuestKind.GetProficiency) //현재 퀘스트가 명성도를 얻는 퀘스트라면 실행
-        {
-            questManager.datas[(int)questManager.questKind].nowFigure += basicScore * arrowComponent.multiplication; //현재 미니게임을 통한 명성도만큼 퀘스트도 갱신
-            questManager.InformationFix();
-        }
-
-        resultsObj.transform.DOScale(new Vector3(1, 1, 1), 0.5f).SetEase(Ease.OutBounce);
+        resultsObj.transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBounce);
         resultsImage.sprite = resultsSprite[arrowComponent.multiplication - 1];
 
         yield return new WaitForSeconds(2.5f);
 
-        GameManager.Instance.CurrentProficiency += (basicScore * arrowComponent.multiplication);
+        GameManager.Instance.GemUnit += nowGiveJewel;
 
         theProductionObj.SetActive(false);
-        resultsObj.transform.DOScale(new Vector3(0, 0, 0), 0);
+        resultsObj.transform.DOScale(Vector3.zero, 0);
         isCustomerArrival = false;
         foodChooseAndMakePanelObj.SetActive(false);
         chooseADishObj.SetActive(true);
         nowSaleOfFoodContents = SaleOfFoodContents.BasicScreen;
+        
         BattleUIManager.Instance.nowContents = Contents.SaleOfFood;
+
         StartCoroutine(customerOnTheWay());
     }
 

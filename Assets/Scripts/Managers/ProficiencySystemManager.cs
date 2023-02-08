@@ -45,7 +45,8 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
         public bool isEquiping;
     }
 
-    public CharacterData[] characterDatas; //각 스킨 시스템 캐릭터 데이터들
+    [Tooltip("각 스킨 시스템 캐릭터 데이터들")]
+    public CharacterData[] characterDatas;
 
     [SerializeField]
     [Tooltip("현재 캐릭터 이름 텍스트")]
@@ -71,11 +72,14 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
     [Tooltip("텍스트 색 모음")]
     private Color[] textColors;
 
-    public CharacterKind nowKind; //현재 캐릭터 스킨
+    [Tooltip("현재 캐릭터 스킨")]
+    public CharacterKind nowKind;
 
-    private Vector3 dragStartMousePos; //드래그 시 마우스 포인트 시작 지점
+    [Tooltip("드래그 시 마우스 포인트 시작 지점")]
+    private Vector3 dragStartMousePos;
 
-    private bool isDraging; //드래그 중인지 판별
+    [Tooltip("드래그 중인지 판별")]
+    private bool isDraging; 
 
     private void OnEnable()
     {
@@ -150,7 +154,9 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
         characterDatas[(int)nowKind].bgAnchorPos.DOAnchorPos(new Vector2(0, 0), 0.3f);
 
         TextReSettings();
+
         yield return new WaitForSeconds(0.035f);
+        
         isDraging = false;
     }
 
@@ -204,8 +210,10 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
     /// </summary>
     public void ProficiencyUnlockOrEquip()
     {
-        if (characterDatas[(int)nowKind].isUnlock == false && characterDatas[(int)nowKind].unlockCost <= GameManager.Instance.CurrentProficiency)
+        if (characterDatas[(int)nowKind].isUnlock == false && characterDatas[(int)nowKind].unlockCost <= GameManager.Instance.GemUnit)
         {
+            GameManager.Instance.GemUnit -= characterDatas[(int)nowKind].unlockCost;
+
             characterDatas[(int)nowKind].isUnlock = true;
 
             characterDatas[(int)nowKind].lockObj.SetActive(false);
@@ -236,7 +244,7 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
 
         if (characterDatas[(int)nowKind].isUnlock == false)
         {
-            guideText.color = (characterDatas[(int)nowKind].unlockCost <= GameManager.Instance.CurrentProficiency) ? textColors[(int)TextColorKind.Green] : textColors[(int)TextColorKind.Red];
+            guideText.color = (characterDatas[(int)nowKind].unlockCost <= GameManager.Instance.GemUnit) ? textColors[(int)TextColorKind.Green] : textColors[(int)TextColorKind.Red];
 
             guideText.transform.localPosition = new Vector3(0, 185, 0);
 

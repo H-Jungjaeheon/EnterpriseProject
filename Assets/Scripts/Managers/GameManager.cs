@@ -4,23 +4,6 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
-    [Tooltip("현재 숙련도")]
-    private int currentProficiency;
-
-    public int CurrentProficiency
-    {
-        get { return currentProficiency; }
-        set
-        {
-            currentProficiency = value;
-            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.Proficiency].activeSelf)
-            {
-                ProficiencySystemManager.Instance.TextReSettings();
-            }
-        }
-    }
-
-    [SerializeField]
     [Tooltip("현재 보유 재화(골드)")]
     private BigInteger moneyUnit;
 

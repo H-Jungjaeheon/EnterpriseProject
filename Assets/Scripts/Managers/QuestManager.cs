@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public enum RewardKind
 {
     Gold,
-    Gem,
-    Proficiency
+    Gem
 }
 
 public enum BGKind
@@ -23,8 +22,7 @@ public enum QuestKind
     HealingStatLevel,
     AttackSpeedStatLevel,
     CriticalDamageStatLevel,
-    CriticalProbabilityStatLevel,
-    GetProficiency
+    CriticalProbabilityStatLevel
 }
 
 public class QuestManager : MonoBehaviour
@@ -47,6 +45,9 @@ public class QuestManager : MonoBehaviour
     }
 
     public QuestData[] datas;
+
+    [Tooltip("GameManager 싱글톤 인스턴스")]
+    private GameManager gm;
 
     [SerializeField]
     [Tooltip("현재 퀘스트 인덱스 표시 텍스트")]
@@ -75,6 +76,8 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
+        gm = GameManager.Instance;
+
         for (int nowIndex = 0; nowIndex < datas.Length; nowIndex++) //저장 후 불러오기 시 각 퀘스트 목표량 최대치 재세팅
         {
             datas[nowIndex].maxFigure += datas[nowIndex].incremental * (questIndex / 8);
@@ -101,6 +104,7 @@ public class QuestManager : MonoBehaviour
 
         bgImage.sprite = datas[(int)questKind].nowFigure >= datas[(int)questKind].maxFigure ? bgResources[(int)BGKind.ClearBg] : bgResources[(int)BGKind.BasicBg]; //현재 퀘스트 목표치를 달성했다면, 클리어 표시 배경으로 변경(달성하지 못했을 시 일반 배경으로 변경)
     }
+
     /// <summary>
     /// 텍스트 재세팅 함수
     /// </summary>
@@ -122,15 +126,16 @@ public class QuestManager : MonoBehaviour
             switch (datas[(int)questKind].rewardkind) //각 퀘스트 마다 설정된 재화 지급
             {
                 case RewardKind.Gold:
+
+
                     break;
                 case RewardKind.Gem:
-                    GameManager.Instance.GemUnit += datas[(int)questKind].amountPaid;
-                    break;
-                case RewardKind.Proficiency:
+                    gm.GemUnit += datas[(int)questKind].amountPaid;
+
                     break;
             }
 
-            questKind = (questKind == QuestKind.GetProficiency) ? QuestKind.DamageStatLevel : questKind + 1; //현재 클리어한 퀘스트가 마지막 퀘스트 종류 인덱스면 퀘스트 종류 인덱스 0번으로 가기 or 다음 퀘스트 종류 인덱스로 가기
+            questKind = (questKind == QuestKind.CriticalProbabilityStatLevel) ? QuestKind.DamageStatLevel : questKind + 1; //현재 클리어한 퀘스트가 마지막 퀘스트 종류 인덱스면 퀘스트 종류 인덱스 0번으로 가기 or 다음 퀘스트 종류 인덱스로 가기
 
             questIndex++; //현재 퀘스트 번호 + 1 (n번째 퀘스트)
 

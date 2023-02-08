@@ -32,6 +32,9 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
         [Tooltip("가격 표시 텍스트")]
         public Text priceText;
 
+        [Tooltip("필요 재화 이미지")]
+        public Image needGoodImage;
+
         [Tooltip("동료 아이콘")]
         public Sprite icon;
 
@@ -48,9 +51,9 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
     [Tooltip("현재 장착중인 동료 아이콘")]
     private SpriteRenderer nowColleagueIcon;
 
-    Color redTextColor = new Color(1f, 0f, 0f);
-
-    Color greenTextColor = new Color(0f, 1f, 0.03f);
+    [SerializeField]
+    [Tooltip("기본 재화(돈) 스프라이트")]
+    private Sprite moneySprite;
 
     void Start()
     {
@@ -71,6 +74,7 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
         {
             TextColorChange();
         }
+
         EquipButtonSetActive();
     }
 
@@ -115,6 +119,8 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
 
             colleagueDatas[nowColleagueIndex].isUnlock = true; //해당 인덱스 동료 잠금 해제
                 
+            colleagueDatas[nowColleagueIndex].needGoodImage.sprite = moneySprite;
+
             EquipButtonSetActive();
         }
         else if (colleagueDatas[nowColleagueIndex].isUnlock && GameManager.Instance.MoneyUnit >= colleagueDatas[nowColleagueIndex].needGold) //해당 인덱스 동료 잠금해제의 경우
@@ -142,12 +148,12 @@ public class ColleagueSystemManager : Singleton<ColleagueSystemManager>
         {
             if (colleagueDatas[nowIndex].isUnlock) //잠금 해제 완료 시
             {
-                colleagueDatas[nowIndex].priceText.color = (colleagueDatas[nowIndex].needGold <= GameManager.Instance.MoneyUnit) ? greenTextColor : redTextColor;
+                colleagueDatas[nowIndex].priceText.color = (colleagueDatas[nowIndex].needGold <= GameManager.Instance.MoneyUnit) ? Color.green : Color.red;
                 colleagueDatas[nowIndex].priceText.text = $"업그레이드\n{colleagueDatas[nowIndex].needGold} 골드"; //해당 인덱스 동료 버튼 텍스트 수정
             }
             else //잠금 해제 비 완료 시
             {
-                colleagueDatas[nowIndex].priceText.color = (colleagueDatas[nowIndex].needGem <= GameManager.Instance.GemUnit) ? greenTextColor : redTextColor;
+                colleagueDatas[nowIndex].priceText.color = (colleagueDatas[nowIndex].needGem <= GameManager.Instance.GemUnit) ? Color.green : Color.red;
                 colleagueDatas[nowIndex].priceText.text = $"구매\n{colleagueDatas[nowIndex].needGem} 젬"; //해당 인덱스 동료 버튼 텍스트 수정
             }
         }
