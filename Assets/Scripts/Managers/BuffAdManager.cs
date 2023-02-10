@@ -19,8 +19,8 @@ public class BuffAdData
     [Tooltip("광고 경험치")]
     public int exp;
 
-    [Tooltip("버프 남은 시간")]
-    public int durationTime;
+    [Tooltip("현재 버프 남은 시간")]
+    public float durationTime;
 
     [TextArea]
     [Tooltip("버프 효과 내용")]
@@ -103,19 +103,40 @@ public class BuffAdManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator RenewAdCoolTime()
     {
+        //bool isEndAllCoolTimes = false;
+        int coolTimeEndCount;
+
         while (true)
         {
+            coolTimeEndCount = 0;
+
+            for (int adCoolTimeIndex = 0; adCoolTimeIndex < 3; adCoolTimeIndex++)
+            {
+                if (adDatas[adCoolTimeIndex].isDuration)
+                {
+                    adDatas[adCoolTimeIndex].durationTime -= Time.deltaTime;
+
+                    if (adDatas[adCoolTimeIndex].durationTime <= 0)
+                    {
+                        adDatas[adCoolTimeIndex].isDuration = false;
+
+                        adDatas[adCoolTimeIndex].durationTime = DURATION_TIME;
+
+                        adDatas[adCoolTimeIndex].watchAdButtonObj.SetActive(true);
+                    }
+                }
+                else
+                {
+                    coolTimeEndCount++;
+                }
+            }
+
+            if (coolTimeEndCount == 3)
+            {
+                break;
+            }
 
             yield return null;
         }
     }
-
-    /// <summary>
-    /// 정보 수정
-    /// </summary>
-    void DataReSetting()
-    {
-        
-    }
-
 }
