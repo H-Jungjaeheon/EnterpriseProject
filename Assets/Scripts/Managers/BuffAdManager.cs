@@ -1,5 +1,6 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using GoogleMobileAds.Api;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,12 +20,17 @@ public class BuffAdData
     [Tooltip("광고 경험치")]
     public int exp;
 
-    [Tooltip("현재 버프 남은 시간")]
-    public float durationTime;
+    [Tooltip("현재 버프 남은 시간(분)")]
+    public int durationTime;
 
-    [TextArea]
-    [Tooltip("버프 효과 내용")]
-    public string buffEffect;
+    [Tooltip("버프 남은 시간 갱신 기준 변수")]
+    public float renewalBaseTime;
+
+    [Tooltip("버프 효과 수치(%)")]
+    public int percentageFigure;
+
+    [Tooltip("버프 효과 수치 증가값(%)")]
+    public int increasedValue;
 
     [Tooltip("현재 광고 효과 지속 중인지 판별")]
     public bool isDuration;
@@ -50,33 +56,69 @@ public class BuffAdData
 
 public class BuffAdManager : MonoBehaviour
 {
+    private RewardedAd rewardedAd;
+
+    AdRequest request;
+
+    [Tooltip("광고 아이디")]
+    const string AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
+
     [Tooltip("버프 광고 데이터들")]
     public BuffAdData[] adDatas;
 
     [Tooltip("광고 경험치 최댓값")]
     const int MAX_EXP = 3;
 
-    [Tooltip("광고 효과 지속시간")]
-    const int DURATION_TIME = 1200;
+    [Tooltip("광고 효과 지속시간(분)")]
+    const int DURATION_TIME = 20;
 
-    [Tooltip("현재 광고 효과 지속중인지 판뵬")]
+    [Tooltip("현재 광고 효과 지속중인지 판별")]
     bool isCoolTimeCounting;
 
-    /// <summary>
-    /// 광고 버튼 클릭 시 실행 함수
-    /// </summary>
-    /// <param name="adIndex"> 현재 시청할 광고 인덱스 </param>
-    public void ClickAdButton(int adIndex)
+    [Tooltip("현재 광고 인덱스")]
+    int nowAdIndex;
+
+    void Start()
     {
-        BuffAdData nowAdDatas = adDatas[adIndex];
+        RequestRewardedAd();
+    }
+
+    /// <summary>
+    /// 광고 불러오기
+    /// </summary>
+    void RequestRewardedAd()
+    {
+        rewardedAd = new RewardedAd(AD_UNIT_ID);
+
+        request = new AdRequest.Builder().Build();
+
+        rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+
+        rewardedAd.LoadAd(request);
+    }
+
+    /// <summary>
+    /// 광고를 끝까지 시청했을 때
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    void HandleUserEarnedReward(object sender, Reward args)
+    {
+        BuffAdData nowAdDatas = adDatas[nowAdIndex];
+
+        //배경음 소리 끄기
 
         nowAdDatas.exp++;
-        
-        if (nowAdDatas.exp >= MAX_EXP) //버프 레벨업 시
+
+        if (nowAdDatas.exp >= MAX_EXP) //버프 레벨업 시 실행
         {
-            nowAdDatas.level++;
             nowAdDatas.exp = 0;
-            //버프 내용 바뀌는 코드 작성
+
+            nowAdDatas.level++;
+            nowAdDatas.percentageFigure += nowAdDatas.increasedValue;
+
+            nowAdDatas.buffEffectText.text = $"{nowAdDatas.percentageFigure}%";
         }
 
         nowAdDatas.buffLevelText.text = $"{nowAdDatas.level}";
@@ -93,8 +135,36 @@ public class BuffAdManager : MonoBehaviour
 
             StartCoroutine(RenewAdCoolTime());
         }
+    }
 
-        //광고 시청 시작
+    /// <summary>
+    /// 광고가 종료되었을 때
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
+    void HandleRewardedAdClosed(object sender, EventArgs args)
+    {
+        RequestRewardedAd();
+    }
+
+    /// <summary>
+    /// 광고 버튼 클릭 시 실행 함수
+    /// </summary>
+    /// <param name="adIndex"> 현재 시청할 광고 인덱스 </param>
+    public void ClickAdButton(int adIndex)
+    {
+        nowAdIndex = adIndex;
+
+        if (rewardedAd.IsLoaded()) //광고 호출
+        {
+            //배경음 소리 켜기
+
+            rewardedAd.Show();
+        }
+        else
+        {
+            RequestRewardedAd();
+        }
     }
 
     /// <summary>
@@ -103,8 +173,7 @@ public class BuffAdManager : MonoBehaviour
     /// <returns></returns>
     IEnumerator RenewAdCoolTime()
     {
-        //bool isEndAllCoolTimes = false;
-        int coolTimeEndCount;
+        int coolTimeEndCount; //현재 비활성화된 버프 개수
 
         while (true)
         {
@@ -112,17 +181,26 @@ public class BuffAdManager : MonoBehaviour
 
             for (int adCoolTimeIndex = 0; adCoolTimeIndex < 3; adCoolTimeIndex++)
             {
-                if (adDatas[adCoolTimeIndex].isDuration)
+                if (adDatas[adCoolTimeIndex].isDuration) //광고 시청 후 활성화된 버프 시간 데이터만 계산하기
                 {
-                    adDatas[adCoolTimeIndex].durationTime -= Time.deltaTime;
+                    adDatas[adCoolTimeIndex].renewalBaseTime += Time.deltaTime;
 
-                    if (adDatas[adCoolTimeIndex].durationTime <= 0)
+                    if (adDatas[adCoolTimeIndex].renewalBaseTime >= 60) //기준 초가 1분이 넘으면 데이터 갱신
                     {
-                        adDatas[adCoolTimeIndex].isDuration = false;
+                        adDatas[adCoolTimeIndex].renewalBaseTime = 0;
 
-                        adDatas[adCoolTimeIndex].durationTime = DURATION_TIME;
+                        adDatas[adCoolTimeIndex].durationTime--;
 
-                        adDatas[adCoolTimeIndex].watchAdButtonObj.SetActive(true);
+                        if (adDatas[adCoolTimeIndex].durationTime <= 0)
+                        {
+                            adDatas[adCoolTimeIndex].isDuration = false;
+
+                            adDatas[adCoolTimeIndex].watchAdButtonObj.SetActive(true);
+
+                            adDatas[adCoolTimeIndex].durationTime = DURATION_TIME;
+                        }
+
+                        adDatas[adCoolTimeIndex].durationTimeText.text = $"{adDatas[adCoolTimeIndex].durationTime}분";
                     }
                 }
                 else
@@ -131,8 +209,9 @@ public class BuffAdManager : MonoBehaviour
                 }
             }
 
-            if (coolTimeEndCount == 3)
+            if (coolTimeEndCount == 3) //현재 버프가 모두 비활성화 되었다면, 연산 정지
             {
+                isCoolTimeCounting = false;
                 break;
             }
 
