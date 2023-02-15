@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Animations;
 
 //직접 만드는 애니메이터
 
@@ -44,7 +43,6 @@ public class AnimationManager : MonoBehaviour
         OriginalSprite = SpriteRenderer.sprite;
 
         Debug.Log(ClipList.Count);
-        AnimatorController a = new AnimatorController();
     }
 
     private void BasicSetting()
