@@ -15,9 +15,10 @@ MonoBehaviour:
   PlayerSkinImg: {fileID: 21300000, guid: 4ee68e4f4457c5a4faec96f89da06e84, type: 3}
   PlayerSkinName: "\uC300\uBC25\uC774"
   Hp: 100
-  HealingValue: 10
-  AttackPower: 50
+  HealingValue: 1
+  AttackPower: 5
   AttackDelay: 1
   CriticalPercent: 0
   CriticalDamage: 150
   BuyCost: 0
+  RuntimeAnimatorController: {fileID: 9100000, guid: 044d15887fcc4ff46844dded8b7727a4, type: 2}

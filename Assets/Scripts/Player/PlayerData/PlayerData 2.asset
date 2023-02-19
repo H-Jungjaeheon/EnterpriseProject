@@ -16,8 +16,9 @@ MonoBehaviour:
   PlayerSkinName: "\uBCF4\uB054\uBC25\uC774"
   Hp: 1000
   HealingValue: 10
-  AttackPower: 500
+  AttackPower: 50
   AttackDelay: 1
   CriticalPercent: 0
   CriticalDamage: 150
-  BuyCost: 200
+  BuyCost: 500
+  RuntimeAnimatorController: {fileID: 9100000, guid: 55fe5d4b497e41d47b0b3899b23211ba, type: 2}

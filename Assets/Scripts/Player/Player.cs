@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
-using Spine.Unity.Examples;
 
 public class Player : MonoBehaviour
 {
@@ -71,6 +70,9 @@ public class Player : MonoBehaviour
     //플레이어 숙련도 스크립터블 들어갈 예정
     public BulletData[] BulletData;
 
+    [Header("애니메이션")]
+    private AnimationManager AnimationManager; 
+
     private void Awake()
     {
         Instance = this;
@@ -104,6 +106,9 @@ public class Player : MonoBehaviour
         this.CriticalPercent = SelectPlayerData.CriticalPercent;
 
         //this.GetComponent<SpriteRenderer>().sprite = SelectPlayerData.PlayerSkinImg;
+
+        this.gameObject.TryGetComponent<AnimationManager>(out AnimationManager);
+        AnimationManager.BasicSetting(SelectPlayerData.RuntimeAnimatorController);
     }
 
     public void CharacterChange(int idx)

@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b50aa11f03b1316448b1e1abfa2e187b, type: 3}
   m_Name: PlayerData 3
   m_EditorClassIdentifier: 
-  PlayerSkinImg: {fileID: 0}
-  PlayerSkinName: 
-  Hp: 0
-  HealingValue: 10
-  AttackPower: 0
+  PlayerSkinImg: {fileID: 21300000, guid: 78e7a30d2c41314499719153b3c02ef4, type: 3}
+  PlayerSkinName: "\uACC4\uB780\uC774"
+  Hp: 10000
+  HealingValue: 100
+  AttackPower: 500
   AttackDelay: 1
   CriticalPercent: 0
   CriticalDamage: 150
-  BuyCost: 0
+  BuyCost: 1000
+  RuntimeAnimatorController: {fileID: 9100000, guid: 5a89a1221611ae7428dc93d098bdc037, type: 2}

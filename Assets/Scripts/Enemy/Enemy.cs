@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Spine.Unity.Examples;
 using DG.Tweening;
 using TMPro;
 
@@ -63,10 +62,6 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float MoveSpeed;
 
-    [Header("애니메이션")]
-    [SerializeField]
-    private Animator Animator;
-
     [Header("파티클 소환")]
     [SerializeField]
     Material ParticleMaterial;
@@ -82,7 +77,6 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         EnemySprite = this.GetComponent<SpriteRenderer>();
-        Animator = this.GetComponent<Animator>();
     }
 
     protected virtual void Update()
@@ -167,7 +161,7 @@ public class Enemy : MonoBehaviour
 
     void SwichBehaviorType(BehaviorType Type)
     {
-        Animator.SetTrigger(Type.ToString()); //  애니메이션 변경
+        //Animator.SetTrigger(Type.ToString()); //  애니메이션 변경
 
         if (CurBehaviorType != Type)
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 //직접 만드는 애니메이터
 
@@ -13,22 +14,25 @@ public enum AnimationType
 public class ClipList
 {
     public AnimationType AnimationType;
-    public AnimationClip AnimationClip; 
+    public AnimationClip AnimationClip;
 }
 
+[RequireComponent(typeof(Animator))]
 public class AnimationManager : MonoBehaviour
 {
     [Header("상위 오브젝트")]
     [SerializeField]
     private SpriteRenderer SpriteRenderer;
+    [SerializeField]
+    private Animator Animator;
 
     [Header("애니메이션 관련")]
     [SerializeField]
-    private RuntimeAnimatorController RuntimeAnimatorController;
-    [SerializeField]
-    private Sprite OriginalSprite;
+    private RuntimeAnimatorController Controller;
     [SerializeField]
     private List<ClipList> ClipList = new List<ClipList>();
+    [SerializeField]
+    private AnimationClip[] Animations;
     [SerializeField]
     private float AnimationSpeed;
     [SerializeField]
@@ -38,57 +42,13 @@ public class AnimationManager : MonoBehaviour
 
     private void Start()
     {
-        SpriteRenderer = this.GetComponent<SpriteRenderer>();
-
-        OriginalSprite = SpriteRenderer.sprite;
-
-        Debug.Log(ClipList.Count);
+        gameObject.TryGetComponent<SpriteRenderer>(out SpriteRenderer);
+        gameObject.TryGetComponent<Animator>(out Animator);
     }
 
-    private void BasicSetting()
+    public void BasicSetting(RuntimeAnimatorController Anim)
     {
-        for (int i = 0; i < ClipList.Count; i++)
-        {
-            Debug.Log("123");
-            AnimationList.Add(ClipList[i].AnimationType, ClipList[i].AnimationClip);
-        }
-    }
-
-    public void PlayAnimation(AnimationType Type, float Speed = 1.0f, bool Loop = false)
-    {
-        PlayAnimCorutine = StartCoroutine(PlayAnimationCorutine(Type, Speed, Loop));
-    }
-
-    public void StopAnimation()
-    {
-        StopCoroutine(PlayAnimCorutine);
-        SpriteRenderer.sprite = OriginalSprite;
-    }
-
-    public void ChageState(AnimationType Type)
-    {
-        switch (Type)
-        {
-            case AnimationType.Move:
-                break;
-            case AnimationType.Attack:
-                break;
-            case AnimationType.Hit:
-                break;
-            case AnimationType.Any:
-                break;
-            default:
-                break;
-        }
-    }
-
-    IEnumerator PlayAnimationCorutine(AnimationType Type, float Speed = 1.0f, bool Loop = false)
-    {
-        yield return null;
-
-        while (true)
-        {
-            
-        }
+        Controller = Anim;
+        Animations = Controller.animationClips;
     }
 }
