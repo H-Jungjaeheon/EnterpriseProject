@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Animations;
 
 //직접 만드는 애니메이터
-
 public enum AnimationType
 {
     Move, Attack, Hit, Any
 }
 
 [System.Serializable]
-public class ClipList
+public class AnimationList
 {
-    public AnimationType AnimationType;
+    public AnimatorControllerParameter AnimatorParameter;
+    public AnimatorControllerParameterType AnimatorParameterType;
     public AnimationClip AnimationClip;
 }
 
@@ -30,25 +31,29 @@ public class AnimationManager : MonoBehaviour
     [SerializeField]
     private RuntimeAnimatorController Controller;
     [SerializeField]
-    private List<ClipList> ClipList = new List<ClipList>();
-    [SerializeField]
-    private AnimationClip[] Animations;
-    [SerializeField]
-    private float AnimationSpeed;
-    [SerializeField]
-    private Dictionary<AnimationType, AnimationClip> AnimationList = new Dictionary<AnimationType, AnimationClip>();
-    [SerializeField]
-    private Coroutine PlayAnimCorutine;
+    private List<AnimationList> AnimationList;
 
-    private void Start()
+    private void Awake()
     {
         gameObject.TryGetComponent<SpriteRenderer>(out SpriteRenderer);
         gameObject.TryGetComponent<Animator>(out Animator);
     }
 
-    public void BasicSetting(RuntimeAnimatorController Anim)
+    public void AnimationSetting(RuntimeAnimatorController Anim)
     {
         Controller = Anim;
-        Animations = Controller.animationClips;
+        Animator.runtimeAnimatorController = Controller;
+
+        if (Animator.parameterCount == Controller.animationClips.Length)
+        {
+            Debug.Log("True");
+        }
+
+        else
+        {
+            Debug.Log(Animator.parameterCount);
+            Debug.Log(Controller.animationClips.Length);
+        }
+            
     }
 }

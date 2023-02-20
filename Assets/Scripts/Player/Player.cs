@@ -76,12 +76,11 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        BasicSetting();
     }
 
     private void Start()
     {
+        BasicSetting();
         StartCoroutine(HealingHp());
     }
 
@@ -108,7 +107,8 @@ public class Player : MonoBehaviour
         //this.GetComponent<SpriteRenderer>().sprite = SelectPlayerData.PlayerSkinImg;
 
         this.gameObject.TryGetComponent<AnimationManager>(out AnimationManager);
-        AnimationManager.BasicSetting(SelectPlayerData.RuntimeAnimatorController);
+
+        AnimationManager.AnimationSetting(SelectPlayerData.RuntimeAnimatorController);
     }
 
     public void CharacterChange(int idx)
