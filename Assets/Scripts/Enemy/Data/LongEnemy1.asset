@@ -20,4 +20,4 @@ MonoBehaviour:
   AttackDistance: 2
   AttackDelay: 1
   MoveSpeed: 0.5
-  RuntimeAnimatorController: {fileID: 0}
+  RuntimeAnimatorController: {fileID: 9100000, guid: 256bb15af80fe4042a96824cc3f40e42, type: 2}

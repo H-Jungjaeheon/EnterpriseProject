@@ -62,6 +62,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float MoveSpeed;
 
+    [Header("애니메이션")]
+    protected AnimationManager AnimationManager;
+
     [Header("파티클 소환")]
     [SerializeField]
     Material ParticleMaterial;
@@ -152,11 +155,16 @@ public class Enemy : MonoBehaviour
         if (Vector2.Distance(TargetPos.position, this.transform.position) > AttackDistance)
         {
             SwichBehaviorType(BehaviorType.Move);
+            AnimationManager.ChangeAnimation("Move");
+
             this.gameObject.transform.position -= new Vector3(MoveSpeed * Time.deltaTime, 0, 0);
         }
 
         else
+        {
             SwichBehaviorType(BehaviorType.Attack);
+            AnimationManager.ChangeAnimation("Attack");
+        }
     }
 
     void SwichBehaviorType(BehaviorType Type)
@@ -198,6 +206,12 @@ public class Enemy : MonoBehaviour
         this.AttackDistance = Data[Select].AttackDistance;
         this.AttackDelay = Data[Select].AttackDelay;
         this.MoveSpeed = Data[Select].MoveSpeed;
+
+
+        //TODO:몬스터 추가시 수정 필요
+        this.gameObject.TryGetComponent<AnimationManager>(out AnimationManager);
+
+        AnimationManager.AnimationSetting(Data[0].RuntimeAnimatorController);
     }
 
     void Die()

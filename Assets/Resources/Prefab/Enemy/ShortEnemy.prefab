@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 1755755353}
   - component: {fileID: 743787892426380635}
   - component: {fileID: 3636879936211524416}
+  - component: {fileID: -6832941993038151936}
+  - component: {fileID: 4141518125896613955}
   m_Layer: 0
   m_Name: ShortEnemy
   m_TagString: Enemy
@@ -113,7 +115,6 @@ MonoBehaviour:
   AttackDelay: 0
   IsAttack: 0
   MoveSpeed: 0
-  Animator: {fileID: 0}
   ParticleMaterial: {fileID: 2100000, guid: 3cf71ddc8bc09924396e7e3cad68d667, type: 2}
   ParticlePrefab: {fileID: 6141688812485550459, guid: afbfe552eac65fe4a863268eac03d5f3, type: 3}
   CoinObj: {fileID: 6206293678686774288, guid: 85f222829c8e2cc418a506407542acb7, type: 3}
@@ -165,3 +166,38 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &-6832941993038151936
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3899307102218605548}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4141518125896613955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3899307102218605548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e43abeb2017f64785846dd188ede33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpriteRenderer: {fileID: 0}
+  Animator: {fileID: 0}
+  Controller: {fileID: 0}
+  AnimationList: []

@@ -10,7 +10,7 @@ public class ShortDisEnemy : Enemy
     }
 
     protected override void Move()
-    {
+    {   
         base.Move();
     }
 
