@@ -15,8 +15,9 @@ MonoBehaviour:
   EnemyType: 1
   EnemyImg: {fileID: 21300000, guid: 0718ae42c78b20442bf379dbad6f59d5, type: 3}
   EnemyName: Carrot
-  Hp: 100
+  Hp: 5
   AttackPower: 10
   AttackDistance: 2
   AttackDelay: 1
   MoveSpeed: 0.5
+  RuntimeAnimatorController: {fileID: 0}

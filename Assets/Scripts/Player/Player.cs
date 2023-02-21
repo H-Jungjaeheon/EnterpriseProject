@@ -123,11 +123,13 @@ public class Player : MonoBehaviour
         if (IsAttack == false && Range.TargetEnemy.Count > 0)
         {
             StartAttack();
+            AnimationManager.ChangeAnimation("Attack");
         }
 
         else if (IsAttack == true && Range.TargetEnemy.Count <= 0)
         {
             StopAttack();
+            AnimationManager.ChangeAnimation("Move");
         }
     }
 

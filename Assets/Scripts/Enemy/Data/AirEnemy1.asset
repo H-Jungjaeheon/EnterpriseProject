@@ -15,8 +15,9 @@ MonoBehaviour:
   EnemyType: 2
   EnemyImg: {fileID: 21300000, guid: ffab7c1c07c483342b9508f0186ce1fd, type: 3}
   EnemyName: MeetBird
-  Hp: 100
+  Hp: 10
   AttackPower: 10
   AttackDistance: 0.6
   AttackDelay: 1
   MoveSpeed: 0.5
+  RuntimeAnimatorController: {fileID: 0}
