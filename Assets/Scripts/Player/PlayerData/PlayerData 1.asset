@@ -21,4 +21,4 @@ MonoBehaviour:
   CriticalPercent: 0
   CriticalDamage: 150
   BuyCost: 0
-  RuntimeAnimatorController: {fileID: 9100000, guid: 044d15887fcc4ff46844dded8b7727a4, type: 2}
+  RuntimeAnimatorController: {fileID: 22100000, guid: 8549448185a4bdb4e9716f9143669801, type: 2}

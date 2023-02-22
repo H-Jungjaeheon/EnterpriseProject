@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
     public BulletData[] BulletData;
 
     [Header("애니메이션")]
-    private AnimationManager AnimationManager; 
+    private AnimationManager AnimationManager;
 
     private void Awake()
     {

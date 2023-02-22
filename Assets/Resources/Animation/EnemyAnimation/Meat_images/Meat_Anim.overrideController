@@ -6,6 +6,6 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Carrot_Override
+  m_Name: Meat_Anim
   m_Controller: {fileID: 9100000, guid: 256bb15af80fe4042a96824cc3f40e42, type: 2}
   m_Clips: []
