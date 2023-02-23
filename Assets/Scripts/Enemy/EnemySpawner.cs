@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine.UI;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 
@@ -21,6 +21,8 @@ public class EnemySpawner : MonoBehaviour
     [Header("EnemySpawner변수")]
     [SerializeField]
     private GameObject[] PoolingEnemyPrefabs;
+    [SerializeField]
+    private GameObject[] PoolingBossPrefabs;
 
     private Queue<Enemy> PoolingShortQueue = new Queue<Enemy>();
     private Queue<Enemy> PoolingLongQueue = new Queue<Enemy>();
@@ -57,7 +59,7 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        Initialize(8);
+        Initialize(4);
     }
 
     #region Pool함수
@@ -95,37 +97,25 @@ public class EnemySpawner : MonoBehaviour
     {
         Enemy enemy = null;
 
-        if (type == EnemyType.ShortDis)
+        if (type == EnemyType.ShortDis && Instance.PoolingShortQueue.Count > 0)
         {
-            //pool에 적이 있을 시 소환
-            if (Instance.PoolingShortQueue.Count > 0)
-            {
-                enemy = Instance.PoolingShortQueue.Dequeue();
-                enemy.transform.SetParent(null);
-                enemy.gameObject.SetActive(true);
-            }
+            enemy = Instance.PoolingShortQueue.Dequeue();
+            enemy.transform.SetParent(null);
+            enemy.gameObject.SetActive(true);
         }
 
-        else if (type == EnemyType.LongDis)
+        else if (type == EnemyType.LongDis && Instance.PoolingLongQueue.Count > 0)
         {
-            //pool에 적이 있을 시 소환
-            if (Instance.PoolingLongQueue.Count > 0)
-            {
-                enemy = Instance.PoolingLongQueue.Dequeue();
-                enemy.transform.SetParent(null);
-                enemy.gameObject.SetActive(true);
-            }
+            enemy = Instance.PoolingLongQueue.Dequeue();
+            enemy.transform.SetParent(null);
+            enemy.gameObject.SetActive(true);
         }
 
-        else if (type == EnemyType.Air)
+        else if (type == EnemyType.Air && Instance.PoolingAirQueue.Count > 0)
         {
-            //pool에 적이 있을 시 소환
-            if (Instance.PoolingAirQueue.Count > 0)
-            {
-                enemy = Instance.PoolingAirQueue.Dequeue();
-                enemy.transform.SetParent(null);
-                enemy.gameObject.SetActive(true);
-            }
+            enemy = Instance.PoolingAirQueue.Dequeue();
+            enemy.transform.SetParent(null);
+            enemy.gameObject.SetActive(true);
         }
 
         //없을 시 새로 생성
@@ -205,7 +195,7 @@ public class EnemySpawner : MonoBehaviour
         {
             //Debug.Log("Up");
 
-            while(FrontProcessBar.fillAmount < value)
+            while (FrontProcessBar.fillAmount < value)
             {
                 yield return null;
                 FrontProcessBar.fillAmount += Time.deltaTime;
@@ -259,7 +249,7 @@ public class EnemySpawner : MonoBehaviour
                     {
                         Enemy enemy = Instance.GetEnemy(EnemyData[i].Type, EnemyData[i].EnemyForm);
                         enemy.transform.position = new Vector2(this.transform.position.x, Random.Range(MinY, MaxY));
-                        
+
                         // 적 높이에 따른 우선렌더
                         SortingEnemy();
 
@@ -272,7 +262,29 @@ public class EnemySpawner : MonoBehaviour
         //일반스테이지가 아닐 때
         else
         {
+            for (int i = 0; i < EnemyData.Length; i++)
+            {
+                if (EnemyData[i].EnemyValue > 0)
+                {
+                    for (int j = 0; j < EnemyData[i].EnemyValue; j++)
+                    {
+                        Enemy enemy = Instance.GetEnemy(EnemyData[i].Type, EnemyData[i].EnemyForm);
+                        enemy.transform.position = new Vector2(this.transform.position.x, Random.Range(MinY, MaxY));
 
+                        // 적 높이에 따른 우선렌더
+                        SortingEnemy();
+
+                        yield return new WaitForSeconds(Random.Range(MinTime, MaxTime));
+                    }
+                }
+            }
+
+            Debug.Log("보스 소환");
+
+            Instantiate(PoolingBossPrefabs[0]).TryGetComponent<Enemy>(out Enemy Boss);
+
+            Boss.BasicSetting(0);
+            Boss.transform.position = new Vector2(this.transform.position.x, 1.3f);
         }
 
         StopEnemySpawn();
