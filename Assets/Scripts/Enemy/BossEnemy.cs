@@ -75,6 +75,7 @@ public class BossEnemy : Enemy
         ParticleSystemRenderer Particle = Instantiate(ParticlePrefab, this.transform.position, Quaternion.identity).GetComponent<ParticleSystemRenderer>();
         Particle.material = ParticleMaterial;
 
+        GameManager.Instance.IsBoss = false;
         Destroy(gameObject);
     }
 }

@@ -59,7 +59,7 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        Initialize(4);
+        Initialize(10);
     }
 
     #region Pool함수
@@ -166,7 +166,11 @@ public class EnemySpawner : MonoBehaviour
         string StageNumStr = StageData.StageNumber.ToString();
 
         StageTxt.text = $"{StageNumStr[0]}-{StageNumStr[1]}";
-        if(StageNumStr[1] == 5)
+
+        Debug.Log(int.Parse(StageNumStr[0].ToString()));
+        Debug.Log(GameManager.Instance.Stage + 1);
+
+        if(int.Parse(StageNumStr[0].ToString()) != GameManager.Instance.Stage + 1)
         {
             GameManager.Instance.StartSceneChange();
         }
@@ -222,7 +226,6 @@ public class EnemySpawner : MonoBehaviour
 
     public void StopEnemySpawn()
     {
-        Debug.Log("StopEnemy");
         StopCoroutine(EnemySpawnCorutine);
         SortingEnemy();
     }
@@ -266,6 +269,13 @@ public class EnemySpawner : MonoBehaviour
         //일반스테이지가 아닐 때
         else
         {
+            GameManager.Instance.IsBoss = true;
+
+            Instantiate(PoolingBossPrefabs[0]).TryGetComponent<Enemy>(out Enemy Boss);
+
+            Boss.BasicSetting(0);
+            Boss.transform.position = new Vector2(this.transform.position.x, 1.3f);
+
             for (int i = 0; i < EnemyData.Length; i++)
             {
                 if (EnemyData[i].EnemyValue > 0)
@@ -284,11 +294,6 @@ public class EnemySpawner : MonoBehaviour
             }
 
             Debug.Log("보스 소환");
-
-            Instantiate(PoolingBossPrefabs[0]).TryGetComponent<Enemy>(out Enemy Boss);
-
-            Boss.BasicSetting(0);
-            Boss.transform.position = new Vector2(this.transform.position.x, 1.3f);
         }
 
         StopEnemySpawn();

@@ -196,7 +196,7 @@ public class Player : MonoBehaviour
             IsMove = true;
         }
 
-        if (GoalPos.x == MovePosX)
+        if (GoalPos.x == MovePosX && GameManager.Instance.IsBoss == false)
         {
             MoveTime += Time.deltaTime;
 

@@ -46,7 +46,7 @@ public class BezierMissile : MonoBehaviour
         t += Time.deltaTime * spd;
         DrawTrajectory();
 
-        if(enemy.activeSelf == false && IsEnemy == true)
+        if(enemy.activeSelf == false && IsEnemy == true || !enemy)
         {
             IsEnemy = false;
 

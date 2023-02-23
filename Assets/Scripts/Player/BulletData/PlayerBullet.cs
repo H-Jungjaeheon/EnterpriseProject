@@ -64,7 +64,7 @@ public class PlayerBullet : MonoBehaviour
     {
         Vector3 dir = Vector3.one;
 
-        if (TargetActive == true)
+        if (TargetActive == true && Target)
         {
             dir = TargetPos.position - transform.position;
         }
@@ -75,9 +75,8 @@ public class PlayerBullet : MonoBehaviour
 
         TargetActive = Target.activeSelf;
 
-        if (TargetActive == false && IsTarget == true)
+        if ((TargetActive == false && IsTarget == true) || (!Target && IsTarget == true))
         {
-            Debug.Log("Des");
             IsTarget = false;
 
             StartCoroutine(NoneTarget());
@@ -86,8 +85,6 @@ public class PlayerBullet : MonoBehaviour
 
     IEnumerator NoneTarget()
     {
-        yield return new WaitForSeconds(1.0f);
-
         TargetPos = null;
 
         this.gameObject.GetComponent<SpriteRenderer>().DOFade(0, 0.5f);

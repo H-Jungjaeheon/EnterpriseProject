@@ -48,6 +48,7 @@ public class GameManager : Singleton<GameManager>
     public int[] statsLevel;
 
     [Header("스테이지 데이터")]
+    public bool IsBoss = false;
     public List<GameObject> BackGrounds;
     public int Difficult = 0;
     public int Stage = 0;
@@ -56,6 +57,8 @@ public class GameManager : Singleton<GameManager>
 
     public void StartSceneChange()
     {
+        Debug.Log("Change");
+
         if (SceneChangeCoroutine == null)
         {
             SceneChangeCoroutine = StartCoroutine(SceneChange());
@@ -71,7 +74,7 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(0.5f);
 
         BackGrounds[Stage].SetActive(false);
-        Stage = Stage < BackGrounds.Count - 1 ? (Stage + 1) : 0;
+        Stage = Stage < BackGrounds.Count ? (Stage + 1) : 0;
         BackGrounds[Stage].SetActive(true);
         yield return new WaitForSeconds(0.2f);
 
