@@ -1,16 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
-    [Tooltip("현재 보유 재화(골드)")]
     private BigInteger moneyUnit;
 
     public BigInteger MoneyUnit
     {
         get { return moneyUnit; }
-        set 
+        set
         {
             moneyUnit = value;
             if (bum.contentsPanelObjs[(int)Contents.Colleague].activeSelf)
@@ -24,15 +28,14 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    
+
     [SerializeField]
-    [Tooltip("현재 보유 재화(보석)")]
     private int gemUnit;
 
     public int GemUnit
     {
         get { return gemUnit; }
-        set 
+        set
         {
             gemUnit = value;
             if (bum.contentsPanelObjs[(int)Contents.Colleague].activeSelf)
@@ -42,8 +45,14 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    [Tooltip("플레이어 기본 능력치 레벨들")]
     public int[] statsLevel;
+
+    [Header("스테이지 데이터")]
+    public List<GameObject> BackGrounds;
+    public int Difficult = 0;
+    public int Stage = 0;
+    public Image SceneChagePanel;
+    public Coroutine SceneChangeCoroutine = null;
 
     #region 싱글톤 인스턴스 모음
     [Tooltip("BattleUIManager 싱글톤 인스턴스")]
@@ -61,5 +70,36 @@ public class GameManager : Singleton<GameManager>
         bum = BattleUIManager.Instance;
         csm = ColleagueSystemManager.Instance;
         psm = ProficiencySystemManager.Instance;
+    }
+
+    public void StartSceneChange()
+    {
+        if (SceneChangeCoroutine == null)
+        {
+            SceneChangeCoroutine = StartCoroutine(SceneChange());
+        }
+    }
+
+    private IEnumerator SceneChange()
+    {
+        yield return null;
+
+        SceneChagePanel.gameObject.SetActive(true);
+        SceneChagePanel.DOFade(1.0f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+
+        BackGrounds[Stage].SetActive(false);
+        Stage = Stage < BackGrounds.Count - 1 ? (Stage + 1) : 0;
+        BackGrounds[Stage].SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+
+        SceneChagePanel.DOFade(1.0f, 0.5f);
+        yield return new WaitForSeconds(0.5f);
+
+        SceneChagePanel.gameObject.SetActive(false);
+
+        StopCoroutine(SceneChangeCoroutine);
+        SceneChangeCoroutine = null;
+        yield break;
     }
 }

@@ -166,6 +166,10 @@ public class EnemySpawner : MonoBehaviour
         string StageNumStr = StageData.StageNumber.ToString();
 
         StageTxt.text = $"{StageNumStr[0]}-{StageNumStr[1]}";
+        if(StageNumStr[1] == 5)
+        {
+            GameManager.Instance.StartSceneChange();
+        }
 
         switch (int.Parse(StageNumStr[2].ToString()))
         {
