@@ -17137,7 +17137,7 @@ MonoBehaviour:
   jemText: {fileID: 446454305}
   sofManager: {fileID: 933780101}
   questManager: {fileID: 760357125}
-  player: {fileID: 1293959311}
+  playerObj: {fileID: 1293959311}
 --- !u!4 &1103746050
 Transform:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Numerics;
+using System;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
 
@@ -89,17 +90,22 @@ public class BattleUIManager : Singleton<BattleUIManager>
     private BigInteger[] goodsRequiredForUpgrade = new BigInteger[(int)UpgradeableBasicStats.UpgradeableBasicStatsNumber];
 
     [SerializeField]
-    private GameObject player;
+    [Tooltip("플레이어 오브젝트")]
+    private GameObject playerObj;
 
+    #region 싱글톤 인스턴스 모음
+    [Tooltip("GameManager 싱글톤 인스턴스")]
     private GameManager gmInstance;
+
+    [Tooltip("Player 싱글톤 인스턴스")]
+    private Player player;
+    #endregion
 
     private float nowClickTime;
 
     void Start()
     {
         StartSetting();
-        BasicStatSetting();
-        basicStatLevelText[(int)UpgradeableBasicStats.Damage].text = $"Lv {GameManager.Instance.statsLevel[(int)UpgradeableBasicStats.Damage]}";
     }
 
     void Update()
@@ -116,6 +122,10 @@ public class BattleUIManager : Singleton<BattleUIManager>
     private void StartSetting()
     {
         gmInstance = GameManager.Instance;
+        
+        player = Player.Instance;
+
+        basicStatLevelText[(int)UpgradeableBasicStats.Damage].text = $"Lv {gmInstance.statsLevel[(int)UpgradeableBasicStats.Damage]}";
 
         for (int nowIndex = 0; nowIndex < goodsRequiredForUpgrade.Length; nowIndex++)
         {
@@ -129,16 +139,18 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
             goodsTextRequiredForUpgrade[nowIndex].text = $"강화\n{goodsRequiredForUpgradeString}";
         }
+
+        BasicStatSetting();
     }
 
     public void BasicStatSetting() // 스탯 세팅
     {
-        basicStatFigureText[0].text = $"{Player.Instance.AttackPower}";
-        basicStatFigureText[1].text = $"{Player.Instance.MaxHp}";
-        basicStatFigureText[2].text = $"{Player.Instance.HealingValue}";
-        basicStatFigureText[3].text = $"{Player.Instance.AttackDelay}";
-        basicStatFigureText[4].text = $"{Player.Instance.CriticalDamage}%";
-        basicStatFigureText[5].text = $"{Player.Instance.CriticalPercent}%";
+        basicStatFigureText[0].text = $"{player.AttackPower}";
+        basicStatFigureText[1].text = $"{player.MaxHp}";
+        basicStatFigureText[2].text = $"{player.HealingValue}";
+        basicStatFigureText[3].text = $"{Math.Round(player.AttackDelay, 2)}";
+        basicStatFigureText[4].text = $"{player.CriticalDamage}%";
+        basicStatFigureText[5].text = $"{player.CriticalPercent}%";
     }
 
     public void NowUpgradeButtonClick(int statsToUpgradeCurrently)
@@ -159,10 +171,12 @@ public class BattleUIManager : Singleton<BattleUIManager>
         while (isClickDown)
         {
             nowClickTime += Time.deltaTime;
+
             if (nowClickTime >= 0.5f)
             {
                 StatUpgrade(statsToUpgradeCurrently);
             }
+
             yield return null;
         }
     }
@@ -180,7 +194,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
             questManager.InformationFix();
         }
 
-        var playerComponent = player.GetComponent<Player>();
+        var playerComponent = playerObj.GetComponent<Player>();
         string goodsRequiredForUpgradeString;
 
         gmInstance.statsLevel[statsToUpgradeCurrently]++; //레벨 증가
@@ -212,7 +226,7 @@ public class BattleUIManager : Singleton<BattleUIManager>
 
             case (int)UpgradeableBasicStats.AttackSpeed:
                 playerComponent.AttackDelay -= 0.01f;
-                basicStatFigureText[statsToUpgradeCurrently].text = $"{playerComponent.AttackDelay}";
+                basicStatFigureText[statsToUpgradeCurrently].text = $"{Math.Round(player.AttackDelay, 2)}";
                 break;
 
             case (int)UpgradeableBasicStats.FatalAttackDamage:

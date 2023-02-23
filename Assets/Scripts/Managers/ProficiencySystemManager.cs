@@ -68,6 +68,9 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
     [Tooltip("업그레이드/잠금해제 버튼 재화 이미지")]
     Image goodsImage;
 
+    [Tooltip("goodsImage의 RectTransform 컴포넌트")]
+    RectTransform goodsImageRt;
+
     [Tooltip("현재 캐릭터 스킨")]
     public CharacterKind nowKind;
 
@@ -84,9 +87,12 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
     WaitForSeconds delay = new WaitForSeconds(0.5f);
 
     #region 인스턴스 모음
+    [Tooltip("GameManager 싱글톤 인스턴스")]
+    GameManager gameManager;
 
+    [Tooltip("Player 싱글톤 인스턴스")]
+    Player player;
     #endregion
-
 
     #region 다회 사용 문자열 모음
     [Tooltip("GuideText : 스킨 잠금 해제 안내 문자열")]
@@ -102,7 +108,15 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
     const string NULL = "";
     #endregion
 
-    private void OnEnable()
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+        player = Player.Instance;
+
+        goodsImageRt = goodsImage.GetComponent<RectTransform>();
+    }
+
+    void OnEnable()
     {
         TextReSettings();
     }
@@ -241,9 +255,9 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
     /// </summary>
     public void ProficiencyUnlockOrEquip()
     {
-        if (characterDatas[(int)nowKind].isUnlock == false && characterDatas[(int)nowKind].unlockCost <= GameManager.Instance.GemUnit)
+        if (characterDatas[(int)nowKind].isUnlock == false && characterDatas[(int)nowKind].unlockCost <= gameManager.GemUnit)
         {
-            GameManager.Instance.GemUnit -= characterDatas[(int)nowKind].unlockCost;
+            gameManager.GemUnit -= characterDatas[(int)nowKind].unlockCost;
 
             characterDatas[(int)nowKind].isUnlock = true;
 
@@ -256,7 +270,7 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
                 characterDatas[nowIndex].isEquiping = (nowIndex == (int)nowKind) ? true : false;
             }
 
-            Player.Instance.CharacterChange((int)nowKind);
+            player.CharacterChange((int)nowKind);
         }
 
         TextReSettings();
@@ -273,7 +287,7 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
 
         if (characterDatas[(int)nowKind].isUnlock == false)
         {
-            guideText.color = (characterDatas[(int)nowKind].unlockCost <= GameManager.Instance.GemUnit) ? Color.green : Color.red;
+            guideText.color = (characterDatas[(int)nowKind].unlockCost <= gameManager.GemUnit) ? Color.green : Color.red;
             goodsImage.color = Color.white;
 
             textPos.y = 185f;
@@ -282,7 +296,7 @@ public class ProficiencySystemManager : Singleton<ProficiencySystemManager>
             guideText.text = SKIN_UNLOCK;
             priceText.text = $"{characterDatas[(int)nowKind].unlockCost}";
 
-            goodsImage.GetComponent<RectTransform>().anchoredPosition = new Vector3(-70 + ((priceText.text.Length - 1) * -20), 15, 0); //필요 재화 단위에 따라서 이미지 위치 변경
+            goodsImageRt.anchoredPosition = new Vector3(-70 + ((priceText.text.Length - 1) * -20), 15, 0); //필요 재화 단위에 따라서 이미지 위치 변경
         }
         else
         {

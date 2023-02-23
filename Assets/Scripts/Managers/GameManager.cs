@@ -13,13 +13,13 @@ public class GameManager : Singleton<GameManager>
         set 
         {
             moneyUnit = value;
-            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.Colleague].activeSelf)
+            if (bum.contentsPanelObjs[(int)Contents.Colleague].activeSelf)
             {
-                ColleagueSystemManager.Instance.TextColorChange();
+                csm.TextColorChange();
             }
-            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.Proficiency].activeSelf)
+            if (bum.contentsPanelObjs[(int)Contents.Proficiency].activeSelf)
             {
-                ProficiencySystemManager.Instance.TextReSettings();
+                psm.TextReSettings();
             }
         }
     }
@@ -35,13 +35,33 @@ public class GameManager : Singleton<GameManager>
         set 
         {
             gemUnit = value;
-            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.Colleague].activeSelf)
+            if (bum.contentsPanelObjs[(int)Contents.Colleague].activeSelf)
             {
-                ColleagueSystemManager.Instance.TextColorChange();
+                csm.TextColorChange();
             }
         }
     }
 
     [Tooltip("플레이어 기본 능력치 레벨들")]
     public int[] statsLevel;
+
+    #region 싱글톤 인스턴스 모음
+    [Tooltip("BattleUIManager 싱글톤 인스턴스")]
+    BattleUIManager bum;
+
+    [Tooltip("ColleagueSystemManager 싱글톤 인스턴스")]
+    ColleagueSystemManager csm;
+
+    [Tooltip("ProficiencySystemManager 싱글톤 인스턴스")]
+    ProficiencySystemManager psm;
+    #endregion
+
+    private void Start()
+    {
+        bum = BattleUIManager.Instance;
+        csm = ColleagueSystemManager.Instance;
+        psm = ProficiencySystemManager.Instance;
+
+        moneyUnit = 100000;
+    }
 }

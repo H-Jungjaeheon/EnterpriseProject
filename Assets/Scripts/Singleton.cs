@@ -7,20 +7,20 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     [SerializeField]
     protected bool isDontDestroyObj;
 
-    private static T instance = null;
+    private static T gameManager = null;
     public static T Instance
     {
         get
         {
-            if (instance == null)
+            if (gameManager == null)
             {
-                instance = FindObjectOfType<T>();
-                if (instance == null)
+                gameManager = FindObjectOfType<T>();
+                if (gameManager == null)
                 {
-                    instance = new GameObject().AddComponent<T>();
+                    gameManager = new GameObject().AddComponent<T>();
                 }
             }
-            return instance;
+            return gameManager;
         }
     }
 
@@ -29,7 +29,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         if (isDontDestroyObj)
         {
-            if (instance == null)
+            if (gameManager == null)
             {
                 DontDestroyOnLoad(this.gameObject);
             }
