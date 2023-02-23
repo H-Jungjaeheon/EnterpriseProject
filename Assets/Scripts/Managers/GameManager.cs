@@ -57,7 +57,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        //Time.timeScale = 50.0f;
+        Time.timeScale = 10.0f;
     }
 
     public void StartSceneChange()
