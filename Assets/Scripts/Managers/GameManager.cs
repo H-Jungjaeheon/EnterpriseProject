@@ -55,6 +55,11 @@ public class GameManager : Singleton<GameManager>
     public Image SceneChagePanel;
     public Coroutine SceneChangeCoroutine = null;
 
+    private void Start()
+    {
+        Time.timeScale = 50.0f;
+    }
+
     public void StartSceneChange()
     {
         Debug.Log("Change");
@@ -74,7 +79,7 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(0.5f);
 
         BackGrounds[Stage].SetActive(false);
-        Stage = Stage < BackGrounds.Count ? (Stage + 1) : 0;
+        Stage = Stage < BackGrounds.Count - 1 ? (Stage + 1) : 0;
         BackGrounds[Stage].SetActive(true);
         yield return new WaitForSeconds(0.2f);
 
