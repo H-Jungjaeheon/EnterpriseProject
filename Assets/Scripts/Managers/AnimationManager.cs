@@ -45,8 +45,6 @@ public class AnimationManager : MonoBehaviour
 
         if (Animator.parameterCount == Controller.animationClips.Length)
         {
-            Debug.Log("True");
-
             for (int i = 0; i < Animator.parameterCount; i++)
             {
                 AnimationList.Add(new AnimationList(Animator.parameters[i].name, Controller.animationClips[i]));

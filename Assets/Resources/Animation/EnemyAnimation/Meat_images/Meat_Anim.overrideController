@@ -8,4 +8,10 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Meat_Anim
   m_Controller: {fileID: 9100000, guid: 256bb15af80fe4042a96824cc3f40e42, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: ddd9404dc584bf44b92bcf22471f466f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d8ec01d245f8a7c48a8523fc21a3840f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3dd1e51740c0ad145903d1666a893983, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2320471533b2b69428efb71a47463465, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 03d906628798a7547801958f0d5a0479, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 60a6c82ba36fc1d45b582158ed2b90fb, type: 2}

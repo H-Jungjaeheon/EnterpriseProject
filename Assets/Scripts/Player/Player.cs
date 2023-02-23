@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using System.Security.Cryptography;
 
 public class Player : MonoBehaviour
 {
@@ -28,6 +30,7 @@ public class Player : MonoBehaviour
         set
         {
             hp = value;
+            SetHpBar();
 
             if (hp <= 0)
             {
@@ -35,6 +38,8 @@ public class Player : MonoBehaviour
             }
         }
     }
+    [SerializeField]
+    private Image HpBar;
 
     public int HealingValue; 
     public int AttackPower;
@@ -159,6 +164,11 @@ public class Player : MonoBehaviour
         }
     }
     #endregion
+
+    void SetHpBar()
+    {
+        HpBar.fillAmount = (float)Hp / (float)MaxHp;
+    }
 
     IEnumerator HealingHp()
     {

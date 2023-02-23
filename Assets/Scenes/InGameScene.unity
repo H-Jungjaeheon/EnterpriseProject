@@ -202,6 +202,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678482}
   m_CullTransparentMesh: 1
+--- !u!114 &10059080 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 10059080, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
+  m_PrefabInstance: {fileID: 440752212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &13125059
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,6 +2167,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 143739230}
   m_CullTransparentMesh: 1
+--- !u!114 &144712766 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 144712766, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
+  m_PrefabInstance: {fileID: 371525501}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &152817780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4308,9 +4330,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 588884266, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 683654880}
+    - target: {fileID: 1755755353, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
+      propertyPath: HpBar
+      value: 
+      objectReference: {fileID: 144712766}
     - target: {fileID: 3899307102218605548, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
       propertyPath: m_Name
       value: LongEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3899307102218605548, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7299165123022306645, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
       propertyPath: m_RootOrder
@@ -4356,7 +4390,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 588884263, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2b00a96b8617ab142a8580cb0726495d, type: 3}
 --- !u!1 &371904070
 GameObject:
@@ -5331,9 +5366,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 10059080, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 579198454, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1755755353, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
+      propertyPath: HpBar
+      value: 
+      objectReference: {fileID: 10059080}
     - target: {fileID: 3899307102218605548, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
       propertyPath: m_Name
       value: ShortEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3899307102218605548, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7299165123022306645, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
       propertyPath: m_RootOrder
@@ -5379,7 +5430,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 579198451, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 674b0e03af379ae4ab78794f3d56fb36, type: 3}
 --- !u!1 &442264226
 GameObject:
@@ -15981,9 +16033,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1038513925, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 683654880}
+    - target: {fileID: 1755755353, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
+      propertyPath: HpBar
+      value: 
+      objectReference: {fileID: 1710109807}
     - target: {fileID: 3899307102218605548, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
       propertyPath: m_Name
       value: AirEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3899307102218605548, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7299165123022306645, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
       propertyPath: m_RootOrder
@@ -16029,7 +16093,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1038513922, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
 --- !u!1 &1054479443
 GameObject:
@@ -19075,6 +19140,7 @@ MonoBehaviour:
   SelectPlayerData: {fileID: 0}
   MaxHp: 0
   hp: 0
+  HpBar: {fileID: 321413605}
   HealingValue: 0
   AttackPower: 0
   AttackDelay: 0
@@ -26383,6 +26449,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708184436}
   m_CullTransparentMesh: 1
+--- !u!114 &1710109807 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1710109807, guid: 8627c2591ac8e7e4ea90ad41f4bff8d3, type: 3}
+  m_PrefabInstance: {fileID: 1042573438}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1710160371
 GameObject:
   m_ObjectHideFlags: 0

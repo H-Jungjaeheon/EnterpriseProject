@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour
     private EnemyType EnemyType;
     [SerializeField]
     private string EnemyName;
+
+    public int MaxHp;
     [SerializeField]
     private int hp;
     public int Hp
@@ -42,6 +44,7 @@ public class Enemy : MonoBehaviour
         set
         {
             hp = value;
+            SetHpBar();
 
             if (hp <= 0)
             {
@@ -49,6 +52,8 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    [SerializeField]
+    private Image HpBar;
 
     [SerializeField]
     private int AttackPower;
@@ -211,6 +216,7 @@ public class Enemy : MonoBehaviour
         this.EnemySprite.sprite = Data[Select].EnemyImg;
         this.EnemyName = Data[Select].EnemyName;
 
+        this.MaxHp = Data[Select].Hp;
         this.Hp = Data[Select].Hp;
         this.AttackPower = Data[Select].AttackPower;
         this.AttackDistance = Data[Select].AttackDistance;
@@ -222,6 +228,11 @@ public class Enemy : MonoBehaviour
         this.gameObject.TryGetComponent<AnimationManager>(out AnimationManager);
 
         AnimationManager.AnimationSetting(Data[0].RuntimeAnimatorController);
+    }
+
+    void SetHpBar()
+    {
+        HpBar.fillAmount = (float)Hp / (float)MaxHp;
     }
 
     void Die()
