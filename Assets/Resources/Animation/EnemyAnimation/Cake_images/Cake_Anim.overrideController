@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Cake_Anim
+  m_Controller: {fileID: 9100000, guid: 256bb15af80fe4042a96824cc3f40e42, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 3dd1e51740c0ad145903d1666a893983, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 93bc650746bd7134285f1159671b0982, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ddd9404dc584bf44b92bcf22471f466f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 08c60c41271cd0445b881e6d7ee843c4, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 03d906628798a7547801958f0d5a0479, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 9a0678950af393242a541f8f1f582139, type: 2}

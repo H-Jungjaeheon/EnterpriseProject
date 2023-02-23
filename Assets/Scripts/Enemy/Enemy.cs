@@ -21,19 +21,19 @@ public class Enemy : MonoBehaviour
     public List<GameObject> TextObjs;
     public GameObject TextObj;
     public TextMeshProUGUI Text;
-    private Coroutine TakeDamageCorutine;
-    private float UpYPos = 0.4f;
-    private float DurationUpPos = 0.5f;
+    protected Coroutine TakeDamageCorutine;
+    protected float UpYPos = 0.4f;
+    protected float DurationUpPos = 0.5f;
 
     [Header("데이터 받아올 변수")]
     [SerializeField]
-    private EnemyType EnemyType;
+    protected EnemyType EnemyType;
     [SerializeField]
-    private string EnemyName;
+    protected string EnemyName;
 
     public int MaxHp;
     [SerializeField]
-    private int hp;
+    protected int hp;
     public int Hp
     {
         get
@@ -53,38 +53,38 @@ public class Enemy : MonoBehaviour
         }
     }
     [SerializeField]
-    private Image HpBar;
+    protected Image HpBar;
 
     [SerializeField]
-    private int AttackPower;
+    protected int AttackPower;
     [SerializeField]
-    private float AttackDistance;
+    protected float AttackDistance;
     [SerializeField]
-    private float AttackDelay;
+    protected float AttackDelay;
     [SerializeField]
-    private bool IsAttack;
-    private Coroutine AttackCorutine;
+    protected bool IsAttack;
+    protected Coroutine AttackCorutine;
     [SerializeField]
-    private float MoveSpeed;
+    protected float MoveSpeed;
     [SerializeField]
-    private bool IsHit = false;
+    protected bool IsHit = false;
 
     [Header("애니메이션")]
     protected AnimationManager AnimationManager;
 
     [Header("파티클 소환")]
     [SerializeField]
-    Material ParticleMaterial;
+    protected Material ParticleMaterial;
     [SerializeField]
-    GameObject ParticlePrefab;
+    protected GameObject ParticlePrefab;
 
     [Header("코인")]
     [SerializeField]
-    private GameObject CoinObj;
+    protected GameObject CoinObj;
     [SerializeField]
-    private int CoinValue;
+    protected int CoinValue;
 
-    private void Awake()
+    protected void Awake()
     {
         EnemySprite = this.GetComponent<SpriteRenderer>();
     }
@@ -167,7 +167,7 @@ public class Enemy : MonoBehaviour
         {
             SwichBehaviorType(BehaviorType.Move);
 
-            if(IsHit != true)
+            if(IsHit != true && IsAttack != true)
                 AnimationManager.ChangeAnimation("Move");
 
             this.gameObject.transform.position -= new Vector3(MoveSpeed * Time.deltaTime, 0, 0);
@@ -235,7 +235,7 @@ public class Enemy : MonoBehaviour
         HpBar.fillAmount = (float)Hp / (float)MaxHp;
     }
 
-    void Die()
+    protected virtual void Die()
     {
         Player.Instance.Range.TargetEnemy.Remove(this.gameObject);
         EnemySpawner.ReturnEnemy(EnemyType, this);
