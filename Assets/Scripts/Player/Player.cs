@@ -30,7 +30,6 @@ public class Player : MonoBehaviour
         set
         {
             hp = value;
-            SetHpBar();
 
             if (hp <= 0)
             {
@@ -93,6 +92,7 @@ public class Player : MonoBehaviour
     {
         OnAttack();
         OnMove();
+        SetHpBar();
     }
 
     public void BasicSetting()
