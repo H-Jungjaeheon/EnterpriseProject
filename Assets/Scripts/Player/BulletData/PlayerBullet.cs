@@ -52,13 +52,6 @@ public class PlayerBullet : MonoBehaviour
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        BasicSetting();
-        StartCoroutine(BulletMove());
-    }
-
     private void OnEnable()
     {
         IsTarget = true;
@@ -107,7 +100,7 @@ public class PlayerBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Enemy"))
+        if(BulletType == BulletType.Player && other.CompareTag("Enemy"))
         {
             //Debug.Log("Attack");
             other.GetComponent<Enemy>().StartTakeDamage(BulletPower, IsCritical);
@@ -117,16 +110,31 @@ public class PlayerBullet : MonoBehaviour
             TargetPos = null;
             PlayerBulletObjectPool.Instance.ReturnBullet(this);
         }
+
+        else if(BulletType == BulletType.Enemy && other.CompareTag("Player"))
+        {
+            Player.Instance.Hp -= BulletPower;
+
+            Destroy(this.gameObject);
+        }
     }
 
     //세팅 함수
-    public void TargetSetting(GameObject Target)
+    public void TargetSetting(GameObject Target, BulletType BulletType, int Damage = 0)
     {
         TargetPos = Target.transform;
         this.Target = Target;
 
-        BasicSetting();
-        ResetBulletDamage();
+        if (BulletType == BulletType.Player)
+        {
+            BasicSetting();
+            ResetBulletDamage();
+        }
+
+        else if((BulletType == BulletType.Enemy))
+        {
+            EnemyBasicSetting(Damage);
+        }
 
         StartCoroutine(BulletMove());
     }
@@ -155,6 +163,18 @@ public class PlayerBullet : MonoBehaviour
         this.BulletName = Player.Instance.BulletData[Player.Instance.SelectNumber].BulletName;
 
         this.BulletSpeed = Player.Instance.BulletData[Player.Instance.SelectNumber].BulletSpeed;
+
+        spriteRenderer.sprite = BulletImg;
+    }
+
+    public void EnemyBasicSetting(int Damage)
+    {
+        this.BulletType = BulletData[0].BulletType;
+        this.BulletImg = BulletData[0].BulletImg;
+        this.BulletName = BulletData[0].BulletName;
+        this.BulletPower = Damage;
+
+        this.BulletSpeed = BulletData[0].BulletSpeed;
 
         spriteRenderer.sprite = BulletImg;
     }
