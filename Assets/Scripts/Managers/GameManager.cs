@@ -61,7 +61,5 @@ public class GameManager : Singleton<GameManager>
         bum = BattleUIManager.Instance;
         csm = ColleagueSystemManager.Instance;
         psm = ProficiencySystemManager.Instance;
-
-        moneyUnit = 100000;
     }
 }
