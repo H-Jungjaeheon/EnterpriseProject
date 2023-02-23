@@ -61,6 +61,8 @@ public class Enemy : MonoBehaviour
     private Coroutine AttackCorutine;
     [SerializeField]
     private float MoveSpeed;
+    [SerializeField]
+    private bool IsHit = false;
 
     [Header("애니메이션")]
     protected AnimationManager AnimationManager;
@@ -123,6 +125,8 @@ public class Enemy : MonoBehaviour
     protected IEnumerator TakeDamage(int Damage, bool IsCritical)
     {
         yield return null;
+        IsHit = true;
+        AnimationManager.ChangeAnimation("Hit");
 
         GameObject Obj = Instantiate(TextObj, this.transform.position, Quaternion.identity);
         Destroy(Obj, DurationUpPos);
@@ -146,6 +150,8 @@ public class Enemy : MonoBehaviour
         TextObjs.Remove(Obj);
 
         Text.color = Color.white;
+        IsHit = false;
+
         StopCoroutine(TakeDamageCorutine);
     }
     #endregion TakeDamage
@@ -155,7 +161,9 @@ public class Enemy : MonoBehaviour
         if (Vector2.Distance(TargetPos.position, this.transform.position) > AttackDistance)
         {
             SwichBehaviorType(BehaviorType.Move);
-            AnimationManager.ChangeAnimation("Move");
+
+            if(IsHit != true)
+                AnimationManager.ChangeAnimation("Move");
 
             this.gameObject.transform.position -= new Vector3(MoveSpeed * Time.deltaTime, 0, 0);
         }
@@ -163,7 +171,9 @@ public class Enemy : MonoBehaviour
         else
         {
             SwichBehaviorType(BehaviorType.Attack);
-            AnimationManager.ChangeAnimation("Attack");
+
+            if (IsHit != true)
+                AnimationManager.ChangeAnimation("Attack");
         }
     }
 
