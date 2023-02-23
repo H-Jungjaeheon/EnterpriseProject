@@ -17,13 +17,13 @@ public class GameManager : Singleton<GameManager>
         set
         {
             moneyUnit = value;
-            if (bum.contentsPanelObjs[(int)Contents.Colleague].activeSelf)
+            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.Colleague].activeSelf)
             {
-                csm.TextColorChange();
+                ColleagueSystemManager.Instance.TextColorChange();
             }
-            if (bum.contentsPanelObjs[(int)Contents.Proficiency].activeSelf)
+            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.Proficiency].activeSelf)
             {
-                psm.TextReSettings();
+                ProficiencySystemManager.Instance.TextReSettings();
             }
         }
     }
@@ -38,9 +38,9 @@ public class GameManager : Singleton<GameManager>
         set
         {
             gemUnit = value;
-            if (bum.contentsPanelObjs[(int)Contents.Colleague].activeSelf)
+            if (BattleUIManager.Instance.contentsPanelObjs[(int)Contents.Colleague].activeSelf)
             {
-                csm.TextColorChange();
+                ColleagueSystemManager.Instance.TextColorChange();
             }
         }
     }
@@ -53,24 +53,6 @@ public class GameManager : Singleton<GameManager>
     public int Stage = 0;
     public Image SceneChagePanel;
     public Coroutine SceneChangeCoroutine = null;
-
-    #region ΩÃ±€≈Ê ¿ŒΩ∫≈œΩ∫ ∏¿Ω
-    [Tooltip("BattleUIManager ΩÃ±€≈Ê ¿ŒΩ∫≈œΩ∫")]
-    BattleUIManager bum;
-
-    [Tooltip("ColleagueSystemManager ΩÃ±€≈Ê ¿ŒΩ∫≈œΩ∫")]
-    ColleagueSystemManager csm;
-
-    [Tooltip("ProficiencySystemManager ΩÃ±€≈Ê ¿ŒΩ∫≈œΩ∫")]
-    ProficiencySystemManager psm;
-    #endregion
-
-    private void Start()
-    {
-        bum = BattleUIManager.Instance;
-        csm = ColleagueSystemManager.Instance;
-        psm = ProficiencySystemManager.Instance;
-    }
 
     public void StartSceneChange()
     {

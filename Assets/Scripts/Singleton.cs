@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
@@ -24,7 +22,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     protected virtual void Awake()
     {
         if (isDontDestroyObj)
@@ -38,11 +35,5 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
