@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 164cbee1a0612c244ad7b7f26a105404, type: 3}
-  m_Name: PlayerBullet_4
+  m_Name: BossBullet1
   m_EditorClassIdentifier: 
-  BulletType: 1
-  BulletImg: {fileID: 21300000, guid: 92ccd9eb239c7ba4bac543bd06335fe3, type: 3}
-  BulletName: LegendaryBullet
+  BulletType: 0
+  BulletImg: {fileID: 21300000, guid: f520b6748a9b35e46adde9dea576ccb6, type: 3}
+  BulletName: BossBullet
   BulletSpeed: 0.7

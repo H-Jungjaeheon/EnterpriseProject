@@ -60,7 +60,7 @@ public class PlayerBulletObjectPool : MonoBehaviour
         }
 
         bullet.transform.position = transform.position;
-        bullet.TargetSetting(Target);
+        bullet.TargetSetting(Target, BulletType.Player);
         return bullet;
     }
 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerBullet_3
   m_EditorClassIdentifier: 
   BulletType: 1
-  BulletImg: {fileID: 21300000, guid: e14c4d1a1f2db6b4c920621c11d45785, type: 3}
+  BulletImg: {fileID: 21300000, guid: 55885bfb5ba1ed846bab8e8143c2d38b, type: 3}
   BulletName: EpicBullet
   BulletSpeed: 0.7
