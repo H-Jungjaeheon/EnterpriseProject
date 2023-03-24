@@ -11,14 +11,14 @@ public enum BuffAdKind
     ThirdBuff
 }
 
-[System.Serializable]
+[Serializable]
 public class BuffAdData
 {
     [Tooltip("광고 레벨")]
     public int level;
 
     [Tooltip("광고 경험치")]
-    public int exp;
+    public float exp;
 
     [Tooltip("현재 버프 남은 시간(분)")]
     public int durationTime;
@@ -67,7 +67,7 @@ public class BuffAdManager : MonoBehaviour
     public BuffAdData[] adDatas;
 
     [Tooltip("광고 경험치 최댓값")]
-    const int MAX_EXP = 3;
+    const float MAX_EXP = 3f;
 
     [Tooltip("광고 효과 지속시간(분)")]
     const int DURATION_TIME = 20;
